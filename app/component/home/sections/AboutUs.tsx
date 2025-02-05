@@ -1,17 +1,42 @@
+'use client'
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 1 } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+};
 
 const AboutUs = () => {
   return (
-    <section className="section-spacing">
+    <motion.section className="section-spacing" 
+    initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      >
       <div className="container">
-        <div className="flex items-center space-x-2 text-primary text-sm font-medium">
+        <motion.div 
+        variants={fadeIn}
+        className="flex items-center space-x-[24px] text-primary text-sm font-medium mb-5 lg:mb-[60px]">
+      
           <span className="w-[24px] h-[2px] bg-primary"></span>
-          <span>ABOUT US</span>
-          <hr />
-        </div>
+          <span className="w-[160px] leading-none uppercase text-[16px]">ABOUT US</span>
+          <hr className="w-[100%]" />
+        </motion.div>
 
-        <div className="grid md:grid-cols-12 gap-[80px] flex items-center mt-6">
-          <div className="relative w-full h-[400px] md:h-[500px] col-span-4">
+        <div className="lg:grid lg:grid-cols-12 gap-[50px] lg:gap-[80px] flex flex-col items-center">
+          <motion.div   variants={slideLeft} className="relative w-full h-[400px] md:h-[500px] col-span-4">
             <Image
               src="/assets/img/home/abt01.jpg"
               alt="About Us"
@@ -21,7 +46,7 @@ const AboutUs = () => {
             />
 
             <div className="absolute bottom-4 w-full flex justify-center">
-              <div className="flex gap-4 justify-center bg-white/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
+              <motion.div  variants={fadeIn} className="flex gap-4 justify-center bg-white/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
                 <Image
                   src="/assets/img/home/iso-9001.svg"
                   alt=""
@@ -40,15 +65,16 @@ const AboutUs = () => {
                   width={100}
                   height={100}
                 />
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           <div className="col-span-8">
-            <h2 className="text-lg font-bold text-gray-900">
+            <motion.div className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none" variants={slideRight}>
+            <h2 className="text-lg font-bold text-black">
               BUILDING CO. (BEST) L.L.C
             </h2>
-            <p className="mt-4 text-gray-600 text-sm leading-relaxed">
+            <p className="leading-relaxed text-black/75">
               Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the
               phenomenal construction industry revolution, with its goal of
               excellence, the Company earned reputation of delivering an
@@ -57,13 +83,14 @@ const AboutUs = () => {
               created an outstanding distinction from its PRIDE Core Foundation
               — Planning, Reliability, Innovation, Determination and Excellence.
             </p>
-            <button className="mt-6 px-6 py-3 text-white bg-orange-500 hover:bg-orange-600 rounded-lg text-sm font-medium transition">
-              + MORE ABOUT US
-            </button>
+            <Link href="#" className="self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
+             <div><Image src={"/assets/img/icons/arrow.svg"} alt="" width={30} height={30}/></div> MORE ABOUT US
+            </Link>
+            </motion.div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

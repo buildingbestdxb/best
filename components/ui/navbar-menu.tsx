@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import arrow from '@/public/assets/img/home/arrow.svg'
+import arrow from "@/public/assets/img/home/arrow.svg";
 
 const transition = {
   type: "spring",
@@ -25,26 +25,29 @@ export const MenuItem = ({
   active: string | null;
   item: string;
   children?: React.ReactNode;
-  noMenu?:boolean;
+  noMenu?: boolean;
 }) => {
   return (
-    <div onMouseEnter={() => noMenu ? setActive(null) : setActive(item)} className="relative">
+    <div
+      onMouseEnter={() => (noMenu ? setActive(null) : setActive(item))}
+      className="relative"
+    >
       <div className="flex gap-2">
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white uppercase"
-      >
-        {item}
-      </motion.p>
-      {!noMenu && <Image src={arrow} alt="arrow"/>}
+        <motion.p
+          transition={{ duration: 0.3 }}
+          className="cursor-pointer font-semibold text-black hover:opacity-[0.9] dark:text-white uppercase"
+        >
+          {item}
+        </motion.p>
+        {!noMenu && <Image src={arrow} alt="arrow" />}
       </div>
-      {active !== null && !noMenu &&(
+      {active !== null && !noMenu && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={transition}
         >
-          {active === item &&  (
+          {active === item && (
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
                 transition={transition}
@@ -76,9 +79,36 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative border border-transparent dark:bg-black dark:border-white/[0.2] shadow-input flex justify-center space-x-10 px-6 py-4 items-center"
+      className="relative border border-transparent dark:bg-black dark:border-white/[0.2] shadow-input flex justify-center space-x-[12px] items-center py-6"
     >
-      {children}
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="flex items-center">
+          <Image
+            src="/Logo.svg"
+            alt="Crest Logo"
+            width={80}
+            height={50}
+            className="h-[50px] w-auto"
+          />
+        </div>
+        <div className="flex space-x-[25px] items-center">
+          {children}
+          <Link
+            href="#"
+            className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn"
+          >
+            <div>
+              <Image
+                src={"/assets/img/icons/arrow.svg"}
+                alt=""
+                width={30}
+                height={30}
+              />
+            </div>{" "}
+            Contact Us
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 };

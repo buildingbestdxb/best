@@ -10,14 +10,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .container {
   @apply mx-auto;
+  @apply px-3 xl:px-[0px]; 
 }
 p {
   @apply text-sm;
   letter-spacing: 0px;
   font-weight: 400;
-}
-h1,h2,h3,h4,h5 {
-  font-family: "Urbanist", serif;
+  
 }
 @layer base {
   :root {
@@ -90,29 +89,50 @@ h1,h2,h3,h4,h5 {
     background: none;
     font-size: 15px;
     position: relative;
+    opacity: 1;
+    @apply text-white/50;
     &::before {
       content: '';
       position: absolute;
       width: 100%;
-      height: 2px;
+      height: 4px;
       background: #ccc;
       bottom: 0;
+      opacity: 0.5;
+      border-radius: 5px;
     }
+    &.swiper-pagination-bullet-active {
+      @apply text-white;
+      .progress-bar {
+        opacity: 1;
+      }
+    }
+  }
+  .progress-bar {
+    @apply absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: white;
+    animation: progress 10s linear forwards;
+    opacity: 0;
+    border-radius: 5px;
+  }
+
+}
+
+
+.custom-pag {
+  span {
+    @apply w-[44px];
+   @apply h-[2px];
+   border-radius: 3px;
+   @apply bg-white;
   }
 }
 
 
-
-
-.progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: white;
-  animation: progress 5s linear forwards;
-}
 
 @keyframes progress {
   from {
@@ -122,9 +142,84 @@ h1,h2,h3,h4,h5 {
     width: 100%;
   }
 }
+
 @layer utilities {
   .section-spacing {
     @apply py-[60px] md:py-[80px] lg:py-[100px];
-    @apply px-2 md:px-[0px]; 
+   
+  }
+}
+.spckbtn {
+  position: relative;
+    height: 44px !important;
+    line-height: 44px;
+    padding: 0 25px 0 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.5s all ease-in-out;
+    > div {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      padding: 8px;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      overflow: hidden;
+      &::before {
+        position: absolute;
+        width: 6px;
+        content: '';
+        height: 6px;
+        @apply bg-white;
+        left: 0;
+        top: 50%;
+        right: 0;
+        z-index: -1;
+        border-radius: 100%;
+        transition: 0.5s all ease-in-out;
+        margin: 0 auto;
+        transform: translateY(-50%);
+      }
+      img {
+        top: 2px;
+        width: 0px;
+        transition: 0.5s all ease-in-out;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+      }
+  }
+  &:hover {
+    padding: 0 15px 0 46px;
+    > div {
+      &::before {
+        width: 100%;
+        height: 100%;
+        border-radius: 0%;
+ 
+      }
+      img {
+        width: 16px;
+        height: 17px;
+      }
+    }
+  }
+  &.whts {
+   @apply bg-white;
+   @apply text-black;
+   > div {
+    &::before {
+      @apply bg-primary;
+    }
+    img {
+      @apply invert;
+      @apply brightness-0;
+    }
+   }
   }
 }

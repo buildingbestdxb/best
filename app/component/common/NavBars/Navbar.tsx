@@ -1,57 +1,47 @@
-"use client"
+"use client";
 
-import { HoveredLink, Menu, MenuItem, ProductItem } from '@/components/ui/navbar-menu';
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import MobileNav from './MobileNav';
-import { menuItems } from './data';
+import {
+  HoveredLink,
+  Menu,
+  MenuItem,
+} from "@/components/ui/navbar-menu";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import MobileNav from "./MobileNav";
+import { menuItems } from "./data";
 
 const Navbar = () => {
-
-  const [active,setActive] = useState<string | null>(null)
-  const [isMobile,setIsMobile] = useState<null | boolean>(null)
+  const [active, setActive] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState<null | boolean>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return; // Prevents errors during SSR
-  
-    const handleScreenCheck = () => {
-      if(window.innerWidth < 768){
 
+    const handleScreenCheck = () => {
+      if (window.innerWidth < 991) {
         setIsMobile(true);
-      }else{
-        setIsMobile(false)
+      } else {
+        setIsMobile(false);
       }
     };
-  
+
     handleScreenCheck(); // Set initial state
-  
+
     window.addEventListener("resize", handleScreenCheck);
-  
+
     return () => window.removeEventListener("resize", handleScreenCheck);
   }, []);
-  
 
-  if(isMobile){
-    return <MobileNav/>
-  
-  }else if(isMobile == null){
-    return null
-  }
-  
-  else{
-
+  if (isMobile) {
+    return <MobileNav />;
+  } else if (isMobile == null) {
+    return null;
+  } else {
     return (
-  
-      <nav className="w-full bg-white/80 backdrop-blur-[10px] shadow-md py-4 absolute top-0 z-10">
-      <div className="container mx-auto flex items-center justify-between">
-
-        
-   <div className="flex items-center">
-     <Image src="/Logo.svg" alt="Crest Logo" width={80} height={50} className='h-[50px] w-auto' />
-   </div>
-
-     {/* <div className='flex items-center'>
+      <header className="w-full bg-white/80 backdrop-blur-[10px] shadow-md  absolute top-0 z-10">
+       
+          {/* <div className='flex items-center'>
    <div className="hidden md:flex space-x-6 text-gray-800 text-sm uppercase">
      <Link href="/about">
        <span className="text-sm">About Us</span>
@@ -94,13 +84,16 @@ const Navbar = () => {
    </Link>
    </div> */}
 
-   <Menu setActive={setActive}>
-          {menuItems.map((menuItem,index)=>(
-            menuItem.children ? 
-            
-            (<MenuItem setActive={setActive} active={active} item={menuItem.title}>
-              <div className="grid grid-cols-2 gap-4 p-4">
-                {/* <ProductItem
+          <Menu setActive={setActive}>
+            {menuItems.map((menuItem, index) =>
+              menuItem.children ? (
+                <MenuItem
+                  setActive={setActive}
+                  active={active}
+                  item={menuItem.title}
+                >
+                  <div className="grid grid-cols-1 gap-4 p-4" key={index}>
+                    {/* <ProductItem
                   title="Residential"
                   description=" "
                   href="#"
@@ -112,35 +105,38 @@ const Navbar = () => {
                   href="#"
                   src="/assets/images/gd-im2.jpg"
                 /> */}
-                {menuItem.children.map((item,index)=>(
-                  <HoveredLink href="#" key={index}>
-                  <div>{item.title}</div>
-                  </HoveredLink>
-                ))}
-                
-                {/* <HoveredLink href="#">
+                    {menuItem.children.map((item, index) => (
+                      <HoveredLink href="#" key={index}>
+                        <div>{item.title}</div>
+                      </HoveredLink>
+                    ))}
+
+                    {/* <HoveredLink href="#">
                   <div>Commercial</div>
                 </HoveredLink> */}
-              </div>
-            </MenuItem>) 
-            
-            : 
-            
-            (<MenuItem item={menuItem.title} setActive={setActive} active={active}>
-             <div className="p-4">
-               <Link href="/">{menuItem.title}</Link>
-             </div>
-           </MenuItem>)
-          ))}
-           
-           {/* <MenuItem item="About Us" setActive={setActive} active={active}>
+                  </div>
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  item={menuItem.title}
+                  setActive={setActive}
+                  active={active}
+                  noMenu
+                >
+                  <div className="p-4">
+                    <Link href="/">{menuItem.title}</Link>
+                  </div>
+                </MenuItem>
+              )
+            )}
+
+            {/* <MenuItem item="About Us" setActive={setActive} active={active}>
              <div className="p-4">
                <Link href="/">About Us</Link>
              </div>
            </MenuItem> */}
 
-
-           {/* <MenuItem setActive={setActive} active={active} item="Projects">
+            {/* <MenuItem setActive={setActive} active={active} item="Projects">
              <div className="grid grid-cols-2 gap-4 p-4">
                <ProductItem
                  title="Residential"
@@ -180,24 +176,11 @@ const Navbar = () => {
                <Link href="/">How we work</Link>
              </div>
            </MenuItem> */}
-
-           <Link href="/contact">
-             <button className="bg-orange-600 text-white px-6 py-2 rounded-md hover:bg-orange-700 uppercase flex items-center gap-3">
-               <div className='size-2 rounded-full bg-white'></div>
-               Contact Us
-             </button>
-           </Link>
-
-   </Menu>
-   </div>
-   
- </nav>
-
-)
-
+        
+          </Menu>
+      </header>
+    );
   }
+};
 
-  
-}
-
-export default Navbar
+export default Navbar;

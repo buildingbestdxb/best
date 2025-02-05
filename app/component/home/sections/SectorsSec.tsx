@@ -1,84 +1,125 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 const sectors = [
-    {
-        id: 1,
-        title: "Residential",
-        icon: "/assets/img/icons/residential.svg",
-        poster: "/assets/img/sectors/01.jpg"
-    },
-    {
-        id: 2,
-        title: "Commercial",
-        icon: "/assets/img/icons/commercial.svg",
-        poster: "/assets/img/sectors/02.jpg"
-    },
-    {
-        id: 3,
-        title: "Industrial",
-        icon: "/assets/img/icons/industrial.svg",
-        poster: "/assets/img/sectors/03.jpg"
-    },
-    {
-        id: 4,
-        title: "Hospitality",
-        icon: "/assets/img/icons/hospitality.svg",
-        poster: "/assets/img/sectors/04.jpg"
-    },
-    {
-        id: 5,
-        title: "Retail",
-        icon: "/assets/img/icons/retail.svg",
-        poster: "/assets/img/sectors/05.jpg"
-    },
-    {
-        id: 6,
-        title: "Healthcare",
-        icon: "/assets/img/icons/health-care.svg",
-        poster: "/assets/img/sectors/06.png"
-    }
-]
+  {
+    id: 1,
+    title: "Residential",
+    icon: "/assets/img/icons/residential.svg",
+    poster: "/assets/img/sectors/01.jpg",
+  },
+  {
+    id: 2,
+    title: "Commercial",
+    icon: "/assets/img/icons/commercial.svg",
+    poster: "/assets/img/sectors/02.jpg",
+  },
+  {
+    id: 3,
+    title: "Industrial",
+    icon: "/assets/img/icons/industrial.svg",
+    poster: "/assets/img/sectors/03.jpg",
+  },
+  {
+    id: 4,
+    title: "Hospitality",
+    icon: "/assets/img/icons/hospitality.svg",
+    poster: "/assets/img/sectors/04.jpg",
+  },
+  {
+    id: 5,
+    title: "Retail",
+    icon: "/assets/img/icons/retail.svg",
+    poster: "/assets/img/sectors/05.jpg",
+  },
+  {
+    id: 6,
+    title: "Healthcare",
+    icon: "/assets/img/icons/health-care.svg",
+    poster: "/assets/img/sectors/06.png",
+  },
+];
+
 const SectorsSec = () => {
   return (
     <section className="section-spacing bg-custom-gray">
       <div className="container">
-        <div className="flex items-center space-x-2 text-orange-500 text-sm font-medium">
-          <span className="w-8 h-[2px] bg-orange-500"></span>
-          <span>Sectors</span>
-        </div>
-        <div className="w-[50%]">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-            BUILDING CO. (BEST) L.L.C
+        {/* Section Header Animation */}
+        <motion.div
+          className="flex items-center space-x-[24px] text-primary text-sm font-medium mb-5 lg:mb-[60px]"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }} // Animation will reset on scroll
+        >
+          <span className="w-[24px] h-[2px] bg-primary"></span>
+          <span className="w-[100px] leading-none uppercase text-[16px]">Sectors</span>
+          <hr className="w-full" />
+        </motion.div>
+
+        {/* Section Title and Description Animation */}
+        <motion.div
+          className="lg:w-[50%]"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }} // Animation will reset on scroll
+        >
+          <h2 className="text-2xl md:text-3xl font-bold uppercase mb-5 lg:mb-[30px] leading-none text-black">
+            Sectors We Support
           </h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          <p className="text-black/75">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-        </div>
-        <div className="grid md:grid-cols-6 gap-[10px] items-center mt-6">
-            {sectors.map((sector, index) => (
-                <div key={index}>
-            <div className="relative h-[400px] overflow-hidden rounded-custom shadow-lg">
-              <Image
-                src={sector.poster}
-                alt="Background Image"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-x-[10px] bottom-[10px] p-4 backdrop-blur-[10px] bg-white/10 text-white rounded-custom overflow-hidden text-left">
-                <Image src={sector.icon} alt="" width={20} height={20}/>
-                <h4 className="text-md font-semibold">{sector.title}</h4>
-              </div>
-            </div>
-          </div>
-            ))}
-          
-       
-          
+        </motion.div>
+
+        {/* Grid Section with Sectors */}
+        <div className="grid lg:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
+          {sectors.map((sector, index) => (
+            <motion.div
+              key={sector.id}
+              className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }} // Animation will reset on scroll
+            >
+              <Image src={sector.poster} alt="Background Image" fill className="object-cover" />
+
+              <motion.div
+                className="absolute flex flex-col inset-x-[20px] bottom-[20px] p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom flex flex-col gap-[20px] group-hover:bg-primary transition-all"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                viewport={{ once: true }} // Animation will reset on scroll
+              >
+                <Image
+                  src={sector.icon}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="transition-all duration-500 group-hover:invert group-hover:brightness-0"
+                />
+                <motion.div
+                  className="flex justify-between items-center w-full"
+                  whileHover={{ opacity: 1 }}
+                >
+                  <h4 className="text-md font-semibold text-white transition-opacity duration-500">
+                    {sector.title}
+                  </h4>
+                  <Image
+                    src="/assets/img/icons/arwtp.svg"
+                    alt=""
+                    width={14}
+                    height={14}
+                    className="transition-all duration-500 ease-in-out group-hover:w-[18px]"
+                  />
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
