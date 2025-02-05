@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Urbanist, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./component/common/Navbar";
+import Navbar from "./component/common/NavBars/Navbar";
 import Footer from "./component/common/Footer";
 
 const urbanist = Urbanist({
