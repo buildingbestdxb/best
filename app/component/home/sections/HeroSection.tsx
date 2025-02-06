@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import {  useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -40,7 +40,7 @@ const HeroSection = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
   };
 
-  const [activeIndex, setActiveIndex] = useState(0);
+/*   const [activeIndex, setActiveIndex] = useState(0); */
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   return (
@@ -60,14 +60,12 @@ const HeroSection = () => {
         loop={true}
         className="h-full"
         onSlideChange={(swiper) => {
-          setActiveIndex(swiper.realIndex);
           document.querySelectorAll(".progress-bar").forEach((el) => {
             (el as HTMLElement).style.animation = "none"; // Reset animation
             void (el as HTMLElement).offsetWidth; // Trigger reflow
-            (el as HTMLElement).style.animation =
-              "progress 10s linear forwards"; // Restart animation
+            (el as HTMLElement).style.animation = "progress 10s linear forwards"; // Restart animation
           });
-
+        
           if (swiper.realIndex === 0 && videoRef.current) {
             videoRef.current.play();
           } else if (videoRef.current) {

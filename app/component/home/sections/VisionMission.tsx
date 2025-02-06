@@ -15,7 +15,7 @@ const VisionMission = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }} // Animation will reset on scroll
+          viewport={{ once: true }}
         >
           <span className="w-[24px] h-[2px] bg-primary"></span>
           <span className="w-[430px] leading-none uppercase text-[16px]">
@@ -31,14 +31,14 @@ const VisionMission = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }} // Animation will reset on scroll
+            viewport={{ once: true }}
           >
             {/* Mission Icon Animation */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              viewport={{ once: true }} // Animation will reset on scroll
+              viewport={{ once: true }}
             >
               <Image src={mission} alt="" className="mb-5 lg:mb-[40px]" />
             </motion.div>
@@ -63,14 +63,14 @@ const VisionMission = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }} // Animation will reset on scroll
+            viewport={{ once: true }}
           >
             {/* Vision Icon Animation */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              viewport={{ once: true }} // Animation will reset on scroll
+              viewport={{ once: true }}
             >
               <Image src={vision} alt="" className="mb-5 lg:mb-[40px]" />
             </motion.div>

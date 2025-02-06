@@ -5,7 +5,6 @@ import {
   Menu,
   MenuItem,
 } from "@/components/ui/navbar-menu";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
@@ -91,8 +90,9 @@ const Navbar = () => {
                   setActive={setActive}
                   active={active}
                   item={menuItem.title}
+                  key={index}
                 >
-                  <div className="grid grid-cols-1 gap-4 p-4" key={index}>
+                  <div className="grid grid-cols-1 gap-4 p-4" >
                     {/* <ProductItem
                   title="Residential"
                   description=" "
@@ -122,6 +122,7 @@ const Navbar = () => {
                   setActive={setActive}
                   active={active}
                   noMenu
+                  key={index}
                 >
                   <div className="p-4">
                     <Link href="/">{menuItem.title}</Link>

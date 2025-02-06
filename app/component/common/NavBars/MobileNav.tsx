@@ -37,29 +37,33 @@ const MobileNav = () => {
          
                      {/* Sliding Menu */}
                      <div
-                         className="fixed top-0 right-0 z-40 h-full w-[50%] translate-x-full overflow-y-auto transition-transform duration-500 peer-checked:translate-x-0 bg-white shadow-2xl w-[300px]"
+                         className="fixed top-0 right-0 z-40 h-full w-[75%] translate-x-full overflow-y-auto transition-transform duration-500 peer-checked:translate-x-0 bg-white shadow-2xl w-[300px]"
                      >
-                         <div className="min-h-full px-6 pt-12">
-                             <menu className='flex flex-col gap-3'>
+                         <div className="min-h-full px-6 pt-[100px]">
+                             <ul className='flex flex-col gap-3'>
                                  {menuItems.map((item,index)=>(
                                      item.children ? (
-                                         <menu>
+                                         <li key={index}>
+                                            <ul>
                                              <li onClick={()=>setActiveDropdown(index)}><a href="#">{item.title}</a></li>
-                                             {activeDropdown == index && item.children.map((childItem)=>(
-                                                 <li className='pl-2'><a href="#">{childItem.title}</a></li>
+                                             <ul>
+                                             {activeDropdown == index && item.children.map((childItem,index)=>(
+                                                 <li key={index} className='pl-2'><a href="#">{childItem.title}</a></li>
                                              ))}
-                                         </menu>
+                                             </ul>
+                                             </ul>
+                                         </li>
                                      ) 
                                      
                                      : 
                                      
                                      (
-                                         <li><a href="#">{item.title}</a></li>
+                                         <li key={index}><a href="#">{item.title}</a></li>
                                      )
                                  ))}
                                  
                                  
-                             </menu>
+                             </ul>
                          </div>
                      </div>
                  </label>

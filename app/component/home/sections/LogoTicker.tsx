@@ -20,7 +20,7 @@ const LogoTicker = () => {
       <div className="container-fluid">
         <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black,transparent)]">
           <motion.div
-            className="flex gap-14 flex-none min-w-max"
+            className="flex gap-5 lg:gap-14 flex-none min-w-max"
             animate={{
               x: "-50%",
             }}

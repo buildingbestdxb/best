@@ -17,8 +17,8 @@ const QualitySafety = () => {
           src="/assets/img/home/qsbg.jpg"
           className="absolute w-full h-full object-cover object-center"
           alt=""
-          width={1920}
-          height={800}
+          width={2500}
+          height={1000}
         />
       </motion.figure>
 

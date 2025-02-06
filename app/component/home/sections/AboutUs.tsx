@@ -50,20 +50,20 @@ const AboutUs = () => {
                 <Image
                   src="/assets/img/home/iso-9001.svg"
                   alt=""
-                  width={100}
-                  height={100}
+                  width={89}
+                  height={89}
                 />
                 <Image
                   src="/assets/img/home/iso-9001.svg"
                   alt=""
-                  width={100}
-                  height={100}
+                  width={89}
+                  height={89}
                 />
                 <Image
                   src="/assets/img/home/iso-9001.svg"
                   alt=""
-                  width={100}
-                  height={100}
+                  width={89}
+                  height={89}
                 />
               </motion.div>
             </div>
