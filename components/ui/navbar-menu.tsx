@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
-import arrow from "@/public/assets/img/home/arrow.svg";
+/* import arrow from "@/public/assets/img/home/arrow.svg"; */
 
 const transition = {
   type: "spring",
@@ -29,7 +29,7 @@ export const MenuItem = ({
 }) => {
   return (
     <div
-      onMouseEnter={() => (noMenu ? setActive(null) : setActive(item))}
+      onMouseEnter={() => (noMenu ? setActive(null) : setActive(null))}
       className="relative"
     >
       <div className="flex gap-2">
@@ -39,7 +39,7 @@ export const MenuItem = ({
         >
           {item}
         </motion.p>
-        {!noMenu && <Image src={arrow} alt="arrow" />}
+       {/*  {!noMenu && <Image src={arrow} alt="arrow" />} */}
       </div>
       {active !== null && !noMenu && (
         <motion.div
@@ -91,7 +91,7 @@ export const Menu = ({
             className="h-[50px] w-auto"
           />
         </div>
-        <div className="flex space-x-[25px] items-center">
+        <div className="flex space-x-[25px] xl:space-x-[35px] items-center">
           {children}
           <Link
             href="#"
