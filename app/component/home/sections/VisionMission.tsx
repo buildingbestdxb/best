@@ -43,13 +43,13 @@ const VisionMission = () => {
         <motion.div className="grid lg:grid-cols-2 gap-6 xl:gap-[80px] items-start mt-6" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ staggerChildren: 0.2 }}>
           <SectionBox
             title="Mission"
-            text="Since 1975, BUILDING CO. (BEST) L.L.C has led the construction industry revolution, earning a reputation for delivering exceptional services in the UAE. Its foundation—Planning, Reliability, Innovation, Determination, and Excellence—drives its commitment to excellence."
+            text="Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the phenomenal construction industry revolution, with its goal of excellence, the Company earned reputation of delivering an exceptional construction services in the UAE. Throughout its commitment towards greater endeavor, BUILDING CO. (BEST) L.L.C created an outstanding distinction from its PRIDE Core Foundation — Planning, Reliability, Innovation, Determination and Excellence."
             imgSrc={mission}
             altText="Mission Icon"
           />
           <SectionBox
             title="Vision"
-            text="BUILDING CO. (BEST) L.L.C aims to redefine the construction industry through innovation and reliability, ensuring excellence in every project. Guided by a strong core foundation, the company continues to set industry standards."
+            text="Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the phenomenal construction industry revolution, with its goal of excellence, the Company earned reputation of delivering an exceptional construction services in the UAE. Throughout its commitment towards greater endeavor, BUILDING CO. (BEST) L.L.C created an outstanding distinction from its PRIDE Core Foundation — Planning, Reliability, Innovation, Determination and Excellence."
             imgSrc={vision}
             altText="Vision Icon"
           />
