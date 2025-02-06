@@ -37,8 +37,17 @@ const MobileNav = () => {
         <div className="fixed inset-0 z-40 hidden h-full w-full bg-black/50 backdrop-blur-sm peer-checked:block"></div>
 
         {/* Sliding Menu */}
-        <div className="fixed top-0 right-0 z-40 h-full w-[75%] translate-x-full overflow-y-auto transition-transform duration-500 peer-checked:translate-x-0 bg-white shadow-2xl w-[300px]">
-          <div className="min-h-full px-6 pt-[100px] pb-[50px] flex flex-col">
+        <div className="fixed top-0 right-0 z-40 h-full w-[350px] translate-x-full overflow-y-auto transition-transform duration-500 peer-checked:translate-x-0 bg-white shadow-2xl w-[300px]">
+          <div className="min-h-full px-6 pt-[30px] pb-[40px] flex flex-col align-middle">
+            <div className="text-left mb-[50px] ">
+          <Image
+              src="/Logo.svg"
+              alt="Crest Logo"
+              width={80}
+              height={50}
+              className="h-[50px] w-auto"
+            />
+            </div>
             <ul className="flex flex-col gap-4">
               {menuItems.map((item, index) =>
                 item.children ? (
@@ -65,11 +74,15 @@ const MobileNav = () => {
                 )
               )}
             </ul>
-              <div className="flex space-x-3 mt-auto">
-                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full leading-[50px] flex justify-center items-center bg-black text-white hover:bg-primary transition-all duration-500 ease-in-out'><FaFacebookF  className="" /></div>
-                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center bg-black text-white hover:bg-primary transition-all duration-500 ease-in-out'><FaLinkedinIn className="" /></div>
-                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center bg-black text-white hover:bg-primary transition-all duration-500 ease-in-out'><FaInstagram className="" /></div>
-                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center bg-black text-white hover:bg-primary transition-all duration-500 ease-in-out'><FaYoutube className="" /></div>
+            <div className="mt-auto">
+            <hr />
+              <div className="flex ">
+             
+                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full leading-[50px] flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out'><FaFacebookF  className="" /></div>
+                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out'><FaLinkedinIn className="" /></div>
+                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out'><FaInstagram className="" /></div>
+                        <div className='cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out'><FaYoutube className="" /></div>
+                      </div>
                       </div>
           </div>
         </div>
