@@ -50,7 +50,7 @@ const ContactUs = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: false }} // Animation resets on scroll
               >
-                Reach out to us to discuss your project needs and discover how Safe Tech can deliver the perfect solution.
+                Reach out to us to discuss your project needs and discover how Best can deliver the perfect solution.
               </motion.p>
             </div>
             <div>
