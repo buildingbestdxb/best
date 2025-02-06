@@ -26,7 +26,7 @@ export default {
 			  container: {
 				center: true,
 				padding: {
-				  DEFAULT: "15px", // Adds 15px horizontal padding on all screen sizes
+				  DEFAULT: "15px", 
 				},
 				screens: {
 					xs: "100%", 
