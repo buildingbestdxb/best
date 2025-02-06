@@ -35,7 +35,7 @@ const ContactUs = () => {
             <div>
               {/* Title with Animation */}
               <motion.h2
-                className="text-lg font-bold uppercase"
+                className="text-lg font-bold uppercase mb-3 lg:mb-[30px]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -55,6 +55,15 @@ const ContactUs = () => {
             </div>
             <div>
               <div className="backdrop-blur-[10px] bg-black/50 text-white rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px]">
+              <motion.h2
+                className="text-lg font-bold uppercase mb-3 lg:mb-[20px]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }} // Animation resets on scroll
+              >
+              Get in Touch
+              </motion.h2>
                 <form className="flex flex-col gap-5">
                   <div className="grid grid-cols-2 gap-4">
                     <motion.input
