@@ -20,7 +20,7 @@ const slideRight = {
 
 const AboutUs = () => {
   return (
-    <motion.section className="section-spacing" 
+    <motion.section className="section-spacing overflow-hidden" 
     initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}

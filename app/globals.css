@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .container {
   @apply mx-auto;
-  @apply px-3 xl:px-[0px]; 
+  @apply px-3 xl:px-5; 
 }
 p {
   @apply text-sm;
@@ -221,5 +221,12 @@ p {
       @apply brightness-0;
     }
    }
+  }
+}
+@media (min-width: 1800px) {
+  footer {
+    container {
+      width: 1600px;
+    }
   }
 }

@@ -20,8 +20,8 @@ const Footer = () => {
 
 
 
-    <footer className="bg-black text-white border-t-[5px] border-primary">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[35px] lg:gap-8  pt-[60px] lg:pt-[120px] pb-[40px] lg:pb-[80px] xxl:w-[1600px]">
+    <footer className="bg-black text-white border-t-[5px] border-primary overflow-hidden">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[35px] lg:gap-8  pt-[60px] lg:pt-[120px] pb-[40px] lg:pb-[80px]">
     
         <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -33,10 +33,10 @@ const Footer = () => {
           </div>
           <h4 className='text-[18px] uppercase leading-none font-bold mb-3 lg:mb-[20px]'>Follow us</h4>
           <div className="flex space-x-3 mt-4">
-            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full leading-[50px] flex justify-center items-center'><FaFacebookF  className="" /></div>
-            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center'><FaLinkedinIn className="" /></div>
-            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center'><FaInstagram className="" /></div>
-            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center'><FaYoutube className="" /></div>
+            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full leading-[50px] flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out'><FaFacebookF  className="" /></div>
+            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out'><FaLinkedinIn className="" /></div>
+            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out'><FaInstagram className="" /></div>
+            <div className='cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out'><FaYoutube className="" /></div>
           </div>
         </motion.div>
         

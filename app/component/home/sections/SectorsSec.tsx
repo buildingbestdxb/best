@@ -44,7 +44,7 @@ const sectors = [
 
 const SectorsSec = () => {
   return (
-    <section className="section-spacing bg-custom-gray">
+    <section className="section-spacing bg-custom-gray overflow-hidden">
       <div className="container">
         {/* Section Header Animation */}
         <motion.div

@@ -16,7 +16,7 @@ const logos = [
 
 const LogoTicker = () => {
   return (
-    <section className="section-spacing">
+    <section className="section-spacing overflow-hidden">
       <div className="container-fluid">
         <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black,transparent)]">
           <motion.div

@@ -38,7 +38,7 @@ const StatsSection = () => {
       </motion.figure>
 
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-[64px] w-full">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
