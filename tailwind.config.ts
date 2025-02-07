@@ -20,7 +20,7 @@ export default {
 				md: "768px",
 				lg: "992px",
 				xl: "1200px",
-				xxl: "1400px", 
+				xxl: "1450px", 
 				"3xl": "1600px", 
 			  },
 			  container: {
@@ -34,7 +34,7 @@ export default {
 					md: "740px", 
 					lg: "960px", 
 					xl: "1140px", 
-					xxl: "1360px", 
+					xxl: "1420px", 
 					"3xl": "1550px", 
 				},
 			  },		  
