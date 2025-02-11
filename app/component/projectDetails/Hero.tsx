@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const slide = {
-  imageSrc: "/assets/img/projects/banner.jpg",
+  imageSrc: "/assets/img/projects-details/banner.jpg",
   title: "3000 Prayer Mosque",
 };
 
