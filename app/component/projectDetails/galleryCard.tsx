@@ -97,7 +97,7 @@ export default function ImageCarousel() {
                 alt={`Thumbnail ${index + 1}`}
                 width={64}
                 height={40}
-                className="object-cover"
+                className="object-cover h-full"
               />
             </div>
           ))}
