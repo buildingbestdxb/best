@@ -20,7 +20,7 @@ const SecHr: FC<SecHrProps> = ({ title }) => {
       variants={fadeIn}
       className="flex items-center space-x-[24px] text-primary text-sm font-medium mb-5 lg:mb-[60px]">
       <span className="w-[24px] h-[2px] bg-primary"></span>
-      <span className="w-[160px] leading-none uppercase text-[16px]">
+      <span className="w-[200px] leading-none uppercase text-[16px]">
         {title}
       </span>
       <hr className="w-full" />

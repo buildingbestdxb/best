@@ -58,7 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
           <motion.h1
             variants={textVariants}
-            className="text-white text-4xl md:text-5xl lg:text-6xl leading-none pb-10 font-black">
+            className="text-white text-4xl md:text-5xl lg:text-6xl leading-none pb-10 font-black uppercase">
             <span>{title.split(" ")[0]}</span>{" "}
             <span className="font-normal">
               {title.split(" ").slice(1).join(" ")}

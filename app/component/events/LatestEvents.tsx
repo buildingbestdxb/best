@@ -1,8 +1,8 @@
-import ImageCard from "./ImageCard";
+import ImageCard from "../news/ImageCard";
 import Image from "next/image";
 import SecHr from "../common/SecDivider/SecHr";
-import ImageContentCard from "./ImageContentCard";
-import ImageCol from "./ImageCol";
+import ImageContentCard from "../news/ImageContentCard";
+import ImageCol from "../news/ImageCol";
 const latestNewsData = [
   {
     date: "14 Nov 2024",
@@ -68,7 +68,7 @@ const LatestNews = () => {
     <>
       <section className="py-[100px]">
         <div className="container">
-          <SecHr title="Latest News" />
+          <SecHr title="Latest Events" />
           <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center mt-5 lg:mt-[60px] ">
             <div className="xl:col-span-6">
               <ImageCard
@@ -90,7 +90,7 @@ const LatestNews = () => {
       </section>
       <section className="bg-[#F2F2F2] py-[100px]">
         <div className="container">
-          <SecHr title="Previous News" />
+          <SecHr title="Previous Events" />
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-[32px] items-center ">
             {prevNewsData.map((news, index) => (
               <ImageCol key={index} {...news} />
@@ -98,7 +98,9 @@ const LatestNews = () => {
           </div>
           <div className="border-b border-[#1E1E1E]/30 pt-[80px]">
             <div className="flex items-center justify-center  pb-[20px] cursor-pointer ">
-              <p className="text-[#1E1E1E] text-[22px] font-[500]">More News</p>
+              <p className="text-[#1E1E1E] text-[22px] font-[500]">
+                More Events
+              </p>
               <Image
                 src="/assets/img/projects/down-arrow.svg"
                 alt="Arrow Icon"
