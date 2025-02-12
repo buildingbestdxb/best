@@ -30,7 +30,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title }) => {
         viewport={{ once: true }}>
         {/* Title and Icons Row */}
         <div className="flex justify-between items-center w-full">
-          <h4 className="text-md font-semibold text-white transition-opacity duration-500">
+          <h4 className="text-md font-semibold text-white transition-opacity duration-500 lg:w-[95%]">
             {title}
           </h4>
 
