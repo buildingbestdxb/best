@@ -1,4 +1,5 @@
 import Image from "next/image";
+import GalleryCard from "../projectDetails/galleryCard";
 
 const Gallery = () => {
   const sectors = [
@@ -83,7 +84,10 @@ const Gallery = () => {
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
               reprehenderit.
             </p>
-            <h3 className="text-[32px] text-[#1E1E1E] font-bold">Gallery</h3>
+            <h3 className="text-[32px] text-[#1E1E1E] font-bold mb-[40px]">
+              Gallery
+            </h3>
+            <GalleryCard />
             {/* <Image
               src="/assets/img/projects-details/gallery.jpg"
               alt=""
