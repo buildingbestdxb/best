@@ -1,7 +1,7 @@
 import React from "react";
-import HeroSection from "../common/banner/Hero";
-import OtherProjects from "../projectDetails/otherProjects";
-import Gallery from "./gallery";
+import HeroSection from "../common/Banner/Hero";
+import OtherProjects from "./OtherProjects";
+import Gallery from "./Gallery";
 
 const Index = () => {
   return (
@@ -9,9 +9,8 @@ const Index = () => {
       <HeroSection
         imageSrc="/assets/img/projects-details/banner.jpg"
         title="3000 Prayer Mosque"
-        breadcrumb="Projects / Commercial Projects"
+        breadcrumb="Projects / Commercial Projects /"
       />
-
       <Gallery />
       <OtherProjects />
     </>

@@ -39,10 +39,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title }) => {
             <div className="w-[8px] h-[8px] bg-primary rounded-full transition-opacity duration-500 opacity-100 group-hover:opacity-0"></div>
             <Image
               src="/assets/img/icons/arwtp.svg"
-              alt="Arrow Icon"
-              width={14}
-              height={14}
-              className="transition-opacity duration-500 opacity-0 group-hover:opacity-100 ml-2"
+              alt=""
+              width={0}
+              height={0}
+              className="transition-all duration-500 ease-in-out group-hover:w-[14px]"
             />
           </div>
         </div>

@@ -51,8 +51,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container py-10">
           <motion.p
             variants={textVariants}
-            className="text-white/50 pt-[100px] text-[16px] font-medium">
-            Home / {breadcrumb} /
+            className="text-white/50 pt-[100px] text-[16px] font-medium uppercase">
+            Home / {breadcrumb}
             <span className="font-bold text-primary"> {title}</span>
           </motion.p>
 
