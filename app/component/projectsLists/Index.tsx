@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "./Hero";
+import HeroSection from "../common/banner/Hero";
 import ProjectCard from "./ProjectList";
 
 import Sectors from "./Sectors";
@@ -7,7 +7,12 @@ import Sectors from "./Sectors";
 const Index = () => {
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        imageSrc="/assets/img/projects/banner.jpg"
+        title="Commercial Projects"
+        breadcrumb="Projects "
+      />
+
       <ProjectCard />
       <Sectors />
     </>

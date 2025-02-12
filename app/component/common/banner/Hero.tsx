@@ -3,33 +3,40 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const slide = {
-  imageSrc: "/assets/img/projects/banner.jpg",
-  title: "Commercial ",
-  light: "Projects",
-};
+interface HeroSectionProps {
+  imageSrc: string;
+  title: string;
+  breadcrumb: string;
+}
 
-const HeroSection = () => {
+const HeroSection: React.FC<HeroSectionProps> = ({
+  imageSrc,
+  title,
+  breadcrumb,
+}) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.5 },
+      transition: { staggerChildren: 0.3 },
     },
   };
 
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   return (
     <section className="relative w-full h-[600px] overflow-hidden">
       <div className="relative w-full h-full">
-        {/* <div className="overlay absolute w-full h-full bg-black opacity-50 z-[1]"></div> */}
         <Image
-          src={slide.imageSrc}
-          alt="Hero Background"
+          src={imageSrc}
+          alt={title}
           layout="fill"
           objectFit="cover"
           priority
@@ -39,20 +46,23 @@ const HeroSection = () => {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
           className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container py-10">
           <motion.p
             variants={textVariants}
-            className="text-white/50 pt-[100px] text-[16px] font-[500]">
-            Home / Projects /{" "}
-            <span className="font-bold text-primary">Commercial Projects</span>
+            className="text-white/50 pt-[100px] text-[16px] font-medium">
+            Home / {breadcrumb} /
+            <span className="font-bold text-primary"> {title}</span>
           </motion.p>
 
           <motion.h1
             variants={textVariants}
-            className="text-white text-xxl leading-none  pb-10 font-black">
-            {slide.title} <span className="font-light">{slide.light}</span>
+            className="text-white text-4xl md:text-5xl lg:text-6xl leading-none pb-10 font-black">
+            <span>{title.split(" ")[0]}</span>{" "}
+            <span className="font-normal">
+              {title.split(" ").slice(1).join(" ")}
+            </span>
           </motion.h1>
         </motion.div>
       </div>
