@@ -13,43 +13,39 @@ export default {
   ],
   theme: {
   	extend: {
-	
-			  screens: {
-				xs: "480px",
-				sm: "576px",
-				md: "768px",
-				lg: "992px",
-				xl: "1200px",
-				xxl: "1450px", 
-				"3xl": "1600px", 
-			  },
-			  container: {
-				center: true,
-				padding: {
-				  DEFAULT: "15px", 
-				},
-				screens: {
-					xs: "100%", 
-					sm: "540px", 
-					md: "740px", 
-					lg: "960px", 
-					xl: "1140px", 
-					xxl: "1420px", 
-					"3xl": "1550px", 
-				},
-			  },		  
+  		screens: {
+  			xs: '480px',
+  			sm: '576px',
+  			md: '768px',
+  			lg: '992px',
+  			xl: '1200px',
+  			xxl: '1450px',
+  			'3xl': '1600px'
+  		},
+  		container: {
+  			center: true,
+  			padding: {
+  				DEFAULT: '15px'
+  			},
+  			screens: {
+  				xs: '100%',
+  				sm: '540px',
+  				md: '740px',
+  				lg: '960px',
+  				xl: '1140px',
+  				xxl: '1420px',
+  				'3xl': '1550px'
+  			}
+  		},
   		colors: {
-			primary: '#FE6601', 
-			secondary: '#1E1E1E', 
-  			/* primary: {
-				primary: '#FE6601',   
+  			primary: {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
-  			}, */
+  			},
   			'custom-gray': '#F2F2F2',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
