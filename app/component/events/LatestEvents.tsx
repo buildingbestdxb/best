@@ -63,7 +63,7 @@ const prevNewsData = [
     subTitle: "Project Updates, Residential",
   },
 ];
-const LatestNews = () => {
+const LatestEvents = () => {
   return (
     <>
       <section className="py-[100px]">
@@ -115,4 +115,4 @@ const LatestNews = () => {
     </>
   );
 };
-export default LatestNews;
+export default LatestEvents;
