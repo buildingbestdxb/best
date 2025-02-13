@@ -34,6 +34,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section className="relative w-full h-[600px] overflow-hidden">
       <div className="relative w-full h-full">
+        <div className="overlay absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/60 via-black/40 to-transparent z-[1]"></div>
+
         <Image
           src={imageSrc}
           alt={title}
@@ -51,16 +53,26 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container py-10">
           <motion.p
             variants={textVariants}
-            className="text-white/50 pt-[100px] text-[16px] font-medium uppercase">
+            className="text-white/50 pt-[100px] text-[16px] font-medium uppercase"
+            style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
             Home / {breadcrumb}
-            <span className="font-bold text-primary"> {title}</span>
+            <span
+              className="font-bold text-primary"
+              style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
+              {" "}
+              {title}
+            </span>
           </motion.p>
 
           <motion.h1
             variants={textVariants}
-            className="text-white text-4xl md:text-5xl lg:text-6xl leading-none pb-10 font-black uppercase">
-            <span>{title.split(" ")[0]}</span>{" "}
-            <span className="font-normal">
+            className="text-white text-xxl leading-none pb-10 font-black uppercase">
+            <span style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
+              {title.split(" ")[0]}
+            </span>{" "}
+            <span
+              className="font-light"
+              style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
               {title.split(" ").slice(1).join(" ")}
             </span>
           </motion.h1>

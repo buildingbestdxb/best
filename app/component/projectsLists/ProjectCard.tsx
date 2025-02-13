@@ -6,12 +6,17 @@ import { motion } from "framer-motion";
 type ProjectCardProps = {
   image: string;
   title: string;
+  locationName: string;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ image, title }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  image,
+  title,
+  locationName,
+}) => {
   return (
     <motion.div
-      className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
+      className="relative h-[300px] lg:h-[449px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -49,9 +54,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title }) => {
 
         {/* Expandable Description Container */}
         <motion.div className="h-0 overflow-hidden group-hover:h-[50px] transition-[height] duration-500 ease-in-out">
-          <div className="flex ">
-            <p className="text-sm text-white mt-2 opacity-100">
-              This is a short description for the project.
+          <div className="flex items-baseline">
+            <Image
+              src="/assets/img/projects/location-white.svg"
+              alt="location icon"
+              width={12}
+              height={12}
+              className="opacity-70"
+            />
+            <p className="text-[16px] font-light ml-2 text-white/70 mt-2 mb-0 ">
+              {locationName}
             </p>
           </div>
         </motion.div>

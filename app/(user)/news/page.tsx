@@ -1,4 +1,4 @@
-import News from "../component/news/Index";
+import News from "../../component/news/Index";
 const Index = () => {
   return (
     <>
