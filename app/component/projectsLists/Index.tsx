@@ -1,6 +1,7 @@
 import React from "react";
+
+import ProjectList from "./ProjectList";
 import HeroSection from "../common/Banner/Hero";
-import ProjectCard from "./ProjectList";
 import Sectors from "./Sectors";
 
 export default function Index() {
@@ -12,7 +13,7 @@ export default function Index() {
         breadcrumb="Projects /"
       />
 
-      <ProjectCard />
+      <ProjectList />
       <Sectors />
     </>
   );

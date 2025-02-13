@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../common/Banner/Hero";
-import OtherProjects from "./otherProjects";
 import Gallery from "./gallery";
+import OtherProjects from "./otherProjects";
 
 export default function Index() {
   return (
@@ -11,6 +11,7 @@ export default function Index() {
         title="3000 Prayer Mosque"
         breadcrumb="Projects / Commercial Projects /"
       />
+
       <Gallery />
       <OtherProjects />
     </>

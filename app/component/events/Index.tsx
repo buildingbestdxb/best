@@ -1,6 +1,6 @@
 import React from "react";
+import LatestNews from "./LatestEvents";
 import HeroSection from "../common/Banner/Hero";
-import LatestEvents from "./LatestEvents";
 
 export default function Index() {
   return (
@@ -10,7 +10,7 @@ export default function Index() {
         title="Events"
         breadcrumb=""
       />
-      <LatestEvents />
+      <LatestNews />
     </>
   );
 }
