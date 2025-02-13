@@ -7,8 +7,8 @@ import { motion } from "framer-motion"; // Import motion
 const Form = () => {
   return (
     <div>
-      <section className="section-spacing relative overflow-hidden">
-        <div className="container">
+      <section className=" relative overflow-hidden">
+        <div className="container p-0">
           {/* Section Header with Animation */}
 
           <div>
@@ -23,7 +23,7 @@ const Form = () => {
                 Get in Touch
               </motion.h2>
               <motion.p
-                className="text-[18px] text-black/75 mb-3 lg:mb-[20px]"
+                className="text-[18px] text-black/75 mb-3 lg:mb-[40px] lg:w-[72%] leading-[25.2px]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,8 +61,7 @@ const Form = () => {
                 <div className="grid grid-cols-1 gap-4">
                   <motion.input
                     className="bg-transparent border-b-[1px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
-                    type="tel"
-                    placeholder="Phone"
+                    placeholder="Subject"
                     required
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -70,7 +69,7 @@ const Form = () => {
                     viewport={{ once: false }} // Animation resets on scroll
                   />
                 </div>
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4 mb-[32px]">
                   <motion.textarea
                     placeholder="Message"
                     rows={4}
@@ -84,7 +83,7 @@ const Form = () => {
                 </div>
                 <Link
                   href="#"
-                  className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn whts">
+                  className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn orng">
                   <div>
                     <Image
                       src={"/assets/img/icons/arrow.svg"}

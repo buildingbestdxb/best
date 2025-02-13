@@ -3,13 +3,13 @@ import ContactDetails from "./ContactDetails";
 const Details = () => {
   return (
     <>
-      <section>
+      <section className="bg-[#F2F2F2] py-[100px]">
         <div className="container">
-          <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center mt-5 lg:mt-[60px]">
-            <div className="xl:col-span-6">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-12 xl:gap-[60px] lg:gap-[40px] items-start ">
+            <div className="xl:col-span-5 col-span-full mr-6">
               <ContactDetails />
             </div>
-            <div className="xl:col-span-6">
+            <div className="xl:col-span-7 col-span-full xl:pl-[30px] lg:pl-[0]">
               <Form />
             </div>
           </div>

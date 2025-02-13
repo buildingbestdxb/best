@@ -7,13 +7,6 @@ const ContactDetails = () => {
   const [activeTab, setActiveTab] = useState<keyof typeof locations>("Sharjah");
 
   const locations = {
-    Dubai: {
-      address: "Al Quoz Industrial Area No. 4, Dubai – United Arab Emirates",
-      phone: "+971 4 123 4567",
-      email: "dubai@example.com",
-      fax: "+971 4 3284399",
-      addressCard: "34535",
-    },
     Sharjah: {
       address:
         "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
@@ -22,6 +15,14 @@ const ContactDetails = () => {
       fax: "+971 4 3284399",
       addressCard: "34535",
     },
+    Dubai: {
+      address: "Al Quoz Industrial Area No. 4, Dubai – United Arab Emirates",
+      phone: "+971 4 123 4567",
+      email: "dubai@example.com",
+      fax: "+971 4 3284399",
+      addressCard: "34535",
+    },
+
     AbuDhabi: {
       address:
         "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
@@ -38,25 +39,27 @@ const ContactDetails = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: 0.8 }}
       viewport={{ once: true }}
-      className="col-span-4">
-      <div className="flex space-x-5 mb-3 lg:mb-[20px]">
+      className="">
+      <div className="flex mb-3 lg:mb-[20px] pb-[15px] border-b-[1px] border-[#1E1E1E] xl:gap-[40px] lg:gap-[20px] gap-3">
         {Object.keys(locations).map((city) => (
           <button
             key={city}
-            className={`flex items-center gap-2 text-[16px] uppercase ${
-              activeTab === city ? "text-black" : "bg-transparent text-black"
+            className={`flex items-center gap-2 xl:text-[32px] sm:text-[28px]  font-[700] uppercase ${
+              activeTab === city
+                ? "text-black"
+                : "bg-transparent text-black/50 "
             }`}
             onClick={() => setActiveTab(city as keyof typeof locations)}>
             <div
-              className={`w-[5px] h-[5px] rounded-full ${
-                activeTab === city ? "bg-primary" : "bg-white/50"
+              className={`w-[10px]  h-[10px] rounded-full ${
+                activeTab === city ? "bg-primary" : "bg-black/30"
               }`}></div>
             {city}
           </button>
         ))}
       </div>
-      <div className="grid  xl:grid-cols-2 gap-[32px] items-center mt-5 lg:mt-[60px]">
-        <div>
+      <div className="grid  lg:grid-cols-2 gap-[40px]   items-center mt-5 lg:mt-[60px]">
+        <div className="">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/phone.svg"
@@ -64,11 +67,15 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50">Phone</span>
+            <span className="text-[16px] text-black/50 font-[800] uppercase">
+              Phone
+            </span>
           </div>
-          <p className="text-sm lg:w-[75%]">{locations[activeTab].phone}</p>
+          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[80%]">
+            {locations[activeTab].phone}
+          </p>
         </div>
-        <div>
+        <div className="">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/fax.svg"
@@ -76,11 +83,15 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50">Fax</span>
+            <span className="text-[16px] text-black/50 font-[800] uppercase">
+              Fax
+            </span>
           </div>
-          <p className="text-sm lg:w-[75%]">{locations[activeTab].fax}</p>
+          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] ">
+            {locations[activeTab].fax}
+          </p>
         </div>
-        <div>
+        <div className="mb-[40px] ">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/mail.svg"
@@ -88,18 +99,19 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50">Mail</span>
+            <span className="text-[16px] text-black/50 font-[800] uppercase">
+              Mail
+            </span>
           </div>
-          <p className="text-sm lg:w-[75%]">
-            {" "}
-            <a
+          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] pr-3">
+            {/* <a
               href={`mailto:${locations[activeTab].email}`}
-              className="text-primary">
-              {locations[activeTab].email}
-            </a>
+              className="text-primary"> */}
+            {locations[activeTab].email}
+            {/* </a> */}
           </p>
         </div>
-        <div>
+        <div className="mb-[40px]">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/addressCard.svg"
@@ -107,24 +119,30 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50">Address Card</span>
+            <span className="text-[16px] text-black/50 font-[800] uppercase">
+              Address Card
+            </span>
           </div>
-          <p className="text-sm lg:w-[75%]">
+          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[75%]">
             {locations[activeTab].addressCard}
           </p>
         </div>
-        <div>
-          <div className="flex gap-2">
-            <Image
-              src="/assets/img/contact/location.svg"
-              alt=""
-              width={15}
-              height={15}
-            />
-            <span className="text-[16px] text-black/50">Address</span>
-          </div>
-          <p className="text-sm lg:w-[75%]">{locations[activeTab].address}</p>
+      </div>
+      <div className="">
+        <div className="flex gap-2">
+          <Image
+            src="/assets/img/contact/location.svg"
+            alt=""
+            width={15}
+            height={15}
+          />
+          <span className="text-[16px] text-black/50 font-[800] uppercase">
+            Address
+          </span>
         </div>
+        <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] lg:w-[60%]">
+          {locations[activeTab].address}
+        </p>
       </div>
     </motion.div>
   );
