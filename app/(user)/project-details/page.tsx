@@ -1,12 +1,9 @@
-import React from "react";
-import Projects from "../../component/projectDetails/Index";
+import Index from "../../component/projectsLists/Index";
 
-const Index = () => {
+export default function ProjectsDetails() {
   return (
     <>
-      <Projects />
+      <Index />
     </>
   );
-};
-
-export default Index;
+}

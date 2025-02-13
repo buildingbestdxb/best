@@ -1,5 +1,5 @@
 import Image from "next/image";
-import GalleryCard from "./GalleryCard";
+import GalleryCard from "./galleryCard";
 
 const Gallery = () => {
   const sectors = [

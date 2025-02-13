@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../common/Banner/Hero";
-import OtherProjects from "./OtherProjects";
-import Gallery from "./Gallery";
+import OtherProjects from "./otherProjects";
+import Gallery from "./gallery";
 
 const Index = () => {
   return (
