@@ -6,7 +6,7 @@ export const Index = () => {
   return (
     <>
       <HeroSection
-        imageSrc="/assets/img/projects-details/banner.jpg"
+        imageSrc="/assets/img/contact/banner.jpg"
         title="Contact"
         breadcrumb=""
       />
