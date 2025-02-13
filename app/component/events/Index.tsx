@@ -6,7 +6,7 @@ const Index = () => {
     <>
       <HeroSection
         imageSrc="/assets/img/projects-details/banner.jpg"
-        title="Event"
+        title="Events"
         breadcrumb=""
       />
       <LatestEvents />
