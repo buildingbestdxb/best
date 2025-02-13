@@ -1,7 +1,8 @@
+import React from "react";
 import HeroSection from "../common/Banner/Hero";
 import Details from "./Details";
 
-const Index = () => {
+export const Index = () => {
   return (
     <>
       <HeroSection
@@ -13,4 +14,3 @@ const Index = () => {
     </>
   );
 };
-export default Index;

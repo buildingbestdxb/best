@@ -1,4 +1,4 @@
-import Index from "../../component/projectsLists/Index";
+import Index from "@/app/component/projectsLists/Index";
 
 export default function Projects() {
   return (

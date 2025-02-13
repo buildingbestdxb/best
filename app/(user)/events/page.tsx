@@ -1,9 +1,10 @@
-import News from "../../component/events/Index";
-const Index = () => {
+import Index from "@/app/component/events/Index";
+
+const Events = () => {
   return (
     <>
-      <News />
+      <Index />
     </>
   );
 };
-export default Index;
+export default Events;

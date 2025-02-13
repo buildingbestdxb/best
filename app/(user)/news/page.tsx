@@ -1,9 +1,10 @@
-import News from "../../component/news/Index";
-const Index = () => {
+import Index from "@/app/component/news/Index";
+
+const News = () => {
   return (
     <>
-      <News />
+      <Index />
     </>
   );
 };
-export default Index;
+export default News;

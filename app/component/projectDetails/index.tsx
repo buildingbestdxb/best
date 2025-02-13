@@ -3,7 +3,7 @@ import HeroSection from "../common/Banner/Hero";
 import OtherProjects from "./otherProjects";
 import Gallery from "./gallery";
 
-const Index = () => {
+export default function Index() {
   return (
     <>
       <HeroSection
@@ -15,6 +15,4 @@ const Index = () => {
       <OtherProjects />
     </>
   );
-};
-
-export default Index;
+}

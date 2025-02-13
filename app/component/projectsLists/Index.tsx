@@ -1,10 +1,9 @@
 import React from "react";
 import HeroSection from "../common/Banner/Hero";
 import ProjectCard from "./ProjectList";
-
 import Sectors from "./Sectors";
 
-const Index = () => {
+export default function Index() {
   return (
     <>
       <HeroSection
@@ -17,6 +16,4 @@ const Index = () => {
       <Sectors />
     </>
   );
-};
-
-export default Index;
+}

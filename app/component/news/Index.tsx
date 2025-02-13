@@ -1,7 +1,9 @@
 import HeroSection from "../common/Banner/Hero";
 import LatestNews from "./LatestNews";
 
-const Index = () => {
+import React from "react";
+
+export default function Index() {
   return (
     <>
       <HeroSection
@@ -12,5 +14,4 @@ const Index = () => {
       <LatestNews />
     </>
   );
-};
-export default Index;
+}
