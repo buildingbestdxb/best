@@ -68,7 +68,9 @@ const LatestNews = () => {
     <>
       <section className="py-[100px]">
         <div className="container">
-          <SecHr title="Latest News" />
+          <div className="mb-5 lg:mb-[60px]">
+            <SecHr title="Latest News" />
+            </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center mt-5 lg:mt-[60px] ">
             <div className="xl:col-span-6">
               <ImageCard
@@ -90,7 +92,9 @@ const LatestNews = () => {
       </section>
       <section className="bg-[#F2F2F2] py-[100px]">
         <div className="container">
-          <SecHr title="Previous News" />
+        <div className="mb-5 lg:mb-[60px]">
+            <SecHr title="Previous News" />
+            </div>
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-[32px] items-center ">
             {prevNewsData.map((news, index) => (
               <ImageCol key={index} {...news} />
