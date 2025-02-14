@@ -18,12 +18,12 @@ const SecHr: FC<SecHrProps> = ({ title }) => {
       initial="hidden"
       animate="visible"
       variants={fadeIn}
-      className="flex items-center space-x-[24px] text-primary text-sm font-medium mb-5 lg:mb-[60px]">
+      className="flex items-center   text-primary text-sm font-medium ">
       <span className="w-[24px] h-[2px] bg-primary"></span>
-      <span className="w-[200px] leading-none uppercase text-[16px]">
+      <span className="w-fit whitespace-nowrap leading-none uppercase text-[16px] mx-6">
         {title}
       </span>
-      <hr className="w-full" />
+      <div className="w-full border-t-[1.5px]  border-black/15 "  ></div>
     </motion.div>
   );
 };

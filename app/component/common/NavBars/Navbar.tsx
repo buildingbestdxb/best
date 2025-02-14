@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
 import { menuItems } from "./data";
+// import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [active, setActive] = useState<string | null>(null);
@@ -37,9 +38,15 @@ const Navbar = () => {
   } else if (isMobile == null) {
     return null;
   } else {
+    //  const pathname = usePathname(); // Get the current path
+
+    //     const isHomePage = pathname === "/"; // Check if it's the home page
+
     return (
-      <header className="w-full bg-white/80 backdrop-blur-[10px] shadow-md  absolute top-0 z-10">
-       
+
+      <header
+      className="w-full  backdrop-blur-[10px] shadow-md  absolute top-0 z-10 bg-white/80   ">
+
           {/* <div className='flex items-center'>
    <div className="hidden md:flex space-x-6 text-gray-800 text-sm uppercase">
      <Link href="/about">
@@ -75,7 +82,7 @@ const Navbar = () => {
      </div>
    </div>
 
-   
+
    <Link href="/contact">
      <button className="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700">
        Contact Us
@@ -177,7 +184,7 @@ const Navbar = () => {
                <Link href="/">How we work</Link>
              </div>
            </MenuItem> */}
-        
+
           </Menu>
       </header>
     );

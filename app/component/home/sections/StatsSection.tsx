@@ -4,13 +4,25 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
-const stats = [
-  { value: 50, label: "Years of Experience", icon: "/assets/img/icons/experience.svg" },
-  { value: 150, label: "Projects Completed", icon: "/assets/img/icons/project-completed.svg" },
-  { value: 100, label: "Clients Who Trust Us", icon: "/assets/img/icons/clients-who.svg" },
-];
+interface FrameworkItem {
 
-const StatsSection = () => {
+  value: number;
+  label: string;
+  icon: string;
+}
+
+interface HeroSectionProps {
+  bannerimage:string
+  colms: number;
+  data: FrameworkItem[];
+}
+// const HeroSectionProps = [
+//   { value: 50, label: "Years of Experience", icon: "/assets/img/icons/experience.svg" },
+//   { value: 150, label: "Projects Completed", icon: "/assets/img/icons/project-completed.svg" },
+//   { value: 100, label: "Clients Who Trust Us", icon: "/assets/img/icons/clients-who.svg" },
+// ];
+
+  const StatsSection: React.FC<HeroSectionProps> = ({ data ,colms,bannerimage}) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
@@ -29,7 +41,7 @@ const StatsSection = () => {
         className="absolute top-0 left-0 h-full w-full -z-[1]"
       >
         <Image
-          src="/assets/img/home/stastsc.jpg"
+          src={bannerimage}
           className="absolute object-cover object-center h-full"
           alt=""
           width={1920}
@@ -38,19 +50,27 @@ const StatsSection = () => {
       </motion.figure>
 
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-[64px] w-full">
-          {stats.map((stat, index) => (
+        <div className={`grid grid-cols-1 md:grid-cols-${colms} gap-6 xl:gap-[64px] w-full`}>
+          {data.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="flex flex-col items-center bg-primary text-white p-[20px] lg:p-[32px] rounded-custom shadow-lg"
+              className="flex flex-col justify-between items-center bg-primary text-white p-[20px] lg:p-[32px] rounded-custom shadow-lg"
             >
               <div className="flex justify-between items-center w-full mb-[10px] lg:mb-[50px]">
-                <span className="text-xl leading-none font-bold">
+                {/* <span className="text-xl leading-none font-bold">
                   {inView ? <CountUp start={0} end={stat.value} duration={2} delay={0.3} /> : 0}+
-                </span>
+                </span>  */}
+
+                {typeof colms !== "undefined" && colms !== 5 && (
+                  <span className="text-xl leading-none font-bold">
+                    {inView ? <CountUp start={0} end={stat.value} duration={2} delay={0.3} /> : 0}+
+                  </span>
+                )}
+
+
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
