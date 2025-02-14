@@ -35,7 +35,7 @@ export const MenuItem = ({
       <div className="flex gap-2">
         <motion.p
           transition={{ duration: 0.3 }}
-          className="cursor-pointer font-semibold text-black hover:opacity-[0.9] dark:text-white uppercase"
+          className="cursor-pointer font-semibold group-hover:text-opacity-50 dark:text-white uppercase"
         >
           {item}
         </motion.p>

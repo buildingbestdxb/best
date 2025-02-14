@@ -7,7 +7,7 @@ export const Index = () => {
     <>
       <HeroSection
         imageSrc="/assets/img/contact/banner.jpg"
-        title="Contact"
+        title="Contact Us"
         breadcrumb=""
       />
       <Details />

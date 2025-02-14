@@ -66,7 +66,7 @@ const prevNewsData = [
 const LatestNews = () => {
   return (
     <>
-      <section className="py-[100px]">
+      <section className="section-spacing">
         <div className="container">
           <div className="mb-5 lg:mb-[60px]">
             <SecHr title="Latest News" />

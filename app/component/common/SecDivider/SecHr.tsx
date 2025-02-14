@@ -23,7 +23,7 @@ const SecHr: FC<SecHrProps> = ({ title }) => {
       <span className="w-fit whitespace-nowrap leading-none uppercase text-[16px] mx-6">
         {title}
       </span>
-      <div className="w-full border-t-[1.5px]  border-black/15 "  ></div>
+      <div className="w-full border-t-[1.5px]  border-black/5 "  ></div>
     </motion.div>
   );
 };

@@ -1,19 +1,27 @@
 "use client";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import MobileNav from "./MobileNav";
+import { menuItems } from "./data";
 
 import {
   HoveredLink,
   Menu,
   MenuItem,
 } from "@/components/ui/navbar-menu";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import MobileNav from "./MobileNav";
-import { menuItems } from "./data";
+
 // import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+ 
+  const pathname = usePathname();
   const [active, setActive] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
+
+  const pagesWithBackground = ['/']; // Add required pages
+  const hasBackground = pagesWithBackground.includes(pathname); 
+
 
   useEffect(() => {
     if (typeof window === "undefined") return; // Prevents errors during SSR
@@ -45,7 +53,7 @@ const Navbar = () => {
     return (
 
       <header
-      className="w-full  backdrop-blur-[10px] shadow-md  absolute top-0 z-10 bg-white/80   ">
+      className={`${hasBackground ? 'bg-white/80 backdrop-blur-[10px] text-black shadow-md ' : 'bg-transparent text-white'} transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
 
           {/* <div className='flex items-center'>
    <div className="hidden md:flex space-x-6 text-gray-800 text-sm uppercase">

@@ -45,26 +45,26 @@ const CoreValue = () => {
 
 
             <div className="  w-full flex ">
-              <motion.div  variants={fadeIn} className="flex gap-4 justify-center bg-secondary/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
+              <motion.div  variants={fadeIn} className="flex gap-2 lg:gap-[12px] justify-center bg-black/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
                 <Image
-                  src="/assets/img/story/iso3.svg"
+                  src="/assets/img/story/im-01.png"
                   alt=""
-                  width={89}
-                    height={89}
+                  width={80}
+                    height={80}
 
                 />
                 <Image
-                  src="/assets/img/story/iso2.svg"
+                  src="/assets/img/story/im-02.png"
                   alt=""
-                  width={89}
-                  height={89}
+                  width={80}
+                  height={80}
 
                 />
                 <Image
-                  src="/assets/img/story/iso1.svg"
+                  src="/assets/img/story/im-03.png"
                   alt=""
-                  width={89}
-                  height={89}
+                  width={80}
+                  height={80}
 
                 />
               </motion.div>
@@ -84,28 +84,7 @@ const CoreValue = () => {
               className="rounded-xl shadow-lg"
             />
 
-            <div className="absolute bottom-4 w-full flex justify-center">
-              <motion.div  variants={fadeIn} className="flex gap-4 justify-center bg-white/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
-                  alt=""
-                  width={89}
-                  height={89}
-                />
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
-                  alt=""
-                  width={89}
-                  height={89}
-                />
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
-                  alt=""
-                  width={89}
-                  height={89}
-                />
-              </motion.div>
-            </div>
+          
           </motion.div>
         </div>
       </div>

@@ -42,8 +42,8 @@ const ImageCol: React.FC<ImageColProps> = ({
         </motion.div>
 
         {/* Content Section */}
-        <div className="w-full">
-          <p className="text-[14px] text-black/80 uppercase">{subTitle}</p>
+        <div className="w-full px-[16px]">
+          <p className="text-[14px] text-black/60 uppercase font-medium">{subTitle}</p>
           <h4 className="text-[22px] font-semibold text-black lg:w-[90%] leading-[28.6px] py-[20px]">
             {title}
           </h4>

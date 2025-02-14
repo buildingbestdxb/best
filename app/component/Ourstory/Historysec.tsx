@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
 const Historysec = () => {
   return (
     <>
-      <section className="  bg-secondary/20">
+      <section className=" section-spacing bg-black/20">
         <div className="container">
-          <div className="py-[60px] md:py-[80px] lg:py-[100px]]">
+          <div className="">
             <div className="mb-4 md:mb-[60px]">
               <SecHr title="Our History" />
             </div>
@@ -49,14 +49,14 @@ const Historysec = () => {
             </div>
             <div className="flex items-center justify-between   w-full  pt-[60px] md:pt-[80px] lg:pt-[120px]">
           <div className="relative flex w-full items-center justify-between">
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-300 -translate-y-1/2"></div>
+          {/*   <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-300 -translate-y-1/2"></div> */}
 
             <div className="flex flex-col md:flex-row w-full justify-between gap-2 md-gap-0">
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   1975
                 </span>
-                    <div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                    <div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -64,7 +64,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   1980
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -72,7 +72,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   1999
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -89,7 +89,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   2014
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -97,7 +97,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   2017
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -105,7 +105,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   2020
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>
@@ -113,7 +113,7 @@ const Historysec = () => {
               <div className="relative flex flex-col items-center gap-3 md:gap-5">
                 <span className="bg-black/30 text-white px-5 py-2 rounded-full text-sm font-semibold">
                   2024
-                </span><div className="w-6 h-6 bg-[#d2d2d2] flex justify-center items-center  ">
+                </span><div className="w-6 h-6 bg-[#cccccc] flex justify-center items-center  ">
                       <div className="w-[10px] h-[10px] bg-primary  rounded-full  "></div>
                     </div>
               </div>

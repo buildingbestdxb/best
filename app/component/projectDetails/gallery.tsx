@@ -5,7 +5,7 @@ const Gallery = () => {
   const sectors = [
     {
       icon: "/assets/img/projects-details/i1.svg",
-      title: "Sector Title",
+      title: "Sector",
       content: "Commercial",
     },
     {
@@ -47,9 +47,9 @@ const Gallery = () => {
   ];
 
   return (
-    <section>
+    <section className="section-spacing mb-0">
       <div className="container">
-        <div className="grid lg:grid-cols-2 xl:grid-cols-12  mt-5 lg:mt-[60px]">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-12">
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
             <div className="bg-[#F2F2F2] p-[60px] rounded-custom">
               {sectors.map((sector, index) => (
@@ -70,7 +70,7 @@ const Gallery = () => {
                     </div>
                   </div>
                   <div className="col-span-6">
-                    <h4 className="text-[22px] text-[#1E1E1EBF] opacity-75 ">
+                    <h4 className="text-[22px] text-black/75 ">
                       {sector.content}
                     </h4>
                   </div>
@@ -80,7 +80,7 @@ const Gallery = () => {
           </div>
 
           <div className="xl:col-span-7">
-            <p className="text-[#1E1E1EBF] opacity-75 text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400] ">
+            <p className="text-black/60 opacity-75 text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400] ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -97,7 +97,7 @@ const Gallery = () => {
               ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
               irure dolor in reprehenderit.
             </p>
-            <h3 className="text-[32px] text-[#1E1E1E] font-bold mb-[40px] mt-[60px] uppercase">
+            <h3 className="text-lg text-black font-bold mb-[40px] mt-[60px] uppercase">
               Gallery
             </h3>
             <GalleryCard />

@@ -19,7 +19,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
 }) => {
   return (
     <section>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-5 lg:gap-[32px]">
         {/* Image Section */}
         <motion.div
           className={`relative w-1/2  lg:h-[215px] overflow-hidden rounded-custom shadow-lg group`}

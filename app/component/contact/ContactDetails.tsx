@@ -40,14 +40,14 @@ const ContactDetails = () => {
       transition={{ duration: 0.6, delay: 0.8 }}
       viewport={{ once: true }}
       className="">
-      <div className="flex mb-3 lg:mb-[20px] pb-[15px] border-b-[1px] border-[#1E1E1E] xl:gap-[40px] lg:gap-[20px] gap-3">
+      <div className="flex mb-3 lg:mb-[20px] pb-[15px] border-b-[1px] border-[#1E1E1E] xl:gap-[40px] lg:gap-[20px] gap-3 h-[50px]">
         {Object.keys(locations).map((city) => (
           <button
             key={city}
-            className={`flex items-center gap-2 xl:text-[32px] sm:text-[28px]  font-[700] uppercase ${
+            className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${
               activeTab === city
-                ? "text-black"
-                : "bg-transparent text-black/50 "
+                ? "text-black text-lg"
+                : "bg-transparent text-black/50 text-[28px]"
             }`}
             onClick={() => setActiveTab(city as keyof typeof locations)}>
             <div

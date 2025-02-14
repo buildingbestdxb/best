@@ -81,12 +81,13 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+     
       fontSize: {
-        xxl: "clamp(3rem, 5vw, 5rem)",
-        xl: "clamp(2.5rem, 4vw, 4rem)",
-        lg: "clamp(1.75rem, 2.5vw, 2rem)",
-        md: "clamp(1.125rem, 2vw, 1.5rem)",
-        sm: "clamp(1rem, 1.5vw, 1.125rem)",
+        xxl: 'clamp(3rem, 5vw, 5rem)',  // 48px - 80px (for hero headings)
+        xl: 'clamp(2.5rem, 4vw, 4rem)', // 40px - 64px (for section titles)
+        lg: 'clamp(1.75rem, 3vw, 2rem)',   // 28px - 32px (for subheadings)
+        md: 'clamp(1.125rem, 2vw, 1.5rem)', // 18px - 24px (for body text)
+        sm: 'clamp(1rem, 1.5vw, 1.125rem)', // 16px - 18px (default body)
       },
       borderRadius: {
         custom: "16px",

@@ -5,9 +5,9 @@ import ProjectCard from "./ProjectCard";
 const ProjectList = () => {
   return (
     <>
-      <section className="pt-10 pb-[100px]">
+      <section className="section-spacing">
         <div className="container">
-          <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center mt-5 lg:mt-[60px]">
+          <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center">
             <div className="xl:col-span-8">
               <ProjectCard
                 locationName="Kalba,Sharjah."
