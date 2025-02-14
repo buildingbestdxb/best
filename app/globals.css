@@ -220,7 +220,17 @@ p {
       }
     }
   }
+  &.orng {
+    @apply bg-primary;
+    @apply text-white;
+    > div {
+      &::before {
+        @apply bg-white;
+      }
+    }
+  }
 }
+
 @media (min-width: 1800px) {
   footer {
     container {
@@ -228,3 +238,4 @@ p {
     }
   }
 }
+
