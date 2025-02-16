@@ -1,3 +1,5 @@
+"use client";
+
 import NewsForm from "../news-form";
 import { useParams } from "next/navigation";
 
