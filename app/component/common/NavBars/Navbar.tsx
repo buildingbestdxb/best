@@ -14,13 +14,13 @@ import {
 // import { usePathname } from "next/navigation";
 
 const Navbar = () => {
- 
+
   const pathname = usePathname();
   const [active, setActive] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
 
   const pagesWithBackground = ['/']; // Add required pages
-  const hasBackground = pagesWithBackground.includes(pathname); 
+  const hasBackground = pagesWithBackground.includes(pathname);
 
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const Navbar = () => {
     return (
 
       <header
-      className={`${hasBackground ? 'bg-white/80 backdrop-blur-[10px] text-black shadow-md ' : 'bg-transparent text-white'} transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
+      className={`${hasBackground ? 'bg-white/80 backdrop-blur-[10px] text-black shadow-md ' : 'bg-transparent text-white tanspheader'} transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
 
           {/* <div className='flex items-center'>
    <div className="hidden md:flex space-x-6 text-gray-800 text-sm uppercase">
@@ -104,6 +104,7 @@ const Navbar = () => {
                 <MenuItem
                   setActive={setActive}
                   active={active}
+                  url={menuItem.url}
                   item={menuItem.title}
                   key={index}
                 >
@@ -121,7 +122,7 @@ const Navbar = () => {
                   src="/assets/images/gd-im2.jpg"
                 /> */}
                     {menuItem.children.map((item, index) => (
-                      <HoveredLink href="#" key={index}>
+                      <HoveredLink href={`${item.url}`} key={index}>
                         <div>{item.title}</div>
                       </HoveredLink>
                     ))}
@@ -133,10 +134,11 @@ const Navbar = () => {
                 </MenuItem>
               ) : (
                 <MenuItem
-                  item={menuItem.title}
+                item={menuItem.title}
+                url={menuItem.url}
                   setActive={setActive}
                   active={active}
-                  noMenu
+                  noMenu={true}
                   key={index}
                 >
                   <div className="p-4">
