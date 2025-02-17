@@ -1,39 +1,56 @@
 export const menuItems = [
     {
         title:"About Us",
+                url:"",
         children:[
             {
-                title:"About Us"
+                title: "Our Story",
+                url:"our-story",
             }
         ]
     },
     {
         title:"Projects",
+        url:"",
         children:[
             {
-                title:"Residential"
+                title:"Residential",
+                url:"projects",
             },
             {
-                title:"Commercial"
+                title:"Commercial",
+                url:"projects",
             }
         ]
     },
     {
         title:"Careers",
+        url:"careers",
     },
     {
         title:"Media",
+        url:"",
         children:[
             {
-                title:"Media"
+                title: "Events",
+                url:"events",
+            },
+            {
+                title:"News",
+                url:"news",
             }
+
+
+
         ]
     },
     {
         title:"How we work",
+        url:"accreditations",
         children:[
             {
-                title:"How we work"
+                title:"How we work",
+                url:"accreditations",
             }
         ]
     },

@@ -72,8 +72,16 @@ const Certificates = () => {
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.title}
                   </h4>
-
-                <div className="w-[10px] h-[10px] bg-primary  rounded-full group-hover:bg-white  "></div>
+ <div className="flex items-center">
+            <div className="w-[8px] h-[8px] bg-primary rounded-full transition-opacity duration-500 opacity-100 group-hover:opacity-0"></div>
+            <Image
+              src="/assets/img/icons/arwtp.svg"
+              alt=""
+              width={0}
+              height={0}
+              className="transition-all duration-500 ease-in-out group-hover:w-[14px]"
+            />
+          </div>
                 </motion.div>
               </motion.div>
             </motion.div>

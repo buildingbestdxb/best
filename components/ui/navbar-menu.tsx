@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
-/* import arrow from "@/public/assets/img/home/arrow.svg"; */
+ import arrow from "@/public/assets/img/home/arrow.svg";
 
 const transition = {
   type: "spring",
@@ -18,41 +18,50 @@ export const MenuItem = ({
   setActive,
   active,
   item,
+  url,
   children,
   noMenu,
 }: {
   setActive: (item: string | null) => void;
   active: string | null;
-  item: string;
+    item: string;
+    url: string;
   children?: React.ReactNode;
   noMenu?: boolean;
 }) => {
   return (
     <div
-      onMouseEnter={() => (noMenu ? setActive(null) : setActive(null))}
+      onMouseEnter={() => (noMenu ? setActive(null) : setActive(item))}
       className="relative"
     >
       <div className="flex gap-2">
-        <motion.p
+        <Link href={url}><motion.p
           transition={{ duration: 0.3 }}
           className="cursor-pointer font-semibold group-hover:text-opacity-50 dark:text-white uppercase"
         >
+          <div className="flex gap-3">
           {item}
-        </motion.p>
-       {/*  {!noMenu && <Image src={arrow} alt="arrow" />} */}
+         </div>
+
+
+      </motion.p>
+      </Link>
+        {!noMenu && <Image src={arrow} alt="arrow"  className="arrowst"/>}
       </div>
       {active !== null && !noMenu && (
+
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={transition}
         >
           {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
+            <div className="">
+
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                className="bg-white absolute dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
               >
                 <motion.div
                   layout // layout ensures smooth animation
@@ -83,18 +92,20 @@ export const Menu = ({
     >
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
+          <Link href="/">
           <Image
             src="/Logo.svg"
             alt="Crest Logo"
             width={80}
             height={50}
             className="h-[50px] w-auto"
-          />
+            />
+          </Link>
         </div>
         <div className="flex space-x-[25px] xl:space-x-[35px] items-center">
           {children}
           <Link
-            href="#"
+            href="contact"
             className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn"
           >
             <div>
