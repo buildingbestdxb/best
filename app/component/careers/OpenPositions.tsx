@@ -16,20 +16,20 @@ export default function OpenPositions() {
       location: "Sharjah",
     },
     {
-      title: "Senior Software Engineer",
-      department: "Revenue Operations",
+      title: "Senior Product Marketing Manager",
+      department: "Marketing",
       employmentType: "Full Time",
       location: "Dubai",
     },
     {
-      title: "Associate, GTM Finance & Operations",
-      department: "Revenue Operations",
+      title: "Customer Experience Agent",
+      department: "Customer Experience",
       employmentType: "Full Time",
       location: "Sharjah",
     },
     {
-      title: "Marketing Specialist",
-      department: "Revenue Operations",
+      title: "Executive Assistant",
+      department: "Corporate",
       employmentType: "Full Time",
       location: "Dubai",
     },
@@ -76,20 +76,16 @@ export default function OpenPositions() {
           {jobListings.map((job, index) => (
             <div key={index} className="w-full">
               <div className="grid lg:grid-cols-2 gap-x-6 items-center  w-full">
-                <div className="flex items-center w-full">
-                  <div className="designation w-full">
-                    <h3 className="text-[22px] font-semibold w-full">
-                      {job.title}
-                    </h3>
+                <div className="grid lg:grid-cols-2 items-center   w-full">
+                  <div className="designation ">
+                    <h3 className="text-[22px] font-semibold ">{job.title}</h3>
                   </div>
-                  <div className="departments w-full text-right">
-                    <p className="text-[16px] w-full uppercase">
-                      {job.department}
-                    </p>
+                  <div className="departments lg:pl-[100px]">
+                    <p className="text-[16px]  uppercase">{job.department}</p>
                   </div>
                 </div>
 
-                <div className="flex items-right lg:mt-0 mt-7 w-full">
+                <div className="sm:flex items-right lg:mt-0 mt-7 w-full">
                   <div className="locations w-full flex lg:justify-end space-x-3">
                     <span className="text-[18px] text-black/60 font-[400] px-[16px] py-[4px] bg-black/5 rounded-custom">
                       {job.employmentType}

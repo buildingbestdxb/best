@@ -22,15 +22,13 @@ const ValueIc = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="flex justify-center items-center py-16 overflow-hidden relative section-spacing"
-    >
+      className="flex justify-center items-center py-16 overflow-hidden relative section-spacing">
       {/* Background Image with Animation */}
       <motion.figure
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute top-0 left-0 h-full w-full -z-[1]"
-      >
+        className="absolute top-0 left-0 h-full w-full -z-[1]">
         <Image
           src="/assets/img/story/storystar.jpg"
           className="absolute object-cover object-center h-full"
@@ -41,21 +39,19 @@ const ValueIc = () => {
       </motion.figure>
 
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 xl:gap-[60px] w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 xxl:gap-[60px] xl-gap-[40px] w-full">
           {stats.data.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col justify-between items-center bg-primary text-white p-[20px] lg:p-[32px] rounded-custom shadow-lg h-[216px]"
-            >
+              className="flex flex-col justify-between items-center bg-primary text-white p-[20px] xxl:p-[32px] rounded-custom shadow-lg h-[216px]">
               <div className="flex justify-between items-center w-full mb-[10px] lg:mb-[50px]">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
+                  transition={{ duration: 0.5, delay: 0.2 }}>
                   <Image
                     src={stat.icon}
                     alt={stat.label}
