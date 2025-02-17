@@ -43,7 +43,7 @@ export default function ImageCarousel() {
   return (
     <div className="flex flex-col gap-4 w-full ">
       {/* Displayed Image with Controls and Thumbnails */}
-      <div className="relative w-full aspect-video overflow-hidden rounded-xl shadow-lg flex flex-col justify-end">
+      <div className="relative w-full lg:h-[571px] h-full aspect-video overflow-hidden rounded-xl shadow-lg flex flex-col justify-end">
         <Image
           src={images[activeIndex]}
           alt="Displayed"

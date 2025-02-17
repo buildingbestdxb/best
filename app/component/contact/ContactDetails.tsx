@@ -10,15 +10,15 @@ const ContactDetails = () => {
     Sharjah: {
       address:
         "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
-      phone: "+971 6 987 6543",
-      email: "sharjah@example.com",
+      phone: "+971 4 3884598",
+      email: "info@bestbcc.com",
       fax: "+971 4 3284399",
       addressCard: "34535",
     },
     Dubai: {
       address: "Al Quoz Industrial Area No. 4, Dubai – United Arab Emirates",
-      phone: "+971 4 123 4567",
-      email: "dubai@example.com",
+      phone: "+971 4 3884598",
+      email: "info@bestbcc.com",
       fax: "+971 4 3284399",
       addressCard: "34535",
     },
@@ -26,8 +26,8 @@ const ContactDetails = () => {
     AbuDhabi: {
       address:
         "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
-      phone: "+971 2 345 6789",
-      email: "abudhabi@example.com",
+      phone: "+971 4 3884598",
+      email: "info@bestbcc.com",
       fax: "+971 4 3284399",
       addressCard: "34535",
     },

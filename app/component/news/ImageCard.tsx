@@ -27,7 +27,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
       {/* Image with gradient overlay */}
       <div className="relative w-full h-full">
         <Image src={image} alt={title} fill className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div> */}
         <div className="absolute top-5 right-5 text-white uppercase  p-[12px] backdrop-blur-[10px] bg-white/10 rounded-[8px]">
           <p className="text-[14px] ">{date}</p>
         </div>
@@ -41,8 +41,10 @@ const ImageCard: React.FC<ImageCardProps> = ({
         viewport={{ once: true }}>
         {/* Title and Icons Row */}
         <div className="w-full">
-          <p className="font-[14px] text-white/80 uppercase">{subTitle}</p>
-          <h4 className="text-[22px] font-[600] text-white  lg:w-[90%] leading-[28.6px] py-[20px]">
+          <p className="text-[14px] text-white/80 uppercase mb-[20px]">
+            {subTitle}
+          </p>
+          <h4 className="text-[22px] font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 mb-[32px]">
             {title}
           </h4>
           <ButtonWithIcon link="" buttonText="Read More" />

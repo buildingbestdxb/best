@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <>
       <HeroSection
-        imageSrc="/assets/img/projects-details/banner.jpg"
+        imageSrc="/assets/img/news/banner.jpg"
         title="News"
         breadcrumb=""
       />

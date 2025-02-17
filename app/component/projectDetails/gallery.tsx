@@ -51,11 +51,11 @@ const Gallery = () => {
       <div className="container">
         <div className="grid lg:grid-cols-2 xl:grid-cols-12">
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
-            <div className="bg-[#F2F2F2] p-[60px] rounded-custom">
+            <div className="bg-[#F2F2F2] px-[60px] pt-[60px] pb-[30px] rounded-custom">
               {sectors.map((sector, index) => (
                 <div
                   key={index}
-                  className="grid lg:grid-cols-12 gap-5 lg:gap-10 mb-[30px] border-b border-[#1E1E1E]/30 pb-[32px] items-center ">
+                  className="grid lg:grid-cols-12 gap-6  mb-[30px] border-b border-[#1E1E1E]/30 pb-[32px] items-center ">
                   <div className="col-span-6">
                     <div className="flex items-center gap-4">
                       <Image
@@ -70,7 +70,7 @@ const Gallery = () => {
                     </div>
                   </div>
                   <div className="col-span-6">
-                    <h4 className="text-[22px] text-black/75 ">
+                    <h4 className="xl:text-[22px] text-[20px] text-black/75 font-[400]">
                       {sector.content}
                     </h4>
                   </div>
@@ -80,7 +80,7 @@ const Gallery = () => {
           </div>
 
           <div className="xl:col-span-7">
-            <p className="text-black/60 opacity-75 text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400] ">
+            <p className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400] ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -90,12 +90,7 @@ const Gallery = () => {
               sunt in culpa qui officia deserunt mollit anim id est laborum. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit.reprehenderit in voluptate velit esse cillum dolore
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-              irure dolor in reprehenderit.
+              reprehenderit.
             </p>
             <h3 className="text-lg text-black font-bold mb-[40px] mt-[60px] uppercase">
               Gallery

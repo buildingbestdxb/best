@@ -13,7 +13,7 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   return (
     <a
       href={link}
-      className="flex items-center gap-2  py-2 text-primary  rounded-lg text-[14px] uppercase">
+      className="flex items-center gap-2   text-primary  rounded-lg text-[14px] uppercase">
       <span>{buttonText}</span>
       <Image
         src="/assets/img/news/arrow-orange.svg"

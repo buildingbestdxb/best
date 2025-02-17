@@ -34,7 +34,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section className="relative w-full h-[600px] overflow-hidden">
       <div className="relative w-full h-full">
-        <div className="overlay absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/60 via-black/40 to-transparent z-[1]"></div>
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            background:
+              "linear-gradient(rgb(0 0 0 / 9%) 0%, rgb(0 0 0 / 55%) 100%), linear-gradient(261.05deg, rgba(0, 0, 0, 0) 10.76%, rgb(254 102 1 / 19%) 100%)",
+          }}></div>
 
         <Image
           src={imageSrc}
