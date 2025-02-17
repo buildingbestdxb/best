@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSection from "../common/Banner/Hero";
 import OpenPositions from "./OpenPositions";
+import ApplicationForm from "./ApplicationForm";
 
 export default function Index() {
   return (
@@ -11,6 +12,7 @@ export default function Index() {
         breadcrumb=""
       />
       <OpenPositions />
+      <ApplicationForm />
     </>
   );
 }
