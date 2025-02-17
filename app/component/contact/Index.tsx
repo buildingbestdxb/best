@@ -1,11 +1,11 @@
 import React from "react";
 import Details from "./Details";
-import HeroSection from "../Banner/Hero";
+import HeroInner from "../common/Banner/Hero";
 
 export const Index = () => {
   return (
     <>
-      <HeroSection
+      <HeroInner
         imageSrc="/assets/img/contact/banner.jpg"
         title="Contact Us"
         breadcrumb=""

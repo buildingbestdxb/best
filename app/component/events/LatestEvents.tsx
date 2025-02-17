@@ -6,14 +6,14 @@ import ImageCol from "../news/ImageCol";
 const latestNewsData = [
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n2.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n3.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
@@ -22,42 +22,42 @@ const latestNewsData = [
 const prevNewsData = [
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n4.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n5.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n-9.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n6.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n7.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
   },
   {
     date: "14 Nov 2024",
-    image: "/assets/img/projects/p-1.jpg",
+    image: "/assets/img/news/n8.jpg",
     title:
       "BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour",
     subTitle: "Project Updates, Residential",
@@ -68,20 +68,20 @@ const LatestEvents = () => {
     <>
       <section className="py-[60px] md:py-[80px] lg:py-[100px]">
         <div className="container">
-        <div className="mb-5 lg:mb-[60px]">
+          <div className="mb-5 lg:mb-[60px]">
             <SecHr title="Latest Events" />
-            </div>
+          </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center mt-5 lg:mt-[60px] ">
-            <div className="xl:col-span-6">
+            <div className="xl:col-span-6 h-full">
               <ImageCard
                 date="14 Nov 2024"
-                image="/assets/img/projects/p-1.jpg"
+                image="/assets/img/news/n1.jpg"
                 title="BEST to construct AED 977 Million EMAAR’s residential complex Bridge District in Dubai Creek Harbour "
                 subTitle="Project Updates, Residential"
               />
             </div>
-            <div className="xl:col-span-6">
-              <div className="flex flex-col gap-6">
+            <div className="xl:col-span-6 h-full">
+              <div className="flex flex-col gap-[40px]">
                 {latestNewsData.map((latestnews, index) => {
                   return <ImageContentCard key={index} {...latestnews} />;
                 })}
@@ -92,9 +92,9 @@ const LatestEvents = () => {
       </section>
       <section className="bg-[#F2F2F2] py-[100px]">
         <div className="container">
-        <div className="mb-5 lg:mb-[60px]">
+          <div className="mb-5 lg:mb-[60px]">
             <SecHr title="Previous Events" />
-            </div>
+          </div>
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-[32px] items-center ">
             {prevNewsData.map((news, index) => (
               <ImageCol key={index} {...news} />

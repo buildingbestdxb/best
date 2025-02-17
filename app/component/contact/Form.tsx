@@ -32,10 +32,10 @@ const Form = () => {
                 Reach out to us to discuss your project needs and discover how
                 Safe Tech can deliver the perfect solution
               </motion.p>
-              <form className="flex flex-col gap-5">
+              <form className="flex flex-col gap-[32px]">
                 <div className="grid grid-cols-1 gap-4">
                   <motion.input
-                    className="bg-transparent border-b-[1px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
+                    className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                     type="text"
                     placeholder="Name"
                     required
@@ -47,7 +47,7 @@ const Form = () => {
                 </div>
                 <div className="grid grid-cols-1 gap-4">
                   <motion.input
-                    className="bg-transparent border-b-[1px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
+                    className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                     type="email"
                     placeholder="Email"
                     required
@@ -58,9 +58,9 @@ const Form = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4 ">
                   <motion.input
-                    className="bg-transparent border-b-[1px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
+                    className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                     placeholder="Subject"
                     required
                     initial={{ opacity: 0, x: -50 }}
@@ -69,12 +69,12 @@ const Form = () => {
                     viewport={{ once: false }} // Animation resets on scroll
                   />
                 </div>
-                <div className="grid grid-cols-1 gap-4 mb-[32px]">
+                <div className="grid grid-cols-1 gap-4 ">
                   <motion.textarea
                     placeholder="Message"
                     rows={4}
                     required
-                    className="bg-transparent border-b-[1px] border-black/10 h-[150px] text-black/50 placeholder:text-black/50 focus:outline-none"
+                    className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[150px] text-black/50 placeholder:text-black/50 focus:outline-none"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
