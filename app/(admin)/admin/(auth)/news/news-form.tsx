@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { TagInput } from "./components/TagInput";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface NewsFormData {
   title: string;
@@ -21,8 +22,7 @@ interface NewsFormData {
   tags: string[];
   date: string;
   images: string[];
-  sector: string;
-  type: string;
+  type: "event" | "news";
 }
 
 interface NewsFormProps {
@@ -46,8 +46,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       tags: [],
       date: new Date().toISOString().split("T")[0],
       images: [],
-      sector: "",
-      type: "",
+      type: "news",
     },
   });
 
@@ -59,7 +58,6 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       setValue("description", data.data.description);
       setValue("tags", data.data.tags);
       setValue("images", data.data.images);
-      setValue("sector", data.data.sector);
       setValue("type", data.data.type);
       setImageUrls(data.data.images);
     };
@@ -124,26 +122,24 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
         </div>
 
         <div>
-          <Label htmlFor="sector" className="block text-sm font-medium text-gray-700">
-            Sector
-          </Label>
-          <Input
-            {...register("sector", { required: "Sector is required" })}
-            type="text"
-            id="sector"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-          />
-        </div>
-
-        <div>
           <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
             Type
           </Label>
-          <Input
-            {...register("type", { required: "Type is required" })}
-            type="text"
-            id="type"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+          <Controller
+            name="type"
+            control={control}
+            rules={{ required: "Type is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="news">News</SelectItem>
+                  <SelectItem value="event">Event</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           />
         </div>
 

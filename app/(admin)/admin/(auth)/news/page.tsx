@@ -14,6 +14,7 @@ type News = {
   date: string;
   images: string[];
   tags: string[];
+  type: "event" | "news";
 };
 
 export default function AdminProducts() {
@@ -84,7 +85,10 @@ export default function AdminProducts() {
               </div>
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <h2 className="text-xl font-semibold">{news.title}</h2>
+                  <div className="flex flex-col gap-2">
+                    <h2 className="text-xl font-semibold">{news.title}</h2>
+                    <p className="text-sm text-gray-500">{news.type === "event" ? "Event" : "News"}</p>
+                  </div>
                   <div className="flex gap-2">
                     <Button
                       variant="ghost"
