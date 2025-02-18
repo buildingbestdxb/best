@@ -19,7 +19,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="relative h-[300px] lg:h-[470px] overflow-hidden rounded-custom shadow-lg group "
+      className="relative h-[400px] lg:h-[470px] overflow-hidden rounded-custom shadow-lg group "
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -41,10 +41,10 @@ const ImageCard: React.FC<ImageCardProps> = ({
         viewport={{ once: true }}>
         {/* Title and Icons Row */}
         <div className="w-full">
-          <p className="text-[14px] text-white/80 uppercase mb-[20px]">
+          <p className="text-[14px] text-white/80 uppercase lg:mb-[20px] mb-2">
             {subTitle}
           </p>
-          <h4 className="text-[22px] font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 mb-[32px]">
+          <h4 className="lg:text-[22px] text-[20px]  font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 lg:mb-[32px] mb-[10px]">
             {title}
           </h4>
           <ButtonWithIcon link="" buttonText="Read More" />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { menuItems } from "./data";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import {
   FaFacebookF,
   FaInstagram,
@@ -63,10 +64,18 @@ const MobileNav = () => {
                   <li key={index}>
                     {/* <a href={`${item.url}`}  className="font-semibold">{item.title}</a> */}
                     <ul>
-                      <li className="" onClick={() => setActiveDropdown(index)}>
+                      <li
+                        className="border-b-[1px] py-4 border-black/10 flex justify-between"
+                        onClick={() => setActiveDropdown(index)}>
                         <a href="#" className="font-semibold ">
                           {item.title}
                         </a>
+                        <ChevronDown
+                          onClick={() => setActiveDropdown(index)}
+                          className={`transition-transform duration-300 ${
+                            activeDropdown === index ? "rotate-180" : ""
+                          }`}
+                        />
                       </li>
                       <ul>
                         {activeDropdown == index &&
@@ -79,14 +88,22 @@ const MobileNav = () => {
                     </ul>
                   </li>
                 ) : (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    className="border-b-[1px] py-4 border-black/10">
                     <a className="font-semibold" href={`${item.url}`}>
                       {item.title}
                     </a>
                   </li>
                 )
               )}
+              <li className=" border-b-[1px] py-4 border-black/10 ">
+                <a className="font-semibold" href="/contact">
+                  Contact Us
+                </a>
+              </li>
             </ul>
+
             <div className="mt-auto">
               <hr />
               <div className="flex ">

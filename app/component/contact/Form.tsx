@@ -22,7 +22,7 @@ const Form = () => {
               Get in Touch
             </motion.h2>
             <motion.p
-              className="text-[18px] text-black/75 mb-3 lg:mb-[40px] lg:w-[72%] leading-[25.2px]"
+              className="lg:text-[18px] text-[16px] text-black/75 mb-3 lg:mb-[40px] lg:w-[72%] leading-[25.2px]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -41,7 +41,7 @@ const Form = () => {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
               <div className="grid grid-cols-1 gap-4">
@@ -53,7 +53,7 @@ const Form = () => {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
 
@@ -65,7 +65,7 @@ const Form = () => {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 ">

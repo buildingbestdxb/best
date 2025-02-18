@@ -33,7 +33,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
                 <motion.input
                   className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
@@ -43,7 +43,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
               <div className="grid lg:grid-cols-2 gap-[32px]">
@@ -55,7 +55,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
 
                 <motion.input
@@ -65,7 +65,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>{" "}
               <div className="grid lg:grid-cols-2 gap-[32px] ">
@@ -75,7 +75,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }}>
+                  viewport={{ once: true }}>
                   <span className="text-black/50 text-[18px]">Gender:</span>
                   {["Male", "Female", "Other"].map((gender) => (
                     <label
@@ -105,7 +105,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
 
                 <motion.input
@@ -115,7 +115,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
               <div className="grid lg:grid-cols-2 gap-[32px]">
@@ -126,7 +126,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
 
                 <motion.input
@@ -136,7 +136,7 @@ export default function ApplicationForm() {
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: false }} // Animation resets on scroll
+                  viewport={{ once: true }} // Animation resets on scroll
                 />
               </div>
               <div className="grid lg:grid-cols-2 gap-[32px]">
@@ -150,7 +150,11 @@ export default function ApplicationForm() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }} // Animation resets on scroll
                 />
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}>
                   <label
                     htmlFor="resume"
                     className="block  text-black/50 text-[18px] mb-[16px]">
@@ -171,7 +175,7 @@ export default function ApplicationForm() {
                       />
                     </div> */}
                   </div>
-                </div>
+                </motion.div>
               </div>
               <Link
                 href="#"

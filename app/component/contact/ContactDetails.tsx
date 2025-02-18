@@ -46,8 +46,8 @@ const ContactDetails = () => {
             key={city}
             className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${
               activeTab === city
-                ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[14px]"
-                : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[14px]"
+                ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[18px]"
+                : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[18px]"
             }`}
             onClick={() => setActiveTab(city as keyof typeof locations)}>
             <div
@@ -67,11 +67,11 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50 font-[800] uppercase">
+            <span className="md:text-[16px] text-[14px] text-black/50 font-[800] uppercase">
               Phone
             </span>
           </div>
-          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[80%]">
+          <p className="lg:text-[22px] text-[16px]  text-black font-[500] mt-[16px] xl:w-[80%]">
             {locations[activeTab].phone}
           </p>
         </div>
@@ -83,11 +83,11 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50 font-[800] uppercase">
+            <span className="md:text-[16px] text-[14px] text-black/50 font-[800] uppercase">
               Fax
             </span>
           </div>
-          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] ">
+          <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] ">
             {locations[activeTab].fax}
           </p>
         </div>
@@ -99,11 +99,11 @@ const ContactDetails = () => {
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50 font-[800] uppercase">
+            <span className="md:text-[16px] text-[14px] text-black/50 font-[800] uppercase">
               Mail
             </span>
           </div>
-          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] pr-3">
+          <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] pr-3">
             {/* <a
               href={`mailto:${locations[activeTab].email}`}
               className="text-primary"> */}
@@ -114,16 +114,16 @@ const ContactDetails = () => {
         <div className="mb-[40px]">
           <div className="flex gap-2">
             <Image
-              src="/assets/img/contact/addressCard.svg"
+              src="/assets/img/contact/addresscard.svg"
               alt=""
               width={15}
               height={15}
             />
-            <span className="text-[16px] text-black/50 font-[800] uppercase">
+            <span className="md:text-[16px] text-[14px] text-black/50 font-[800] uppercase">
               Address Card
             </span>
           </div>
-          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[75%] ">
+          <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] xl:w-[75%] ">
             {locations[activeTab].addressCard}
           </p>
         </div>
@@ -136,11 +136,11 @@ const ContactDetails = () => {
             width={15}
             height={15}
           />
-          <span className="text-[16px] text-black/50 font-[800] uppercase">
+          <span className="md:text-[16px] text-[14px] text-black/50 font-[800] uppercase">
             Address
           </span>
         </div>
-        <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] lg:w-[60%]">
+        <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%]">
           {locations[activeTab].address}
         </p>
       </div>

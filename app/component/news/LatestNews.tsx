@@ -100,7 +100,7 @@ const LatestNews = () => {
               <ImageCol key={index} {...news} />
             ))}
           </div>
-          <div className="border-b border-[#1E1E1E]/30 pt-[80px]">
+          <div className="border-b border-[#1E1E1E]/30 lg:pt-[80px]">
             <div className="flex items-center justify-center  pb-[20px] cursor-pointer ">
               <p className="text-[#1E1E1E] text-[22px] font-[500]">More News</p>
               <Image
