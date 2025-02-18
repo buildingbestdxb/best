@@ -15,18 +15,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   locationName,
 }) => {
   return (
-    <motion.div
-      className="relative h-[300px] lg:h-[449px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}>
-      {/* Image with gradient overlay */}
-      <div className="relative w-full h-full">
-        <Image src={image} alt={title} fill className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div>
-      </div>
-      <a href="/project-details">
+    <a href="/project-details">
+      <motion.div
+        className="relative h-[300px] lg:h-[449px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}>
+        {/* Image with gradient overlay */}
+        <div className="relative w-full h-full">
+          <Image src={image} alt={title} fill className="object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div>
+        </div>
+
         <motion.div
           className="absolute flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom group-hover:bg-primary transition-all"
           initial={{ opacity: 0, y: 20 }}
@@ -68,8 +69,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           </motion.div>
         </motion.div>
-      </a>
-    </motion.div>
+      </motion.div>
+    </a>
   );
 };
 
