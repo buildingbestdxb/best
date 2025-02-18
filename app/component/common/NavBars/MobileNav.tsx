@@ -13,7 +13,7 @@ const MobileNav = () => {
 
   return (
     <>
-      <nav className="w-full bg-white/80 backdrop-blur-[10px] shadow-md py-4 absolute top-0 z-10">
+      <nav className="w-full bg-transparent text-white tanspheader py-4 absolute top-0 z-10">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/">

@@ -103,7 +103,7 @@ const Navbar = () => {
                 url={menuItem.url}
                 item={menuItem.title}
                 key={index}>
-                <div className="grid grid-cols-1 gap-4 py-4 px-3 max-w-[150px]">
+                <div className="grid grid-cols-1 py-4  ">
                   {/* <ProductItem
                   title="Residential"
                   description=" "
@@ -118,8 +118,10 @@ const Navbar = () => {
                 /> */}
                   {menuItem.children.map((item, index) => (
                     <HoveredLink href={`${item.url}`} key={index}>
-                      <div>
-                        <p className="text-[16px] uppercase">{item.title}</p>
+                      <div className="hover:bg-black/5 pl-3 pr-[80px] py-2 rounded-[8px] transition-transform duration-300 hover:scale-105">
+                        <p className="m-0 p-0 text-[16px] uppercase">
+                          {item.title}
+                        </p>
                       </div>
                     </HoveredLink>
                   ))}

@@ -52,7 +52,7 @@ const HeroInner: React.FC<HeroSectionProps> = ({
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
           className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container ">
-          <ul className="flex items-center flex-wrap md:pt-[160px] pt-[100px]">
+          <ul className="flex items-center flex-wrap lg:pt-[160px] pt-[100px]">
             {breadcrumbs.map((breadcrumb, index) => (
               <li
                 key={index}
