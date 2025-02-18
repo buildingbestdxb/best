@@ -42,8 +42,7 @@ const MobileNav = () => {
                   menuOpen
                     ? "bg-transparent before:rotate-45 before:top-0 after:-rotate-45 after:bottom-0"
                     : ""
-                }
-              `}></div>
+                }`}></div>
           </div>
         </div>
       </nav>
@@ -103,7 +102,11 @@ const MobileNav = () => {
                     <ul className="">
                       {item.children.map((childItem, childIndex) => (
                         <li key={childIndex} className="py-1">
-                          <Link href={childItem.url}>{childItem.title}</Link>
+                          <Link
+                            href={childItem.url}
+                            onClick={() => setMenuOpen(false)}>
+                            {childItem.title}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -111,7 +114,10 @@ const MobileNav = () => {
                 </li>
               ) : (
                 <li key={index} className="pb-2">
-                  <Link className="font-semibold" href={item.url}>
+                  <Link
+                    href={item.url}
+                    onClick={() => setMenuOpen(false)}
+                    className="font-semibold">
                     {item.title}
                   </Link>
                 </li>
@@ -120,7 +126,10 @@ const MobileNav = () => {
 
             {/* Contact Link */}
             <li>
-              <Link className="font-semibold" href="/contact">
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="font-semibold">
                 Contact Us
               </Link>
             </li>
