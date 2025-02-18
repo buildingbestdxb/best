@@ -9,11 +9,14 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import Link from "next/link";
+
 const MobileNav = () => {
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false); // State for menu visibility
 
   return (
     <>
+      {/* Navbar */}
       <nav className="w-full bg-transparent text-white tanspheader py-4 absolute top-0 z-10">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center">
@@ -27,103 +30,114 @@ const MobileNav = () => {
               />
             </Link>
           </div>
+          {/* Hamburger Button */}
+          <div
+            className="cursor-pointer px-3 py-6"
+            onClick={() => setMenuOpen(!menuOpen)}>
+            <div
+              className={`relative block h-[2px] w-7 bg-primary transition-all
+                before:absolute before:top-[-0.35rem] before:block before:h-full before:w-full before:bg-primary before:transition-all
+                after:absolute after:bottom-[-0.35rem] after:block after:h-full after:w-full after:bg-primary after:transition-all
+                ${
+                  menuOpen
+                    ? "bg-transparent before:rotate-45 before:top-0 after:-rotate-45 after:bottom-0"
+                    : ""
+                }
+              `}></div>
+          </div>
         </div>
       </nav>
-      <label
-        className="absolute top-4 right-4 z-50 cursor-pointer px-3 py-6"
-        htmlFor="mobile-menu">
-        <input className="peer hidden" type="checkbox" id="mobile-menu" />
+
+      {/* Overlay */}
+      {menuOpen && (
         <div
-          className="relative z-50 block h-[2px] w-7 bg-primary content-['']
-                 before:absolute before:top-[-0.35rem] before:block before:h-full before:w-full before:bg-primary before:transition-all before:duration-200 before:ease-out before:content-['']
-                 after:absolute after:bottom-[-0.35rem] after:block after:h-full after:w-full after:bg-primary after:transition-all after:duration-200 after:ease-out after:content-['']
-                 peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform
-                 after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform"></div>
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          onClick={() => setMenuOpen(false)} // Clicking outside closes menu
+        ></div>
+      )}
 
-        {/* Overlay */}
-        <div className="fixed inset-0 z-40 hidden h-full w-full bg-black/50 backdrop-blur-sm peer-checked:block"></div>
+      {/* Sliding Menu */}
+      <div
+        className={`fixed top-0 right-0 z-50 h-full w-[300px] bg-white shadow-2xl transform transition-transform duration-500
+          ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+        <div className="min-h-full px-6 pt-[30px] pb-[40px] flex flex-col relative">
+          {/* Close Button */}
+          <button
+            className="absolute top-8 right-4 text-[25px] text-primary font-600"
+            onClick={() => setMenuOpen(false)}>
+            ✕
+          </button>
 
-        {/* Sliding Menu */}
-        <div className="fixed top-0 right-0 z-40 h-full w-[350px] translate-x-full overflow-y-auto transition-transform duration-500 peer-checked:translate-x-0 bg-white shadow-2xl w-[300px]">
-          <div className="min-h-full px-6 pt-[30px] pb-[40px] flex flex-col align-middle">
-            <div className="text-left mb-[50px] ">
-              <Link href={"/"}>
-                {" "}
-                <Image
-                  src="/Logo.svg"
-                  alt="Crest Logo"
-                  width={80}
-                  height={50}
-                  className="h-[50px] w-auto"
-                />
-              </Link>
-            </div>
-            <ul className="flex flex-col gap-4">
-              {menuItems.map((item, index) =>
-                item.children ? (
-                  <li key={index}>
-                    {/* <a href={`${item.url}`}  className="font-semibold">{item.title}</a> */}
-                    <ul>
-                      <li
-                        className="border-b-[1px] py-4 border-black/10 flex justify-between"
-                        onClick={() => setActiveDropdown(index)}>
-                        <a href="#" className="font-semibold ">
-                          {item.title}
-                        </a>
-                        <ChevronDown
-                          onClick={() => setActiveDropdown(index)}
-                          className={`transition-transform duration-300 ${
-                            activeDropdown === index ? "rotate-180" : ""
-                          }`}
-                        />
-                      </li>
-                      <ul>
-                        {activeDropdown == index &&
-                          item.children.map((childItem, index) => (
-                            <li key={index} className="pl-2 pt-3">
-                              <a href={`${childItem.url}`}>{childItem.title}</a>
-                            </li>
-                          ))}
-                      </ul>
+          {/* Logo */}
+          <div className="text-left mb-[50px]">
+            <Link href="/">
+              <Image
+                src="/Logo.svg"
+                alt="Crest Logo"
+                width={80}
+                height={50}
+                className="h-[50px] w-auto"
+              />
+            </Link>
+          </div>
+
+          {/* Navigation Items */}
+          <ul className="flex flex-col gap-4">
+            {menuItems.map((item, index) =>
+              item.children ? (
+                <li key={index}>
+                  <div
+                    className="pb-2 flex justify-between items-center cursor-pointer"
+                    onClick={() =>
+                      setActiveDropdown(activeDropdown === index ? null : index)
+                    }>
+                    <span className="font-semibold">{item.title}</span>
+                    <ChevronDown
+                      className={`transition-transform duration-300 ${
+                        activeDropdown === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                  {/* Dropdown */}
+                  {activeDropdown === index && (
+                    <ul className="">
+                      {item.children.map((childItem, childIndex) => (
+                        <li key={childIndex} className="py-1">
+                          <Link href={childItem.url}>{childItem.title}</Link>
+                        </li>
+                      ))}
                     </ul>
-                  </li>
-                ) : (
-                  <li
-                    key={index}
-                    className="border-b-[1px] py-4 border-black/10">
-                    <a className="font-semibold" href={`${item.url}`}>
-                      {item.title}
-                    </a>
-                  </li>
-                )
-              )}
-              <li className=" border-b-[1px] py-4 border-black/10 ">
-                <a className="font-semibold" href="/contact">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
+                  )}
+                </li>
+              ) : (
+                <li key={index} className="pb-2">
+                  <Link className="font-semibold" href={item.url}>
+                    {item.title}
+                  </Link>
+                </li>
+              )
+            )}
 
-            <div className="mt-auto">
-              <hr />
-              <div className="flex ">
-                <div className="cursor-pointer w-[45px] h-[45px] rounded-full leading-[50px] flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out">
-                  <FaFacebookF className="" />
-                </div>
-                <div className="cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out">
-                  <FaLinkedinIn className="" />
-                </div>
-                <div className="cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out">
-                  <FaInstagram className="" />
-                </div>
-                <div className="cursor-pointer w-[45px] h-[45px] rounded-full flex justify-center items-center hover:text-primary transition-all duration-500 ease-in-out">
-                  <FaYoutube className="" />
-                </div>
-              </div>
+            {/* Contact Link */}
+            <li>
+              <Link className="font-semibold" href="/contact">
+                Contact Us
+              </Link>
+            </li>
+          </ul>
+
+          {/* Social Icons */}
+          <div className="mt-auto">
+            <hr />
+            <div className="flex space-x-4 mt-4">
+              <FaFacebookF className="cursor-pointer w-6 h-6 hover:text-primary transition-all duration-500" />
+              <FaLinkedinIn className="cursor-pointer w-6 h-6 hover:text-primary transition-all duration-500" />
+              <FaInstagram className="cursor-pointer w-6 h-6 hover:text-primary transition-all duration-500" />
+              <FaYoutube className="cursor-pointer w-6 h-6 hover:text-primary transition-all duration-500" />
             </div>
           </div>
         </div>
-      </label>
+      </div>
     </>
   );
 };
