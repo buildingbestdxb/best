@@ -248,3 +248,4 @@ p {
 }
 .wwebanner{background: url('/assets/img/story/banner_wwa.jpg');}
 .liststs li::before{background: url('/assets/img/icons/tick.svg');}
+.tanspheader .arrowst{filter: invert(1);}
