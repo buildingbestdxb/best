@@ -5,7 +5,8 @@ import {
   UserGroupIcon,
   EnvelopeIcon,
   ArrowRightOnRectangleIcon,
-  CalendarIcon,
+  BriefcaseIcon,
+  CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import ClientSideLink from "../client-side-link";
 
@@ -13,9 +14,10 @@ const navItems = [
   { name: "Home", href: "/admin", icon: HomeIcon },
   { name: "About", href: "/admin/about", icon: UserGroupIcon },
   { name: "News", href: "/admin/news", icon: NewspaperIcon },
-  { name: "Events", href: "/admin/events", icon: CalendarIcon },
   { name: "Projects", href: "/admin/projects", icon: CubeIcon },
   { name: "Contact", href: "/admin/contact", icon: EnvelopeIcon },
+  { name: "Careers", href: "/admin/careers", icon: BriefcaseIcon },
+  { name: "Accreditation", href: "/admin/accreditation", icon: CheckBadgeIcon },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

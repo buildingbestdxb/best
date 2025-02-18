@@ -61,6 +61,10 @@ const CareersPage = () => {
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <h3 className="text-xl font-semibold text-gray-600 mb-2">No careers found</h3>
           <p className="text-gray-500 mb-4">Get started by creating your first career</p>
+          <Button className="bg-primary text-white" onClick={handleClickNewCareer}>
+            <span className="mr-2">+</span>
+            Add Career
+          </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
