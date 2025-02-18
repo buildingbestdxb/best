@@ -5,29 +5,23 @@ import React, { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
 import { menuItems } from "./data";
 
-import {
-  HoveredLink,
-  Menu,
-  MenuItem,
-} from "@/components/ui/navbar-menu";
+import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 
 // import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-
   const pathname = usePathname();
   const [active, setActive] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
 
-  const pagesWithBackground = ['/']; // Add required pages
+  const pagesWithBackground = ["/"]; // Add required pages
   const hasBackground = pagesWithBackground.includes(pathname);
-
 
   useEffect(() => {
     if (typeof window === "undefined") return; // Prevents errors during SSR
 
     const handleScreenCheck = () => {
-      if (window.innerWidth < 991) {
+      if (window.innerWidth < 1139) {
         setIsMobile(true);
       } else {
         setIsMobile(false);
@@ -51,11 +45,13 @@ const Navbar = () => {
     //     const isHomePage = pathname === "/"; // Check if it's the home page
 
     return (
-
       <header
-      className={`${hasBackground ? 'bg-white/80 backdrop-blur-[10px] text-black shadow-md ' : 'bg-transparent text-white tanspheader'} transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
-
-          {/* <div className='flex items-center'>
+        className={`${
+          hasBackground
+            ? "bg-white/80 backdrop-blur-[10px] text-black shadow-md "
+            : "bg-transparent text-white tanspheader"
+        } transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
+        {/* <div className='flex items-center'>
    <div className="hidden md:flex space-x-6 text-gray-800 text-sm uppercase">
      <Link href="/about">
        <span className="text-sm">About Us</span>
@@ -98,18 +94,17 @@ const Navbar = () => {
    </Link>
    </div> */}
 
-          <Menu setActive={setActive}>
-            {menuItems.map((menuItem, index) =>
-              menuItem.children ? (
-                <MenuItem
-                  setActive={setActive}
-                  active={active}
-                  url={menuItem.url}
-                  item={menuItem.title}
-                  key={index}
-                >
-                  <div className="grid grid-cols-1 gap-4 p-4" >
-                    {/* <ProductItem
+        <Menu setActive={setActive}>
+          {menuItems.map((menuItem, index) =>
+            menuItem.children ? (
+              <MenuItem
+                setActive={setActive}
+                active={active}
+                url={menuItem.url}
+                item={menuItem.title}
+                key={index}>
+                <div className="grid grid-cols-1 gap-4 py-4 px-3 max-w-[150px]">
+                  {/* <ProductItem
                   title="Residential"
                   description=" "
                   href="#"
@@ -121,40 +116,41 @@ const Navbar = () => {
                   href="#"
                   src="/assets/images/gd-im2.jpg"
                 /> */}
-                    {menuItem.children.map((item, index) => (
-                      <HoveredLink href={`${item.url}`} key={index}>
-                        <div>{item.title}</div>
-                      </HoveredLink>
-                    ))}
+                  {menuItem.children.map((item, index) => (
+                    <HoveredLink href={`${item.url}`} key={index}>
+                      <div>
+                        <p className="text-[16px] uppercase">{item.title}</p>
+                      </div>
+                    </HoveredLink>
+                  ))}
 
-                    {/* <HoveredLink href="#">
+                  {/* <HoveredLink href="#">
                   <div>Commercial</div>
                 </HoveredLink> */}
-                  </div>
-                </MenuItem>
-              ) : (
-                <MenuItem
+                </div>
+              </MenuItem>
+            ) : (
+              <MenuItem
                 item={menuItem.title}
                 url={menuItem.url}
-                  setActive={setActive}
-                  active={active}
-                  noMenu={true}
-                  key={index}
-                >
-                  <div className="p-4">
-                    <Link href="/">{menuItem.title}</Link>
-                  </div>
-                </MenuItem>
-              )
-            )}
+                setActive={setActive}
+                active={active}
+                noMenu={true}
+                key={index}>
+                <div className="p-4">
+                  <Link href="/">{menuItem.title}</Link>
+                </div>
+              </MenuItem>
+            )
+          )}
 
-            {/* <MenuItem item="About Us" setActive={setActive} active={active}>
+          {/* <MenuItem item="About Us" setActive={setActive} active={active}>
              <div className="p-4">
                <Link href="/">About Us</Link>
              </div>
            </MenuItem> */}
 
-            {/* <MenuItem setActive={setActive} active={active} item="Projects">
+          {/* <MenuItem setActive={setActive} active={active} item="Projects">
              <div className="grid grid-cols-2 gap-4 p-4">
                <ProductItem
                  title="Residential"
@@ -194,8 +190,7 @@ const Navbar = () => {
                <Link href="/">How we work</Link>
              </div>
            </MenuItem> */}
-
-          </Menu>
+        </Menu>
       </header>
     );
   }
