@@ -92,7 +92,7 @@ const AboutUs = () => {
                 and Excellence.
               </p>
               <Link
-                href="#"
+                href="/our-story"
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
                 <div>
                   <Image
