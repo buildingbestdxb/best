@@ -43,7 +43,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
       {/* Content Section */}
       <div className="w-full">
         <p className="text-[14px] text-black/80 uppercase">{subTitle}</p>
-        <h4 className="text-[22px] font-semibold text-black lg:w-[90%] leading-[28.6px] py-[20px]">
+        <h4 className="lg:text-[22px] text-[20px] font-semibold text-black lg:w-[90%] leading-[28.6px] py-[20px]">
           {title}
         </h4>
         <ButtonWithIcon link="#" buttonText="Read More" />
