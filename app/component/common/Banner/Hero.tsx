@@ -32,7 +32,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   return (
-    <section className="relative w-full h-[600px] overflow-hidden">
+    <section className="relative w-full md:h-[600px] h-[400px] overflow-hidden">
       <div className="relative w-full h-full">
         <div
           className="absolute inset-0 z-[1]"
@@ -55,10 +55,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
-          className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container py-10">
+          className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container ">
           <motion.p
             variants={textVariants}
-            className="text-white/50 pt-[100px] text-[16px] font- uppercase"
+            className="text-white/50 md:pt-[160px] pt-[60px] text-[16px] font- uppercase"
             style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
             Home / {breadcrumb}
             <span
@@ -71,12 +71,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
           <motion.h1
             variants={textVariants}
-            className="text-white text-xxl leading-none pb-10 font-black uppercase">
-            <span style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
+            className="text-white text-xxl  leading-none pb-6 lg:pb-[60px] font-black uppercase">
+            <span
+              className="sm:text-xxl text-[40px]"
+              style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
               {title.split(" ")[0]}
             </span>{" "}
             <span
-              className="font-light"
+              className="font-light sm:text-xxl text-[40px]"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
               {title.split(" ").slice(1).join(" ")}
             </span>
