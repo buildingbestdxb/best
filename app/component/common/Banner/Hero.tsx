@@ -58,7 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           className="absolute inset-0 flex flex-col justify-between items-start text-left z-[2] container ">
           <motion.p
             variants={textVariants}
-            className="text-white/50 md:pt-[160px] pt-[60px] text-[16px] font- uppercase"
+            className="text-white/50 lg:pt-[160px] pt-[100px] text-[16px] font- uppercase"
             style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
             Home / {breadcrumb}
             <span

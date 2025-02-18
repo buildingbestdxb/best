@@ -84,14 +84,14 @@ const Historysec = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        // Small screens - show 3 items: active + 1 on each side (if possible)
+        // Small screens - show 2 items: active + 1 next to it (if possible)
         const start = Math.max(0, activeIndex - 1);
-        const end = Math.min(historyData.length - 1, activeIndex + 1);
+        const end = Math.min(historyData.length - 1, activeIndex);
         setVisibleRange({ start, end });
       } else if (window.innerWidth < 1024) {
         // Medium screens - show 5 items
         const start = Math.max(0, activeIndex - 2);
-        const end = Math.min(historyData.length - 1, activeIndex + 2);
+        const end = Math.min(historyData.length - 1, activeIndex + 1);
         setVisibleRange({ start, end });
       } else {
         // Large screens - show all
@@ -109,20 +109,21 @@ const Historysec = () => {
 
   // Mobile-only scroll to ensure active item is visible
   useEffect(() => {
-    if (timelineRef.current && activeIndex >= 0 && window.innerWidth < 1024) {
+    if (timelineRef.current && activeIndex >= 0) {
       const timelineItems =
         timelineRef.current.querySelectorAll(".timeline-item");
+
       if (timelineItems[activeIndex]) {
         const container = timelineRef.current;
         const item = timelineItems[activeIndex];
 
-        // Get the horizontal center of the container
+        // Get the center of the container
         const containerCenter = container.offsetWidth / 2;
-        // Get the horizontal center of the item relative to the container
+        // Get the center of the item relative to the container
         const itemCenter =
           (item as HTMLElement).offsetLeft +
           (item as HTMLElement).offsetWidth / 2;
-        // Calculate the scroll position to center the item
+        // Scroll to center the active item
         const scrollPosition = itemCenter - containerCenter;
 
         container.scrollTo({
@@ -139,13 +140,13 @@ const Historysec = () => {
 
   const handleScrollLeft = () => {
     if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
+      setActiveIndex((prevIndex) => prevIndex - 1);
     }
   };
 
   const handleScrollRight = () => {
     if (activeIndex < historyData.length - 1) {
-      setActiveIndex(activeIndex + 1);
+      setActiveIndex((prevIndex) => prevIndex + 1);
     }
   };
 
@@ -157,9 +158,9 @@ const Historysec = () => {
             <div className="mb-4 md:mb-[60px]">
               <SecHr title="Our History" />
             </div>
-            <div className="lg:grid lg:grid-cols-12 gap-[50px] lg:gap-[80px] flex flex-col items-center">
+            <div className="lg:grid lg:grid-cols-12 md:gap-[50px] gap-[20px] lg:gap-[80px] flex flex-col items-center">
               <motion.div
-                className="relative w-full h-[200px] md:h-[300px] col-span-4"
+                className="relative w-full h-[300px] col-span-4"
                 key={activeIndex}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -194,23 +195,22 @@ const Historysec = () => {
             </div>
 
             {/* Timeline Navigation */}
-            <div className="w-full pt-[60px] md:pt-[80px] lg:pt-[120px] relative">
+            <div className="w-full pt-2 md:pt-[30px] lg:pt-[120px] relative">
               {/* Mobile Navigation Arrows */}
-              <div className="flex justify-between mb-4 md:hidden">
+
+              <div className="flex justify-between md:hidden">
                 <button
                   onClick={handleScrollLeft}
-                  className={`p-2 rounded-full bg-black/30 text-white ${
+                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 left-2 transform -translate-y-1/2 z-10  ${
                     activeIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   disabled={activeIndex === 0}>
                   <ChevronLeft size={18} />
                 </button>
-                <span className="font-semibold">
-                  {historyData[activeIndex].year}
-                </span>
+
                 <button
                   onClick={handleScrollRight}
-                  className={`p-2 rounded-full bg-black/30 text-white ${
+                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 right-2 transform -translate-y-1/2 z-10  ${
                     activeIndex === historyData.length - 1
                       ? "opacity-50 cursor-not-allowed"
                       : ""
@@ -223,7 +223,7 @@ const Historysec = () => {
               {/* Timeline Container - Scrollable on mobile only */}
               <div
                 ref={timelineRef}
-                className="relative w-full overflow-x-auto md:overflow-x-visible overflow-y-hidden py-8 md:py-[10px] px-4 flex flex-row no-scrollbar"
+                className="relative w-full overflow-x-auto md:overflow-x-visible overflow-y-hidden pt-4 md:py-[10px] px-4 flex flex-row no-scrollbar"
                 style={{
                   scrollBehavior: "smooth",
                 }}>

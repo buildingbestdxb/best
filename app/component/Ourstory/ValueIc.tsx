@@ -39,14 +39,14 @@ const ValueIc = () => {
       </motion.figure>
 
       <div className="container">
-        <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 xxl:gap-[60px] xl-gap-[40px] w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-2 gap-6 xxl:gap-[60px] xl-gap-[40px] w-full">
           {stats.data.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col justify-between items-center bg-primary text-white p-[20px] xxl:p-[32px] rounded-custom shadow-lg h-[216px]">
+              className="flex flex-col justify-between items-center bg-primary text-white p-[20px] xxl:p-[32px] rounded-custom shadow-lg sm:h-[216px] h-[120px]">
               <div className="flex justify-between items-center w-full mb-[10px] lg:mb-[50px]">
                 <motion.div
                   initial={{ scale: 0 }}

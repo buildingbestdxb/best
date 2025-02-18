@@ -46,8 +46,8 @@ const ContactDetails = () => {
             key={city}
             className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${
               activeTab === city
-                ? "text-black text-lg"
-                : "bg-transparent text-black/50 text-[28px]"
+                ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[14px]"
+                : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[14px]"
             }`}
             onClick={() => setActiveTab(city as keyof typeof locations)}>
             <div
@@ -91,7 +91,7 @@ const ContactDetails = () => {
             {locations[activeTab].fax}
           </p>
         </div>
-        <div className="mb-[40px] ">
+        <div className="lg:mb-[40px] ">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/mail.svg"
@@ -123,12 +123,12 @@ const ContactDetails = () => {
               Address Card
             </span>
           </div>
-          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[75%]">
+          <p className="lg:text-[22px] text-[18px] text-black font-[500] mt-[16px] xl:w-[75%] ">
             {locations[activeTab].addressCard}
           </p>
         </div>
       </div>
-      <div className="">
+      <div className=" lg:mb-0 mb-9">
         <div className="flex gap-2">
           <Image
             src="/assets/img/contact/location.svg"
