@@ -3,21 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof addresses>("Sharjah");
+  const [activeTab, setActiveTab] = useState<keyof typeof addresses>(
+    "Sharjah (Headquarters)"
+  );
   /* const [activeTab, setActiveTab] = useState('Sharjah'); */
 
   const addresses = {
-    Dubai: "Al Quoz Industrial Area No. 4, Dubai – United Arab Emirates",
-    Sharjah:
+    "Sharjah (Headquarters)":
       "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
+    Dubai: "Office No. 401, The Exchange Tower, Business Bay, Dubai, UAE.",
     AbuDhabi:
       "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
   };
@@ -44,9 +41,9 @@ const Footer = () => {
             Follow us
           </h4>
           <div className="flex space-x-3 mt-4">
-            <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full leading-[50px] flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
+            {/* <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full leading-[50px] flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
               <FaFacebookF className="" />
-            </div>
+            </div> */}
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
               <FaLinkedinIn className="" />
             </div>
