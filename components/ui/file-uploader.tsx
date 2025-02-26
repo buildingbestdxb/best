@@ -2,26 +2,46 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, Loader2 } from "lucide-react";
-import Image from "next/image";
+import { File, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 
-interface ImageUploaderProps {
+interface FileUploaderProps {
   value?: string;
-  onChange: (url: string, imageData?: File) => void;
+  onChange: (url: string, fileName: string) => void;
   className?: string;
-  deleteAfterUpload?: boolean;
+  accept?: Record<string, string[]>;
 }
 
-export function ImageUploader({ value, onChange, className, deleteAfterUpload = false }: ImageUploaderProps) {
+export function FileUploader({
+  value,
+  onChange,
+  className,
+  accept = {
+    "application/pdf": [".pdf"],
+    "application/msword": [".doc"],
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+    "application/vnd.ms-excel": [".xls"],
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+  },
+}: FileUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
-  const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [fileName, setFileName] = useState<string>(() => {
+    if (value) {
+      const parts = value.split("/");
+      return parts[parts.length - 1];
+    }
+    return "";
+  });
 
   useEffect(() => {
-    setIsUploadComplete(!!value);
+    if (value) {
+      const parts = value.split("/");
+      setFileName(parts[parts.length - 1]);
+    } else {
+      setFileName("");
+    }
   }, [value]);
 
   const onDrop = useCallback(
@@ -32,33 +52,26 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
       try {
         setIsUploading(true);
         setError(null);
-        setIsUploadComplete(false);
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("fileType", "image");
+        formData.append("fileType", "file");
+
         const response = await fetch("/api/admin/upload", {
           method: "POST",
           body: formData,
         });
 
         if (response.status !== 200) {
-          setLocalImageUrl(null);
           alert("Upload failed");
           return;
         }
 
         const data = await response.json();
-        setLocalImageUrl(data.url);
-        onChange(data.url, file);
-        setIsUploadComplete(true);
-        if (deleteAfterUpload) {
-          setLocalImageUrl(null);
-          setIsUploadComplete(false);
-        }
+        setFileName(file.name);
+        onChange(data.url, file.name);
       } catch (err) {
-        setLocalImageUrl(null);
-        setError(err instanceof Error ? err.message : "Failed to upload image");
+        setError(err instanceof Error ? err.message : "Failed to upload file");
       } finally {
         setIsUploading(false);
       }
@@ -68,33 +81,25 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".gif"],
-    },
+    accept,
     maxFiles: 1,
     multiple: false,
   });
 
-  const removeImage = useCallback(() => {
-    setLocalImageUrl(null);
-    setIsUploadComplete(false);
-    onChange("", undefined);
-  }, [onChange, localImageUrl]);
-
-  const displayUrl = localImageUrl || value;
+  const removeFile = useCallback(() => {
+    setFileName("");
+    onChange("", "");
+  }, [onChange]);
 
   return (
     <div className={cn("space-y-4 w-full", className)}>
-      {displayUrl && isUploadComplete ? (
-        <div className="relative w-full max-w-[300px] aspect-[4/3] overflow-hidden rounded-lg border">
-          <Image src={value ? value : displayUrl} alt="Uploaded image" className="object-cover" fill />
-          <Button
-            type="button"
-            variant="destructive"
-            size="icon"
-            className="absolute right-2 top-2"
-            onClick={removeImage}
-          >
+      {value && fileName ? (
+        <div className="flex items-center justify-between p-4 border rounded-lg">
+          <div className="flex items-center space-x-2">
+            <File className="h-5 w-5 text-blue-500" />
+            <span className="text-sm">{fileName}</span>
+          </div>
+          <Button type="button" variant="ghost" size="icon" onClick={removeFile}>
             <X className="h-4 w-4" />
           </Button>
         </div>
@@ -116,9 +121,9 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
             </>
           ) : (
             <>
-              <Upload className="h-10 w-10 text-gray-400" />
+              <File className="h-10 w-10 text-gray-400" />
               <p className="text-sm text-gray-600">
-                {isDragActive ? "Drop the image here" : "Drag & drop an image here, or click to select"}
+                {isDragActive ? "Drop the file here" : "Drag & drop a file here, or click to select"}
               </p>
             </>
           )}
