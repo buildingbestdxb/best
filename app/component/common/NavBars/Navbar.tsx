@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
+import Image from "next/image";
 import { menuItems } from "./data";
 
 import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
@@ -118,7 +119,15 @@ const Navbar = () => {
                 /> */}
                   {menuItem.children.map((item, index) => (
                     <HoveredLink href={`${item.url}`} key={index}>
-                      <div className="hover:bg-black/5 pl-3 pr-[80px] py-2 rounded-[8px] transition-transform duration-300 hover:scale-105">
+                      <div className="hover:bg-black/5 pl-3 pr-[80px] py-2 rounded-[8px] transition-transform duration-300 hover:scale-105 flex justify-between items-center self-start spckbtn whts">
+                        <div>
+                          <Image
+                            src={"/assets/img/icons/arrow.svg"}
+                            alt=""
+                            width={30}
+                            height={30}
+                          />
+                        </div>{" "}
                         <p className="m-0 p-0 text-[16px] uppercase">
                           {item.title}
                         </p>

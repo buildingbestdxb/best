@@ -40,7 +40,7 @@ const OurLocation = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }} // Animation resets on scroll
           >
-            <h2 className="text-lg font-bold text-white uppercase leading-none">
+            <h2 className="text-[18px] font-bold text-white uppercase leading-normal">
               With a strong presence across the UAE, Building Co. (BEST) L.L.C
               operates in all emirates, with offices in Dubai, Sharjah, and Abu
               Dhabi, delivering high-quality construction solutions tailored to

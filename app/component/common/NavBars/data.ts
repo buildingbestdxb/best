@@ -1,13 +1,7 @@
 export const menuItems = [
   {
     title: "About Us",
-    url: "",
-    children: [
-      {
-        title: "Our Story",
-        url: "our-story",
-      },
-    ],
+    url: "our-story",
   },
   {
     title: "How we work",
