@@ -1,5 +1,5 @@
 
-import { uploadToDropbox } from "../../../best/lib/connectDropbox";
+import { uploadToDropbox } from "@/lib/connectDropbox";
 
 export const uploadImagesFromEditor = async(content:string) =>{
     const doc = new DOMParser().parseFromString(content, "text/html");
