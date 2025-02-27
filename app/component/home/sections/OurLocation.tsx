@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React from "react";
 import map from "@/public/assets/img/home/map.svg";
@@ -32,7 +32,7 @@ const OurLocation = () => {
           <hr className="opacity-10 w-[100%]" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-[20px] items-center mt-6">
+        <div className="grid md:grid-cols-2 gap-[20px]  mt-6">
           {/* Title with Animation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,10 +40,13 @@ const OurLocation = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }} // Animation resets on scroll
           >
-            <h2 className="text-lg font-bold text-white uppercase leading-none">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam,
+            <h2 className="text-[20px] font-bold text-white uppercase leading-normal mt-[10%]">
+              With a strong presence across the UAE, Building Co. (BEST) L.L.C
+              operates in all emirates, with offices in Dubai, Sharjah, and Abu
+              Dhabi, delivering high-quality construction solutions tailored to
+              diverse project needs. Our strategic locations enable us to
+              efficiently serve clients nationwide, ensuring excellence,
+              innovation, and timely project execution across the region.
             </h2>
           </motion.div>
 

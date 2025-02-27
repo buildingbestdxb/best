@@ -1,12 +1,13 @@
 "use client";
 
-import {  useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import { motion } from "framer-motion";
+
 const slides = [
   {
     id: 1,
@@ -15,33 +16,39 @@ const slides = [
     poster: "/assets/img/banner.jpg", // Poster image
     title: "BUILDING EXCELLENCE",
     subtitle: "DELIVERING TRUST",
+    imageSrc: "/assets/img/slide1.jpg", // Add imageSrc property
   },
   {
     id: 2,
-    type: "image",
-    imageSrc: "/assets/img/slide2.jpg",
+    type: "video",
+    videoSrc: "/assets/video/banner-2.mp4",
+    poster: "/assets/img/banner.jpg",
     title: "BUILDING EXCELLENCE",
     subtitle: "DELIVERING TRUST",
+    imageSrc: "/assets/img/slide2.jpg", // Add imageSrc property
   },
 ];
 
 const HeroSection = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.5 } // Delay between child elements
-    }
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.5 }, // Delay between child elements
+    },
   };
-  
+
   // Child Elements Animation
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
   };
 
-/*   const [activeIndex, setActiveIndex] = useState(0); */
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    videoRefs.current = videoRefs.current.slice(0, slides.length);
+  }, [slides.length]);
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
@@ -63,17 +70,21 @@ const HeroSection = () => {
           document.querySelectorAll(".progress-bar").forEach((el) => {
             (el as HTMLElement).style.animation = "none"; // Reset animation
             void (el as HTMLElement).offsetWidth; // Trigger reflow
-            (el as HTMLElement).style.animation = "progress 10s linear forwards"; // Restart animation
+            (el as HTMLElement).style.animation =
+              "progress 10s linear forwards"; // Restart animation
           });
-        
-          if (swiper.realIndex === 0 && videoRef.current) {
-            videoRef.current.play();
-          } else if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
-          }
-        }}
-      >
+
+          videoRefs.current.forEach((video, index) => {
+            if (video) {
+              if (swiper.realIndex === index) {
+                video.play();
+              } else {
+                video.pause();
+                video.currentTime = 0;
+              }
+            }
+          });
+        }}>
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
@@ -81,7 +92,9 @@ const HeroSection = () => {
               {/* Video Slide with Poster */}
               {slide.type === "video" ? (
                 <video
-                  ref={videoRef}
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                  }}
                   src={slide.videoSrc}
                   className="absolute inset-0 w-full h-full object-cover"
                   loop
@@ -103,16 +116,20 @@ const HeroSection = () => {
 
               {/* Text Overlay */}
               <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={containerVariants}
-               className="absolute inset-0 flex flex-col justify-center items-start text-left z-[2] lg:top-[10%]">
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                variants={containerVariants}
+                className="absolute inset-0 flex flex-col justify-center items-start text-left z-[2] lg:top-[10%]">
                 <div className="container">
-                  <motion.h1 variants={textVariants} className="text-white text-xxl leading-none font-light">
+                  <motion.h1
+                    variants={textVariants}
+                    className="text-white text-xxl leading-none font-light">
                     {slide.title}
                   </motion.h1>
-                  <motion.h1 variants={textVariants} className="text-white text-xxl leading-none font-black">
+                  <motion.h1
+                    variants={textVariants}
+                    className="text-white text-xxl leading-none font-black">
                     {slide.subtitle}
                   </motion.h1>
                 </div>
@@ -140,8 +157,7 @@ const HeroSection = () => {
                   clickable: true,
                 }}
                 loop={true}
-                className=" "
-              >
+                className=" ">
                 <SwiperSlide>
                   <div className="space-y-6 text-center flex flex-col items-center">
                     <Image

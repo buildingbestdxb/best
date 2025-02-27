@@ -1,6 +1,10 @@
 export const menuItems = [
   {
     title: "About Us",
+    url: "our-story",
+  },
+  {
+    title: "How we work",
     url: "",
     children: [
       {
@@ -54,7 +58,7 @@ export const menuItems = [
     ],
   },
   {
-    title: "How we work",
-    url: "",
+    title: "Careers",
+    url: "careers",
   },
 ];

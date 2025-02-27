@@ -52,10 +52,11 @@ const SectorsSec = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+          viewport={{ once: true }}>
           <span className="w-[24px] h-[2px] bg-primary"></span>
-          <span className="w-[100px] leading-none uppercase text-[16px]">Sectors</span>
+          <span className="w-[100px] leading-none uppercase text-[16px]">
+            Sectors
+          </span>
           <hr className="w-full" />
         </motion.div>
 
@@ -65,13 +66,14 @@ const SectorsSec = () => {
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+          viewport={{ once: true }}>
           <h2 className="text-2xl md:text-3xl font-bold uppercase mb-5 lg:mb-[30px] leading-none text-black">
             Sectors We Support
           </h2>
           <p className="text-black/75">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            We build across diverse sectors, delivering tailored construction
+            solutions that meet industry demands with excellence, innovation,
+            and reliability.
           </p>
         </motion.div>
 
@@ -84,17 +86,20 @@ const SectorsSec = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Image src={sector.poster} alt="Background Image" fill className="object-cover" />
+              viewport={{ once: true }}>
+              <Image
+                src={sector.poster}
+                alt="Background Image"
+                fill
+                className="object-cover"
+              />
 
               <motion.div
                 className="absolute flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom flex flex-col gap-[20px] group-hover:bg-primary transition-all"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                viewport={{ once: true }}
-              >
+                viewport={{ once: true }}>
                 <Image
                   src={sector.icon}
                   alt=""
@@ -104,8 +109,7 @@ const SectorsSec = () => {
                 />
                 <motion.div
                   className="flex justify-between items-center w-full"
-                  whileHover={{ opacity: 1 }}
-                >
+                  whileHover={{ opacity: 1 }}>
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.title}
                   </h4>

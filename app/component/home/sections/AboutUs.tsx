@@ -82,14 +82,15 @@ const AboutUs = () => {
                 BUILDING CO. (BEST) L.L.C
               </h2>
               <p className="leading-relaxed text-black/75">
-                Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the
-                phenomenal construction industry revolution, with its goal of
-                excellence, the Company earned reputation of delivering an
-                exceptional construction services in the UAE. Throughout its
-                commitment towards greater endeavor, BUILDING CO. (BEST) L.L.C
-                created an outstanding distinction from its PRIDE Core
-                Foundation — Planning, Reliability, Innovation, Determination
-                and Excellence.
+                Since 1975, Building Co. (BEST) L.L.C has been shaping the UAE’s
+                construction landscape with a commitment to excellence,
+                innovation, and reliability. Specializing in large-scale
+                residential, commercial, and governmental projects, we have
+                successfully delivered luxury villas, hospitals, and
+                high-profile buildings that stand as benchmarks of quality. With
+                decades of expertise, a client-centric approach, and a
+                dedication to superior craftsmanship, we continue to build
+                lasting landmarks that redefine industry standards.
               </p>
               <Link
                 href="/our-story"
