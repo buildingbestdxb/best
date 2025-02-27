@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import React, { useEffect, useState } from 'react'
-import DeleteCareerDialog from '../careers/components/DeleteCareerDialog'
 import Image from 'next/image'
 import { useRouter } from "next/navigation";
 import DeleteAccreditationDialog from './components/DeleteAccreditation'
@@ -71,8 +70,8 @@ const AccreditaionList = () => {
                 : 
                 
                 (<div className='grid grid-cols-3 gap-5 mt-5'>
-                {files && files.map((item:{title:string;_id:string;files:{thumbnail:string;}[];}) => (
-                    <Card>
+                {files && files.map((item:{title:string;_id:string;files:{thumbnail:string;}[];},index) => (
+                    <Card key={index}>
                         <div className='grid grid-cols-2 p-5'>
                             <CardHeader>{item.title}</CardHeader>
                             <CardContent className='w-40 h-40 relative'>

@@ -5,8 +5,8 @@ import Image from "next/image";
 import SecHr from "../common/SecDivider/SecHr";
 import ImageContentCard from "./ImageContentCard";
 import ImageCol from "./ImageCol";
-import useSWR,{Fetcher} from 'swr'
-import { useEffect, useState } from "react";
+import useSWR from 'swr'
+import { useEffect } from "react";
 import { NewsType } from "@/app/types/NewsType";
 import moment from "moment";
 

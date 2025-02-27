@@ -1,4 +1,3 @@
-import AccreditationForm from "./accreditation-form";
 import AccreditaionList from "./accreditation-list";
 
 export default function AccreditationPage() {

@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 import useSWR from "swr";
 import { departments } from "@/app/(admin)/admin/(auth)/careers/departmentData";
+import { CareerType } from "@/app/types/CareerType";
 
 export default function OpenPositions() {
   const [open, setOpen] = useState(false);
@@ -22,8 +23,8 @@ export default function OpenPositions() {
 
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data }:{data:any} = useSWR(`/api/admin/careers`, fetcher)
-  const [filteredData,setFilteredData] = useState([])
+  const { data }:{data:CareerType} = useSWR(`/api/admin/careers`, fetcher)
+  const [filteredData,setFilteredData] = useState<{title:string;department:string;location:string;applyLink:string;type:string}[]>([])
 
 
   useEffect(()=>{

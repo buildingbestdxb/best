@@ -5,7 +5,8 @@ import Image from "next/image";
 
 
 
-export default function ImageCarousel({data}:{data:any}) {
+
+export default function ImageCarousel({data}:{data:string[]}) {
 
   console.log(data)
   const [activeIndex, setActiveIndex] = useState(0);

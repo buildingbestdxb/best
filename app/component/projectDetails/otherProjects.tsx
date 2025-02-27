@@ -96,6 +96,7 @@ const ProjectList = () => {
                   locationName={project.locationName}
                   title={project.title}
                   image={project.image}
+                  href="#"
                 />
               </div>
             ))}

@@ -1,4 +1,3 @@
-import Careers from "@/models/Careers";
 import JobRequest from "@/models/JobRequest";
 import { NextRequest, NextResponse } from "next/server";
 

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion"; // Import motion
 import {useForm} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';

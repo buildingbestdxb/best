@@ -43,8 +43,8 @@ const ImageCol: React.FC<ImageColProps> = ({
 
       {/* Content Section */}
       <div className="w-full px-[16px]">
-        {tags.map((item)=>(
-          <p className="text-[14px] text-black/60 uppercase font-medium">
+        {tags.map((item,index)=>(
+          <p className="text-[14px] text-black/60 uppercase font-medium" key={index}>
           {item}
         </p>
         ))}

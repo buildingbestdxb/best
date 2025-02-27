@@ -7,7 +7,7 @@ import ImageContentCard from "../news/ImageContentCard";
 import ImageCol from "../news/ImageCol";
 import { useEffect } from "react";
 import { NewsType } from "@/app/types/NewsType";
-import useSWR,{Fetcher} from 'swr'
+import useSWR from 'swr'
 import moment from "moment";
 
 // const latestNewsData = [
