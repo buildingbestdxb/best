@@ -9,6 +9,7 @@ type ImageContentProps = {
   title: string;
   description: string;
   date: Date;
+  _id:string;
 };
 
 const ImageContentCard: React.FC<ImageContentProps> = ({
@@ -16,6 +17,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
   title,
   description,
   date,
+  _id
 }) => {
   return (
     <div className="flex items-center gap-5 lg:gap-[32px]">
@@ -46,7 +48,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
         <h4 className="lg:text-[22px] text-[20px] font-semibold text-black lg:w-[90%] leading-[28.6px] py-[20px]">
           {title}
         </h4>
-        <ButtonWithIcon link="#" buttonText="Read More" />
+        <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" />
       </div>
     </div>
   );

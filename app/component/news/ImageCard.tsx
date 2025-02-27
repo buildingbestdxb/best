@@ -9,6 +9,7 @@ type ImageCardProps = {
   title: string;
   subTitle: string[];
   date: string;
+  _id:string;
 };
 
 const ImageCard: React.FC<ImageCardProps> = ({
@@ -16,6 +17,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
   title,
   subTitle,
   date,
+  _id
 }) => {
   return (
     <motion.div
@@ -53,7 +55,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
           <h4 className="lg:text-[22px] text-[20px]  font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 lg:mb-[32px] mb-[10px]">
             {title}
           </h4>
-          <ButtonWithIcon link="" buttonText="Read More" />
+          <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" />
         </div>
       </motion.div>
     </motion.div>
