@@ -1,10 +1,11 @@
 import AccreditationForm from "./accreditation-form";
+import AccreditaionList from "./accreditation-list";
 
 export default function AccreditationPage() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Accreditation</h1>
-      <AccreditationForm />
+      <AccreditaionList/>
+      {/* <AccreditationForm /> */}
     </div>
   );
 }

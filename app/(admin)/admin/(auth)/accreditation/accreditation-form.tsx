@@ -7,7 +7,7 @@ import { Plus, Minus } from "lucide-react";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { FileUploader } from "@/components/ui/file-uploader";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter,useParams } from "next/navigation";
 
 interface FileData {
   file: string;
@@ -24,6 +24,8 @@ interface AccreditationFormData {
 export default function AccreditationForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const {id} = useParams()
+
   const {
     register,
     handleSubmit,
@@ -39,7 +41,7 @@ export default function AccreditationForm() {
   });
 
   const fetchAccreditation = async () => {
-    const response = await fetch(`/api/admin/accreditation`);
+    const response = await fetch(`/api/admin/accreditation/byid?id=${id}`);
     const data = await response.json();
     setValue("title", data.data.title);
     setValue("description", data.data.description);
@@ -47,8 +49,10 @@ export default function AccreditationForm() {
   };
 
   useEffect(() => {
-    fetchAccreditation();
-  }, []);
+    if(id){
+      fetchAccreditation();
+    }
+  }, [id]);
 
   const files = watch("files");
 
@@ -75,13 +79,23 @@ export default function AccreditationForm() {
   const onSubmit = async (data: AccreditationFormData) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`/api/admin/accreditation`, {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      const res = await response.json();
-      console.log(res);
-      router.push("/admin/accreditation");
+      if(id){
+        const response = await fetch(`/api/admin/accreditation/byid?id=${id}`, {
+          method: "PATCH",
+          body: JSON.stringify(data),
+        });
+        const res = await response.json();
+        console.log(res);
+        router.push("/admin/accreditation");
+      }else{
+        const response = await fetch(`/api/admin/accreditation`, {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+        const res = await response.json();
+        console.log(res);
+        router.push("/admin/accreditation");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -154,10 +168,10 @@ export default function AccreditationForm() {
               </div>
             ))}
 
-            <Button type="button" variant="outline" onClick={addFile} className="w-full">
+            {files?.length == 0 && (<Button type="button" variant="outline" onClick={addFile} className="w-full">
               <Plus className="h-4 w-4 mr-2" />
               Add File
-            </Button>
+            </Button>)}
           </div>
         </div>
       </div>

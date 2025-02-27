@@ -9,6 +9,10 @@ const SpecificationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  logo:{
+    type:String,
+    required:true
+  }
 });
 
 const ProjectSchema = new mongoose.Schema({
@@ -21,6 +25,14 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
   },
   images: [String],
+  type:{
+    type:String,
+    required:true
+  },
+  location:{
+    type:String,
+    required:true
+  },
   specifications: [SpecificationSchema],
   createdAt: {
     type: Date,

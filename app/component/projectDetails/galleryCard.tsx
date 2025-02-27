@@ -3,19 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const images = [
-  "/assets/img/projects-details/slider1.jpg",
-  "/assets/img/projects/p-2.jpg",
-  "/assets/img/projects/p-3.jpg",
-  "/assets/img/projects/p-4.jpg",
-  "/assets/img/projects/p-5.jpg",
-  "/assets/img/projects/p-6.jpg",
-  "/assets/img/projects/p-7.jpg",
-  "/assets/img/projects/p-6.jpg",
-  "/assets/img/projects/p-7.jpg",
-];
 
-export default function ImageCarousel() {
+
+export default function ImageCarousel({data}:{data:any}) {
+
+  console.log(data)
   const [activeIndex, setActiveIndex] = useState(0);
 
   const updateScreen = (index: number) => {
@@ -23,19 +15,19 @@ export default function ImageCarousel() {
   };
 
   const handleNext = () => {
-    updateScreen((activeIndex + 1) % images.length);
+    updateScreen((activeIndex + 1) % data.length);
   };
 
   const handlePrev = () => {
-    updateScreen((activeIndex - 1 + images.length) % images.length);
+    updateScreen((activeIndex - 1 + data.length) % data.length);
   };
 
   // Function to get 4 thumbnails in a loop
   const getThumbnails = () => {
     const start = activeIndex;
     const thumbnails = [];
-    for (let i = 0; i < 4; i++) {
-      thumbnails.push(images[(start + i) % images.length]);
+    for (let i = 0; i < data?.length; i++) {
+      thumbnails.push(data && data[(start + i) % data.length]);
     }
     return thumbnails;
   };
@@ -45,7 +37,7 @@ export default function ImageCarousel() {
       {/* Displayed Image with Controls and Thumbnails */}
       <div className="relative w-full lg:h-[571px] h-full aspect-video overflow-hidden rounded-xl shadow-lg flex flex-col justify-end">
         <Image
-          src={images[activeIndex]}
+          src={data && data[activeIndex]}
           alt="Displayed"
           fill
           className="object-cover h-full"
@@ -63,7 +55,7 @@ export default function ImageCarousel() {
           onClick={handlePrev}>
           <Image
             src="/assets/img/projects-details/next-icn.svg"
-            alt=""
+            alt="image"
             width={12}
             height={12}
           />
@@ -87,11 +79,11 @@ export default function ImageCarousel() {
             <div
               key={index}
               className={`cursor-pointer rounded-[8px] overflow-hidden border-2 transition-all w-[54px] h-[54px] ${
-                images.indexOf(img) === activeIndex
+                data.indexOf(img) === activeIndex
                   ? "border-[#FE6601]"
                   : "border-transparent"
               }`}
-              onClick={() => updateScreen(images.indexOf(img))}>
+              onClick={() => updateScreen(data.indexOf(img))}>
               <Image
                 src={img}
                 alt={`Thumbnail ${index + 1}`}

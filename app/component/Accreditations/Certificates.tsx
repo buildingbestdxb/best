@@ -1,30 +1,20 @@
 'use client'
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import useSWR from "swr";
+import { Accreditation } from "@/app/types/AccreditationType";
 
-const sectors = [
-  {
-    id: 1,
-    title: "Residential",
-    icon: "/assets/img/icons/residential.svg",
-    poster: "/assets/img/cer.jpg",
-  },
-  {
-    id: 2,
-    title: "Commercial",
-    icon: "/assets/img/icons/commercial.svg",
-    poster: "/assets/img/cer.jpg",
-  },
-  {
-    id: 3,
-    title: "Industrial",
-    icon: "/assets/img/icons/industrial.svg",
-    poster: "/assets/img/cer.jpg",
-  }
-];
 
 const Certificates = () => {
+
+  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  const { data }:{data:Accreditation} = useSWR(`/api/admin/accreditation`, fetcher)
+
+  useEffect(()=>{
+    console.log(data)
+  },[data])
+
   return (
     <motion.section className="section-spacing overflow-hidden"
     initial="hidden"
@@ -46,19 +36,19 @@ const Certificates = () => {
           <div>
 
  <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-[10px] md:gap-[15px] lg:gap-[30px] xl:gap-[60px] items-center mt-5 lg:mt-[60px]">
-          {sectors.map((sector, index) => (
+          {data?.data.map((sector, index) => (
             <motion.div
-              key={sector.id}
+              key={sector._id}
               className="relative h-[300px] lg:h-[663px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Image src={sector.poster} alt="Background Image" fill className="object-cover" />
+              <Image src={sector.files[0].thumbnail} alt="Background Image" fill className="object-cover" />
 
               <motion.div
-                className="absolute flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom flex flex-col gap-[20px] group-hover:bg-primary transition-all"
+                className="absolute flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom gap-[20px] group-hover:bg-primary transition-all"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}

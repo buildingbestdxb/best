@@ -20,8 +20,9 @@ export async function PATCH(request: NextRequest) {
   }
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  const { title, department, location, applyLink, datePosted } = await request.json();
-  const career = await Careers.findByIdAndUpdate(id, { title, department, location, applyLink, datePosted });
+  console.log(id)
+  const { title, department, location, applyLink, datePosted,type } = await request.json();
+  const career = await Careers.findByIdAndUpdate(id, { title, department, location, applyLink, datePosted ,type});
   return NextResponse.json({ data: career, success: true }, { status: 200 });
 }
 

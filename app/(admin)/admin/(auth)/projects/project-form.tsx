@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type ProjectData = {
@@ -18,8 +19,11 @@ type ProjectData = {
   specifications: {
     name: string;
     value: string;
+    logo:string;
   }[];
   images: string[];
+  type:string;
+  location:string;
 };
 
 interface ProjectFormData {
@@ -29,7 +33,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const { register, handleSubmit, control, setValue } = useForm<ProjectData>({
+  const { register, handleSubmit, control, setValue,watch } = useForm<ProjectData>({
     defaultValues: {
       name: "",
       description: "",
@@ -54,7 +58,10 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
       setValue("name", res.data.name);
       setValue("description", res.data.description);
       setValue("specifications", res.data.specifications);
+      console.log(res.data.type)
+      setValue("type", res.data.type);
       setValue("images", res.data.images);
+      setValue("location", res.data.location);
       setImageUrls(res.data.images);
     } catch (error) {
       console.error("Error fetching project:", error);
@@ -69,6 +76,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
 
   const onSubmit = async (data: ProjectData) => {
     try {
+
       if (projectId) {
         const response = await fetch(`/api/admin/projects/byid?id=${projectId}`, {
           method: "PATCH",
@@ -106,6 +114,11 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     );
   };
 
+
+  const handleSpecLogoUpload = (index: number, uploadedUrl: string) => {
+    setValue(`specifications.${index}.logo`, uploadedUrl);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">{projectId ? "Edit" : "Create"} Project</h1>
@@ -126,16 +139,52 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
               )}
             />
           </div>
+
+          <div>
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            Type
+          </Label>
+          <Controller
+            name="type"
+            control={control}
+            rules={{ required: "Type is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="residential">Residential</SelectItem>
+                  <SelectItem value="commercial">Commercial</SelectItem>
+                  <SelectItem value="industrial">Industrial</SelectItem>
+                  <SelectItem value="hospitality">Hospitality</SelectItem>
+                  <SelectItem value="retail">Retail</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div className="space-y-2">
+            <Label htmlFor="name">Location</Label>
+            <Input id="location" {...register("location")} />
+          </div>
+
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Label>Specifications</Label>
-              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "" })}>
+              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "",logo:"" })}>
                 Add Specification
               </Button>
             </div>
 
             {specFields.map((field, index) => (
               <div key={field.id} className="flex gap-4 items-start">
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor={`specifications.${index}.name`}>Logo</Label>
+                  <ImageUploader value={watch(`specifications.${index}.logo`)} onChange={(url) => handleSpecLogoUpload(index, url)} deleteAfterUpload={true} />
+                </div>
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.name`}>Name</Label>
                   <Input {...register(`specifications.${index}.name`)} placeholder="Specification name" />

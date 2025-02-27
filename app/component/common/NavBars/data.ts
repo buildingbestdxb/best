@@ -5,7 +5,7 @@ export const menuItems = [
     children: [
       {
         title: "Our Story",
-        url: "our-story",
+        url: "/our-story",
       },
     ],
   },
@@ -15,17 +15,29 @@ export const menuItems = [
     children: [
       {
         title: "Residential",
-        url: "projects",
+        url: "/projects/residential",
       },
       {
         title: "Commercial",
-        url: "projects",
+        url: "/projects/commercial",
+      },
+      {
+        title: "Industrial",
+        url: "/projects/industrial",
+      },
+      {
+        title: "Hospitality",
+        url: "/projects/hospitality",
+      },
+      {
+        title: "Retail",
+        url: "/projects/retail",
       },
     ],
   },
   {
     title: "Careers",
-    url: "careers",
+    url: "/careers",
   },
   {
     title: "Media",
@@ -33,11 +45,11 @@ export const menuItems = [
     children: [
       {
         title: "Events",
-        url: "events",
+        url: "/events",
       },
       {
         title: "News",
-        url: "news",
+        url: "/news",
       },
     ],
   },

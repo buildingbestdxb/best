@@ -7,15 +7,17 @@ type ProjectCardProps = {
   image: string;
   title: string;
   locationName: string;
+  href:string;
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   title,
   locationName,
+  href
 }) => {
   return (
-    <a href="/project-details">
+    <a href={href}>
       <motion.div
         className="relative h-[300px] lg:h-[449px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
         initial={{ opacity: 0, y: 30 }}

@@ -7,7 +7,7 @@ import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 type ImageCardProps = {
   image: string;
   title: string;
-  subTitle: string;
+  subTitle: string[];
   date: string;
 };
 
@@ -41,9 +41,15 @@ const ImageCard: React.FC<ImageCardProps> = ({
         viewport={{ once: true }}>
         {/* Title and Icons Row */}
         <div className="w-full">
-          <p className="text-[14px] text-white/80 uppercase lg:mb-[20px] mb-2">
-            {subTitle}
+          <div className="flex">
+          {subTitle && subTitle.map((item,index)=>(
+            <p key={index} className="text-[14px] text-white/80 uppercase lg:mb-[20px] mb-2">
+            {item}{index !== subTitle.length - 1 ? ',' : ''}
           </p>
+          ))}
+          </div>
+          
+          
           <h4 className="lg:text-[22px] text-[20px]  font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 lg:mb-[32px] mb-[10px]">
             {title}
           </h4>

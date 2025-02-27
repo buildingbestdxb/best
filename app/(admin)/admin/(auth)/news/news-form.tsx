@@ -130,7 +130,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
             control={control}
             rules={{ required: "Type is required" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a type" />
                 </SelectTrigger>
