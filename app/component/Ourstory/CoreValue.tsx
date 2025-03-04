@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SecHr from "../common/SecDivider/SecHr";
+import { AboutType } from "@/app/types/AboutType";
+import parse from 'html-react-parser'
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -18,7 +20,9 @@ const slideRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const CoreValue = () => {
+const CoreValue = ({data}:{
+  data:AboutType
+}) => {
   return (
     <motion.section
       className="section-spacing overflow-hidden"
@@ -36,41 +40,25 @@ const CoreValue = () => {
               className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none"
               variants={slideRight}>
               <h2 className="text-lg font-bold text-black">
-                BUILDING CO. (BEST) L.L.C
+                {data?.data[0].core_value.title}
               </h2>
-              <p className="leading-relaxed text-black/75">
-                At BUILDING CO. (BEST) L.L.C, we uphold the highest standards in
-                every project, driven by our core values of Planning, Quality,
-                Integrity, Excellence, and Commitment. Our success is built on
-                the expertise of our skilled professionals, meticulous attention
-                to detail, and an unwavering dedication to client satisfaction.
-                We don’t just construct buildings—we create lasting legacies
-                that reflect our passion for quality and our pursuit of
-                perfection
-              </p>
+              <div className="leading-relaxed text-black/75">
+                {parse(data?.data[0].core_value.content || "")}
+              </div>
 
               <div className="  w-full flex ">
                 <motion.div
                   variants={fadeIn}
                   className="flex gap-2 lg:gap-[12px] justify-center bg-black/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
-                  <Image
-                    src="/assets/img/story/im-01.png"
+                  {data?.data[0].core_value.seals.map((item,index)=>(
+                    <Image key={index}
+                    src={item.logo}
                     alt=""
                     width={80}
                     height={80}
                   />
-                  <Image
-                    src="/assets/img/story/im-02.png"
-                    alt=""
-                    width={80}
-                    height={80}
-                  />
-                  <Image
-                    src="/assets/img/story/im-03.png"
-                    alt=""
-                    width={80}
-                    height={80}
-                  />
+                  ))}
+                  
                 </motion.div>
               </div>
             </motion.div>
@@ -79,7 +67,7 @@ const CoreValue = () => {
             variants={slideLeft}
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
-              src="/assets/img/home/abt01.jpg"
+              src={data?.data[0].core_value.image}
               alt="About Us"
               layout="fill"
               objectFit="cover"

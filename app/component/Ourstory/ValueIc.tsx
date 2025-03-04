@@ -2,17 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { AboutType } from "@/app/types/AboutType";
 
-const ValueIc = () => {
-  const stats = {
-    data: [
-      { value: 50, label: "Planning", icon: "/assets/img/story/ico1.svg" },
-      { value: 150, label: "Quality", icon: "/assets/img/story/ico2.svg" },
-      { value: 100, label: "Integrity", icon: "/assets/img/story/ico3.svg" },
-      { value: 100, label: "Excellence", icon: "/assets/img/story/ico4.svg" },
-      { value: 100, label: "Commitment", icon: "/assets/img/story/ico5.svg" },
-    ],
-  };
+const ValueIc = ({data}:{
+  data:AboutType
+}) => {
+
 
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
@@ -40,7 +35,7 @@ const ValueIc = () => {
 
       <div className="container">
         <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-2 gap-6 xxl:gap-[60px] xl-gap-[40px] w-full">
-          {stats.data.map((stat, index) => (
+          {data?.data[0].core_value.cards.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -53,8 +48,8 @@ const ValueIc = () => {
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 }}>
                   <Image
-                    src={stat.icon}
-                    alt={stat.label}
+                    src={stat.logo}
+                    alt={stat.title}
                     className="h-[30px] lg:h-[40px]"
                     width={50}
                     height={50}
@@ -62,7 +57,7 @@ const ValueIc = () => {
                 </motion.div>
               </div>
               <h4 className="text-left flex w-full text-white uppercase text-md font-bold">
-                {stat.label}
+                {stat.title}
               </h4>
             </motion.div>
           ))}

@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { AboutType } from "@/app/types/AboutType";
 
 const logos = [
   "/assets/img/clients/cl-01.png",
@@ -14,7 +15,9 @@ const logos = [
   "/assets/img/clients/cl-08.png",
 ];
 
-const LogoTicker = () => {
+const LogoTicker = ({data}:{
+  data?:AboutType
+}) => {
   return (
     <section className="section-spacing overflow-hidden">
       <div className="container-fluid">
@@ -29,16 +32,27 @@ const LogoTicker = () => {
               repeat: Infinity,
               ease: "linear",
             }}>
-            {[...logos, ...logos].map((logo, index) => (
+            {data ? data?.data[0]?.strength_and_vision.clients.map((item, index) => (
               <Image
                 key={index}
-                src={logo}
+                src={item.logo}
                 alt="client logo"
                 width={150}
                 height={80}
                 className="logo-ticker-image"
               />
-            ))}
+            )) : 
+              logos.map((item,index)=>(
+                <Image
+                key={index}
+                src={item}
+                alt="client logo"
+                width={150}
+                height={80}
+                className="logo-ticker-image"
+              />
+              ))
+            }
           </motion.div>
         </div>
       </div>

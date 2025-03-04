@@ -4,79 +4,18 @@ import React, { useState, useEffect, useRef } from "react";
 import SecHr from "../common/SecDivider/SecHr";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AboutType } from "@/app/types/AboutType";
+import parse from 'html-react-parser'
 
-const Historysec = () => {
-  const historyData = [
-    {
-      year: "1975",
-      content: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "1980",
-      content: [
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "1999",
-      content: [
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-        "Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "2010",
-      content: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "2014",
-      content: [
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-        "Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "2017",
-      content: [
-        "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-        "Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "2020",
-      content: [
-        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
-        "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-    {
-      year: "2024",
-      content: [
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.",
-        "Deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-      ],
-      image: "/assets/img/story/history.jpg",
-    },
-  ];
+const Historysec = ({data}:{
+  data:AboutType
+}) => {
+  
 
-  const [activeIndex, setActiveIndex] = useState(3); // 2010 is default active (index 3)
+  const [activeIndex, setActiveIndex] = useState(0); // 2010 is default active (index 3)
   const [visibleRange, setVisibleRange] = useState({
     start: 0,
-    end: historyData.length - 1,
+    end: data?.data[0].history.length - 1,
   });
   const timelineRef = useRef<HTMLDivElement>(null);
 
@@ -86,16 +25,16 @@ const Historysec = () => {
       if (window.innerWidth < 640) {
         // Small screens - show 2 items: active + 1 next to it (if possible)
         const start = Math.max(0, activeIndex - 1);
-        const end = Math.min(historyData.length - 1, activeIndex);
+        const end = Math.min(data?.data[0].history.length - 1, activeIndex);
         setVisibleRange({ start, end });
       } else if (window.innerWidth < 1024) {
         // Medium screens - show 5 items
         const start = Math.max(0, activeIndex - 2);
-        const end = Math.min(historyData.length - 1, activeIndex + 1);
+        const end = Math.min(data?.data[0].history.length - 1, activeIndex + 1);
         setVisibleRange({ start, end });
       } else {
         // Large screens - show all
-        setVisibleRange({ start: 0, end: historyData.length - 1 });
+        setVisibleRange({ start: 0, end: data?.data[0].history.length - 1 });
       }
     };
 
@@ -105,7 +44,7 @@ const Historysec = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [activeIndex, historyData.length]);
+  }, [activeIndex, data?.data[0].history.length]);
 
   // Mobile-only scroll to ensure active item is visible
   useEffect(() => {
@@ -145,7 +84,7 @@ const Historysec = () => {
   };
 
   const handleScrollRight = () => {
-    if (activeIndex < historyData.length - 1) {
+    if (activeIndex < data?.data[0].history.length - 1) {
       setActiveIndex((prevIndex) => prevIndex + 1);
     }
   };
@@ -166,8 +105,8 @@ const Historysec = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}>
                 <Image
-                  src={historyData[activeIndex].image}
-                  alt={`history-${historyData[activeIndex].year}`}
+                  src={data?.data[0]?.history[activeIndex].image}
+                  alt={`history-${data?.data[0].history[activeIndex].year}`}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-xl shadow-lg"
@@ -181,15 +120,16 @@ const Historysec = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}>
                   <h2 className="text-xxl font-black">
-                    {historyData[activeIndex].year}
+                    {data?.data[0]?.history[activeIndex].year}
                   </h2>
-                  {historyData[activeIndex].content.map((paragraph, i) => (
+                  {/* {data?.data[0]?.history[activeIndex].content.map((paragraph, i) => (
                     <p
                       key={i}
                       className="font-sm leading-[25.3px] text-secondary/75">
                       {paragraph}
                     </p>
-                  ))}
+                  ))} */}
+                  {parse(data?.data[0]?.history[activeIndex].content || "")}
                 </motion.div>
               </div>
             </div>
@@ -211,11 +151,11 @@ const Historysec = () => {
                 <button
                   onClick={handleScrollRight}
                   className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 right-2 transform -translate-y-1/2 z-10  ${
-                    activeIndex === historyData.length - 1
+                    activeIndex === data?.data[0].history.length - 1
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
-                  disabled={activeIndex === historyData.length - 1}>
+                  disabled={activeIndex === data?.data[0].history.length - 1}>
                   <ChevronRight size={18} />
                 </button>
               </div>
@@ -228,7 +168,7 @@ const Historysec = () => {
                   scrollBehavior: "smooth",
                 }}>
                 <div className="flex flex-row items-center min-w-max mx-auto md:mx-0 md:w-full justify-between">
-                  {historyData.map((item, index) => (
+                  {data?.data[0].history.map((item, index) => (
                     <div
                       key={index}
                       className={`timeline-item relative flex flex-col items-center gap-3 md:gap-5 cursor-pointer mx-4 md:mx-0 transition-all duration-300 ${
