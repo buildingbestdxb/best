@@ -15,29 +15,8 @@ export const menuItems = [
   },
   {
     title: "Projects",
-    url: "",
-    children: [
-      {
-        title: "Residential",
-        url: "/projects/residential",
-      },
-      {
-        title: "Commercial",
-        url: "/projects/commercial",
-      },
-      {
-        title: "Industrial",
-        url: "/projects/industrial",
-      },
-      {
-        title: "Hospitality",
-        url: "/projects/hospitality",
-      },
-      {
-        title: "Retail",
-        url: "/projects/retail",
-      },
-    ],
+    url: "/projects",
+    
   },
   {
     title: "Careers",

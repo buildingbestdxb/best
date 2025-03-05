@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const sectors = [
   {
@@ -88,13 +89,13 @@ const Sectors = () => {
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.title}
                   </h4>
-                  <Image
+                  <Link href={`/projects/${sector.title.toLowerCase()}`}><Image
                     src="/assets/img/icons/arwtp.svg"
                     alt=""
                     width={0}
                     height={0}
                     className="transition-all duration-500 ease-in-out group-hover:w-[14px]"
-                  />
+                  /></Link>
                 </motion.div>
               </motion.div>
             </motion.div>

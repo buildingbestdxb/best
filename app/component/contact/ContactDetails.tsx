@@ -1,37 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import useSWR from "swr";
+import parse from 'html-react-parser'
+import { ContactType } from "@/app/types/ContactType";
 
 const ContactDetails = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof locations>("Sharjah");
 
-  const locations = {
-    Sharjah: {
-      address:
-        "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
-      phone: "+971 4 3884598",
-      email: "info@bestbcc.com",
-      fax: "+971 4 3284399",
-      addressCard: "34535",
-    },
-    Dubai: {
-      address: "Al Quoz Industrial Area No. 4, Dubai – United Arab Emirates",
-      phone: "+971 4 3884598",
-      email: "info@bestbcc.com",
-      fax: "+971 4 3284399",
-      addressCard: "34535",
-    },
+  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  const { data }:{data:ContactType} = useSWR(`/api/admin/contact`, fetcher)
 
-    AbuDhabi: {
-      address:
-        "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
-      phone: "+971 4 3884598",
-      email: "info@bestbcc.com",
-      fax: "+971 4 3284399",
-      addressCard: "34535",
-    },
-  };
+
+  useEffect(()=>{
+    console.log(data)
+  },[data])
+
+
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <motion.div
@@ -41,20 +27,20 @@ const ContactDetails = () => {
       viewport={{ once: true }}
       className="">
       <div className="flex mb-3 lg:mb-[20px] pb-[15px] border-b-[1px] border-[#1E1E1E] xl:gap-[40px] lg:gap-[20px] gap-3 h-[50px]">
-        {Object.keys(locations).map((city) => (
+        {data?.data?.map((item,index) => (
           <button
-            key={city}
+            key={index}
             className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${
-              activeTab === city
+              data?.data[activeTab].region === item.region
                 ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[18px]"
                 : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[18px]"
             }`}
-            onClick={() => setActiveTab(city as keyof typeof locations)}>
+            onClick={() => setActiveTab(index)}>
             <div
               className={`w-[10px]  h-[10px] rounded-full ${
-                activeTab === city ? "bg-primary" : "bg-black/30"
+                data?.data[activeTab].region === item.region ? "bg-primary" : "bg-black/30"
               }`}></div>
-            {city}
+            {item.region}
           </button>
         ))}
       </div>
@@ -72,7 +58,7 @@ const ContactDetails = () => {
             </span>
           </div>
           <p className="lg:text-[22px] text-[16px]  text-black font-[500] mt-[16px] xl:w-[80%]">
-            {locations[activeTab].phone}
+            {data?.data[activeTab].phone}
           </p>
         </div>
         <div className="">
@@ -88,7 +74,7 @@ const ContactDetails = () => {
             </span>
           </div>
           <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] ">
-            {locations[activeTab].fax}
+            {data?.data[activeTab].fax}
           </p>
         </div>
         <div className="lg:mb-[40px] ">
@@ -107,7 +93,7 @@ const ContactDetails = () => {
             {/* <a
               href={`mailto:${locations[activeTab].email}`}
               className="text-primary"> */}
-            {locations[activeTab].email}
+            {data?.data[activeTab].mail}
             {/* </a> */}
           </p>
         </div>
@@ -124,7 +110,7 @@ const ContactDetails = () => {
             </span>
           </div>
           <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] xl:w-[75%] ">
-            {locations[activeTab].addressCard}
+            {data?.data[activeTab].address_card}
           </p>
         </div>
       </div>
@@ -140,9 +126,9 @@ const ContactDetails = () => {
             Address
           </span>
         </div>
-        <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%]">
-          {locations[activeTab].address}
-        </p>
+        <div className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%]">
+          {parse(data?.data[activeTab].address || "")}
+        </div>
       </div>
     </motion.div>
   );

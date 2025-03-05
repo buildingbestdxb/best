@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const careerForm = z.object({
-    firstName: z.string().min(2, { message: 'First name is required' }),
-    lastName: z.string().min(2, { message: 'Last name is required' }),
+    firstName: z.string().trim().min(2, { message: 'First name is required' }),
+    lastName: z.string().trim().min(2, { message: 'Last name is required' }),
     email: z.string().email(),
     phone: z.preprocess(
         (val) => (typeof val === "string" ? Number(val) : val), // Convert string to number
@@ -13,12 +13,12 @@ export const careerForm = z.object({
         (val) => (typeof val === "string" ? new Date(val) : val), // Convert string to Date
         z.date({ message: "Provide a valid date" })
       ),
-    nationality:z.string().min(2,{message:"Provide a nationality"}),
-    location:z.string().min(2,{message:"Provide a location"}),
+    nationality:z.string().trim().min(2,{message:"Provide a nationality"}),
+    location:z.string().trim().min(2,{message:"Provide a location"}),
     experience: z.preprocess(
         (val) => (typeof val === "string" ? Number(val) : val), // Convert string to number
         z.number().min(1, { message: "Enter your years of experience" }) // Ensure it's a positive number
       ),
-    skills:z.string().min(3,{message:"Enter valid skills"}),
+    skills:z.string().trim().min(3,{message:"Enter valid skills"}),
     resume:z.string()
   });

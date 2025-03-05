@@ -22,6 +22,8 @@ export default function Index() {
     console.log(filteredData)
   },[filteredData])
 
+
+
   return (
     <>
       <HeroSection
