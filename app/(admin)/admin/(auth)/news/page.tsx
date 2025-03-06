@@ -86,7 +86,7 @@ export default function AdminProducts() {
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-xl font-semibold">{news.title}</h2>
+                    <h2 className="text-sm font-semibold">{news.title}</h2>
                     <p className="text-sm text-gray-500">{news.type === "event" ? "Event" : "News"}</p>
                   </div>
                   <div className="flex gap-2">
