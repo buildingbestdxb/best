@@ -3,15 +3,12 @@ import mongoose from "mongoose";
 const SpecificationSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   value: {
     type: String,
-    required: true,
   },
   logo:{
     type:String,
-    required:true
   }
 });
 
@@ -22,7 +19,6 @@ const ProjectSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   images: [String],
   type:{
@@ -31,7 +27,6 @@ const ProjectSchema = new mongoose.Schema({
   },
   location:{
     type:String,
-    required:true
   },
   specifications: [SpecificationSchema],
   createdAt: {

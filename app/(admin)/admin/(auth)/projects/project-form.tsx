@@ -120,7 +120,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 h-screen overflow-y-auto">
       <h1 className="text-3xl font-bold mb-6">{projectId ? "Edit" : "Create"} Project</h1>
 
       <Card className="p-6">

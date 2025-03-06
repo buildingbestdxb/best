@@ -20,14 +20,14 @@ const ProjectList = ({ data }: {
   handleLoadMore?:()=>void
 }) => {
 
-  const limit = 7;
+  const limit = 8;
   const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data?.slice(0, limit));
   const [noLoadMore,setNoLoadMore] = useState(false)
 
-  console.log(data)
 
   const handleLoadMore = () => {
+    console.log("clicked")
     const newVisible = visible + limit;
     setDisplayData((prev) => [...prev, ...data.slice(visible, newVisible)]);
     setVisible(newVisible); // Update visible count
@@ -39,12 +39,11 @@ useEffect(()=>{
     return;
   }else{
     setNoLoadMore(false)
-    setDisplayData(data?.slice(0, limit))
   }
 },[data,visible])
 
 useEffect(()=>{
-  setDisplayData(data)
+  setDisplayData(data?.slice(0, limit))
 },[data])
 
   return (
