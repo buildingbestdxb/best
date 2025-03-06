@@ -18,10 +18,7 @@ export const menuItems = [
     url: "/projects",
     
   },
-  {
-    title: "Careers",
-    url: "/careers",
-  },
+
   {
     title: "Media",
     url: "",
@@ -38,6 +35,6 @@ export const menuItems = [
   },
   {
     title: "Careers",
-    url: "careers",
+    url: "/careers",
   },
 ];

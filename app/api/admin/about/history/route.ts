@@ -26,11 +26,12 @@ export async function POST(request: NextRequest) {
       await connectDB();
       const formData = await request.formData()
       const year = formData.get("year")
+      const title = formData.get("title")
       const content = formData.get("content")
       const image = formData.get("image")
       const about = await About.findOne();
       if(about){
-        about.history.push({year,content,image})
+        about.history.push({year,title,content,image})
         await about.save()
         return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 });
       }
@@ -53,6 +54,7 @@ export async function POST(request: NextRequest) {
       const id = searchParams.get("id")
       const formData = await request.formData()
       const year = formData.get("year")
+      const title = formData.get("title")
       const content = formData.get("content")
       const image = formData.get("image")
       const about = await About.findOne();
@@ -60,6 +62,7 @@ export async function POST(request: NextRequest) {
         const toBeEditedItem = about.history.find((item:{_id:string})=>item._id==id)
         if(toBeEditedItem){
             toBeEditedItem.year = year
+            toBeEditedItem.title = title
             toBeEditedItem.content = content
             toBeEditedItem.about = about
             toBeEditedItem.image = image

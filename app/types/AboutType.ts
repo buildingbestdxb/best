@@ -22,6 +22,7 @@ export type AboutType = {
         }
         history:{
             year:string;
+            title:string;
             image:string;
             content:string;
         }[]

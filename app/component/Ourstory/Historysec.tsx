@@ -114,7 +114,7 @@ const Historysec = ({data}:{
               </motion.div>
               <div className="col-span-8">
                 <motion.div
-                  className="flex flex-col gap-[12px] lg:gap-[32px] leading-none"
+                  className="flex flex-col gap-[12px] lg:gap-[32px]  font-sm leading-[25.3px] text-secondary/75"
                   key={activeIndex}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -122,6 +122,9 @@ const Historysec = ({data}:{
                   <h2 className="text-xxl font-black">
                     {data?.data[0]?.history[activeIndex].year}
                   </h2>
+                  <h3 className="text-lg font-black mt-5">
+                    {data?.data[0]?.history[activeIndex].title}
+                  </h3>
                   {/* {data?.data[0]?.history[activeIndex].content.map((paragraph, i) => (
                     <p
                       key={i}

@@ -25,6 +25,7 @@ interface Values {
     year: string;
     content: string
     image: string;
+    title:string;
 }
 
 const History = () => {
@@ -35,12 +36,14 @@ const History = () => {
         watch,
         setValue,
         getValues,
+        reset,
         formState: {},
     } = useForm<Values>({
         defaultValues: {
             content: "",
             image: "",
-            year: ""
+            year: "",
+            title:""
         }
     });
 
@@ -50,6 +53,7 @@ const History = () => {
         try {
             const formData = new FormData()
             formData.append("year", getValues("year"))
+            formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
 
@@ -90,23 +94,26 @@ const History = () => {
         fetchData()
     }, [])
 
-    const handleSetEditHistory = (year:string,content:string,image:string) => {
+    const handleSetEditHistory = (year:string,title:string,content:string,image:string) => {
         setValue("year", year)
+        setValue("title", title)
         setValue("content", content)
         setValue("image", image)
     }
 
 
     const handleSetAddHistory = () => {
-        setValue("year", "")
-        setValue("content", "")
-        setValue("image", "")
+        // setValue("year", "")
+        // setValue("content", "")
+        // setValue("image", "")
+        reset()
     }
 
     const handleAddHistory = async () => {
         try {
             const formData = new FormData()
             formData.append("year", getValues("year"))
+            formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
 
@@ -163,6 +170,10 @@ const History = () => {
                                             <Input {...register("year")} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
+                                            <Label>Title</Label>
+                                            <Input {...register("title")} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
                                             <Label>Content</Label>
                                             <Controller
                                                 name="content"
@@ -180,13 +191,13 @@ const History = () => {
             </div>
 
 
-            {histories && histories.map((item:{year:string;content:string;_id:string,image:string;})=>(
+            {histories && histories.map((item:{title:string;year:string;content:string;_id:string,image:string;})=>(
                 <div className='border-dashed border-2 p-4 flex flex-col gap-5' key={item._id}>
                 
                 <div className='flex justify-end'>
                     <div className='flex gap-5'>
                         <Dialog>
-                            <DialogTrigger onClick={()=>handleSetEditHistory(item.year,item.content,item.image)}>Edit</DialogTrigger>
+                            <DialogTrigger onClick={()=>handleSetEditHistory(item.year,item.title,item.content,item.image)}>Edit</DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle>Edit client content</DialogTitle>
@@ -200,18 +211,22 @@ const History = () => {
                                             <Input {...register("year")} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
+                                            <Label>Title</Label>
+                                            <Input {...register("title")} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
                                             <Label>Content</Label>
                                             <Controller
                                                 name="content"
                                                 control={control}
                                                 render={({ field }) => (
-                                                    <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1" />
+                                                    <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1 h-32" />
                                                 )}
                                             />
                                         </div>
                                     </DialogDescription>
                                 </DialogHeader>
-                                <DialogClose onClick={()=>handleEditHistory(item._id)}>Save</DialogClose>
+                                <DialogClose onClick={()=>handleEditHistory(item._id)} className='mt-10'>Save</DialogClose>
                             </DialogContent>
                         </Dialog>
                         <Button className='bg-transparent border-none shadow-none hover:bg-transparent font-light' onClick={()=>handleDeleteHistory(item._id)}>Delete</Button>
@@ -223,6 +238,10 @@ const History = () => {
                             Year
                         </Label>
                         <Input value={item.year} readOnly/>
+                        <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                            Title
+                        </Label>
+                        <Input value={item.title} readOnly/>
                     </div>
 
                     <div className='col-span-1'>

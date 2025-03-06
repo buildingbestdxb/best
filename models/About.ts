@@ -42,6 +42,9 @@ const AboutSchema  = new mongoose.Schema({
         year:{
             type:String,
         },
+        title:{
+            type:String,
+        },
         image:{
             type:String,
         },
