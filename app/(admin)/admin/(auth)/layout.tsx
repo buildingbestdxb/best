@@ -51,7 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-8">{children}</main>
+      <main className="flex-1 p-8 h-screen overflow-y-scroll">{children}</main>
     </div>
   );
 }
