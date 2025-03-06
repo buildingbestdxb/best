@@ -13,7 +13,7 @@ import ClientSideLink from "../client-side-link";
 const navItems = [
   { name: "Home", href: "/admin", icon: HomeIcon },
   { name: "About", href: "/admin/about", icon: UserGroupIcon },
-  { name: "News", href: "/admin/news", icon: NewspaperIcon },
+  { name: "News & Events", href: "/admin/news", icon: NewspaperIcon },
   { name: "Projects", href: "/admin/projects", icon: CubeIcon },
   { name: "Contact", href: "/admin/contact", icon: EnvelopeIcon },
   { name: "Careers", href: "/admin/careers", icon: BriefcaseIcon },

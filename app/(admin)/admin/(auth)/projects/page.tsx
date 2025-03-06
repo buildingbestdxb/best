@@ -77,7 +77,7 @@ export default function Projects() {
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                    <h2 className="text-xl font-semibold">{project.name}</h2>
+                    <h2 className="text-md font-semibold">{project.name}</h2>
                   </div>
                   <div className="flex gap-2">
                     <Button
