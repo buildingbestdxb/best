@@ -25,6 +25,8 @@ const ProjectList = ({ data }: {
   const [displayData, setDisplayData] = useState(data?.slice(0, limit));
   const [noLoadMore,setNoLoadMore] = useState(false)
 
+  console.log(data)
+
   const handleLoadMore = () => {
     const newVisible = visible + limit;
     setDisplayData((prev) => [...prev, ...data.slice(visible, newVisible)]);
@@ -40,6 +42,10 @@ useEffect(()=>{
     setDisplayData(data?.slice(0, limit))
   }
 },[data,visible])
+
+useEffect(()=>{
+  setDisplayData(data)
+},[data])
 
   return (
     <>

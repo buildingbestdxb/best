@@ -159,6 +159,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                   <SelectItem value="industrial">Industrial</SelectItem>
                   <SelectItem value="hospitality">Hospitality</SelectItem>
                   <SelectItem value="retail">Retail</SelectItem>
+                  <SelectItem value="healthcare">Health Care</SelectItem>
                 </SelectContent>
               </Select>
             )}
