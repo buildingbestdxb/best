@@ -1,6 +1,7 @@
 export type ProjectType = {
     data:{
         description:string;
+        thumbnail:string;
         images:string[];
         location:string;
         name:string;

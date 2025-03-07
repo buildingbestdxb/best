@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React from "react";
 import HeroInner from "../common/Banner/HeroInner";
 import Gallery from "./gallery";
 import OtherProjects from "./otherProjects";
@@ -17,11 +17,8 @@ export default function Index() {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const { data }:{data:IndiProjectType} = useSWR(`/api/admin/projects/byid?id=${id}`, fetcher)
+  const {data:relatedProjects} = useSWR(`/api/admin/projects?type=${type}`,fetcher)
 
-
-  useEffect(()=>{
-    console.log(data)
-  },[data])
 
   const breadcrumb = [
     { label: "Home", href: "/" },
@@ -42,7 +39,7 @@ export default function Index() {
       />
 
       <Gallery data={data}/>
-      <OtherProjects />
+      <OtherProjects data={relatedProjects}/>
     </>
   );
 }

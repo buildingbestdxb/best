@@ -10,6 +10,7 @@ import useSWR from "swr";
 interface DataType {
     projects: {
         description: string;
+        thumbnail:string;
         images: string[];
         location: string;
         name: string;
@@ -27,7 +28,7 @@ export default function Projects() {
 
     const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
     const { data: projectData }: { data: DataType } = useSWR(`/api/admin/projects/all`, fetcher)
-    const [actualData, setActualData] = useState<{ description: string; images: string[]; location: string; name: string; specifications: { name: string; value: string; _id: string; }[]; type: string; _id: string; }[]>([])
+    const [actualData, setActualData] = useState<{ thumbnail:string;description: string; images: string[]; location: string; name: string; specifications: { name: string; value: string; _id: string; }[]; type: string; _id: string; }[]>([])
 
 
     useEffect(() => {

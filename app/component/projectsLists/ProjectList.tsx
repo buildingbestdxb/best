@@ -5,6 +5,7 @@ import ProjectCard from "./ProjectCard";
 const ProjectList = ({ data }: {
   data: {
     description: string;
+    thumbnail:string;
     images: string[];
     location: string;
     name: string;
@@ -56,14 +57,14 @@ useEffect(()=>{
                 <ProjectCard
                   locationName={item.location}
                   title={item.name}
-                  image={item.images[0]}
+                  image={item.thumbnail}
                   href={`/project-details/${item._id}?type=${item.type}`}
                 />
               </div>) : (<div className="xl:col-span-4" key={index}>
                 <ProjectCard
                   locationName={item.location}
                   title={item.name}
-                  image={item.images[0]}
+                  image={item.thumbnail}
                   href={`/project-details/${item._id}?type=${item.type}`}
                 />
               </div>)

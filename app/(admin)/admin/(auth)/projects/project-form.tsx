@@ -15,6 +15,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type ProjectData = {
   name: string;
+  thumbnail:string;
   description: string;
   specifications: {
     name: string;
@@ -56,6 +57,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
       const response = await fetch(`/api/admin/projects/byid?id=${projectId}`);
       const res = await response.json();
       setValue("name", res.data.name);
+      setValue("thumbnail", res.data.thumbnail);
       setValue("description", res.data.description);
       setValue("specifications", res.data.specifications);
       console.log(res.data.type)
@@ -125,9 +127,18 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
 
       <Card className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name")} />
+          <div className="space-y-2 grid grid-cols-2 gap-5">
+            
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" {...register("name")} />
+            </div>
+
+            <div>
+              <Label htmlFor="name">Thumbnail</Label>
+              <ImageUploader value={watch(`thumbnail`)} onChange={(url) => setValue("thumbnail",url)} deleteAfterUpload={true} />
+            </div>
+
           </div>
           <div className="space-y-2">
             <Label>Description</Label>
@@ -202,7 +213,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
           </div>
           {/* Images */}
           <div>
-            <Label className="block text-sm font-medium text-gray-700">Images</Label>
+            <Label className="block text-sm font-medium text-gray-700">Gallery</Label>
             <div className="mt-2">
               <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} />
             </div>
