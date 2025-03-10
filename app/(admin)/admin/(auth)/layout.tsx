@@ -15,6 +15,7 @@ const navItems = [
   { name: "About", href: "/admin/about", icon: UserGroupIcon },
   { name: "News & Events", href: "/admin/news", icon: NewspaperIcon },
   { name: "Projects", href: "/admin/projects", icon: CubeIcon },
+  { name: "Sectors", href: "/admin/sectors", icon: CubeIcon },
   { name: "Contact", href: "/admin/contact", icon: EnvelopeIcon },
   { name: "Careers", href: "/admin/careers", icon: BriefcaseIcon },
   { name: "Accreditation", href: "/admin/accreditation", icon: CheckBadgeIcon },

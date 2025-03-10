@@ -34,6 +34,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [types,setTypes] = useState([])
   const { register, handleSubmit, control, setValue,watch } = useForm<ProjectData>({
     defaultValues: {
       name: "",
@@ -70,11 +71,27 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     }
   };
 
+  const fetchSectors = async() =>{
+    try {
+      const response = await fetch(`/api/admin/sector`);
+      const res = await response.json();
+      if(response.ok){
+        setTypes(res.data)
+      }
+    } catch (error) {
+      console.error("Error fetching sectors:", error);
+    }
+  }
+
   useEffect(() => {
     if (projectId) {
       fetchProject();
     }
   }, [projectId]);
+
+  useEffect(()=>{
+    fetchSectors()
+  },[])
 
   const onSubmit = async (data: ProjectData) => {
     try {
@@ -165,12 +182,9 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                   <SelectValue placeholder="Select a type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="residential">Residential</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
-                  <SelectItem value="industrial">Industrial</SelectItem>
-                  <SelectItem value="hospitality">Hospitality</SelectItem>
-                  <SelectItem value="retail">Retail</SelectItem>
-                  <SelectItem value="healthcare">Health Care</SelectItem>
+                  {types && types.map((item:{name:string},index)=>(
+                    <SelectItem value={item.name} key={index}>{item.name}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             )}

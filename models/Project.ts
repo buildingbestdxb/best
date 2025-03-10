@@ -19,7 +19,6 @@ const ProjectSchema = new mongoose.Schema({
   },
   thumbnail: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
