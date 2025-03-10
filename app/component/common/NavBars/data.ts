@@ -4,14 +4,8 @@ export const menuItems = [
     url: "our-story",
   },
   {
-    title: "How we work",
-    url: "",
-    children: [
-      {
-        title: "Our Story",
-        url: "/our-story",
-      },
-    ],
+    title: "Accreditation",
+    url: "accreditations",
   },
   {
     title: "Projects",
