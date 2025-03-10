@@ -105,7 +105,7 @@ const Historysec = ({data}:{
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}>
                 <Image
-                  src={data?.data[0]?.history[activeIndex].image}
+                  src={data?.data[0]?.history[activeIndex].image || "data:"}
                   alt={`history-${data?.data[0].history[activeIndex].year}`}
                   layout="fill"
                   objectFit="cover"

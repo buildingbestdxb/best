@@ -24,7 +24,7 @@ export default function Index() {
     { label: "Home", href: "/" },
     { label: "Projects", href: "/" },
     { label: `${type} Projects`, href: "/" },
-    { label: `${data?.data.name}`, href: "" },
+    { label: `${data?.data?.name}`, href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
 
@@ -33,8 +33,8 @@ export default function Index() {
   return (
     <>
       <HeroInner
-        imageSrc="/assets/img/projects-details/banner2.jpg"
-        title={data?.data.name}
+        imageSrc={data?.data?.bannerImage == "" ? "/assets/img/projects-details/banner2.jpg"  : data?.data?.bannerImage}
+        title={data?.data?.name}
         breadcrumbs={breadcrumb}
       />
 

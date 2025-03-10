@@ -28,7 +28,7 @@ export default function Index() {
   return (
     <>
       <HeroInner
-        imageSrc="/assets/img/story/banner.jpg"
+        imageSrc={data?.data[0].bannerImage == "" ?  "/assets/img/story/banner.jpg" : data?.data[0].bannerImage}
         title="Our Story"
         breadcrumbs={breadcrumb}
       />

@@ -35,7 +35,7 @@ const LogoTicker = ({data}:{
             {data ? data?.data[0]?.strength_and_vision.clients.map((item, index) => (
               <Image
                 key={index}
-                src={item.logo}
+                src={item.logo || "data:"}
                 alt="client logo"
                 width={150}
                 height={80}

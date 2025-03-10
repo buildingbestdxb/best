@@ -1,5 +1,6 @@
 export type IndiProjectType = {
     data:{
+        bannerImage:string;
         description:string;
         images:string[];
         location:string;

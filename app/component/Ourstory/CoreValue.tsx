@@ -52,7 +52,7 @@ const CoreValue = ({data}:{
                   className="flex gap-2 lg:gap-[12px] justify-center bg-black/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
                   {data?.data[0].core_value.seals.map((item,index)=>(
                     <Image key={index}
-                    src={item.logo}
+                    src={item.logo || "data:"}
                     alt=""
                     width={80}
                     height={80}
@@ -67,7 +67,7 @@ const CoreValue = ({data}:{
             variants={slideLeft}
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
-              src={data?.data[0].core_value.image}
+              src={data?.data[0].core_value.image || "data:"}
               alt="About Us"
               layout="fill"
               objectFit="cover"

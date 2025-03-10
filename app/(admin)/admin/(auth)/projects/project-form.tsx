@@ -25,6 +25,7 @@ type ProjectData = {
   images: string[];
   type:string;
   location:string;
+  bannerImage:string;
 };
 
 interface ProjectFormData {
@@ -57,6 +58,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     try {
       const response = await fetch(`/api/admin/projects/byid?id=${projectId}`);
       const res = await response.json();
+      setValue("bannerImage", res.data.bannerImage);
       setValue("name", res.data.name);
       setValue("thumbnail", res.data.thumbnail);
       setValue("description", res.data.description);
@@ -144,6 +146,12 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
 
       <Card className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+                    <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        Banner Image
+                      </Label>
+                      <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+            </div>
           <div className="space-y-2 grid grid-cols-2 gap-5">
             
             <div>

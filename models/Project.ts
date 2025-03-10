@@ -13,6 +13,9 @@ const SpecificationSchema = new mongoose.Schema({
 });
 
 const ProjectSchema = new mongoose.Schema({
+  bannerImage:{
+    type:String
+  },
   name: {
     type: String,
     required: true,

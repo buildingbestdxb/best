@@ -39,7 +39,7 @@ const HeroInner: React.FC<HeroSectionProps> = ({
         <figure className=" relative w-full  h-full overflow-hidden  ">
           <Image
             className="w-full h-full"
-            src={imageSrc}
+            src={imageSrc || "data:"}
             fill
             objectFit="cover"
             alt={title}

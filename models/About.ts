@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const AboutSchema  = new mongoose.Schema({
+    bannerImage:{
+        type:String
+    },
     who_we_are:{
         type:String,
         required:true

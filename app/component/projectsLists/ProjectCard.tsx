@@ -26,7 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         viewport={{ once: true }}>
         {/* Image with gradient overlay */}
         <div className="relative w-full h-full">
-          <Image src={image} alt={title} fill className="object-cover" />
+          <Image src={image || "data:"} alt={title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div>
         </div>
 

@@ -13,14 +13,14 @@ const Gallery = ({data}:{
         <div className="grid lg:grid-cols-2 xl:grid-cols-12">
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
             <div className="bg-[#F2F2F2] md:px-[60px] md:pt-[60px] md:pb-[30px] px-8 pt-8 pb-6 rounded-custom">
-              {data?.data?.specifications.map((sector, index) => (
+              {data?.data?.specifications?.map((sector, index) => (
                 <div
                   key={index}
                   className="grid lg:grid-cols-12 lg:gap-6 gap-2  lg:mb-[30px] mb-4 border-b border-[#1E1E1E]/30 lg:pb-[32px] pb-3 items-center ">
                   <div className="col-span-6">
                     <div className="flex items-center gap-4">
                       <Image
-                        src={sector.logo}
+                        src={sector.logo || "data:"}
                         alt={sector.name}
                         width={20}
                         height={20}
@@ -53,11 +53,11 @@ const Gallery = ({data}:{
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
               reprehenderit.
             </p> */}
-            {parse(data?.data.description || "")}
+            {parse(data?.data?.description || "")}
             <h3 className="text-lg text-black font-bold mb-[40px] mt-[60px] uppercase">
               Gallery
             </h3>
-            <GalleryCard data={data?.data.images}/>
+            <GalleryCard data={data?.data?.images}/>
             {/* <Image
               src="/assets/img/projects-details/gallery.jpg"
               alt=""

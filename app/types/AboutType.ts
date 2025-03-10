@@ -1,5 +1,6 @@
 export type AboutType = {
     data:{
+        bannerImage:string;
         who_we_are:string;
         core_value:{
             title:string;

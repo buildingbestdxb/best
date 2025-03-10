@@ -38,7 +38,7 @@ export default function ImageCarousel({data}:{data:string[]}) {
       {/* Displayed Image with Controls and Thumbnails */}
       <div className="relative w-full lg:h-[571px] h-full aspect-video overflow-hidden rounded-xl shadow-lg flex flex-col justify-end">
         <Image
-          src={data && data[activeIndex]}
+          src={data && data[activeIndex] || "data:"}
           alt="Displayed"
           fill
           className="object-cover h-full"
@@ -86,7 +86,7 @@ export default function ImageCarousel({data}:{data:string[]}) {
               }`}
               onClick={() => updateScreen(data.indexOf(img))}>
               <Image
-                src={img}
+                src={img || "data:"}
                 alt={`Thumbnail ${index + 1}`}
                 width={64}
                 height={40}

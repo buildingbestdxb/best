@@ -10,10 +10,12 @@ import "react-quill/dist/quill.snow.css";
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ImageUploader } from '@/components/ui/image-uploader'
 
 
 
 interface AboutFormData {
+  bannerImage:string;
   who_we_are: string;
   values_and_expertise: string;
   core_value_title:string;
@@ -67,6 +69,7 @@ const AdminAbout = () => {
         if(response.ok){
           const data = await response.json()
           console.log(data)
+          setValue("bannerImage",data.data[0].bannerImage)
           setValue("who_we_are",data.data[0].who_we_are)
           setValue("core_value_content",data.data[0].core_value.content)
           setValue("core_value_title",data.data[0].core_value.title)
@@ -92,13 +95,23 @@ const AdminAbout = () => {
       <div className='text-3xl font-bold'>About Page</div>
       <div className='flex flex-col gap-5'>
         <form className='border-dashed border-2 p-4 flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex justify-between'>
-            <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
-              Who we are
-            </Label>
+          
+          <div className='flex justify-end'>
             <Button type='submit' disabled={isLoading}>Save</Button>
           </div>
           
+          <div>
+          <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+              Banner Image
+            </Label>
+            <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+          </div>
+
+          <div>
+          <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+              Who we are
+            </Label>
+
           <Controller
             name="who_we_are"
             control={control}
@@ -107,6 +120,7 @@ const AdminAbout = () => {
               <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1" />
             )}
           />
+          </div>
           {errors.who_we_are && <p className="mt-1 text-sm text-red-600">{errors.who_we_are.message}</p>}
         </form>
 

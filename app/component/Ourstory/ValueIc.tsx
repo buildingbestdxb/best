@@ -48,7 +48,7 @@ const ValueIc = ({data}:{
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 }}>
                   <Image
-                    src={stat.logo}
+                    src={stat.logo || "data:"}
                     alt={stat.title}
                     className="h-[30px] lg:h-[40px]"
                     width={50}

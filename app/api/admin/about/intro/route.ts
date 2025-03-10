@@ -23,10 +23,11 @@ export async function PATCH(request: NextRequest) {
     }
     try {
       await connectDB();
-      const { who_we_are } = await request.json();
+      const { who_we_are,bannerImage } = await request.json();
       const about = await About.findOne();
       if(about){
         about.who_we_are = who_we_are
+        about.bannerImage = bannerImage
         await about.save()
         return NextResponse.json({ data:about,message:"Content updated successfully", success: true }, { status: 201 });
       }

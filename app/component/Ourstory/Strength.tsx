@@ -34,7 +34,7 @@ const Strength = ({data}:{
             variants={slideLeft}
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
-              src={data?.data[0]?.strength_and_vision.image}
+              src={data?.data[0]?.strength_and_vision.image || "data:"}
               alt="About Us"
               layout="fill"
               objectFit="cover"
