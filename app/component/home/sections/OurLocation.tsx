@@ -3,8 +3,12 @@ import Image from "next/image";
 import React from "react";
 import map from "@/public/assets/img/home/map.svg";
 import { motion } from "framer-motion"; // Import motion
+import parse from 'html-react-parser'
+import { HomeType } from "@/app/types/HomeType";
 
-const OurLocation = () => {
+const OurLocation = ({data}:{
+  data:HomeType
+}) => {
   return (
     <section className="section-spacing relative overflow-hidden">
       <figure className="absolute top-0 left-0 h-full w-full -z-[1]">
@@ -40,14 +44,17 @@ const OurLocation = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }} // Animation resets on scroll
           >
-            <h2 className="text-[20px] font-bold text-white uppercase leading-normal mt-[10%]">
+            {/* <h2 className="text-[20px] font-bold text-white uppercase leading-normal mt-[10%]">
               With a strong presence across the UAE, Building Co. (BEST) L.L.C
               operates in all emirates, with offices in Dubai, Sharjah, and Abu
               Dhabi, delivering high-quality construction solutions tailored to
               diverse project needs. Our strategic locations enable us to
               efficiently serve clients nationwide, ensuring excellence,
               innovation, and timely project execution across the region.
-            </h2>
+            </h2> */}
+            <div className="text-[20px] font-bold text-white uppercase leading-normal mt-[10%]">
+              {parse(data?.data[0].location || "")}
+            </div>
           </motion.div>
 
           {/* Map Image with Animation */}

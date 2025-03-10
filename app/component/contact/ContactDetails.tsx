@@ -45,7 +45,7 @@ const ContactDetails = () => {
         ))}
       </div>
       <div className="grid  lg:grid-cols-2 gap-[40px]   items-center mt-5 lg:mt-[60px]">
-        <div className="">
+        {data?.data[activeTab].phone !== "" && <div className="">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/phone.svg"
@@ -60,8 +60,8 @@ const ContactDetails = () => {
           <p className="lg:text-[22px] text-[16px]  text-black font-[500] mt-[16px] xl:w-[80%]">
             {data?.data[activeTab].phone}
           </p>
-        </div>
-        <div className="">
+        </div>}
+        {data?.data[activeTab].fax !== "" && <div className="">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/fax.svg"
@@ -76,8 +76,8 @@ const ContactDetails = () => {
           <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] ">
             {data?.data[activeTab].fax}
           </p>
-        </div>
-        <div className="lg:mb-[40px] ">
+        </div>}
+        {data?.data[activeTab].mail !== "" && <div className="lg:mb-[40px] ">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/mail.svg"
@@ -96,8 +96,8 @@ const ContactDetails = () => {
             {data?.data[activeTab].mail}
             {/* </a> */}
           </p>
-        </div>
-        <div className="mb-[40px]">
+        </div>}
+        {data?.data[activeTab].address_card !== "" && <div className="mb-[40px]">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/addresscard.svg"
@@ -112,9 +112,9 @@ const ContactDetails = () => {
           <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] xl:w-[75%] ">
             {data?.data[activeTab].address_card}
           </p>
-        </div>
+        </div>}
       </div>
-      <div className=" lg:mb-0 mb-9">
+      {data?.data[activeTab].address !== "" && <div className=" lg:mb-0 mb-9">
         <div className="flex gap-2">
           <Image
             src="/assets/img/contact/location.svg"
@@ -129,7 +129,7 @@ const ContactDetails = () => {
         <div className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%]">
           {parse(data?.data[activeTab].address || "")}
         </div>
-      </div>
+      </div>}
     </motion.div>
   );
 };

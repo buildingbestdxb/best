@@ -3,8 +3,12 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion"; // Import motion
+import parse from 'html-react-parser'
+import { HomeType } from "@/app/types/HomeType";
 
-const ContactUs = () => {
+const ContactUs = ({data}:{
+  data:HomeType
+}) => {
   return (
     <div>
       <section className="section-spacing relative overflow-hidden">
@@ -45,7 +49,7 @@ const ContactUs = () => {
               >
                 CONTACT US
               </motion.h2>
-              <motion.p
+              {/* <motion.p
                 className="text-black/75 lg:w-[75%]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +61,18 @@ const ContactUs = () => {
                 our construction solutions, and experience excellence in every
                 detail. Our team is ready to assist you with expert guidance and
                 tailored services across the UAE.
-              </motion.p>
+              </motion.p> */}
+
+            <motion.div
+                className="text-black/75 lg:w-[75%]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: false }} // Animation resets on scroll
+              >
+                {parse(data?.data[0].contact || "")}
+              </motion.div>
+
             </div>
             <div>
               <div className="backdrop-blur-[10px] bg-black/50 text-white rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px]">

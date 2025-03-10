@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import parse from 'html-react-parser'
+import { HomeType } from "@/app/types/HomeType";
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -18,7 +20,9 @@ const slideRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const AboutUs = () => {
+const AboutUs = ({data}:{
+  data:HomeType
+}) => {
   return (
     <motion.section
       className="section-spacing overflow-hidden"
@@ -41,7 +45,7 @@ const AboutUs = () => {
             variants={slideLeft}
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
-              src="/assets/img/home/abt01.jpg"
+              src={data?.data[0].about.image || "data:"}
               alt="About Us"
               layout="fill"
               objectFit="cover"
@@ -52,24 +56,16 @@ const AboutUs = () => {
               <motion.div
                 variants={fadeIn}
                 className="flex gap-4 justify-center bg-white/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
+                {data && data?.data[0]?.about?.seals.map((item,index)=>(
+                  <Image
+                  key={index}
+                  src={item.logo || "data:"}
                   alt=""
                   width={89}
                   height={89}
                 />
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
-                  alt=""
-                  width={89}
-                  height={89}
-                />
-                <Image
-                  src="/assets/img/home/iso-9001.svg"
-                  alt=""
-                  width={89}
-                  height={89}
-                />
+                ))}
+
               </motion.div>
             </div>
           </motion.div>
@@ -79,9 +75,9 @@ const AboutUs = () => {
               className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none"
               variants={slideRight}>
               <h2 className="text-lg font-bold text-black">
-                BUILDING CO. (BEST) L.L.C
+                {data?.data[0].about?.title}
               </h2>
-              <p className="leading-relaxed text-black/75">
+              {/* <p className="leading-relaxed text-black/75">
                 Since 1975, Building Co. (BEST) L.L.C has been shaping the UAE’s
                 construction landscape with a commitment to excellence,
                 innovation, and reliability. Specializing in large-scale
@@ -91,7 +87,10 @@ const AboutUs = () => {
                 decades of expertise, a client-centric approach, and a
                 dedication to superior craftsmanship, we continue to build
                 lasting landmarks that redefine industry standards.
-              </p>
+              </p> */}
+              <div className="leading-relaxed text-black/75">
+                {parse(data?.data[0].about?.content || "")}
+              </div>
               <Link
                 href="/our-story"
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">

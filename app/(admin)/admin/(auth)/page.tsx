@@ -1,9 +1,8 @@
+import AdminHome from "@/app/component/AdminHome/AdminHome";
 import React from "react";
 
-export default function AdminHome() {
+export default function page() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold">Home</h1>
-    </div>
+    <AdminHome/>
   );
 }

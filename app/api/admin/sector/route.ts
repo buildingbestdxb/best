@@ -28,7 +28,8 @@ export async function POST(request: NextRequest) {
         const formData = await request.formData()
         const name = formData.get("name")
         const image = formData.get("image")
-        const sector = await Sector.create({ name, image });
+        const icon = formData.get("icon")
+        const sector = await Sector.create({ name, image,icon });
         if (sector) {
             return NextResponse.json({ message: "Sector added successfully", success: true }, { status: 201 });
         }
@@ -58,6 +59,7 @@ export async function PATCH(request: NextRequest) {
         const name = formData.get("name");
         const oldName = formData.get("oldName");
         const image = formData.get("image");
+        const icon = formData.get("icon");
 
         // Update projects that belong to the old sector name
         const projects = await Project.find({ type: oldName }).session(session);
@@ -69,7 +71,7 @@ export async function PATCH(request: NextRequest) {
         // Update the sector
         const sector = await Sector.findByIdAndUpdate(
             id,
-            { $set: { name, image } },
+            { $set: { name, image,icon } },
             { new: true, session } // Ensure the update is part of the transaction
         );
 

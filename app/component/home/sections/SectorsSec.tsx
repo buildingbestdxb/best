@@ -1,48 +1,26 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import parse from 'html-react-parser'
+import useSWR from "swr";
+import { HomeType } from "@/app/types/HomeType";
+import { SectorType } from "@/app/types/SectorType";
 
-const sectors = [
-  {
-    id: 1,
-    title: "Residential",
-    icon: "/assets/img/icons/residential.svg",
-    poster: "/assets/img/sectors/01.jpg",
-  },
-  {
-    id: 2,
-    title: "Commercial",
-    icon: "/assets/img/icons/commercial.svg",
-    poster: "/assets/img/sectors/02.jpg",
-  },
-  {
-    id: 3,
-    title: "Industrial",
-    icon: "/assets/img/icons/industrial.svg",
-    poster: "/assets/img/sectors/03.jpg",
-  },
-  {
-    id: 4,
-    title: "Hospitality",
-    icon: "/assets/img/icons/hospitality.svg",
-    poster: "/assets/img/sectors/04.jpg",
-  },
-  {
-    id: 5,
-    title: "Retail",
-    icon: "/assets/img/icons/retail.svg",
-    poster: "/assets/img/sectors/05.jpg",
-  },
-  {
-    id: 6,
-    title: "Healthcare",
-    icon: "/assets/img/icons/health-care.svg",
-    poster: "/assets/img/sectors/06.png",
-  },
-];
 
-const SectorsSec = () => {
+
+const SectorsSec = ({data}:{
+  data:HomeType
+}) => {
+
+  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  const { data:sectorData }:{data:SectorType} = useSWR(`/api/admin/sector`, fetcher)
+
+
+  useEffect(()=>{
+    console.log(sectorData)
+  },[sectorData])
+  
   return (
     <section className="section-spacing bg-custom-gray overflow-hidden">
       <div className="container">
@@ -68,27 +46,30 @@ const SectorsSec = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}>
           <h2 className="text-2xl md:text-3xl font-bold uppercase mb-5 lg:mb-[30px] leading-none text-black">
-            Sectors We Support
+            {data?.data[0]?.sectorHeading}
           </h2>
-          <p className="text-black/75">
+          {/* <p className="text-black/75">
             We build across diverse sectors, delivering tailored construction
             solutions that meet industry demands with excellence, innovation,
             and reliability.
-          </p>
+          </p> */}
+          <div className="text-black/75">
+              {parse(data?.data[0]?.sectorDescription || "")}
+          </div>
         </motion.div>
 
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
-          {sectors.map((sector, index) => (
+          {sectorData?.data.map((sector, index) => (
             <motion.div
-              key={sector.id}
+              key={sector._id}
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}>
               <Image
-                src={sector.poster}
+                src={sector.image}
                 alt="Background Image"
                 fill
                 className="object-cover"
@@ -111,7 +92,7 @@ const SectorsSec = () => {
                   className="flex justify-between items-center w-full"
                   whileHover={{ opacity: 1 }}>
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
-                    {sector.title}
+                    {sector.name}
                   </h4>
                   <Image
                     src="/assets/img/icons/arwtp.svg"

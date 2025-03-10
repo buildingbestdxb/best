@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import mission from "@/public/assets/img/icons/mission.svg";
 import vision from "@/public/assets/img/icons/vision.svg";
+import { HomeType } from "@/app/types/HomeType";
 
 const boxVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -35,11 +36,13 @@ const SectionBox = ({
     <h3 className="text-lg font-semibold uppercase leading-none mb-5">
       {title}
     </h3>
-    <p className="text-white/70">{text}</p>
+    <p className="text-white/70" dangerouslySetInnerHTML={{__html:text}}></p>
   </motion.div>
 );
 
-const VisionMission = () => {
+const VisionMission = ({data}:{
+  data:HomeType
+}) => {
   return (
     <section className="section-spacing relative overflow-hidden">
       <div className="container">
@@ -63,13 +66,13 @@ const VisionMission = () => {
           transition={{ staggerChildren: 0.2 }}>
           <SectionBox
             title="Mission"
-            text="At Building Co. (BEST) L.L.C, our mission is to deliver world-class construction solutions that set the industry benchmark for quality, innovation, and efficiency. With an unwavering commitment to excellence, we ensure that every project meets the highest construction standards, integrating precision engineering, safety, reliability, and environmental responsibility. Our goal is to create lasting value for our clients and communities by delivering projects that exemplify superior craftsmanship and technical expertise."
+            text={data?.data[0]?.mission}
             imgSrc={mission}
             altText="Mission Icon"
           />
           <SectionBox
             title="Vision"
-            text="To be the leading force in the construction industry, recognized for our ability to deliver complex projects with unmatched expertise and strict adherence to the highest construction standards. We strive to push the boundaries of innovation by leveraging cutting-edge technologies, enhancing efficiency, and maintaining superior quality. At Building Co. (BEST) L.L.C, we are committed to shaping the future of construction with projects that stand the test of time."
+            text={data?.data[0]?.vision}
             imgSrc={vision}
             altText="Vision Icon"
           />

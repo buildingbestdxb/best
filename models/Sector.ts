@@ -8,6 +8,10 @@ const sectorSchema = new mongoose.Schema({
         type: String,
         default:""
     },
+    icon: {
+        type: String,
+        default:""
+    },
 });
 
 const Sector = mongoose.models.Sector || mongoose.model("Sector", sectorSchema);

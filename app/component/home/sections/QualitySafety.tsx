@@ -2,8 +2,12 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import parse from 'html-react-parser'
+import { HomeType } from "@/app/types/HomeType";
 
-const QualitySafety = () => {
+const QualitySafety = ({data}:{
+  data:HomeType
+}) => {
   return (
     <section className="section-spacing relative overflow-hidden">
       {/* Background Image with Infinite Movement */}
@@ -47,7 +51,7 @@ const QualitySafety = () => {
             viewport={{ once: true }} // Animation resets on scroll
           >
             <h2 className="text-lg font-bold text-white uppercase leading-none">
-              Commitment to Quality & Safety
+              {data?.data[0].qualityHeading}
             </h2>
           </motion.div>
 
@@ -76,7 +80,7 @@ const QualitySafety = () => {
             </motion.div>
 
             {/* Paragraph Animation */}
-            <motion.p
+            {/* <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -90,7 +94,17 @@ const QualitySafety = () => {
               14001 (Environmental Management), and ISO 45001 (Occupational
               Health & Safety Management) certifications, we guarantee
               excellence in every project we deliver.
-            </motion.p>
+            </motion.p> */}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }} // Animation resets on scroll
+              className="text-white"
+            >
+              {parse(data?.data[0].qualityDescription || "")}
+            </motion.div>
 
             <hr className="mt-6 lg:mt-[32px] opacity-10" />
           </motion.div>
