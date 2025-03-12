@@ -62,8 +62,8 @@ const SectorsSec = ({data}:{
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectorData?.data.map((sector, index) => (
-            <Link href={`/projects/${sector.name.toLowerCase()}`}><motion.div
-              key={sector._id}
+            <Link href={`/projects/${sector.name.toLowerCase()}`} key={sector._id}><motion.div
+              
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
