@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+import Link from "next/link";
 
 type ImageCardProps = {
   image: string;
@@ -20,6 +21,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
   _id
 }) => {
   return (
+    <Link href={`/news-details/${_id}`}>
     <motion.div
       className="relative h-[400px] lg:h-[470px] overflow-hidden rounded-custom shadow-lg group "
       initial={{ opacity: 0, y: 30 }}
@@ -59,6 +61,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
         </div>
       </motion.div>
     </motion.div>
+    </Link>
   );
 };
 

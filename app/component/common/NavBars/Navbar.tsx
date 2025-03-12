@@ -16,7 +16,11 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
 
   const pagesWithBackground = ["/"]; // Add required pages
+  const pagesWithBlackTextHeader = ["/news-details/*"]
   const hasBackground = pagesWithBackground.includes(pathname);
+  const makeTextBlack = pagesWithBlackTextHeader.some((page) =>
+    page.endsWith("/*") ? pathname.startsWith(page.replace("/*", "")) : pathname === page
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return; // Prevents errors during SSR
@@ -49,7 +53,8 @@ const Navbar = () => {
       <header
         className={`${
           hasBackground
-            ? "bg-white/80 backdrop-blur-[10px] text-black shadow-md "
+            ? "bg-white/80 backdrop-blur-[10px] text-black shadow-md " 
+            : makeTextBlack ? "bg-transparent text-black tanspheader"
             : "bg-transparent text-white tanspheader"
         } transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
         {/* <div className='flex items-center'>

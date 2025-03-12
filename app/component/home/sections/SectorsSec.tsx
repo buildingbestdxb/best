@@ -6,6 +6,7 @@ import parse from 'html-react-parser'
 import useSWR from "swr";
 import { HomeType } from "@/app/types/HomeType";
 import { SectorType } from "@/app/types/SectorType";
+import Link from "next/link";
 
 
 
@@ -61,7 +62,7 @@ const SectorsSec = ({data}:{
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectorData?.data.map((sector, index) => (
-            <motion.div
+            <Link href={`/projects/${sector.name.toLowerCase()}`}><motion.div
               key={sector._id}
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
@@ -104,6 +105,7 @@ const SectorsSec = ({data}:{
                 </motion.div>
               </motion.div>
             </motion.div>
+            </Link>
           ))}
         </div>
       </div>

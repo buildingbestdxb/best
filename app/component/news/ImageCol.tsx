@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+import Link from "next/link";
 
 type ImageColProps = {
   images: string[];
@@ -19,6 +20,7 @@ const ImageCol: React.FC<ImageColProps> = ({
   date,
 }) => {
   return (
+    <Link href={`/`}>
     <div className="flex flex-col items-center gap-6">
       {/* Image Section */}
       <motion.div
@@ -55,6 +57,7 @@ const ImageCol: React.FC<ImageColProps> = ({
         <ButtonWithIcon link="#" buttonText="Read More" />
       </div>
     </div>
+    </Link>
   );
 };
 

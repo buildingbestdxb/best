@@ -56,7 +56,7 @@ const Sectors = () => {
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectors.map((sector, index) => (
-            <motion.div
+            <Link href={`/projects/${sector.title.toLowerCase()}`}><motion.div
               key={sector.id}
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
@@ -89,16 +89,17 @@ const Sectors = () => {
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.title}
                   </h4>
-                  <Link href={`/projects/${sector.title.toLowerCase()}`}><Image
+                  <Image
                     src="/assets/img/icons/arwtp.svg"
                     alt=""
                     width={0}
                     height={0}
                     className="transition-all duration-500 ease-in-out group-hover:w-[14px]"
-                  /></Link>
+                  />
                 </motion.div>
               </motion.div>
             </motion.div>
+            </Link>
           ))}
         </div>
       </div>

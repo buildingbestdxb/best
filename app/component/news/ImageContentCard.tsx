@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+import Link from "next/link";
 
 type ImageContentProps = {
   images: string[];
@@ -20,6 +21,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
   _id
 }) => {
   return (
+    <Link href={`/news-details/${_id}`}>
     <div className="flex items-center gap-5 lg:gap-[32px]">
       {/* Image Section */}
       <motion.div
@@ -51,6 +53,7 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
         <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" />
       </div>
     </div>
+    </Link>
   );
 };
 
