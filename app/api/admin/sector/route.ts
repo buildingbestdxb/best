@@ -5,11 +5,20 @@ import Sector from "@/models/Sector";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 
-export async function GET() {
+export async function GET(request:NextRequest) {
     try {
         await connectDB();
-        const sector = await Sector.find();
-        return NextResponse.json({ data: sector, success: true }, { status: 200 });
+        const {searchParams} = new URL(request.url)
+        const name = searchParams.get("name")
+        if(name){
+            console.log(name)
+            const sector = await Sector.find({name});
+            return NextResponse.json({ data: sector, success: true }, { status: 200 }); 
+        }else{
+            const sector = await Sector.find();
+            return NextResponse.json({ data: sector, success: true }, { status: 200 });
+        }
+        
     } catch (error) {
         console.error("Error fetching sector:", error);
         return NextResponse.json({ error: "Failed to fetch sector" }, { status: 500 });
@@ -26,10 +35,11 @@ export async function POST(request: NextRequest) {
     try {
         await connectDB();
         const formData = await request.formData()
+        const bannerImage = formData.get("bannerImage")
         const name = formData.get("name")
         const image = formData.get("image")
         const icon = formData.get("icon")
-        const sector = await Sector.create({ name, image,icon });
+        const sector = await Sector.create({ bannerImage,name, image,icon });
         if (sector) {
             return NextResponse.json({ message: "Sector added successfully", success: true }, { status: 201 });
         }
@@ -56,6 +66,7 @@ export async function PATCH(request: NextRequest) {
         const id = searchParams.get("id");
 
         const formData = await request.formData();
+        const bannerImage = formData.get("bannerImage")
         const name = formData.get("name");
         const oldName = formData.get("oldName");
         const image = formData.get("image");
@@ -71,7 +82,7 @@ export async function PATCH(request: NextRequest) {
         // Update the sector
         const sector = await Sector.findByIdAndUpdate(
             id,
-            { $set: { name, image,icon } },
+            { $set: { bannerImage,name, image,icon } },
             { new: true, session } // Ensure the update is part of the transaction
         );
 

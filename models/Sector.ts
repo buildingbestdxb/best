@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const sectorSchema = new mongoose.Schema({
+    bannerImage:{
+        type:String,
+        default:""
+    },
     name: {
         type: String,
     },

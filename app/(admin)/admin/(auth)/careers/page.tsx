@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import DeleteCareerDialog from "./components/DeleteCareerDialog";
+import { useForm } from "react-hook-form";
+import { ImageUploader } from "@/components/ui/image-uploader";
 
 type Career = {
   _id: string;
@@ -14,7 +16,20 @@ type Career = {
   applyLink: string;
 };
 
+
+interface Values {
+  bannerImage: string;
+}
+
 const CareersPage = () => {
+
+  const {
+    setValue,
+    watch,
+    getValues,
+    formState: { },
+  } = useForm<Values>();
+
   const [isLoading, setIsLoading] = useState(true);
   const [careers, setCareers] = useState<Career[]>([]);
   const router = useRouter();
@@ -28,6 +43,7 @@ const CareersPage = () => {
 
   useEffect(() => {
     fetchCareers();
+    fetchBanner()
   }, []);
 
   const handleClickNewCareer = () => {
@@ -37,6 +53,41 @@ const CareersPage = () => {
   const handleEditCareer = (careerId: string) => {
     router.push(`/admin/careers/${careerId}`);
   };
+
+  const fetchBanner = async () => {
+    try {
+      const response = await fetch('/api/admin/careers/banner')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.data) {
+
+          setValue("bannerImage", data.data[0].image)
+        }
+      }
+    } catch (error) {
+      console.log("Failed to fetch data:", error)
+    }
+  }
+
+
+  const handleBannerSave = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("bannerImage", getValues("bannerImage"))
+      formData.append("pageName", "career")
+      const response = await fetch(`/api/admin/careers/banner`, {
+        method: "PATCH",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchBanner()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   if (isLoading) {
     return (
@@ -49,7 +100,14 @@ const CareersPage = () => {
     );
   }
   return (
-    <div className="p-6">
+    <div className="p-6 flex flex-col gap-5">
+      <div>
+        <div className='flex justify-between mb-5'>
+          <h2 className='font-bold text-3xl'>Banner Image</h2>
+          <Button onClick={handleBannerSave}>Save Banner</Button>
+        </div>
+        <ImageUploader value={watch('bannerImage')} onChange={(url) => setValue("bannerImage", url)} />
+      </div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Careers</h1>
         <Button className="bg-primary text-white" onClick={handleClickNewCareer}>

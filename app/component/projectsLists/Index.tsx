@@ -15,19 +15,21 @@ export default function Index() {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const { data:projectData }:{data:ProjectType} = useSWR(`/api/admin/projects`, fetcher)
+  const { data:sectorData } = useSWR(`/api/admin/sector?name=${type?.toString().replace(/^(\w)/, (match) => match.toUpperCase())}`, fetcher)
 
   const filteredData = projectData?.data.filter((item)=>(item.type==type))
 
   useEffect(()=>{
     console.log(filteredData)
-  },[filteredData])
+    console.log(sectorData)
+  },[filteredData,sectorData])
 
 
 
   return (
     <>
       <HeroSection
-        imageSrc="/assets/img/projects/banner.jpg"
+        imageSrc={sectorData?.data?.[0]?.bannerImage || "/assets/img/projects/banner.jpg"}
         title={`${type} Projects`}
         breadcrumb="Projects /"
       />

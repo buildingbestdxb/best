@@ -10,9 +10,11 @@ import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import Link from 'next/link'
+import { ImageUploader } from '@/components/ui/image-uploader'
 
 
 interface Values {
+    bannerImage:string;
     region:string;
     phone: string;
     fax: string;
@@ -29,6 +31,7 @@ const AdminContact = () => {
         control,
         setValue,
         reset,
+        watch,
         getValues,
         formState: {},
     } = useForm<Values>();
@@ -85,9 +88,26 @@ const AdminContact = () => {
         }
     }
 
+
+    const fetchBanner = async() =>{
+        try {
+            const response = await fetch('/api/admin/contact/banner')
+            if(response.ok){
+                const data = await response.json()
+                if(data.data){
+                    
+                    setValue("bannerImage",data.data[0].image)
+                }
+            }
+        } catch (error) {
+            console.log("Failed to fetch data:",error)
+        }
+    }
+
     useEffect(()=>{
         fetchData()
         fetchEnquiry()
+        fetchBanner()
     },[])
 
 
@@ -143,10 +163,37 @@ const AdminContact = () => {
         }
     }
 
+    const handleBannerSave = async() =>{
+        try {
+            const formData = new FormData()
+            formData.append("bannerImage",getValues("bannerImage"))
+            formData.append("pageName","contact")
+            const response = await fetch(`/api/admin/contact/banner`,{
+                method:"PATCH",
+                body:formData
+            })
+            if(response.ok){
+                const data = await response.json()
+                alert(data.message)
+                fetchBanner()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className='flex flex-col gap-5'>
             <div className='text-3xl font-bold'>Contact</div>
             <div className='flex flex-col gap-5'>
+                <div>
+                    <div className='flex justify-between mb-5'>
+                        <h2 className='font-bold'>Banner Image</h2>
+                        <Button onClick={handleBannerSave}>Save Banner</Button>
+                    </div>
+                    <ImageUploader value={watch('bannerImage')} onChange={(url)=>setValue("bannerImage",url)}/>
+                </div>
+
                 <div className='flex justify-between'>
                     <h2 className='font-bold'>Regions</h2>
                     <Dialog>
