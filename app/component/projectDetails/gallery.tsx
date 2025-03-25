@@ -53,7 +53,8 @@ const Gallery = ({data}:{
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
               reprehenderit.
             </p> */}
-            {parse(data?.data?.description || "")}
+            <div className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400]">
+            {parse(data?.data?.description || "")}</div>
             <h3 className="text-lg text-black font-bold mb-[40px] mt-[60px] uppercase">
               Gallery
             </h3>
