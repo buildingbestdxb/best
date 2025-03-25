@@ -43,7 +43,7 @@ const Strength = ({data}:{
           </motion.div>
           <div className="col-span-8">
             <motion.div
-              className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none"
+              className="flex flex-col  gap-[20px] lg:gap-[60px] lstans liststs "
               variants={slideRight}>
               {/* <ul className=" liststs">
                 <li className="flex before:content-['']   before:h-5 before:min-w-5 before:rounded-[100%] before:bg-secondary before:mr-4 before:mt-1 text-sm leading-[1.4] text-black/75 mb-3">
