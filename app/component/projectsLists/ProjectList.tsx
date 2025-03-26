@@ -51,6 +51,39 @@ useEffect(()=>{
     <>
       <section className="section-spacing">
         <div className="container">
+          <div>
+            <div className="block md:flex bg-black p-6 md:p-7 pt-3 items-center mb-6 rounded-sm">
+              <div className="w-full md:w-4/5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+                  <div>
+                    <div className="relative w-full">
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300">
+                        <option className="bg-black text-white" value="">Status</option>
+                        <option className="bg-black text-white" value="Completed">Completed</option>
+                        <option className="bg-black text-white" value="Ongoing">Ongoing</option>
+                      </select>
+
+                    </div>
+                  </div>
+                  <div>
+                    <div className="relative w-full">
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300">
+
+                        <option className="bg-black text-white" value="">Industries </option>
+                        <option className="bg-black text-white" value="Industrial">Industrial </option>
+                        <option className="bg-black text-white" value="Healthcare">Healthcare</option>
+                        <option className="bg-black text-white" value="Hospitality">Hospitality</option>
+                        <option className="bg-black text-white" value="Residential">Residential</option>
+                        <option className="bg-black text-white" value="Retail">Retail</option>
+                        <option className="bg-black text-white" value="Commercial">Commercial</option>
+                      </select>
+
+                    </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+            </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-12 gap-[32px] items-center">
             {displayData?.map((item, index) => (
               index == 0 ? (<div className="xl:col-span-8" key={index}>

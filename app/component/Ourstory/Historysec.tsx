@@ -10,7 +10,7 @@ import parse from 'html-react-parser'
 const Historysec = ({data}:{
   data:AboutType
 }) => {
-  
+
 
   const [activeIndex, setActiveIndex] = useState(0); // 2010 is default active (index 3)
   const [visibleRange, setVisibleRange] = useState({
@@ -88,6 +88,19 @@ const Historysec = ({data}:{
       setActiveIndex((prevIndex) => prevIndex + 1);
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => {
+        if (prevIndex >= data?.data[0].history.length - 1) {
+          return 0;
+        }
+        return prevIndex + 1;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [data?.data[0].history.length]);
 
   return (
     <>
