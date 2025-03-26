@@ -100,9 +100,10 @@ const AboutSection = () => {
         fetchData()
     }, [])
 
-    const handleSetEditCard = (title: string, logo: string) => {
+    const handleSetEditCard = (title: string, logo: string,number:string) => {
         setValue("cardTitle", title)
         setValue("cardLogo", logo)
+        setValue("cardNumber", number)
     }
 
     const onSubmitForm = async (e: FormEvent) => {
@@ -277,7 +278,7 @@ const AboutSection = () => {
                                 </div>
                                 <div className='flex justify-end'>
                                     <Dialog>
-                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo)}>Edit</DialogTrigger>
+                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo,item.number)}>Edit</DialogTrigger>
                                         <DialogContent>
                                             <DialogHeader>
                                                 <DialogTitle>Edit card content</DialogTitle>

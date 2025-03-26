@@ -85,15 +85,19 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     }
   }
 
-  useEffect(() => {
-    if (projectId) {
-      fetchProject();
-    }
-  }, [projectId]);
+  // useEffect(() => {
+  //   if (projectId) {
+  //     fetchProject();
+  //   }
+  // }, [projectId]);
 
   useEffect(()=>{
-    fetchSectors()
-  },[])
+    if(projectId){
+      fetchSectors().then(()=>fetchProject())
+    }else{
+      fetchSectors()
+    }
+  },[projectId])
 
   const onSubmit = async (data: ProjectData) => {
     try {
