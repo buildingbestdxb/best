@@ -11,6 +11,7 @@ export type ProjectType = {
             _id:string;
         }[]
         type:string;
+        status:string;
         _id:string;
     }[]
 }

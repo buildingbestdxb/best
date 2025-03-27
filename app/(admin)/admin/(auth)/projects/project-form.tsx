@@ -26,6 +26,7 @@ type ProjectData = {
   type:string;
   location:string;
   bannerImage:string;
+  status:string;
 };
 
 interface ProjectFormData {
@@ -42,6 +43,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
       description: "",
       specifications: [],
       images: [],
+      status:"",
     },
   });
 
@@ -65,6 +67,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
       setValue("specifications", res.data.specifications);
       console.log(res.data.type)
       setValue("type", res.data.type);
+      setValue("status", res.data.status);
       setValue("images", res.data.images);
       setValue("location", res.data.location);
       setImageUrls(res.data.images);
@@ -197,6 +200,28 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                   {types && types.map((item:{name:string},index)=>(
                     <SelectItem value={item.name} key={index}>{item.name}</SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            Status
+          </Label>
+          <Controller
+            name="status"
+            control={control}
+            rules={{ required: "Status is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a status" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value={"Ongoing"}>Ongoing</SelectItem>
+                    <SelectItem value={"Completed"}>Completed</SelectItem>
                 </SelectContent>
               </Select>
             )}

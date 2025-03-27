@@ -15,6 +15,7 @@ const ProjectList = ({ data }: {
       _id: string;
     }[];
     type: string;
+    status: string;
     _id: string;
   }[]
   type?:string | string[];
@@ -25,7 +26,9 @@ const ProjectList = ({ data }: {
   const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data?.slice(0, limit));
   const [noLoadMore,setNoLoadMore] = useState(false)
-
+  const [types,setTypes] = useState([])
+  const [selectedType,setSelectedType] = useState("")
+  const [selectedStatus,setSelectedStatus] = useState("")
 
   const handleLoadMore = () => {
     console.log("clicked")
@@ -34,17 +37,52 @@ const ProjectList = ({ data }: {
     setVisible(newVisible); // Update visible count
 };
 
+const fetchSectors = async() =>{
+  try {
+    const response = await fetch(`/api/admin/sector`);
+    const res = await response.json();
+    if(response.ok){
+      setTypes(res.data)
+    }
+  } catch (error) {
+    console.error("Error fetching sectors:", error);
+  }
+}
+
+useEffect(()=>{
+  if(selectedType == "" && selectedStatus == ""){
+    setDisplayData(data?.slice(0, limit))
+    setVisible(limit)
+  }else if(selectedType != "" || selectedStatus != ""){
+    if(selectedType !== "" && selectedStatus == ""){
+      const filtered = data.filter((item)=>item.type == selectedType)
+      setDisplayData(filtered)
+    }
+    else if(selectedStatus !== "" && selectedType == ""){
+      const filtered = data.filter((item)=>item.status == selectedStatus)
+      setDisplayData(filtered)
+    }else{
+      const filtered = data.filter((item)=>item.type == selectedType && item.status == selectedStatus)
+      setDisplayData(filtered)
+    }
+    setNoLoadMore(true)
+  }
+},[selectedType,selectedStatus])
+
 useEffect(()=>{
   if(visible>=data?.length){
+    console.log("in if")
     setNoLoadMore(true)
     return;
   }else{
+    console.log("in else")
     setNoLoadMore(false)
   }
 },[data,visible])
 
 useEffect(()=>{
   setDisplayData(data?.slice(0, limit))
+  fetchSectors()
 },[data])
 
   return (
@@ -57,7 +95,7 @@ useEffect(()=>{
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
                   <div>
                     <div className="relative w-full">
-                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300">
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" onChange={(e)=>setSelectedStatus(e.target.value)}>
                         <option className="bg-black text-white" value="">Status</option>
                         <option className="bg-black text-white" value="Completed">Completed</option>
                         <option className="bg-black text-white" value="Ongoing">Ongoing</option>
@@ -67,15 +105,11 @@ useEffect(()=>{
                   </div>
                   <div>
                     <div className="relative w-full">
-                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300">
-
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" onChange={(e)=>setSelectedType(e.target.value)}>
                         <option className="bg-black text-white" value="">Industries </option>
-                        <option className="bg-black text-white" value="Industrial">Industrial </option>
-                        <option className="bg-black text-white" value="Healthcare">Healthcare</option>
-                        <option className="bg-black text-white" value="Hospitality">Hospitality</option>
-                        <option className="bg-black text-white" value="Residential">Residential</option>
-                        <option className="bg-black text-white" value="Retail">Retail</option>
-                        <option className="bg-black text-white" value="Commercial">Commercial</option>
+                        {types && types.map((item:{name:string},index)=>(
+                          <option className="bg-black text-white" value={item.name} key={index}>{item.name}</option>
+                        ))}
                       </select>
 
                     </div>
