@@ -51,8 +51,10 @@ const fetchSectors = async() =>{
 
 useEffect(()=>{
   if(selectedType == "" && selectedStatus == ""){
+    console.log("this workds")
     setDisplayData(data?.slice(0, limit))
     setVisible(limit)
+    setNoLoadMore(false)
   }else if(selectedType != "" || selectedStatus != ""){
     if(selectedType !== "" && selectedStatus == ""){
       const filtered = data.filter((item)=>item.type == selectedType)
@@ -70,6 +72,7 @@ useEffect(()=>{
 },[selectedType,selectedStatus])
 
 useEffect(()=>{
+  console.log("here")
   if(visible>=data?.length){
     console.log("in if")
     setNoLoadMore(true)
