@@ -94,11 +94,11 @@ useEffect(()=>{
         <div className="container">
           <div>
             <div className="block md:flex bg-black p-6 md:p-7 pt-3 items-center mb-6 rounded-sm">
-              <div className="w-full md:w-4/5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
-                  <div>
+              <div className="w-full md:w-full">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-[40px]">
+                  <div className="col-span-2">
                     <div className="relative w-full">
-                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" onChange={(e)=>setSelectedStatus(e.target.value)}>
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedStatus} onChange={(e)=>setSelectedStatus(e.target.value)}>
                         <option className="bg-black text-white" value="">Status</option>
                         <option className="bg-black text-white" value="Completed">Completed</option>
                         <option className="bg-black text-white" value="Ongoing">Ongoing</option>
@@ -106,17 +106,29 @@ useEffect(()=>{
 
                     </div>
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <div className="relative w-full">
-                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" onChange={(e)=>setSelectedType(e.target.value)}>
+                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedType} onChange={(e)=>setSelectedType(e.target.value)}>
                         <option className="bg-black text-white" value="">Industries </option>
                         {types && types.map((item:{name:string},index)=>(
                           <option className="bg-black text-white" value={item.name} key={index}>{item.name}</option>
                         ))}
                       </select>
+                    </div>
+
+                  </div>
+
+                  <div className="relative w-full bg-primary flex items-center justify-center cursor-pointer" onClick={()=>{
+                    setSelectedStatus("")
+                    
+                    setSelectedType("")
+                  }}>
+                  <p className="font-[500] text-white">
+                    Reset
+                  </p>
 
                     </div>
-                  </div>
+                  
                </div>
               </div>
             </div>
