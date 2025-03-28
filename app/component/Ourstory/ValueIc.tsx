@@ -47,13 +47,18 @@ const ValueIc = ({data}:{
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 }}>
-                  <Image
-                    src={stat.logo || "data:"}
-                    alt={stat.title}
-                    className="h-[30px] lg:h-[40px]"
-                    width={50}
-                    height={50}
-                  />
+                <motion.div
+  animate={{ scale: [1, 1.2, 1], rotate: [0, 5, 0] }}
+  transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity }}
+>
+  <Image
+    src={stat.logo || "data:"}
+    alt={stat.title}
+    className="h-[30px] lg:h-[40px]"
+    width={50}
+    height={50}
+  />
+</motion.div>
                 </motion.div>
               </div>
               <h4 className="text-left flex w-full text-white uppercase text-md font-bold">
