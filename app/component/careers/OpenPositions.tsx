@@ -88,7 +88,9 @@ export default function OpenPositions() {
                     </span>
                   </div>
                   <div className="applybtm w-full flex justify-end">
-                    <ButtonWithIcon link={job.applyLink} buttonText="Apply Now" />
+                    {/* <ButtonWithIcon link={job.applyLink} buttonText="Apply Now" /> */}
+
+                    <ButtonWithIcon link={'/apply'} buttonText="Apply Now" />
                   </div>
                 </div>
               </div>

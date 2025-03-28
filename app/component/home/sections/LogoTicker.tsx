@@ -5,7 +5,6 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { AboutType } from "@/app/types/AboutType";
 
 const logos = [
@@ -78,17 +77,33 @@ const LogoTicker = ({data}:{
         className="mySwiper"
       >
 
-        {logos.map((logo, index) => (
-          <SwiperSlide key={index} className="!w-auto">
+          {data ? data?.data[0]?.strength_and_vision.clients.map((item, index) => (
+
+            <SwiperSlide key={index} className="!w-auto">
             <Image
-              src={logo || "data:"}
+              src={item.logo || "data:"}
               alt="client logo"
               width={150}
               height={80}
               className="logo-ticker-image"
             />
           </SwiperSlide>
-        ))}
+            )) :
+              logos.map((logo, index) => (
+                <SwiperSlide key={index} className="!w-auto">
+                  <Image
+                    src={logo || "data:"}
+                    alt="client logo"
+                    width={150}
+                    height={80}
+                    className="logo-ticker-image"
+                  />
+                </SwiperSlide>
+              ))
+          }
+
+
+
       </Swiper>
 
       </div>
