@@ -93,8 +93,8 @@ useEffect(()=>{
       <section className="section-spacing">
         <div className="container">
           <div>
-            <div className="block md:flex bg-black p-6 md:p-7 pt-3 items-center mb-6 rounded-sm">
-              <div className="w-full md:w-4/5">
+            <div className="block md:flex bg-black p-6 md:p-7 pt-3 items-center mb-6 rounded-sm ">
+              <div className="w-full ">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
                   <div>
                     <div className="relative w-full">
