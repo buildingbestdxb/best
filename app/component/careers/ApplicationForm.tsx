@@ -77,7 +77,7 @@ export default function ApplicationForm() {
         <div>
           <div className=" bg-black/5 text-black rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px]">
             <motion.h2
-              className="lg:text-[32px] text-[25px] font-bold uppercase mb-3 lg:mb-[20px] xl:max-w-[74%]"
+              className="lg:text-[32px] text-[25px] font-bold uppercase mb-3 lg:max-w-[55ch]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
