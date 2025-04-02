@@ -70,14 +70,14 @@ export default function ApplicationForm() {
   }
 
   return (
-    <div className=" relative overflow-hidden pb-[100px]">
+    <div className=" relative overflow-hidden pb-[100px] pbsts">
       <div className="container p-0">
         {/* Section Header with Animation */}
 
         <div>
           <div className=" bg-black/5 text-black rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px]">
             <motion.h2
-              className="lg:text-[32px] text-[25px] font-bold uppercase mb-3 lg:mb-[20px] xl:max-w-[74%]"
+              className="lg:text-[32px] text-[25px] font-bold uppercase mb-3 lg:max-w-[55ch]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -95,7 +95,7 @@ export default function ApplicationForm() {
                   className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                   type="text"
                   placeholder="First Name"
-                  
+
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
@@ -103,7 +103,7 @@ export default function ApplicationForm() {
                 />
                 {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
                 </div>
-                
+
                 <div className="flex flex-col">
                 <motion.input
                   className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
@@ -117,7 +117,7 @@ export default function ApplicationForm() {
                 />
                 {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
                 </div>
-                
+
               </div>
               <div className="grid lg:grid-cols-2 gap-[32px]">
                 <div className="flex flex-col">
@@ -133,7 +133,7 @@ export default function ApplicationForm() {
                 />
                 {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                 </div>
-                
+
                 <div className="flex flex-col">
                 <motion.input
                   className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
@@ -146,7 +146,7 @@ export default function ApplicationForm() {
                 />
                  {errors.phone && <span className="text-red-500">{errors.phone.message}</span>}
                 </div>
-                
+
               </div>{" "}
               <div className="grid lg:grid-cols-2 gap-[32px] ">
                 {/* Gender Selection */}
@@ -250,7 +250,7 @@ export default function ApplicationForm() {
                 />
                 {errors.skills && <span className="text-red-500">{errors.skills.message}</span>}
                 </div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}

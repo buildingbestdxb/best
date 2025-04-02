@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+// import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 
 export default function Index() {
 
@@ -42,11 +42,11 @@ export default function Index() {
                 <li>Strong leadership, communication, and decision-making skills</li>
             </ul>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
 
 
               <ButtonWithIcon link={'#'} buttonText="Apply Now" />
-            </div>
+            </div> */}
         </div>
         </div>
         </section>
