@@ -4,6 +4,7 @@ import React from "react";
 import useSWR from "swr";
 import CareerDetails from "./CareerDetails";
 import HeroSection from "../Banner/Hero";
+import ApplicationForm from "../careers/ApplicationForm";
 
 export default function Index() {
 
@@ -18,7 +19,16 @@ export default function Index() {
               title="Careers"
               breadcrumb=""
             />
-     <CareerDetails />
+
+
+      <div className="xl:flex items-center">
+              <div className="w-full xl:w-1/2">
+              <CareerDetails />
+              </div>
+              <div className="w-full xl:w-1/2 sma">
+                <ApplicationForm />
+                </div>
+              </div>
     </>
   );
 }

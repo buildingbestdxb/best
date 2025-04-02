@@ -268,3 +268,6 @@ p {
   padding: 10px;
 }
 
+@media (min-width: 1200px) {
+.sma .pbsts{padding-bottom: 0px !important;}
+}
