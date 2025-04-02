@@ -21,14 +21,10 @@ export default function Index() {
             />
 
 
-      <div className="xl:flex items-center">
-              <div className="w-full xl:w-1/2">
+
               <CareerDetails />
-              </div>
-              <div className="w-full xl:w-1/2 sma">
                 <ApplicationForm />
-                </div>
-              </div>
+
     </>
   );
 }
