@@ -42,7 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           }}></div>
 
         <Image
-          src={imageSrc}
+          src={imageSrc || "data:"}
           alt={title}
           layout="fill"
           objectFit="cover"

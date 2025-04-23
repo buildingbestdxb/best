@@ -26,8 +26,8 @@ export async function PATCH(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     await connectDB();
-    const { name, description, images, specifications } = await request.json();
-    const project = await Project.findByIdAndUpdate(id, { name, description, images, specifications }, { new: true });
+    const { name, description, images, specifications,type,location,thumbnail,bannerImage,status } = await request.json();
+    const project = await Project.findByIdAndUpdate(id, { name, description, images, specifications, type, location,thumbnail,bannerImage,status }, { new: true });
     return NextResponse.json({ data: project, success: true }, { status: 200 });
   } catch (error) {
     console.error("Error updating project:", error);

@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useEffect } from "react";
 import HeroSection from "./sections/HeroSection";
 import AboutUs from "./sections/AboutUs";
 import StatsSection from "./sections/StatsSection";
@@ -8,6 +10,8 @@ import QualitySafety from "./sections/QualitySafety";
 import VisionMission from "./sections/VisionMission";
 import OurLocation from "./sections/OurLocation";
 import ContactUs from "./sections/ContactUs";
+import useSWR from "swr";
+import { HomeType } from "@/app/types/HomeType";
 const stats = {
   bannerimage: "/assets/img/home/stastsc.jpg",
   data: [
@@ -29,21 +33,30 @@ const stats = {
   ],
 };
 const Index = () => {
+
+  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  const { data }:{data:HomeType} = useSWR(`/api/admin/home`, fetcher)
+
+
+  useEffect(()=>{
+    console.log(data)
+  },[data])
+
   return (
     <>
       <HeroSection />
-      <AboutUs />
+      <AboutUs data={data}/>
       <StatsSection
-        data={stats.data}
+        data={data}
         colms={3}
         bannerimage={stats.bannerimage}
       />
       <LogoTicker />
-      <SectorsSec />
-      <QualitySafety />
-      <VisionMission />
-      <OurLocation />
-      <ContactUs />
+      <SectorsSec data={data}/>
+      <QualitySafety data={data}/>
+      <VisionMission data={data}/>
+      <OurLocation data={data}/>
+      <ContactUs data={data}/>
     </>
   );
 };

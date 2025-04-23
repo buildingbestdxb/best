@@ -10,16 +10,23 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type ProjectData = {
   name: string;
+  thumbnail:string;
   description: string;
   specifications: {
     name: string;
     value: string;
+    logo:string;
   }[];
   images: string[];
+  type:string;
+  location:string;
+  bannerImage:string;
+  status:string;
 };
 
 interface ProjectFormData {
@@ -29,12 +36,14 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const { register, handleSubmit, control, setValue } = useForm<ProjectData>({
+  const [types,setTypes] = useState([])
+  const { register, handleSubmit, control, setValue,watch } = useForm<ProjectData>({
     defaultValues: {
       name: "",
       description: "",
       specifications: [],
       images: [],
+      status:"",
     },
   });
 
@@ -51,24 +60,51 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     try {
       const response = await fetch(`/api/admin/projects/byid?id=${projectId}`);
       const res = await response.json();
+      setValue("bannerImage", res.data.bannerImage);
       setValue("name", res.data.name);
+      setValue("thumbnail", res.data.thumbnail);
       setValue("description", res.data.description);
       setValue("specifications", res.data.specifications);
+      console.log(res.data.type)
+      setValue("type", res.data.type);
+      setValue("status", res.data.status);
       setValue("images", res.data.images);
+      setValue("location", res.data.location);
       setImageUrls(res.data.images);
     } catch (error) {
       console.error("Error fetching project:", error);
     }
   };
 
-  useEffect(() => {
-    if (projectId) {
-      fetchProject();
+  const fetchSectors = async() =>{
+    try {
+      const response = await fetch(`/api/admin/sector`);
+      const res = await response.json();
+      if(response.ok){
+        setTypes(res.data)
+      }
+    } catch (error) {
+      console.error("Error fetching sectors:", error);
     }
-  }, [projectId]);
+  }
+
+  // useEffect(() => {
+  //   if (projectId) {
+  //     fetchProject();
+  //   }
+  // }, [projectId]);
+
+  useEffect(()=>{
+    if(projectId){
+      fetchSectors().then(()=>fetchProject())
+    }else{
+      fetchSectors()
+    }
+  },[projectId])
 
   const onSubmit = async (data: ProjectData) => {
     try {
+
       if (projectId) {
         const response = await fetch(`/api/admin/projects/byid?id=${projectId}`, {
           method: "PATCH",
@@ -106,15 +142,35 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
     );
   };
 
+
+  const handleSpecLogoUpload = (index: number, uploadedUrl: string) => {
+    setValue(`specifications.${index}.logo`, uploadedUrl);
+  };
+
   return (
-    <div className="p-6">
+    <div className="p-6 h-screen overflow-y-auto">
       <h1 className="text-3xl font-bold mb-6">{projectId ? "Edit" : "Create"} Project</h1>
 
       <Card className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name")} />
+          <div>
+                    <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        Banner Image
+                      </Label>
+                      <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+            </div>
+          <div className="space-y-2 grid grid-cols-2 gap-5">
+            
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" {...register("name")} />
+            </div>
+
+            <div>
+              <Label htmlFor="name">Thumbnail</Label>
+              <ImageUploader value={watch(`thumbnail`)} onChange={(url) => setValue("thumbnail",url)} deleteAfterUpload={true} />
+            </div>
+
           </div>
           <div className="space-y-2">
             <Label>Description</Label>
@@ -126,16 +182,72 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
               )}
             />
           </div>
+
+          <div>
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            Type
+          </Label>
+          <Controller
+            name="type"
+            control={control}
+            rules={{ required: "Type is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {types && types.map((item:{name:string},index)=>(
+                    <SelectItem value={item.name} key={index}>{item.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            Status
+          </Label>
+          <Controller
+            name="status"
+            control={control}
+            rules={{ required: "Status is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a status" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value={"Ongoing"}>Ongoing</SelectItem>
+                    <SelectItem value={"Completed"}>Completed</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div className="space-y-2">
+            <Label htmlFor="name">Location</Label>
+            <Input id="location" {...register("location")} />
+          </div>
+
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Label>Specifications</Label>
-              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "" })}>
+              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "",logo:"" })}>
                 Add Specification
               </Button>
             </div>
 
             {specFields.map((field, index) => (
               <div key={field.id} className="flex gap-4 items-start">
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor={`specifications.${index}.name`}>Logo</Label>
+                  <ImageUploader value={watch(`specifications.${index}.logo`)} onChange={(url) => handleSpecLogoUpload(index, url)} deleteAfterUpload={true} />
+                </div>
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.name`}>Name</Label>
                   <Input {...register(`specifications.${index}.name`)} placeholder="Specification name" />
@@ -152,7 +264,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
           </div>
           {/* Images */}
           <div>
-            <Label className="block text-sm font-medium text-gray-700">Images</Label>
+            <Label className="block text-sm font-medium text-gray-700">Gallery</Label>
             <div className="mt-2">
               <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} />
             </div>

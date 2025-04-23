@@ -1,43 +1,36 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+import useSWR from "swr";
+import { departments } from "@/app/(admin)/admin/(auth)/careers/departmentData";
+import { CareerType } from "@/app/types/CareerType";
 
 export default function OpenPositions() {
   const [open, setOpen] = useState(false);
   const [selectedDept, setSelectedDept] = useState("Department");
-  const departments = ["HR", "Engineering", "Marketing", "Sales"];
-  const jobListings = [
-    {
-      title: "Associate, GTM Finance & Operations",
-      department: "Revenue Operations",
-      employmentType: "Full Time",
-      location: "Sharjah",
-    },
-    {
-      title: "Senior Product Marketing Manager",
-      department: "Marketing",
-      employmentType: "Full Time",
-      location: "Dubai",
-    },
-    {
-      title: "Customer Experience Agent",
-      department: "Customer Experience",
-      employmentType: "Full Time",
-      location: "Sharjah",
-    },
-    {
-      title: "Executive Assistant",
-      department: "Corporate",
-      employmentType: "Full Time",
-      location: "Dubai",
-    },
-  ];
+
   const handleSelect = (dept: string) => {
+    setFilteredData(()=>(
+      data?.data.filter((item:{department:string})=>(
+        item.department.toLowerCase() == dept.toLowerCase()
+      ))
+    ))
     setSelectedDept(dept); // Update selected department
     setOpen(false); // Close dropdown
   };
+
+
+  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  const { data }:{data:CareerType} = useSWR(`/api/admin/careers`, fetcher)
+  const [filteredData,setFilteredData] = useState<{title:string;department:string;location:string;applyLink:string;type:string}[]>([])
+
+
+  useEffect(()=>{
+    setFilteredData(data?.data)
+  },[data])
+
 
   return (
     <div>
@@ -60,12 +53,12 @@ export default function OpenPositions() {
 
                 {open && (
                   <ul className="absolute w-[230px] mt-2 bg-white border rounded-lg shadow-lg z-10 ">
-                    {departments.map((dept) => (
+                    {departments.map((dept,index) => (
                       <li
-                        key={dept}
+                        key={index}
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer uppercase"
-                        onClick={() => handleSelect(dept)}>
-                        {dept}
+                        onClick={() => handleSelect(dept.title)}>
+                        {dept.title}
                       </li>
                     ))}
                   </ul>
@@ -73,7 +66,7 @@ export default function OpenPositions() {
               </div>
             </div>
           </div>
-          {jobListings.map((job, index) => (
+          {filteredData?.map((job:{title:string;department:string;type:string;location:string;applyLink:string}, index) => (
             <div key={index} className="w-full">
               <div className="grid lg:grid-cols-2 gap-x-6 items-center  w-full">
                 <div className="grid lg:grid-cols-2 items-center   w-full">
@@ -88,14 +81,16 @@ export default function OpenPositions() {
                 <div className="sm:flex items-right lg:mt-0 mt-7 w-full">
                   <div className="locations w-full flex lg:justify-end space-x-3">
                     <span className="text-[18px] text-black/60 font-[400] px-[16px] py-[4px] bg-black/5 rounded-custom">
-                      {job.employmentType}
+                      {job.type}
                     </span>
                     <span className="text-[18px] text-black/60 font-[400] px-[16px] py-[4px] bg-black/5 rounded-custom">
                       {job.location}
                     </span>
                   </div>
                   <div className="applybtm w-full flex justify-end">
-                    <ButtonWithIcon link="" buttonText="Apply Now" />
+                    {/* <ButtonWithIcon link={job.applyLink} buttonText="Apply Now" /> */}
+
+                    <ButtonWithIcon link={'/apply'} buttonText="Apply Now" />
                   </div>
                 </div>
               </div>

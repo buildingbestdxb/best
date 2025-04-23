@@ -1,11 +1,13 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { departments } from "./departmentData";
 
 interface CareerFormData {
   title: string;
@@ -13,6 +15,7 @@ interface CareerFormData {
   department: string;
   applyLink: string;
   datePosted: string;
+  type:string;
 }
 
 interface CareerFormProps {
@@ -26,6 +29,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CareerFormData>({
     defaultValues: {
@@ -45,9 +49,16 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       setValue("location", data.data.location);
       setValue("department", data.data.department);
       setValue("applyLink", data.data.applyLink);
-      setValue("datePosted", data.data.datePosted);
+      if (data.data.datePosted) {
+        const formattedDate = new Date(data.data.datePosted).toISOString().split("T")[0];
+        setValue("datePosted", formattedDate);
+      }
+      setValue("type",data.data.type)
     };
-    fetchCareer();
+
+    if(careerId){
+      fetchCareer();
+    }
   }, [careerId]);
 
   const onSubmit = async (data: CareerFormData) => {
@@ -95,6 +106,31 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
         </div>
 
         <div>
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            Type
+          </Label>
+          <Controller
+            name="type"
+            control={control}
+            rules={{ required: "Type is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Full Time">Full Time</SelectItem>
+                  <SelectItem value="Part Time">Part Time</SelectItem>
+                  <SelectItem value="Contract">Contract</SelectItem>
+                  <SelectItem value="Remote">Remote</SelectItem>
+                  <SelectItem value="Temporary">Temporary</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div>
           <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
             Location
           </Label>
@@ -108,16 +144,26 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
         </div>
 
         <div>
-          <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+          <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
             Department
           </Label>
-          <Input
-            {...register("department", { required: "Department is required" })}
-            type="text"
-            id="department"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+          <Controller
+            name="department"
+            control={control}
+            rules={{ required: "Department is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a department" />
+                </SelectTrigger>
+                <SelectContent>
+                  {departments.map((item,index)=>(
+                    <SelectItem value={item.value} key={index}>{item.title}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
-          {errors.department && <p className="mt-1 text-sm text-red-600">{errors.department.message}</p>}
         </div>
 
         <div>

@@ -1,0 +1,105 @@
+"use client"
+
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import React, { FormEvent, useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import dynamic from 'next/dynamic'
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
+
+
+
+interface Values {
+    title: string;
+    description: string;
+}
+
+const LocationSection = () => {
+
+    const {
+        control,
+        setValue,
+        getValues,
+        formState: {},
+    } = useForm<Values>();
+
+
+
+
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`/api/admin/home/location`, {
+                method: "GET",
+            });
+
+            if (response.ok) {
+                const data = await response.json()
+                console.log(data)
+                setValue("description", data.data[0].location)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+
+
+    const onSubmitForm = async (e: FormEvent) => {
+        console.log("here triggered")
+        try {
+            e.preventDefault()
+            const formData = new FormData()
+            formData.append("title", getValues("title"))
+            formData.append("description", getValues("description"))
+
+            const response = await fetch(`/api/admin/home/location`, {
+                method: "PATCH",
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json()
+                alert(data.message)
+                fetchData()
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+
+    return (
+        <div className='flex flex-col gap-5'>
+            <form className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                <div className='flex justify-between'>
+                    <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        Location Content
+                    </Label>
+                    <Button type='submit' onClick={(e) => onSubmitForm(e)}>Save</Button>
+                </div>
+                <div className='grid grid-cols-1 gap-5'>
+                    <div>
+                        <Label>Description</Label>
+                        <Controller
+                            name="description"
+                            control={control}
+                            render={({ field }) => (
+                                <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1" />
+                            )}
+                        />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    )
+}
+
+export default LocationSection

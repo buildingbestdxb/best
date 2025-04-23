@@ -39,7 +39,7 @@ const HeroInner: React.FC<HeroSectionProps> = ({
         <figure className=" relative w-full  h-full overflow-hidden  ">
           <Image
             className="w-full h-full"
-            src={imageSrc}
+            src={imageSrc || "data:"}
             fill
             objectFit="cover"
             alt={title}
@@ -90,12 +90,12 @@ const HeroInner: React.FC<HeroSectionProps> = ({
             <span
               className="sm:text-xxl text-[34px]"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
-              {title.split(" ")[0]}
+              {title && title.split(" ")[0]}
             </span>{" "}
             <span
               className="font-light sm:text-xxl text-[34px]"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
-              {title.split(" ").slice(1).join(" ")}
+              {title && title.split(" ").slice(1).join(" ")}
             </span>
           </motion.h1>
         </motion.div>

@@ -2,8 +2,11 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import ProjectCard from "../projectsLists/ProjectCard";
+import { ProjectType } from "@/app/types/ProjectType";
 
-const ProjectList = () => {
+const ProjectList = ({data}:{
+  data:ProjectType
+}) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
@@ -87,15 +90,16 @@ const ProjectList = () => {
             ref={sliderRef}
             className="flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-            {projects.map((project, index) => (
+            {data?.data.map((project, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 px-2"
                 style={{ width: `${100 / slidesPerView}%` }}>
                 <ProjectCard
-                  locationName={project.locationName}
-                  title={project.title}
-                  image={project.image}
+                  locationName={project.location}
+                  title={project.name}
+                  image={project.thumbnail}
+                  href={`/project-details/${project._id}?type=${project.type}`}
                 />
               </div>
             ))}

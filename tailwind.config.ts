@@ -81,6 +81,7 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+
      
       fontSize: {
         xxl: 'clamp(3rem, 5vw, 5rem)',  // 48px - 80px (for hero headings)

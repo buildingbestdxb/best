@@ -22,6 +22,9 @@ p {
   letter-spacing: 0px;
   font-weight: 400;
 }
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -249,3 +252,19 @@ p {
 .wwebanner{background: url('/assets/img/story/banner_wwa.jpg');}
 .liststs li::before{background: url('/assets/img/icons/tick.svg');}
 .tanspheader .arrowst{filter: invert(1);}
+.lstans  li {
+  @apply    flex before:content-['']   before:h-5 before:min-w-5 before:rounded-[100%]   before:mr-4 before:mt-1 text-sm leading-[1.4] text-black/75 mb-3;
+}
+.btnfrtss{
+  color: #ffffff;
+  position: absolute;
+  z-index: 2;
+  background: #fa6323;
+  font-size: 22px !important;
+  bottom: 0;
+  width: 95%;
+  left: 2.5%;
+  border-radius: 2px;
+  padding: 10px;
+}
+

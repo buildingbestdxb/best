@@ -69,7 +69,7 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".gif"],
+      "image/*": [".png", ".jpg", ".jpeg", ".gif",".svg"],
     },
     maxFiles: 1,
     multiple: false,

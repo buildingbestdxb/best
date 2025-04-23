@@ -1,20 +1,16 @@
 "use client";
 import Image from "next/image";
-import CountUp from "react-countup";
+
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import { HomeType } from "@/app/types/HomeType";
 
-interface FrameworkItem {
 
-  value: number;
-  label: string;
-  icon: string;
-}
 
 interface HeroSectionProps {
   bannerimage:string
   colms: number;
-  data: FrameworkItem[];
+  data: HomeType;
 }
 // const HeroSectionProps = [
 //   { value: 50, label: "Years of Experience", icon: "/assets/img/icons/experience.svg" },
@@ -51,7 +47,7 @@ interface HeroSectionProps {
 
       <div className="container">
         <div className={`grid grid-cols-1 md:grid-cols-${colms} gap-6 xl:gap-[64px] w-full`}>
-          {data.map((stat, index) => (
+          {data?.data[0]?.about?.cards.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -66,7 +62,7 @@ interface HeroSectionProps {
 
                 {typeof colms !== "undefined" && colms !== 5 && (
                   <span className="text-xl leading-none font-bold">
-                    {inView ? <CountUp start={0} end={stat.value} duration={2} delay={0.3} /> : 0}+
+                    {stat.number}
                   </span>
                 )}
 
@@ -76,10 +72,10 @@ interface HeroSectionProps {
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <Image src={stat.icon} alt="" className="w-[30px] lg:w-[50px]" width={50} height={50} />
+                  <Image src={stat.logo} alt="" className="w-[30px] lg:w-[50px]" width={50} height={50} />
                 </motion.div>
               </div>
-              <span className="text-sm mt-1 text-left flex w-full text-white/80">{stat.label}</span>
+              <span className="text-sm mt-1 text-left flex w-full text-white/80">{stat.title}</span>
             </motion.div>
           ))}
         </div>

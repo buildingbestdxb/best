@@ -1,0 +1,31 @@
+export type AboutType = {
+    data:{
+        bannerImage:string;
+        who_we_are:string;
+        core_value:{
+            title:string;
+            content:string;
+            image:string;
+            cards:{
+                logo:string;
+                title:string
+            }[]
+            seals:{
+                logo:string
+            }[]
+        }
+        strength_and_vision:{
+            content:string;
+            image:string;
+            clients:{
+                logo:string
+            }[]
+        }
+        history:{
+            year:string;
+            title:string;
+            image:string;
+            content:string;
+        }[]
+    }[]
+}

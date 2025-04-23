@@ -3,12 +3,14 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+import Link from "next/link";
 
 type ImageCardProps = {
   image: string;
   title: string;
-  subTitle: string;
+  subTitle: string[];
   date: string;
+  _id:string;
 };
 
 const ImageCard: React.FC<ImageCardProps> = ({
@@ -16,8 +18,10 @@ const ImageCard: React.FC<ImageCardProps> = ({
   title,
   subTitle,
   date,
+  _id
 }) => {
   return (
+    <Link href={`/news-details/${_id}`}>
     <motion.div
       className="relative h-[400px] lg:h-[470px] overflow-hidden rounded-custom shadow-lg group "
       initial={{ opacity: 0, y: 30 }}
@@ -41,16 +45,23 @@ const ImageCard: React.FC<ImageCardProps> = ({
         viewport={{ once: true }}>
         {/* Title and Icons Row */}
         <div className="w-full">
-          <p className="text-[14px] text-white/80 uppercase lg:mb-[20px] mb-2">
-            {subTitle}
+          <div className="flex">
+          {subTitle && subTitle.map((item,index)=>(
+            <p key={index} className="text-[14px] text-white/80 uppercase lg:mb-[20px] mb-2">
+            {item}{index !== subTitle.length - 1 ? ',' : ''}
           </p>
+          ))}
+          </div>
+          
+          
           <h4 className="lg:text-[22px] text-[20px]  font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 lg:mb-[32px] mb-[10px]">
             {title}
           </h4>
-          <ButtonWithIcon link="" buttonText="Read More" />
+          <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" />
         </div>
       </motion.div>
     </motion.div>
+    </Link>
   );
 };
 

@@ -35,11 +35,11 @@ export const MenuItem = ({
       className="relative">
       <div className="flex gap-2 mb-3">
         <Link href={url}>
-          <motion.p
+          <motion.div
             transition={{ duration: 0.3 }}
             className="cursor-pointer font-semibold group-hover:text-opacity-50 dark:text-white uppercase ">
             <div className="flex gap-3 ">{item}</div>
-          </motion.p>
+          </motion.div>
         </Link>
         {!noMenu && <Image src={arrow} alt="arrow" className="arrowst" />}
       </div>

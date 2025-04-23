@@ -1,0 +1,55 @@
+import mongoose from "mongoose";
+
+const HomeSchema  = new mongoose.Schema({
+    pageHeading:{
+        type:String,
+        required:true
+    },
+    about:{
+        title:{
+            type:String
+        },
+        content:{
+            type:String,
+        },
+        image:{
+            type:String,
+        },
+        cards:[
+            {
+                logo:{type:String},
+                title:{type:String},
+                number:{type:String}
+            },
+        ],
+        seals:[{
+            logo:{type:String}
+        }]
+    },
+    sectorHeading:{
+        type:String,
+    },
+    sectorDescription:{
+        type:String,
+    },
+    qualityHeading:{
+        type:String
+    },
+    qualityDescription:{
+        type:String
+    },
+    mission:{
+        type:String
+    },
+    vision:{
+        type:String
+    },
+    location:{
+        type:String
+    },
+    contact:{
+        type:String
+    }
+})
+
+export default mongoose.models.Home || mongoose.model("Home",HomeSchema)

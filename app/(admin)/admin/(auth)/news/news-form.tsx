@@ -1,12 +1,9 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 // Dynamically import React Quill to avoid SSR issues
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,6 +12,8 @@ import Image from "next/image";
 import { TagInput } from "./components/TagInput";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import TinyEditor from "@/app/component/TinyMce/TinyEditor";
+import { uploadImagesFromEditor } from "@/app/helpers/uploadImagesFromEditore";
 
 interface NewsFormData {
   title: string;
@@ -29,9 +28,12 @@ interface NewsFormProps {
   newsId?: string;
 }
 
+
+
 const NewsForm = ({ newsId }: NewsFormProps) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [newsContent,setNewsContent] = useState("")
   const router = useRouter();
   const {
     register,
@@ -59,6 +61,9 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       setValue("tags", data.data.tags);
       setValue("images", data.data.images);
       setValue("type", data.data.type);
+      if(data.data.description){
+        setNewsContent(data.data.description)
+      }
       setImageUrls(data.data.images);
     };
     fetchNews();
@@ -80,7 +85,12 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
   const onSubmit = async (data: NewsFormData) => {
     try {
       setIsLoading(true);
+      const actualContent = await uploadImagesFromEditor(newsContent)
+      if(actualContent){
+        data = {...data,description:actualContent}
+      }
       if (newsId) {
+        console.log("here",data)
         const response = await fetch(`/api/admin/news/byid?id=${newsId}`, {
           method: "PATCH",
           body: JSON.stringify(data),
@@ -103,6 +113,13 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       setIsLoading(false);
     }
   };
+
+
+  useEffect(()=>{
+    setValue("description",newsContent)
+  },[newsContent])
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-4xl mx-auto p-6">
@@ -130,7 +147,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
             control={control}
             rules={{ required: "Type is required" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a type" />
                 </SelectTrigger>
@@ -146,14 +163,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
         {/* Description Field */}
         <div>
           <Label className="block text-sm font-medium text-gray-700">Description</Label>
-          <Controller
-            name="description"
-            control={control}
-            rules={{ required: "Description is required" }}
-            render={({ field }) => (
-              <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1 block w-full" />
-            )}
-          />
+              <TinyEditor setNewsContent={setNewsContent} newsContent={newsContent}/>
           {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>}
         </div>
 
@@ -183,10 +193,10 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
 
         {/* Images Field */}
         <div>
-          <Label className="block text-sm font-medium text-gray-700">Images</Label>
-          <div className="mt-2">
+          <Label className="block text-sm font-medium text-gray-700">Cover Image</Label>
+          {imageUrls.length == 0 && <div className="mt-2">
             <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} />
-          </div>
+          </div>}
           <div className="mt-4 grid grid-cols-3 gap-4">
             {imageUrls.map((url, index) => (
               <div key={index} className="relative h-40">

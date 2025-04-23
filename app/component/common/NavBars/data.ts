@@ -4,39 +4,31 @@ export const menuItems = [
     url: "our-story",
   },
   {
-    title: "How we work",
-    url: "",
+    title: "Accreditation",
+    url: "accreditations",
   },
   {
     title: "Projects",
-    url: "",
-    children: [
-      {
-        title: "Residential",
-        url: "projects",
-      },
-      {
-        title: "Commercial",
-        url: "projects",
-      },
-    ],
+    url: "/projects",
+    
   },
+
   {
     title: "Media",
     url: "",
     children: [
       {
         title: "Events",
-        url: "events",
+        url: "/events",
       },
       {
         title: "News",
-        url: "news",
+        url: "/news",
       },
     ],
   },
   {
     title: "Careers",
-    url: "careers",
+    url: "/careers",
   },
 ];

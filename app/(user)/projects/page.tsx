@@ -1,9 +1,10 @@
-import Index from "@/app/component/projectsLists/Index";
+import Projects from '@/app/component/Projects/Index'
+import React from 'react'
 
-export default function Projects() {
+const page = () => {
   return (
-    <>
-      <Index />
-    </>
-  );
+    <Projects/>
+  )
 }
+
+export default page

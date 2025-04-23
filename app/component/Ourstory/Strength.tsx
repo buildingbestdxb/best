@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SecHr from "../common/SecDivider/SecHr";
+import { AboutType } from "@/app/types/AboutType";
+import parse from 'html-react-parser'
 
 const slideLeft = {
   hidden: { opacity: 0, x: -50 },
@@ -13,7 +15,9 @@ const slideRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const Strength = () => {
+const Strength = ({data}:{
+  data:AboutType
+}) => {
   return (
     <motion.section
       className="pt-[60px] md:pt-[80px] lg:pt-[100px] overflow-hidden  "
@@ -30,7 +34,7 @@ const Strength = () => {
             variants={slideLeft}
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
-              src="/assets/img/story/strength.jpg"
+              src={data?.data[0]?.strength_and_vision.image || "data:"}
               alt="About Us"
               layout="fill"
               objectFit="cover"
@@ -39,9 +43,9 @@ const Strength = () => {
           </motion.div>
           <div className="col-span-8">
             <motion.div
-              className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none"
+              className="flex flex-col  gap-[20px] lg:gap-[60px] lstans liststs "
               variants={slideRight}>
-              <ul className=" liststs">
+              {/* <ul className=" liststs">
                 <li className="flex before:content-['']   before:h-5 before:min-w-5 before:rounded-[100%] before:bg-secondary before:mr-4 before:mt-1 text-sm leading-[1.4] text-black/75 mb-3">
                   BUILDING CO. (BEST) L.L.C specializes in delivering
                   high-quality construction projects across residential,
@@ -69,7 +73,8 @@ const Strength = () => {
                   construction excellence, ensuring our projects contribute to
                   the UAE’s evolving skyline and long-term development.
                 </li>
-              </ul>
+              </ul> */}
+              {parse(data?.data[0]?.strength_and_vision.content || "")}
             </motion.div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const sectors = [
   {
@@ -55,8 +56,8 @@ const Sectors = () => {
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectors.map((sector, index) => (
-            <motion.div
-              key={sector.id}
+            <Link href={`/projects/${sector.title.toLowerCase()}`} key={sector.id}><motion.div
+              
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -98,6 +99,7 @@ const Sectors = () => {
                 </motion.div>
               </motion.div>
             </motion.div>
+            </Link>
           ))}
         </div>
       </div>
