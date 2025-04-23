@@ -10,19 +10,18 @@ export const menuItems = [
   {
     title: "Projects",
     url: "/projects",
-    
   },
 
   {
     title: "Media",
     url: "",
     children: [
+      // {
+      //   title: "Events",
+      //   url: "/events",
+      // },
       {
-        title: "Events",
-        url: "/events",
-      },
-      {
-        title: "News",
+        title: "News & Events",
         url: "/news",
       },
     ],
