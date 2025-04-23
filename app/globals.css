@@ -23,8 +23,6 @@ p {
   font-weight: 400;
 }
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -241,21 +239,33 @@ p {
     }
   }
 }
-.ovrbanner::after{
-  content: '';
+.ovrbanner::after {
+  content: "";
   position: absolute;
   top: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 45%, rgba(0, 0, 0, 0) 99%), rgba(0, 0, 0, 0.3);
+  background: linear-gradient(
+      0deg,
+      rgb(0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 45%,
+      rgba(0, 0, 0, 0) 99%
+    ),
+    rgba(0, 0, 0, 0.3);
 }
-.wwebanner{background: url('/assets/img/story/banner_wwa.jpg');}
-.liststs li::before{background: url('/assets/img/icons/tick.svg');}
-.tanspheader .arrowst{filter: invert(1);}
-.lstans  li {
-  @apply    flex before:content-['']   before:h-5 before:min-w-5 before:rounded-[100%]   before:mr-4 before:mt-1 text-sm leading-[1.4] text-black/75 mb-3;
+.wwebanner {
+  background: url("/assets/img/story/banner_wwa.jpg");
 }
-.btnfrtss{
+.liststs li::before {
+  background: url("/assets/img/icons/tick.svg");
+}
+.tanspheader .arrowst {
+  filter: invert(1);
+}
+.lstans li {
+  @apply flex before:content-['']   before:h-5 before:min-w-5 before:rounded-[100%]   before:mr-4 before:mt-1 text-sm leading-[1.4] text-black/75 mb-3;
+}
+.btnfrtss {
   color: #ffffff;
   position: absolute;
   z-index: 2;
@@ -267,4 +277,6 @@ p {
   border-radius: 2px;
   padding: 10px;
 }
-
+.urbn-fnt-fmly {
+  font-family: var(--font-urbanist), sans-serif;
+}
