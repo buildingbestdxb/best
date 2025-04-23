@@ -16,10 +16,12 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
 
   const pagesWithBackground = ["/"]; // Add required pages
-  const pagesWithBlackTextHeader = ["/news-details/*"]
+  const pagesWithBlackTextHeader = ["/news-details/*"];
   const hasBackground = pagesWithBackground.includes(pathname);
   const makeTextBlack = pagesWithBlackTextHeader.some((page) =>
-    page.endsWith("/*") ? pathname.startsWith(page.replace("/*", "")) : pathname === page
+    page.endsWith("/*")
+      ? pathname.startsWith(page.replace("/*", ""))
+      : pathname === page
   );
 
   useEffect(() => {
@@ -53,8 +55,9 @@ const Navbar = () => {
       <header
         className={`${
           hasBackground
-            ? "bg-white/80 backdrop-blur-[10px] text-black shadow-md " 
-            : makeTextBlack ? "bg-transparent text-black tanspheader"
+            ? "bg-white/80 backdrop-blur-[10px] text-black shadow-md "
+            : makeTextBlack
+            ? "bg-transparent text-black tanspheader"
             : "bg-transparent text-white tanspheader"
         } transition duration-300 ease-in-out w-full   absolute top-0 z-10 group`}>
         {/* <div className='flex items-center'>
@@ -102,6 +105,8 @@ const Navbar = () => {
 
         <Menu setActive={setActive}>
           {menuItems.map((menuItem, index) =>
+            menuItem.children?.length &&
+            menuItem?.children?.length > 0 &&
             menuItem.children ? (
               <MenuItem
                 setActive={setActive}
@@ -122,23 +127,25 @@ const Navbar = () => {
                   href="#"
                   src="/assets/images/gd-im2.jpg"
                 /> */}
-                  {menuItem.children.map((item, index) => (
-                    <HoveredLink href={`${item.url}`} key={index}>
-                      <div className="hover:bg-black/5 pl-3 pr-[80px] py-2 rounded-[8px] transition-transform duration-300 hover:scale-105 flex justify-between items-center self-start spckbtn whts">
-                        <div>
-                          <Image
-                            src={"/assets/img/icons/arrow.svg"}
-                            alt=""
-                            width={30}
-                            height={30}
-                          />
-                        </div>{" "}
-                        <p className="m-0 p-0 text-[16px] uppercase">
-                          {item.title}
-                        </p>
-                      </div>
-                    </HoveredLink>
-                  ))}
+                  {menuItem.children.map(
+                    (item: { url: string; title: string }, index) => (
+                      <HoveredLink href={`${item.url}`} key={index}>
+                        <div className="hover:bg-black/5 pl-3 pr-[80px] py-2 rounded-[8px] transition-transform duration-300 hover:scale-105 flex justify-between items-center self-start spckbtn whts">
+                          <div>
+                            <Image
+                              src={"/assets/img/icons/arrow.svg"}
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
+                          </div>{" "}
+                          <p className="m-0 p-0 text-[16px] uppercase">
+                            {item.title}
+                          </p>
+                        </div>
+                      </HoveredLink>
+                    )
+                  )}
 
                   {/* <HoveredLink href="#">
                   <div>Commercial</div>
