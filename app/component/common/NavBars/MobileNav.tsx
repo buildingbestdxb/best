@@ -100,15 +100,20 @@ const MobileNav = () => {
                   {/* Dropdown */}
                   {activeDropdown === index && (
                     <ul className="">
-                      {item.children.map((childItem, childIndex) => (
-                        <li key={childIndex} className="py-1">
-                          <Link
-                            href={childItem.url}
-                            onClick={() => setMenuOpen(false)}>
-                            {childItem.title}
-                          </Link>
-                        </li>
-                      ))}
+                      {item.children.map(
+                        (
+                          childItem: { url: string; title: string },
+                          childIndex
+                        ) => (
+                          <li key={childIndex} className="py-1">
+                            <Link
+                              href={childItem.url}
+                              onClick={() => setMenuOpen(false)}>
+                              {childItem.title}
+                            </Link>
+                          </li>
+                        )
+                      )}
                     </ul>
                   )}
                 </li>

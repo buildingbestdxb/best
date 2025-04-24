@@ -11,21 +11,12 @@ export const menuItems = [
     title: "Projects",
     url: "/projects",
   },
-
   {
-    title: "Media",
-    url: "",
-    children: [
-      // {
-      //   title: "Events",
-      //   url: "/events",
-      // },
-      {
-        title: "News & Events",
-        url: "/news",
-      },
-    ],
+    title: "News & Events",
+    url: "/news",
+    children: [],
   },
+
   {
     title: "Careers",
     url: "/careers",
