@@ -13,7 +13,7 @@ export const menuItems = [
   },
   {
     title: "News & Events",
-    url: "/news",
+    url: "/news-and-events",
     children: [],
   },
 
