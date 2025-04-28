@@ -18,11 +18,13 @@ import {
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { DialogClose } from '@radix-ui/react-dialog'
 import Image from 'next/image'
+import { Input } from '@/components/ui/input'
 
 
 interface Values {
     content: string;
     image: string;
+    altTag: string;
     cardTitle: string;
     clientLogo: string;
 }
@@ -39,6 +41,7 @@ const StrengthAndVision = () => {
         defaultValues: {
           content: "",
           image: "",
+          altTag: "",
           cardTitle: "",
           clientLogo: ""
         }
@@ -79,6 +82,7 @@ const StrengthAndVision = () => {
               console.log(data)
               setValue("content",data.data[0].strength_and_vision.content)
               setValue("image",data.data[0].strength_and_vision.image ?? "")
+              setValue("altTag",data.data[0].strength_and_vision.altTag ?? "")
               setCards(data.data[0].strength_and_vision.clients)
             }
           } catch (error) {
@@ -101,7 +105,7 @@ const StrengthAndVision = () => {
             const formData = new FormData()
             formData.append("content",getValues("content"))
             formData.append("image",getValues("image"))
-
+            formData.append("altTag",getValues("altTag"))
             const response = await fetch(`/api/admin/about/strength-and-vision`, {
                 method: "PATCH",
                 body:formData
@@ -188,8 +192,11 @@ const handleDeleteClient = async(id:string) =>{
                             Image
                         </Label>
                         <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                        <Label htmlFor="altTag" className="block text-sm font-medium text-gray-700">
+                            Alt Tag
+                        </Label>
+                        <Input type="text" value={watch("altTag")} onChange={(e) => setValue("altTag", e.target.value)} />
                     </div>
-
                 </div>
             </form>
 

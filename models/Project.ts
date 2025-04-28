@@ -9,6 +9,9 @@ const SpecificationSchema = new mongoose.Schema({
   },
   logo:{
     type:String,
+  },
+  logoAlt:{
+    type:String
   }
 });
 
@@ -16,12 +19,21 @@ const ProjectSchema = new mongoose.Schema({
   bannerImage:{
     type:String
   },
+  bannerAlt:{
+    type:String
+  },
   name: {
     type: String,
     required: true,
   },
+  slug:{
+    type:String,
+  },
   thumbnail: {
     type: String,
+  },
+  thumbnailAlt:{
+    type:String
   },
   description: {
     type: String,
@@ -33,7 +45,6 @@ const ProjectSchema = new mongoose.Schema({
   },
   status:{
     type:String,
-    required:true
   },
   location:{
     type:String,
@@ -43,6 +54,12 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  metaTitle:{
+    type:String
+  },
+  metaDescription:{
+    type:String
+  }
 });
 
 const Project = mongoose.models.Project || mongoose.model("Project", ProjectSchema);

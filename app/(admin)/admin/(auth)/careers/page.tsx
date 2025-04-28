@@ -7,6 +7,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import DeleteCareerDialog from "./components/DeleteCareerDialog";
 import { useForm } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 type Career = {
   _id: string;
@@ -19,6 +21,7 @@ type Career = {
 
 interface Values {
   bannerImage: string;
+  bannerAlt: string;
 }
 
 const CareersPage = () => {
@@ -32,6 +35,8 @@ const CareersPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [careers, setCareers] = useState<Career[]>([]);
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
   const router = useRouter();
 
   const fetchCareers = async () => {
@@ -42,8 +47,9 @@ const CareersPage = () => {
   };
 
   useEffect(() => {
-    fetchCareers();
+    fetchCareers()
     fetchBanner()
+    fetchMeta()
   }, []);
 
   const handleClickNewCareer = () => {
@@ -62,6 +68,7 @@ const CareersPage = () => {
         if (data.data) {
 
           setValue("bannerImage", data.data[0].image)
+          setValue("bannerAlt", data.data[0].alt)
         }
       }
     } catch (error) {
@@ -74,6 +81,7 @@ const CareersPage = () => {
     try {
       const formData = new FormData()
       formData.append("bannerImage", getValues("bannerImage"))
+      formData.append("bannerAlt", getValues("bannerAlt"))
       formData.append("pageName", "career")
       const response = await fetch(`/api/admin/careers/banner`, {
         method: "PATCH",
@@ -89,6 +97,41 @@ const CareersPage = () => {
     }
   }
 
+  const handleMetaSave = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("metaTitle", metaTitle)
+      formData.append("metaDescription", metaDescription)
+      formData.append("pageName", "career")
+      const response = await fetch(`/api/admin/careers/meta`, {
+        method: "PATCH",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchMeta()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const fetchMeta = async () => {
+    try {
+      const response = await fetch('/api/admin/careers/meta')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.data) {
+          setMetaTitle(data.data.metaTitle)
+          setMetaDescription(data.data.metaDescription)
+        }
+      }
+    } catch (error) {
+      console.log("Failed to fetch data:", error)
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="p-6 flex justify-center items-center">
@@ -101,12 +144,28 @@ const CareersPage = () => {
   }
   return (
     <div className="p-6 flex flex-col gap-5">
+      <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                                <div className='flex justify-between'>
+                                    <div>Meta Section</div>
+                                    <Button onClick={handleMetaSave}>Save</Button>
+                                </div>
+                                <div>
+                                    <Label>Meta Title</Label>
+                                    <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} />
+                                </div>
+                                <div>
+                                    <Label>Meta Description</Label>
+                                    <Input value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} />
+                                </div>
+                            </div>
       <div>
         <div className='flex justify-between mb-5'>
           <h2 className='font-bold text-3xl'>Banner Image</h2>
           <Button onClick={handleBannerSave}>Save Banner</Button>
         </div>
         <ImageUploader value={watch('bannerImage')} onChange={(url) => setValue("bannerImage", url)} />
+        <Label>Banner Alt</Label>
+        <Input value={watch('bannerAlt')} onChange={(e) => setValue("bannerAlt", e.target.value)} />
       </div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Careers</h1>

@@ -4,9 +4,11 @@ export type IndiNews = {
         description:string;
         images:string[]
         date:Date;
-        tags:string[]
+        tags:string[];
         type:string;
         _id:string;
+        altTag:string;
+        slug:string;
     }
     
 }

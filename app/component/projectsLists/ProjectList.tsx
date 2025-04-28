@@ -6,6 +6,10 @@ const ProjectList = ({ data }: {
   data: {
     description: string;
     thumbnail:string;
+    slug?:string;
+    thumbnailAlt?: string;
+    bannerImage?:string;
+    bannerAlt?:string;
     images: string[];
     location: string;
     name: string;
@@ -140,14 +144,16 @@ useEffect(()=>{
                   locationName={item.location}
                   title={item.name}
                   image={item.thumbnail}
-                  href={`/project-details/${item._id}?type=${item.type}`}
+                  href={`/project-details/${item.slug}`}
+                  imageAlt={item.thumbnailAlt}
                 />
               </div>) : (<div className="xl:col-span-4" key={index}>
                 <ProjectCard
                   locationName={item.location}
                   title={item.name}
                   image={item.thumbnail}
-                  href={`/project-details/${item._id}?type=${item.type}`}
+                  href={`/project-details/${item.slug}`}
+                  imageAlt={item.thumbnailAlt}
                 />
               </div>)
             ))}

@@ -107,6 +107,8 @@ const LatestNews = () => {
                 title={latestNews && latestNews[0].title}
                 subTitle={latestNews && latestNews[0].tags}
                 _id={latestNews && latestNews[0]._id}
+                altTag={latestNews && latestNews[0].altTag}
+                slug={latestNews && latestNews[0].slug}
               />
             </div>
             <div className="xl:col-span-6 h-full">

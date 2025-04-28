@@ -39,7 +39,12 @@ export async function POST(request: NextRequest) {
         const name = formData.get("name")
         const image = formData.get("image")
         const icon = formData.get("icon")
-        const sector = await Sector.create({ bannerImage,name, image,icon });
+        const bannerAlt = formData.get("bannerAlt")
+        const imageAlt = formData.get("imageAlt")
+        const iconAlt = formData.get("iconAlt")
+        const metaTitle = formData.get("metaTitle");
+        const metaDescription = formData.get("metaDescription");
+        const sector = await Sector.create({ bannerImage,name, image,icon,bannerAlt,imageAlt,iconAlt,metaTitle,metaDescription });
         if (sector) {
             return NextResponse.json({ message: "Sector added successfully", success: true }, { status: 201 });
         }
@@ -71,6 +76,11 @@ export async function PATCH(request: NextRequest) {
         const oldName = formData.get("oldName");
         const image = formData.get("image");
         const icon = formData.get("icon");
+        const bannerAlt = formData.get("bannerAlt");
+        const imageAlt = formData.get("imageAlt");
+        const iconAlt = formData.get("iconAlt");
+        const metaTitle = formData.get("metaTitle");
+        const metaDescription = formData.get("metaDescription");
 
         // Update projects that belong to the old sector name
         const projects = await Project.find({ type: oldName }).session(session);
@@ -82,7 +92,7 @@ export async function PATCH(request: NextRequest) {
         // Update the sector
         const sector = await Sector.findByIdAndUpdate(
             id,
-            { $set: { bannerImage,name, image,icon } },
+            { $set: { bannerImage,name, image,icon,bannerAlt,imageAlt,iconAlt,metaTitle,metaDescription } },
             { new: true, session } // Ensure the update is part of the transaction
         );
 

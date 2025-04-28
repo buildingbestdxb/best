@@ -7,6 +7,9 @@ const bannerSchema = new mongoose.Schema({
   },
   image:{
     type:String,
+  },
+  alt:{
+    type:String,
   }
 });
 

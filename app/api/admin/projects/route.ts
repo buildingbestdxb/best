@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
   }
   try {
     await connectDB();
-    const { name, description, images, specifications,type,location,thumbnail,bannerImage,status } = await request.json();
-    const project = await Project.create({ name, description, images, specifications,type,location,thumbnail,bannerImage,status });
+    const { name, slug, description, images, specifications,type,location,thumbnail,thumbnailAlt,bannerImage,bannerAlt,status,metaTitle,metaDescription } = await request.json();
+    const project = await Project.create({ name, slug, description, images, specifications,type,location,thumbnail,thumbnailAlt,bannerImage,bannerAlt,status,metaTitle,metaDescription });
     return NextResponse.json({ data: project, success: true }, { status: 201 });
   } catch (error) {
     console.error("Error creating project:", error);

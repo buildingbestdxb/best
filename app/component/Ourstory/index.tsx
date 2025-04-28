@@ -7,18 +7,17 @@ import Strength from "./Strength";
 import LogoTicker from "../home/sections/LogoTicker";
 import Historysec from "./Historysec";
 import ValueIc from "./ValueIc";
-import useSWR from "swr";
 import { AboutType } from "@/app/types/AboutType";
 
-export default function Index() {
+export default function Index({data}: {data: AboutType}) {
   const breadcrumb = [
     { label: "Home", href: "/" },
     { label: "About Us", href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
 
-  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data }:{data:AboutType} = useSWR(`/api/admin/about/intro`, fetcher)
+  // const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  // const { data }:{data:AboutType} = useSWR(`/api/admin/about/intro`, fetcher)
 
 
   useEffect(()=>{
@@ -27,10 +26,12 @@ export default function Index() {
 
   return (
     <>
+      
       <HeroInner
         imageSrc={data?.data[0].bannerImage == "" ?  "/assets/img/story/banner.jpg" : data?.data[0].bannerImage}
         title="Our Story"
         breadcrumbs={breadcrumb}
+        altTag={data?.data[0].bannerAlt}
       />
       <WhoWeare data={data}/>
       <CoreValue data={data}/>

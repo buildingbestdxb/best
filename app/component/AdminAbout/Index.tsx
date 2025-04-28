@@ -16,6 +16,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 
 interface AboutFormData {
   bannerImage:string;
+  bannerAlt: string;
   who_we_are: string;
   values_and_expertise: string;
   core_value_title:string;
@@ -39,6 +40,8 @@ const AdminAbout = () => {
   const [cards,setCards] = useState([])
   const [clients,setClients] = useState([])
   const [histories,setHistories] = useState([])
+  const [metaTitle, setMetaTitle] = useState('');
+  const [metaDescription, setMetaDescription] = useState('');
 
 
   const onSubmit = async(data:AboutFormData) => {
@@ -70,6 +73,7 @@ const AdminAbout = () => {
           const data = await response.json()
           console.log(data)
           setValue("bannerImage",data.data[0].bannerImage)
+          setValue("bannerAlt",data.data[0].bannerAlt)
           setValue("who_we_are",data.data[0].who_we_are)
           setValue("core_value_content",data.data[0].core_value.content)
           setValue("core_value_title",data.data[0].core_value.title)
@@ -79,6 +83,8 @@ const AdminAbout = () => {
           setValue("strength_and_vision_image",data.data[0].strength_and_vision.image)
           setClients(data.data[0].strength_and_vision.clients)
           setHistories(data.data[0].history)
+          setMetaTitle(data.data[0].metaTitle)
+          setMetaDescription(data.data[0].metaDescription)
         }
       } catch (error) {
         console.log(error)
@@ -89,11 +95,46 @@ const AdminAbout = () => {
 
   },[])
 
+  const handleMetaSave = async () => {
+    try {
+      const response = await fetch(`/api/admin/about/meta`, {
+        method: "POST",
+        body: JSON.stringify({
+          metaTitle: metaTitle,
+          metaDescription: metaDescription,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <div className='flex flex-col gap-5'>
       <div className='text-3xl font-bold'>About Page</div>
       <div className='flex flex-col gap-5'>
+        <div>
+          <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                              <div className='flex justify-between'>
+                                  <div>Meta Section</div>
+                                  <Button onClick={handleMetaSave}>Save</Button>
+                              </div>
+                              <div>
+                                  <Label>Meta Title</Label>
+                                  <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} />
+                              </div>
+                              <div>
+                                  <Label>Meta Description</Label>
+                                  <Input value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} />
+                              </div>
+                          </div>
+        </div>
         <form className='border-dashed border-2 p-4 flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
           
           <div className='flex justify-end'>
@@ -105,6 +146,13 @@ const AdminAbout = () => {
               Banner Image
             </Label>
             <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+          </div>
+
+          <div>
+          <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+              Banner Alt
+            </Label>
+            <Input value={watch("bannerAlt")} onChange={(e) => setValue("bannerAlt", e.target.value)} />
           </div>
 
           <div>

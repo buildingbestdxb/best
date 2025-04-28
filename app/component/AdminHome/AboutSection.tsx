@@ -25,14 +25,15 @@ interface Values {
     title: string;
     content: string;
     image: string;
+    altTag: string;
     cardTitle: string;
     cardNumber:string;
     cardLogo: string;
     seal: string;
+    cardLogoAlt: string;
 }
 
 const AboutSection = () => {
-
     const {
         register,
         control,
@@ -58,6 +59,7 @@ const AboutSection = () => {
             formData.append("cardTitle", getValues("cardTitle"))
             formData.append("cardNumber", getValues("cardNumber"))
             formData.append("cardLogo", getValues("cardLogo"))
+            formData.append("cardLogoAlt",getValues("cardLogoAlt"))
 
             const response = await fetch(`/api/admin/home/about/card?id=${id}`, {
                 method: "PATCH",
@@ -88,6 +90,7 @@ const AboutSection = () => {
                 setValue("content", data.data[0].about.content)
                 setValue("title", data.data[0].about.title)
                 setValue("image", data.data[0].about.image)
+                setValue("altTag", data.data[0].about.altTag)
                 setCards(data.data[0].about.cards)
                 setSeals(data.data[0].about.seals)
             }
@@ -100,10 +103,11 @@ const AboutSection = () => {
         fetchData()
     }, [])
 
-    const handleSetEditCard = (title: string, logo: string,number:string) => {
+    const handleSetEditCard = (title: string, logo: string,number:string,logoAlt:string) => {
         setValue("cardTitle", title)
         setValue("cardLogo", logo)
         setValue("cardNumber", number)
+        setValue("cardLogoAlt", logoAlt)
     }
 
     const onSubmitForm = async (e: FormEvent) => {
@@ -114,10 +118,11 @@ const AboutSection = () => {
             formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
+            formData.append("altTag", getValues("altTag"))
 
             const response = await fetch(`/api/admin/home/about`, {
                 method: "PATCH",
-                body: formData
+                body: formData,
             });
 
             if (response.ok) {
@@ -205,10 +210,14 @@ const AboutSection = () => {
                     </div>
 
                     <div className='col-span-1'>
+                        <div>
                         <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
                             Image
                         </Label>
                         <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                            <Label>Alt Tag</Label>
+                            <Input {...register("altTag", { required: "Alt tag is required" })} />
+                        </div>
                     </div>
 
                 </div>
@@ -257,7 +266,7 @@ const AboutSection = () => {
                         <div className='flex justify-between'>
                             <Label>Cards</Label>
                         </div>
-                        {cards && cards.map((item: { title: string; number: string; logo: string; _id: string }, index) => (
+                        {cards && cards.map((item: { title: string; number: string; logo: string; _id: string; logoAlt: string }, index) => (
                             <div className='border-dashed border-2 p-4 flex flex-col gap-5 bg-orange-300' key={index}>
                                 <div className='grid grid-cols-2 gap-5'>
                                     <div>
@@ -278,7 +287,7 @@ const AboutSection = () => {
                                 </div>
                                 <div className='flex justify-end'>
                                     <Dialog>
-                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo,item.number)}>Edit</DialogTrigger>
+                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo,item.number,item.logoAlt)}>Edit</DialogTrigger>
                                         <DialogContent>
                                             <DialogHeader>
                                                 <DialogTitle>Edit card content</DialogTitle>
@@ -286,6 +295,8 @@ const AboutSection = () => {
                                                     <div className='flex flex-col gap-2'>
                                                         <Label>Logo</Label>
                                                         <ImageUploader value={watch("cardLogo")} onChange={(url) => setValue("cardLogo", url)} />
+                                                        <Label>Alt Tag</Label>
+                                                        <Input {...register("cardLogoAlt")} />
                                                         <Label>Title</Label>
                                                         <Input
                                                             {...register("cardTitle", { required: "Title is required" })}

@@ -6,10 +6,12 @@ export type HomeType = {
         title: string;
         content: string;
         image: string;
+        altTag: string;
         cards: {
             logo: string;
             title: string;
             number: string;
+            logoAlt: string;
         }[];
         seals: {
             logo: string;

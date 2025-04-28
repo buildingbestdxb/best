@@ -25,13 +25,14 @@ interface Values {
     title: string;
     content: string;
     image: string;
+    altTag: string;
     cardTitle: string;
     cardLogo: string;
+    cardLogoAlt: string;
     seal: string;
 }
 
 const ValuesSection = () => {
-
     const {
         register,
         control,
@@ -56,6 +57,7 @@ const ValuesSection = () => {
             const formData = new FormData()
             formData.append("cardTitle", getValues("cardTitle"))
             formData.append("cardLogo", getValues("cardLogo"))
+            formData.append("cardLogoAlt", getValues("cardLogoAlt"))
 
             const response = await fetch(`/api/admin/about/value/card?id=${id}`, {
                 method: "PATCH",
@@ -86,6 +88,7 @@ const ValuesSection = () => {
                 setValue("content", data.data[0].core_value.content)
                 setValue("title", data.data[0].core_value.title)
                 setValue("image", data.data[0].core_value.image)
+                setValue("altTag", data.data[0].core_value.altTag)
                 setCards(data.data[0].core_value.cards)
                 setSeals(data.data[0].core_value.seals)
             }
@@ -98,11 +101,11 @@ const ValuesSection = () => {
         fetchData()
     }, [])
 
-    const handleSetEditCard = (title: string, logo: string) => {
+    const handleSetEditCard = (title: string, logo: string,logoAlt:string) => {
         setValue("cardTitle", title)
         setValue("cardLogo", logo)
+        setValue("cardLogoAlt", logoAlt)
     }
-
     const onSubmitForm = async (e: FormEvent) => {
         console.log("here triggered")
         try {
@@ -111,6 +114,7 @@ const ValuesSection = () => {
             formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
+            formData.append("altTag", getValues("altTag"))
 
             const response = await fetch(`/api/admin/about/value`, {
                 method: "PATCH",
@@ -206,8 +210,9 @@ const ValuesSection = () => {
                             Image
                         </Label>
                         <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                        <Label>Alt Tag</Label>
+                        <Input {...register("altTag", { required: "Alt tag is required" })} />
                     </div>
-
                 </div>
             </form>
 
@@ -254,7 +259,7 @@ const ValuesSection = () => {
                         <div className='flex justify-between'>
                             <Label>Cards</Label>
                         </div>
-                        {cards && cards.map((item: { title: string; logo: string; _id: string }, index) => (
+                        {cards && cards.map((item: { title: string; logo: string; logoAlt: string; _id: string }, index) => (
                             <div className='border-dashed border-2 p-4 flex flex-col gap-5' key={index}>
                                 <div className='grid grid-cols-2 gap-5'>
                                     <div>
@@ -268,7 +273,7 @@ const ValuesSection = () => {
                                 </div>
                                 <div className='flex justify-end'>
                                     <Dialog>
-                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo)}>Edit</DialogTrigger>
+                                        <DialogTrigger onClick={() => handleSetEditCard(item.title, item.logo,item.logoAlt)}>Edit</DialogTrigger>
                                         <DialogContent>
                                             <DialogHeader>
                                                 <DialogTitle>Edit card content</DialogTitle>
@@ -276,6 +281,8 @@ const ValuesSection = () => {
                                                     <div className='flex flex-col gap-2'>
                                                         <Label>Logo</Label>
                                                         <ImageUploader value={watch("cardLogo")} onChange={(url) => setValue("cardLogo", url)} />
+                                                        <Label>Alt Tag</Label>
+                                                        <Input {...register("cardLogoAlt")} />
                                                         <Label>Title</Label>
                                                         <Input
                                                             {...register("cardTitle", { required: "Title is required" })}

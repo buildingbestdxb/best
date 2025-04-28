@@ -7,12 +7,14 @@ interface HeroSectionProps {
   imageSrc: string;
   title: string;
   breadcrumb: string;
+  altTag?: string;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   imageSrc,
   title,
   breadcrumb,
+  altTag
 }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,7 +45,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
         <Image
           src={imageSrc || "data:"}
-          alt={title}
+          alt={altTag ?? ""}
           layout="fill"
           objectFit="cover"
           priority

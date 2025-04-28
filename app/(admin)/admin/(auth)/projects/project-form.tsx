@@ -15,18 +15,24 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type ProjectData = {
   name: string;
+  slug: string;
   thumbnail:string;
+  thumbnailAlt:string;
   description: string;
   specifications: {
     name: string;
     value: string;
     logo:string;
+    logoAlt:string;
   }[];
   images: string[];
   type:string;
   location:string;
   bannerImage:string;
+  bannerAlt:string;
   status:string;
+  metaTitle:string;
+  metaDescription:string;
 };
 
 interface ProjectFormData {
@@ -37,13 +43,15 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   const router = useRouter();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [types,setTypes] = useState([])
-  const { register, handleSubmit, control, setValue,watch } = useForm<ProjectData>({
+  const { register, handleSubmit, control, setValue,watch,formState:{errors} } = useForm<ProjectData>({
     defaultValues: {
       name: "",
       description: "",
       specifications: [],
       images: [],
       status:"",
+      metaTitle:"",
+      metaDescription:""
     },
   });
 
@@ -62,10 +70,14 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
       const res = await response.json();
       setValue("bannerImage", res.data.bannerImage);
       setValue("name", res.data.name);
+      setValue("slug", res.data.slug);
       setValue("thumbnail", res.data.thumbnail);
+      setValue("thumbnailAlt", res.data.thumbnailAlt);
       setValue("description", res.data.description);
+      setValue("bannerAlt", res.data.bannerAlt);
       setValue("specifications", res.data.specifications);
-      console.log(res.data.type)
+      setValue("metaTitle", res.data.metaTitle);
+      setValue("metaDescription", res.data.metaDescription);
       setValue("type", res.data.type);
       setValue("status", res.data.status);
       setValue("images", res.data.images);
@@ -93,6 +105,12 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
   //     fetchProject();
   //   }
   // }, [projectId]);
+
+    useEffect(() => {
+      if (watch("slug") === undefined) return;
+      const slug = watch("slug").replace(/\s+/g, '-');
+      setValue("slug", slug);
+  }, [watch("slug")])
 
   useEffect(()=>{
     if(projectId){
@@ -159,6 +177,12 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                       </Label>
                       <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
             </div>
+            <div>
+                    <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        Banner Image Alt
+                      </Label>
+                      <Input id="bannerAlt" {...register("bannerAlt")} />
+            </div>
           <div className="space-y-2 grid grid-cols-2 gap-5">
             
             <div>
@@ -167,9 +191,29 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
             </div>
 
             <div>
+                    <Label className=''>Slug</Label>
+                    <Input type='text' placeholder='Project Slug' {...register("slug", {
+                        required: "Slug is required", pattern: {
+                            value: /^[a-z0-9]+(-[a-z0-9]+)*$/,
+                            message: "Slug must contain only lowercase letters, numbers, and hyphens (no spaces)"
+                        }
+                    })} />
+                    {errors.slug && <p className='text-red-500'>{errors.slug.message}</p>}
+                </div>
+
+            <div>
+              <div>
               <Label htmlFor="name">Thumbnail</Label>
               <ImageUploader value={watch(`thumbnail`)} onChange={(url) => setValue("thumbnail",url)} deleteAfterUpload={true} />
+            
             </div>
+            <div>
+              <Label htmlFor="name">Thumbnail Alt</Label>
+              <Input id="thumbnailAlt" {...register("thumbnailAlt")} />
+            </div>
+            </div>
+
+
 
           </div>
           <div className="space-y-2">
@@ -237,7 +281,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Label>Specifications</Label>
-              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "",logo:"" })}>
+              <Button type="button" variant="outline" onClick={() => appendSpec({ name: "", value: "",logo:"",logoAlt:"" })}>
                 Add Specification
               </Button>
             </div>
@@ -247,6 +291,10 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.name`}>Logo</Label>
                   <ImageUploader value={watch(`specifications.${index}.logo`)} onChange={(url) => handleSpecLogoUpload(index, url)} deleteAfterUpload={true} />
+                </div>
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor={`specifications.${index}.logoAlt`}>Logo Alt</Label>
+                  <Input {...register(`specifications.${index}.logoAlt`)} placeholder="Logo Alt" />
                 </div>
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.name`}>Name</Label>
@@ -287,6 +335,17 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <div>
+              <Label>Meta Title</Label>
+              <Input {...register("metaTitle")} />
+            </div>
+            <div>
+              <Label>Meta Description</Label>
+              <Input {...register("metaDescription")} />
             </div>
           </div>
 

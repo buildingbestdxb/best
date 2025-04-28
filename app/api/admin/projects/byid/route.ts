@@ -7,9 +7,16 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
+    const slug = searchParams.get("slug");
     await connectDB();
-    const project = await Project.findById(id);
+    if(slug){
+      const project = await Project.findOne({slug});
     return NextResponse.json({ data: project, success: true }, { status: 200 });
+    }else{
+      const project = await Project.findById(id);
+      return NextResponse.json({ data: project, success: true }, { status: 200 });
+    }
+    
   } catch (error) {
     console.error("Error fetching project:", error);
     return NextResponse.json({ error: "Failed to fetch project" }, { status: 500 });
@@ -26,8 +33,8 @@ export async function PATCH(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     await connectDB();
-    const { name, description, images, specifications,type,location,thumbnail,bannerImage,status } = await request.json();
-    const project = await Project.findByIdAndUpdate(id, { name, description, images, specifications, type, location,thumbnail,bannerImage,status }, { new: true });
+    const { name, slug, description, images, specifications,type,location,thumbnail,thumbnailAlt,bannerImage,bannerAlt,status,metaTitle,metaDescription } = await request.json();
+    const project = await Project.findByIdAndUpdate(id, { name, slug, description, images, specifications, type, location,thumbnail,thumbnailAlt,bannerImage,bannerAlt,status,metaTitle,metaDescription }, { new: true });
     return NextResponse.json({ data: project, success: true }, { status: 200 });
   } catch (error) {
     console.error("Error updating project:", error);

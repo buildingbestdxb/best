@@ -119,7 +119,7 @@ const Historysec = ({data}:{
                 transition={{ duration: 0.5 }}>
                 <Image
                   src={data?.data[0]?.history[activeIndex].image || "data:"}
-                  alt={`history-${data?.data[0].history[activeIndex].year}`}
+                  alt={data?.data[0]?.history[activeIndex].altTag}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-xl shadow-lg"

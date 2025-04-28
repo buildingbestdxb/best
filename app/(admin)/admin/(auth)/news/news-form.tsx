@@ -21,6 +21,10 @@ interface NewsFormData {
   tags: string[];
   date: string;
   images: string[];
+  metaTitle: string;
+  metaDescription: string;
+  altTag: string;
+  slug: string;
   type: "event" | "news";
 }
 
@@ -40,6 +44,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
     handleSubmit,
     control,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<NewsFormData>({
     defaultValues: {
@@ -48,6 +53,10 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       tags: [],
       date: new Date().toISOString().split("T")[0],
       images: [],
+      metaTitle: "",
+      metaDescription: "",
+      altTag: "",
+      slug: "",
       type: "news",
     },
   });
@@ -57,9 +66,13 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       const response = await fetch(`/api/admin/news/byid?id=${newsId}`);
       const data = await response.json();
       setValue("title", data.data.title);
+      setValue("slug", data.data.slug);
       setValue("description", data.data.description);
       setValue("tags", data.data.tags);
       setValue("images", data.data.images);
+      setValue("metaTitle", data.data.metaTitle);
+      setValue("metaDescription", data.data.metaDescription);
+      setValue("altTag", data.data.altTag);
       setValue("type", data.data.type);
       if(data.data.description){
         setNewsContent(data.data.description)
@@ -119,6 +132,12 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
     setValue("description",newsContent)
   },[newsContent])
 
+  useEffect(() => {
+    if (watch("slug") === undefined) return;
+    const slug = watch("slug").replace(/\s+/g, '-');
+    setValue("slug", slug);
+}, [watch("slug")])
+
 
 
   return (
@@ -137,6 +156,17 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
           />
           {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>}
         </div>
+
+        <div>
+                    <Label className=''>Slug</Label>
+                    <Input type='text' placeholder='News Slug' {...register("slug", {
+                        required: "Slug is required", pattern: {
+                            value: /^[a-z0-9]+(-[a-z0-9]+)*$/,
+                            message: "Slug must contain only lowercase letters, numbers, and hyphens (no spaces)"
+                        }
+                    })} />
+                    {errors.slug && <p className='text-red-500'>{errors.slug.message}</p>}
+                </div>
 
         <div>
           <Label htmlFor="type" className="block text-sm font-medium text-gray-700">
@@ -192,7 +222,8 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
         </div>
 
         {/* Images Field */}
-        <div>
+        <div className="flex flex-col gap-5">
+          <div>
           <Label className="block text-sm font-medium text-gray-700">Cover Image</Label>
           {imageUrls.length == 0 && <div className="mt-2">
             <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} />
@@ -217,7 +248,22 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
               </div>
             ))}
           </div>
+          </div>
+          <div>
+            <Label>Alt Tag</Label>
+            <Input {...register("altTag")} />
+          </div>
         </div>
+      </div>
+
+
+      <div>
+        <Label>Meta Title</Label>
+        <Input {...register("metaTitle")} />
+      </div>
+      <div>
+        <Label>Meta Description</Label>
+        <Input {...register("metaDescription")} />
       </div>
 
       <div className="flex justify-end">
@@ -229,6 +275,8 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
           {isLoading ? "Saving..." : "Save"}
         </Button>
       </div>
+
+
     </form>
   );
 };

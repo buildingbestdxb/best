@@ -46,7 +46,7 @@ const AboutUs = ({data}:{
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
               src={data?.data[0].about.image || "data:"}
-              alt="About Us"
+              alt={data?.data[0].about.altTag}
               layout="fill"
               objectFit="cover"
               className="rounded-xl shadow-lg"

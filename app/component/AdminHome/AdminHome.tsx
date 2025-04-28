@@ -27,6 +27,8 @@ interface AboutFormData {
     vision: string;
     location: string;
     contact: string;
+    metaTitle: string;
+    metaDescription: string;
 }
 
 const AdminHome = () => {
@@ -85,6 +87,8 @@ const AdminHome = () => {
                     setValue("vision", data.data[0].vision)
                     setValue("location", data.data[0].location)
                     setValue("contact", data.data[0].contact)
+                    setValue("metaTitle", data.data[0].metaTitle)
+                    setValue("metaDescription", data.data[0].metaDescription)
                 }
             } catch (error) {
                 console.log(error)
@@ -95,11 +99,47 @@ const AdminHome = () => {
 
     }, [])
 
+    const handleMetaSave = async () => {
+        try {
+            const response = await fetch(`/api/admin/home/meta`, {
+                method: "POST",
+                body: JSON.stringify({
+                    metaTitle: watch("metaTitle"),
+                    metaDescription: watch("metaDescription"),
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json()
+                alert(data.message)
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     return (
         <div className='flex flex-col gap-5'>
             <div className='text-3xl font-bold'>Home Page</div>
             <div className='flex flex-col gap-5'>
+                
+                <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                    <div className='flex justify-between'>
+                        <div>Meta Section</div>
+                        <Button onClick={handleMetaSave}>Save</Button>
+                    </div>
+                    <div>
+                        <Label>Meta Title</Label>
+                        <Input {...register("metaTitle")} />
+                    </div>
+                    <div>
+                        <Label>Meta Description</Label>
+                        <Input {...register("metaDescription")} />
+                    </div>
+                </div>
+                
                 <form className='border-dashed border-2 p-4 flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex justify-between'>
                         <Label htmlFor="title" className="block text-sm font-medium text-gray-700">

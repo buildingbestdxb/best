@@ -7,6 +7,8 @@ export type NewsType = {
         tags:string[]
         type:string;
         _id:string;
+        altTag:string;
+        slug:string;
     }[]
-
+    
 }

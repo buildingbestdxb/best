@@ -53,7 +53,7 @@ const ValueIc = ({data}:{
 >
   <Image
     src={stat.logo || "data:"}
-    alt={stat.title}
+    alt={stat.logoAlt}
     className="h-[30px] lg:h-[40px]"
     width={50}
     height={50}

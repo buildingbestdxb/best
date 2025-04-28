@@ -6,6 +6,9 @@ import { PencilIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import DeleteProjectDialog from "./components/DeleteProjectDialog";
 import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { ImageUploader } from "@/components/ui/image-uploader";
 type Project = {
   _id: string;
   name: string;
@@ -22,6 +25,11 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const router = useRouter();
 
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
+  const [bannerImage, setBannerImage] = useState("");
+  const [bannerAlt, setBannerAlt] = useState("");
+
   const fetchProjects = async () => {
     const response = await fetch("/api/admin/projects");
     const data = await response.json();
@@ -31,6 +39,8 @@ export default function Projects() {
 
   useEffect(() => {
     fetchProjects();
+    fetchMeta()
+    fetchBanner()
   }, []);
 
   const handleClickNewProject = () => {
@@ -40,6 +50,76 @@ export default function Projects() {
   const handleEditProject = (projectId: string) => {
     router.push(`/admin/projects/${projectId}`);
   };
+
+  const handleMetaSave = async() =>{
+    try {
+      const formData = new FormData()
+      formData.append("metaTitle", metaTitle)
+      formData.append("metaDescription", metaDescription)
+      const response = await fetch(`/api/admin/projects/meta`, {
+        method: "PATCH",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchMeta()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const fetchMeta = async () => {
+    try {
+      const response = await fetch('/api/admin/projects/meta')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.data) {
+          setMetaTitle(data.data.metaTitle)
+          setMetaDescription(data.data.metaDescription)
+        }
+      }
+    } catch (error) {
+      console.log("Failed to fetch data:", error)
+    }
+  }
+
+  const handleBannerSave = async() => {
+    try {
+      const formData = new FormData()
+      formData.append("bannerImage", bannerImage)
+      formData.append("bannerAlt", bannerAlt)
+      formData.append("pageName", "projects")
+      const response = await fetch(`/api/admin/projects/banner`, {
+        method: "PATCH",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchBanner()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const fetchBanner = async () => {
+    try {
+      const response = await fetch('/api/admin/projects/banner')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.data) {
+          console.log(data.data)
+          setBannerImage(data.data.image)
+          setBannerAlt(data.data.alt)
+        }
+      }
+    } catch (error) {
+      console.log("Failed to fetch data:", error)
+    }
+  }
 
   if (isLoading) {
     return (
@@ -52,7 +132,33 @@ export default function Projects() {
     );
   }
   return (
-    <div className="p-6">
+    <div className="p-6 flex flex-col gap-5">
+            
+            <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                                <div className='flex justify-between'>
+                                    <div>Meta Section</div>
+                                    <Button onClick={handleMetaSave}>Save</Button>
+                                </div>
+                                <div>
+                                    <Label>Meta Title</Label>
+                                    <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} />
+                                </div>
+                                <div>
+                                    <Label>Meta Description</Label>
+                                    <Input value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} />
+                                </div>
+                            </div>
+
+                            <div className="border-dashed border-2 p-4 flex flex-col gap-5">
+                                    <div className='flex justify-between mb-5'>
+                                      <h2 className='font-bold text-3xl'>Banner Image</h2>
+                                      <Button onClick={handleBannerSave}>Save Banner</Button>
+                                    </div>
+                                    <ImageUploader value={bannerImage} onChange={(url) => setBannerImage(url)} />
+                                    <Label>Banner Alt</Label>
+                                    <Input value={bannerAlt} onChange={(e) => setBannerAlt(e.target.value)} />
+                                  </div>
+
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Projects</h1>
         <Button className="bg-primary text-white" onClick={handleClickNewProject}>

@@ -1,28 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import useSWR from "swr";
 import parse from "html-react-parser";
 import moment from "moment";
 import shareIcon from "../../../public/assets/img/news-details/share-icon.svg";
 import { IndiNews } from "@/app/types/IndiNews";
 
-const NewsDetails = () => {
-  const { id } = useParams();
+const NewsDetails = ({data}: {data: IndiNews}) => {
 
-  const fetcher = (...args: Parameters<typeof fetch>) =>
-    fetch(...args).then((res) => res.json());
-  const { data }: { data: IndiNews } = useSWR(
-    `/api/admin/news/byid?id=${id}`,
-    fetcher
-  );
-
-  useEffect(() => {
-    console.log(data?.data.description.split("</p><p>"));
-  }, [data]);
 
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -52,7 +39,7 @@ const NewsDetails = () => {
         <div className="w-full lg:h-[40em] h-[20em] relative">
           <Image
             src={data?.data?.images[0]}
-            alt="cover-image"
+            alt={data?.data?.altTag}
             className="object-cover w-full h-full absolute object-center"
             width={500}
             height={500}

@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 interface HeroSectionProps {
   imageSrc: string;
   title: string;
+  altTag: string;
   breadcrumbs: { label: string; href: string }[];
 }
 
 const HeroInner: React.FC<HeroSectionProps> = ({
   imageSrc,
   title,
+  altTag,
   breadcrumbs,
 }) => {
   const containerVariants = {
@@ -42,7 +44,7 @@ const HeroInner: React.FC<HeroSectionProps> = ({
             src={imageSrc || "data:"}
             fill
             objectFit="cover"
-            alt={title}
+            alt={altTag}
           />
         </figure>
 

@@ -71,7 +71,7 @@ const SectorsSec = ({data}:{
               viewport={{ once: true }}>
               <Image
                 src={sector.image}
-                alt="Background Image"
+                alt={sector.imageAlt}
                 fill
                 className="object-cover"
               />
@@ -84,7 +84,7 @@ const SectorsSec = ({data}:{
                 viewport={{ once: true }}>
                 <Image
                   src={sector.icon}
-                  alt=""
+                  alt={sector.iconAlt}
                   width={20}
                   height={20}
                   className="transition-all duration-500 group-hover:invert group-hover:brightness-0"

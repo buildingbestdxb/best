@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React from "react";
 import HeroSection from "./sections/HeroSection";
 import AboutUs from "./sections/AboutUs";
 import StatsSection from "./sections/StatsSection";
@@ -10,7 +10,6 @@ import QualitySafety from "./sections/QualitySafety";
 import VisionMission from "./sections/VisionMission";
 import OurLocation from "./sections/OurLocation";
 import ContactUs from "./sections/ContactUs";
-import useSWR from "swr";
 import { HomeType } from "@/app/types/HomeType";
 const stats = {
   bannerimage: "/assets/img/home/stastsc.jpg",
@@ -32,15 +31,9 @@ const stats = {
     },
   ],
 };
-const Index = () => {
-
-  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data }:{data:HomeType} = useSWR(`/api/admin/home`, fetcher)
-
-
-  useEffect(()=>{
-    console.log(data)
-  },[data])
+const Index = ({data}: {data: HomeType}) => {
+  // const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
+  // const { data }:{data:HomeType} = useSWR(`/api/admin/home`, fetcher)
 
   return (
     <>

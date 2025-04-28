@@ -1,14 +1,17 @@
 export type AboutType = {
     data:{
         bannerImage:string;
+        bannerAlt:string;
         who_we_are:string;
         core_value:{
             title:string;
             content:string;
             image:string;
+            altTag:string;
             cards:{
                 logo:string;
                 title:string
+                logoAlt:string
             }[]
             seals:{
                 logo:string
@@ -17,6 +20,7 @@ export type AboutType = {
         strength_and_vision:{
             content:string;
             image:string;
+            altTag:string;
             clients:{
                 logo:string
             }[]
@@ -25,6 +29,7 @@ export type AboutType = {
             year:string;
             title:string;
             image:string;
+            altTag:string;
             content:string;
         }[]
     }[]

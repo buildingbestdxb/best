@@ -29,9 +29,10 @@ export async function POST(request: NextRequest) {
       const title = formData.get("title")
       const content = formData.get("content")
       const image = formData.get("image")
+      const altTag = formData.get("altTag")
       const about = await About.findOne();
       if(about){
-        about.history.push({year,title,content,image})
+        about.history.push({year,title,content,image,altTag})
         await about.save()
         return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 });
       }
@@ -57,6 +58,7 @@ export async function POST(request: NextRequest) {
       const title = formData.get("title")
       const content = formData.get("content")
       const image = formData.get("image")
+      const altTag = formData.get("altTag")
       const about = await About.findOne();
       if(about){
         const toBeEditedItem = about.history.find((item:{_id:string})=>item._id==id)
@@ -66,6 +68,7 @@ export async function POST(request: NextRequest) {
             toBeEditedItem.content = content
             toBeEditedItem.about = about
             toBeEditedItem.image = image
+            toBeEditedItem.altTag = altTag
             await about.save()
             return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 });
         }else{

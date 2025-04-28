@@ -23,15 +23,15 @@ export async function GET() {
     }
     try {
       await connectDB();
-
       const formData = await request.formData();
       const content = formData.get("content")
       const image = formData.get("image")
-
+      const altTag = formData.get("altTag")
       const about = await About.findOne()
       if(about){
             about.strength_and_vision.content = content
             about.strength_and_vision.image = image
+            about.strength_and_vision.altTag = altTag
             await about.save()
             return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 }); 
       }

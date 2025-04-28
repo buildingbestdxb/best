@@ -28,12 +28,14 @@ export async function GET() {
       const content = formData.get("content")
       const title = formData.get("title")
       const image = formData.get("image")
+      const altTag = formData.get("altTag")
 
       const about = await About.findOne()
       if(about){
             about.core_value.content = content
             about.core_value.image = image
             about.core_value.title = title
+            about.core_value.altTag = altTag
             await about.save()
             return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 }); 
       }
