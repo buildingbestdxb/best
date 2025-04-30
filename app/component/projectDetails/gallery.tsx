@@ -1,7 +1,7 @@
 import Image from "next/image";
 import GalleryCard from "./galleryCard";
 import { IndiProjectType } from "@/app/types/IndiProjectType";
-import parse from 'html-react-parser'
+/* import parse from 'html-react-parser' */
 
 const Gallery = ({data}:{
   data:IndiProjectType
