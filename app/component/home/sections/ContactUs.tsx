@@ -1,14 +1,57 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion"; // Import motion
 import parse from 'html-react-parser'
 import { HomeType } from "@/app/types/HomeType";
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { contactFormHome } from "@/app/schemas/contactForm";
+
+
+interface Values {
+  name:string;
+  email: string;
+  subject: string;
+  phone:string;
+  message: string;
+}
+
 
 const ContactUs = ({data}:{
   data:HomeType
 }) => {
+
+  const {
+            register,
+            reset,
+            handleSubmit,
+            formState: {errors},
+        } = useForm<Values>({resolver:zodResolver(contactFormHome)});
+
+        const [submitting,setIsSubmitting] = useState(false)
+
+        const onSubmit = async(data:Values) =>{
+          console.log("called")
+          try {
+           setIsSubmitting(true)
+           const response = await fetch('/api/admin/contact/enquiry',{
+             method:"POST",
+             body:JSON.stringify(data)
+           })
+           if(response.ok){
+             const data = await response.json()
+             alert(data.message)
+             reset()
+           }
+          } catch (error) {
+           console.log("Error submitting form",error)
+          }finally{
+           setIsSubmitting(false)
+          }
+         }
+
+
   return (
     <div>
       <section className="section-spacing relative overflow-hidden">
@@ -85,44 +128,57 @@ const ContactUs = ({data}:{
                 >
                   Get in Touch
                 </motion.h2>
-                <form className="flex flex-col gap-5">
+                <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
                     <motion.input
                       className="bg-transparent border-b-[1px] border-white/20 h-[50px] text-white placeholder:text-white/80 focus:outline-none"
                       type="text"
                       placeholder="Name"
+                      {...register("name")}
                       required
                       initial={{ opacity: 0, x: -50 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.6 }}
                       viewport={{ once: false }} // Animation resets on scroll
                     />
+                    {errors.name && <span className="text-red-500">{errors.name.message}</span>}
+                    </div>
+                    <div className="flex flex-col">
                     <motion.input
                       className="bg-transparent border-b-[1px] border-white/20 h-[50px] text-white placeholder:text-white/80 focus:outline-none"
-                      type="email"
+                      type="text"
                       placeholder="Email"
+                      {...register("email")}
                       required
                       initial={{ opacity: 0, x: -50 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.6 }}
                       viewport={{ once: false }} // Animation resets on scroll
                     />
+                    {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 gap-4">
+                    <div className="flex flex-col">
                     <motion.input
                       className="bg-transparent border-b-[1px] border-white/20 h-[50px] text-white placeholder:text-white/80 focus:outline-none"
-                      type="tel"
+                      type="text"
                       placeholder="Phone"
+                      {...register("phone")}
                       required
                       initial={{ opacity: 0, x: -50 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.6 }}
                       viewport={{ once: false }} // Animation resets on scroll
                     />
+                    {errors.phone && <span className="text-red-500">{errors.phone.message}</span>}
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 gap-4">
                     <motion.textarea
                       placeholder="Message"
+                      {...register("message")}
                       rows={4}
                       required
                       className="bg-transparent border-b-[1px] border-white/20 h-[150px] text-white placeholder:text-white/80 focus:outline-none"
@@ -131,9 +187,11 @@ const ContactUs = ({data}:{
                       transition={{ duration: 0.6, delay: 0.6 }}
                       viewport={{ once: true }} // Animation resets on scroll
                     />
+                    {errors.message && <span className="text-red-500">{errors.message.message}</span>}
                   </div>
-                  <Link
-                    href="#"
+                  <button
+                  disabled={submitting}
+                    type="submit"
                     className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn whts">
                     <div>
                       <Image
@@ -144,7 +202,7 @@ const ContactUs = ({data}:{
                       />
                     </div>
                     Send Message
-                  </Link>
+                  </button>
                 </form>
               </div>
             </div>

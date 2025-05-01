@@ -15,9 +15,10 @@ export async function POST(request: NextRequest) {
         const { name,
         email,
         subject,
+        phone,
         message } = await request.json();
 
-      const enquiry = await Enquiry.create({ name,email,subject,message });
+      const enquiry = await Enquiry.create({ name,email,subject,phone,message });
       if(enquiry){
         return NextResponse.json({ message:"Thank you, we will get back to you soon", success: true }, { status: 200 });
       }else{

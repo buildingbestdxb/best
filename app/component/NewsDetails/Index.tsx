@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import parse from "html-react-parser";
 import moment from "moment";
-import shareIcon from "../../../public/assets/img/news-details/share-icon.svg";
 import { IndiNews } from "@/app/types/IndiNews";
+import ShareArticle from "./ShareArticle";
 
 const NewsDetails = ({data}: {data: IndiNews}) => {
 
@@ -47,7 +47,7 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
         </div>
 
         <div className="grid md:grid-cols-6 md:gap-20 gap-6">
-          <div className="p-14 bg-[#F2F2F2] md:col-span-2 col-span-6 rounded-xl h-fit">
+          <div className="p-14 bg-[#F2F2F2] md:col-span-2 col-span-6 rounded-xl h-[420px]">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-6">
                 <label className="text-[#FE6601] uppercase font-[800]">
@@ -77,7 +77,8 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
               </div>
               <div className="flex flex-col">
                 <div className="uppercase font-[800] text-[#FE6601] flex gap-2 items-center">
-                  <Image src={shareIcon} alt="share-icon" /> Share article
+                  {/* <Image src={shareIcon} alt="share-icon" /> Share article */}
+                <ShareArticle/>
                 </div>
               </div>
             </div>

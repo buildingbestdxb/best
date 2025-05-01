@@ -135,7 +135,7 @@ const Footer = () => {
           <h3 className="text-[18px] uppercase font-bold mb-3 lg:mb-[20px]">
             Address
           </h3>
-          <div className="flex space-x-5 mb-3 lg:mb-[20px]">
+          <div className="lg:flex lg:space-x-5 mb-3 lg:mb-[20px] space-y-2 lg:space-y-0">
             {(Object.keys(addresses) as Array<keyof typeof addresses>).map(
               (city) => (
                 <button

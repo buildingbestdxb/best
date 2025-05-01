@@ -2,6 +2,7 @@ export type ProjectType = {
     data:{
         description:string;
         thumbnail:string;
+        slug:string;
         images:string[];
         location:string;
         name:string;

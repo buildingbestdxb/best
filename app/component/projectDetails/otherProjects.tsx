@@ -99,7 +99,7 @@ const ProjectList = ({data}:{
                   locationName={project.location}
                   title={project.name}
                   image={project.thumbnail}
-                  href={`/project-details/${project._id}?type=${project.type}`}
+                  href={`/project-details/${project.slug}`}
                 />
               </div>
             ))}

@@ -7,8 +7,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AboutType } from "@/app/types/AboutType";
 import parse from 'html-react-parser'
 
-const Historysec = ({data}:{
-  data:AboutType
+const Historysec = ({ data }: {
+  data: AboutType
 }) => {
 
 
@@ -17,22 +17,41 @@ const Historysec = ({data}:{
     start: 0,
     end: data?.data[0].history.length - 1,
   });
+  const [isMobile, setIsMobile] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
+
+  const getLoopedVisibleYears = () => {
+    const history = data?.data[0].history || [];
+    const len = history.length;
+    if (len < 3) return history;
+
+    return [
+      history[(activeIndex - 1 + len) % len],
+      history[activeIndex % len],
+      history[(activeIndex + 1) % len],
+    ];
+  };
+
+  const visibleYears = getLoopedVisibleYears();
 
   // Handle responsive visible range
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
+        setIsMobile(true);
         // Small screens - show 2 items: active + 1 next to it (if possible)
-        const start = Math.max(0, activeIndex - 1);
-        const end = Math.min(data?.data[0].history.length - 1, activeIndex);
+        const start = Math.max(0, activeIndex);
+        const end = Math.min(data?.data[0].history.length - 1, start + 2);
+        console.log(start, end)
         setVisibleRange({ start, end });
-      } else if (window.innerWidth < 1024) {
+      } else if (window.innerWidth < 960) {
+        setIsMobile(true);
         // Medium screens - show 5 items
-        const start = Math.max(0, activeIndex - 2);
-        const end = Math.min(data?.data[0].history.length - 1, activeIndex + 1);
-        setVisibleRange({ start, end });
+        // const start = Math.max(0, activeIndex - 2);
+        // const end = Math.min(data?.data[0].history.length - 1, activeIndex + 1);
+        // setVisibleRange({ start, end });
       } else {
+        setIsMobile(false);
         // Large screens - show all
         setVisibleRange({ start: 0, end: data?.data[0].history.length - 1 });
       }
@@ -74,18 +93,24 @@ const Historysec = ({data}:{
   }, [activeIndex]);
 
   const handleYearClick = (index: number) => {
+    console.log(index)
     setActiveIndex(index);
   };
 
   const handleScrollLeft = () => {
     if (activeIndex > 0) {
       setActiveIndex((prevIndex) => prevIndex - 1);
+    }else{
+      setActiveIndex(data?.data[0].history.length - 1);
     }
   };
 
   const handleScrollRight = () => {
+    console.log("clciked")
     if (activeIndex < data?.data[0].history.length - 1) {
       setActiveIndex((prevIndex) => prevIndex + 1);
+    }else{
+      setActiveIndex(0);
     }
   };
 
@@ -97,7 +122,7 @@ const Historysec = ({data}:{
         }
         return prevIndex + 1;
       });
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [data?.data[0].history.length]);
@@ -154,26 +179,25 @@ const Historysec = ({data}:{
             <div className="w-full pt-2 md:pt-[30px] lg:pt-[120px] relative">
               {/* Mobile Navigation Arrows */}
 
-              <div className="flex justify-between md:hidden">
+              <div className="flex justify-between lg:hidden">
                 <button
                   onClick={handleScrollLeft}
-                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 left-2 transform -translate-y-1/2 z-10  ${
-                    activeIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                  disabled={activeIndex === 0}>
+                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 left-2 transform -translate-y-1/2 z-10  ${activeIndex === 0 ? "" : ""
+                    }`}
+                  >
                   <ChevronLeft size={18} />
                 </button>
 
                 <button
                   onClick={handleScrollRight}
-                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 right-2 transform -translate-y-1/2 z-10  ${
-                    activeIndex === data?.data[0].history.length - 1
-                      ? "opacity-50 cursor-not-allowed"
+                  className={`p-2 rounded-full bg-black/30 text-white absolute top-1/2 right-2 transform -translate-y-1/2 z-10  ${activeIndex === data?.data[0].history.length - 1
+                      ? ""
                       : ""
-                  }`}
-                  disabled={activeIndex === data?.data[0].history.length - 1}>
+                    }`}
+                  >
                   <ChevronRight size={18} />
                 </button>
+                
               </div>
 
               {/* Timeline Container - Scrollable on mobile only */}
@@ -183,34 +207,54 @@ const Historysec = ({data}:{
                 style={{
                   scrollBehavior: "smooth",
                 }}>
-                <div className="flex flex-row items-center min-w-max mx-auto md:mx-0 md:w-full justify-between">
-                  {data?.data[0].history.map((item, index) => (
+                <div className="flex flex-row items-center min-w-max mx-auto md:mx-0 md:w-full justify-between md:px-16 lg:px-0">
+                  {isMobile ? (
+                    visibleYears.map((item, index) => {
+                      const originalIndex = data?.data[0].history.findIndex((h) => h.year === item.year);
+                      return(
+                      <div
+                        key={index}
+                        className="timeline-item relative flex flex-col items-center gap-3 md:gap-5 cursor-pointer mx-4 transition-all duration-300"
+                        onClick={() => handleYearClick(originalIndex)}
+                      >
+                        <span
+                          className={`${index === 1 ? "bg-primary scale-110" : "bg-black/30"
+                            } text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap`}
+                        >
+                          {item.year}
+                        </span>
+                        <div
+                          className={`w-6 h-6 ${index === 1 ? "bg-primary rounded-full" : "bg-[#cccccc]"
+                            } flex justify-center items-center transition-all duration-300`}
+                        >
+                          <div className="w-[10px] h-[10px] bg-primary rounded-full"></div>
+                        </div>
+                      </div>
+                      )})
+                  ) : (data?.data[0].history.map((item, index) => (
                     <div
                       key={index}
-                      className={`timeline-item relative flex flex-col items-center gap-3 md:gap-5 cursor-pointer mx-4 md:mx-0 transition-all duration-300 ${
-                        index < visibleRange.start || index > visibleRange.end
+                      className={`timeline-item relative flex flex-col items-center gap-3 md:gap-5 cursor-pointer mx-4 md:mx-0 transition-all duration-300 ${index < visibleRange.start || index > visibleRange.end
                           ? "hidden md:flex"
                           : "flex"
-                      }`}
+                        }`}
                       onClick={() => handleYearClick(index)}>
                       <span
-                        className={`${
-                          activeIndex === index
+                        className={`${activeIndex === index
                             ? "bg-primary scale-110"
                             : "bg-black/30"
-                        } text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap`}>
+                          } text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap`}>
                         {item.year}
                       </span>
                       <div
-                        className={`w-6 h-6 ${
-                          activeIndex === index
+                        className={`w-6 h-6 ${activeIndex === index
                             ? "bg-primary rounded-full"
                             : "bg-[#cccccc]"
-                        } flex justify-center items-center transition-all duration-300`}>
+                          } flex justify-center items-center transition-all duration-300`}>
                         <div className="w-[10px] h-[10px] bg-primary rounded-full"></div>
                       </div>
                     </div>
-                  ))}
+                  )))}
                 </div>
               </div>
 
