@@ -5,6 +5,10 @@ const careerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slug: {
+    type: String,
+    required: true,
+  },
   department: {
     type: String,
     required: true,
@@ -23,6 +27,14 @@ const careerSchema = new mongoose.Schema({
   },
   datePosted: {
     type: Date,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  experience: {
+    type: String,
     required: true,
   },
   createdAt: {

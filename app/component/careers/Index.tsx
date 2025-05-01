@@ -3,7 +3,7 @@
 import React from "react";
 import HeroSection from "../common/Banner/Hero";
 import OpenPositions from "./OpenPositions";
-import ApplicationForm from "./ApplicationForm";
+// import ApplicationForm from "./ApplicationForm";
 
 export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) {
 
@@ -21,7 +21,7 @@ export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) 
       />
       <OpenPositions />
 
-      <ApplicationForm />
+      {/* <ApplicationForm /> */}
     </>
   );
 }
