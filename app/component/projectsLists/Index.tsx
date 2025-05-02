@@ -41,12 +41,12 @@ export default function Index({data:sectorData}:{data:SectorData}) {
   const { data:projectData }:{data:ProjectType} = useSWR(`/api/admin/projects`, fetcher)
   // const { data:sectorData } = useSWR(`/api/admin/sector?name=${type?.toString().replace(/^(\w)/, (match) => match.toUpperCase())}`, fetcher)
 
-  const filteredData = projectData?.data.filter((item)=>(item.type==type))
+  const filteredData = projectData?.data.filter((item)=>(item.type==type?.toString().replace(/^(\w)/, (match) => match.toUpperCase())))
 
   useEffect(()=>{
     console.log(filteredData)
-    console.log(sectorData)
-  },[filteredData,sectorData])
+    console.log(projectData)
+  },[filteredData,projectData])
 
 
 

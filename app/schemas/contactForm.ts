@@ -4,7 +4,7 @@ export const contactForm = z.object({
     name: z.string().trim().min(2, { message: 'Name is required' }),
     email: z.string().email(),
     subject: z.string().trim().min(5, { message: 'Subject is required' }),
-    message: z.string().trim().min(10, { message: 'Message is required' }),
+    message: z.string().trim().min(1, { message: 'Message is required' }),
     phone: z
     .string()
     .trim()
@@ -14,7 +14,7 @@ export const contactForm = z.object({
   export const contactFormHome = z.object({
     name: z.string().trim().min(2, { message: 'Name is required' }),
     email: z.string().email(),
-    message: z.string().trim().min(10, { message: 'Message is required' }),
+    message: z.string().trim().min(1, { message: 'Message is required' }),
     phone: z
     .string()
     .trim()
