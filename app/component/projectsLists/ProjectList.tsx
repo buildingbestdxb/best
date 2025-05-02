@@ -30,7 +30,7 @@ const ProjectList = ({ data }: {
   const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data?.slice(0, limit));
   const [noLoadMore,setNoLoadMore] = useState(false)
-  const [types,setTypes] = useState([])
+  // const [types,setTypes] = useState([])
   const [selectedType,setSelectedType] = useState("")
   const [selectedStatus,setSelectedStatus] = useState("")
 
@@ -41,17 +41,17 @@ const ProjectList = ({ data }: {
     setVisible(newVisible); // Update visible count
 };
 
-const fetchSectors = async() =>{
-  try {
-    const response = await fetch(`/api/admin/sector`);
-    const res = await response.json();
-    if(response.ok){
-      setTypes(res.data)
-    }
-  } catch (error) {
-    console.error("Error fetching sectors:", error);
-  }
-}
+// const fetchSectors = async() =>{
+//   try {
+//     const response = await fetch(`/api/admin/sector`);
+//     const res = await response.json();
+//     if(response.ok){
+//       setTypes(res.data)
+//     }
+//   } catch (error) {
+//     console.error("Error fetching sectors:", error);
+//   }
+// }
 
 useEffect(()=>{
   if(selectedType == "" && selectedStatus == ""){
@@ -89,7 +89,7 @@ useEffect(()=>{
 
 useEffect(()=>{
   setDisplayData(data?.slice(0, limit))
-  fetchSectors()
+  // fetchSectors()
 },[data])
 
   return (
@@ -100,7 +100,7 @@ useEffect(()=>{
             <div className="block md:flex bg-black p-6 md:p-7 pt-3 items-center mb-6 rounded-sm">
               <div className="w-full md:w-full">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-[40px]">
-                  <div className="col-span-2">
+                  <div className="col-span-4">
                     <div className="relative w-full">
                       <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedStatus} onChange={(e)=>setSelectedStatus(e.target.value)}>
                         <option className="bg-black text-white" value="">Status</option>
@@ -110,7 +110,7 @@ useEffect(()=>{
 
                     </div>
                   </div>
-                  <div className="col-span-2">
+                  {/* <div className="col-span-2">
                     <div className="relative w-full">
                       <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedType} onChange={(e)=>setSelectedType(e.target.value)}>
                         <option className="bg-black text-white" value="">Industries </option>
@@ -120,7 +120,7 @@ useEffect(()=>{
                       </select>
                     </div>
 
-                  </div>
+                  </div> */}
 
                   <div className="relative w-full bg-primary flex items-center justify-center cursor-pointer" onClick={()=>{
                     setSelectedStatus("")

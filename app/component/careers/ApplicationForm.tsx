@@ -34,7 +34,7 @@ type FormData = {
   linkedinProfile:string;
 }
 
-export default function ApplicationForm({data:fetchedData}:{data:{data:{title:string}}}) {
+export default function ApplicationForm({data:fetchedData}:{data:{data:{title:string,responsibilities:string[]}}}) {
 
   const { register, setValue, formState: { errors }, handleSubmit, setError, reset, control,watch } = useForm<FormData>({ resolver: zodResolver(careerForm) })
   const [choosenFile, setChoosenFile] = useState<File | null>(null)
@@ -480,7 +480,7 @@ export default function ApplicationForm({data:fetchedData}:{data:{data:{title:st
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                     viewport={{ once: true }}>
-                    <span className="text-black/50 text-[18px]">Have you handled responsibilities such as</span>
+                    <span className="text-black/50 text-[18px]">Have you handled responsibilities such as {fetchedData?.data.responsibilities.map((item:string,index:number)=>(<span key={index}>{index === fetchedData?.data.responsibilities.length - 1 ? item : item + ", "}</span>))}</span>
                     {["Yes", "No"].map((experience) => (
                       <label
                         key={experience}

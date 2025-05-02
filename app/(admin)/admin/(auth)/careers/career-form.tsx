@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { departments } from "./departmentData";
 import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface CareerFormData {
   title: string;
@@ -22,6 +22,7 @@ interface CareerFormData {
   type:string;
   description: string;
   experience:string;
+  responsibilities:string[]
 }
 
 interface CareerFormProps {
@@ -30,6 +31,9 @@ interface CareerFormProps {
 
 const CareerForm = ({ careerId }: CareerFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [responsibility,setResponsibility] = useState("")
+  const [responsibilities,setResponsibilities] = useState<string[]>([])
+  const [departments,setDepartments] = useState<{_id:string,name:string}[]>([])
   const router = useRouter();
   const {
     register,
@@ -38,6 +42,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
     control,
     watch,
     getValues,
+    setError,
     formState: { errors },
   } = useForm<CareerFormData>({
     defaultValues: {
@@ -50,6 +55,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       type: "",
       description: "",
       experience: "",
+      responsibilities:[]
     },
   });
 
@@ -57,6 +63,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
     const fetchCareer = async () => {
       const response = await fetch(`/api/admin/careers/byid?id=${careerId}`);
       const data = await response.json();
+      console.log(data)
       setValue("title", data.data.title);
       // setValue("slug", data.data.slug);
       setValue("location", data.data.location);
@@ -69,6 +76,10 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       setValue("type",data.data.type)
       setValue("experience",data.data.experience)
       setValue("description",data.data.description)
+      if(data.data.responsibilities){
+        setResponsibilities(data.data.responsibilities)
+        setValue("responsibilities",data.data.responsibilities)
+      }
     };
 
     if(careerId){
@@ -76,8 +87,16 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
     }
   }, [careerId]);
 
+  useEffect(()=>{
+    fetchDepartments()
+  },[])
+
   const onSubmit = async (data: CareerFormData) => {
     try {
+      if(responsibilities.length === 0){
+        setError("responsibilities", { type: "required", message: "Responsibilities is required" });
+        return
+      }
       setIsLoading(true);
       if (careerId) {
         const response = await fetch(`/api/admin/careers/byid?id=${careerId}`, {
@@ -102,6 +121,33 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       setIsLoading(false);
     }
   };
+
+  const fetchDepartments = async () =>{
+    try {
+      const response = await fetch("/api/admin/careers/department")
+      const data = await response.json()
+      setDepartments(data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const handleAddResponsibility = () =>{
+    if(!responsibility){
+      return
+    }
+    setResponsibilities([...responsibilities,responsibility])
+    setResponsibility("")
+    setValue("responsibilities",[...responsibilities,responsibility])
+  }
+
+  const handleRemoveResponsibility = (index:number) => {
+    const updatedResponsibilities = [...responsibilities]
+    updatedResponsibilities.splice(index, 1)
+    setResponsibilities(updatedResponsibilities)
+    setValue("responsibilities",updatedResponsibilities)
+  }
 
   useEffect(()=>{
     console.log("called")
@@ -196,7 +242,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
                 </SelectTrigger>
                 <SelectContent>
                   {departments.map((item,index)=>(
-                    <SelectItem value={item.value} key={index}>{item.title}</SelectItem>
+                    <SelectItem value={item.name} key={index}>{item.name}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -243,6 +289,27 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
           />
           {errors.datePosted && <p className="mt-1 text-sm text-red-600">{errors.datePosted.message}</p>}
         </div>
+
+           <div>
+            <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Responsibilities
+            </Label>
+        <div className="border border-gray-300 p-4 w-full h-[200px]">
+            <div className="relative">
+            <Input value={responsibility} placeholder="Type in responsibilities" onChange={(e) => setResponsibility(e.target.value)} type="text" id="responsibility" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"/>
+            <Button type="button" className="absolute top-0 right-0" onClick={handleAddResponsibility}>Add</Button>
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-2">
+            {responsibilities.map((item,index)=>(
+              <span className="bg-gray-200 p-2 rounded relative" key={index}>
+                {item}
+                <IoIosCloseCircle onClick={()=>handleRemoveResponsibility(index)} className="absolute -top-2 -right-2 cursor-pointer text-md"/>
+                </span>
+            ))}
+            </div>
+        </div>
+        </div>
+        {errors.responsibilities && <p className="mt-1 text-sm text-red-600">{errors.responsibilities.message}</p>}
 
         <div>
                   <Label htmlFor="title" className="block text-sm font-medium text-gray-700">

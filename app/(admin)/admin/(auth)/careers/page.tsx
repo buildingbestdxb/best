@@ -40,6 +40,8 @@ const CareersPage = () => {
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [requests,setRequests] = useState<{fullName:string;email:string;phone:string;appliedFor:string}[]>([])
+  const [departments,setDepartments] = useState<{_id:string,name:string}[]>([])
+  const [departmentName,setDepartmentName] = useState("")
   const router = useRouter();
 
   const fetchCareers = async () => {
@@ -54,6 +56,7 @@ const CareersPage = () => {
     fetchBanner()
     fetchMeta()
     fetchRequests()
+    fetchDepartments()
   }, []);
 
   const handleClickNewCareer = () => {
@@ -150,6 +153,67 @@ const CareersPage = () => {
     }
 }
 
+const handleAddNewDepartment = async () =>{
+    try {
+        const response = await fetch('/api/admin/careers/department', {
+            method: "POST",
+            body: JSON.stringify({ name: departmentName })
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
+const fetchDepartments = async () => {
+    try {
+        const response = await fetch('/api/admin/careers/department')
+        if (response.ok) {
+            const data = await response.json()
+            if (data.data) {
+                setDepartments(data.data)
+            }
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:", error)
+    }
+}
+
+const handleEditDepartment = async (id:string) =>{
+    try {
+        const response = await fetch(`/api/admin/careers/department?id=${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ name: departmentName })
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
+const handleDeleteDepartment = async (id:string) =>{
+    try {
+        const response = await fetch(`/api/admin/careers/department?id=${id}`, {
+            method: "DELETE"
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
   if (isLoading) {
     return (
       <div className="p-6 flex justify-center items-center">
@@ -186,6 +250,58 @@ const CareersPage = () => {
         <Label>Banner Alt</Label>
         <Input value={watch('bannerAlt')} onChange={(e) => setValue("bannerAlt", e.target.value)} />
       </div>
+
+
+      <div className='flex flex-col gap-2'>
+                <div className='flex justify-between'>
+                <h1 className='font-bold text-3xl'>Departments</h1>
+                <Dialog>
+                            <DialogTrigger onClick={()=>setDepartmentName("")}>Add New</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Add New Department</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-1'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} />
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose onClick={handleAddNewDepartment}>Save</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                </div>
+                <div className='border h-[200px] p-2 flex flex-col gap-2 overflow-y-auto'>
+                    {departments && departments.map((item:{_id:string,name:string},index)=>(
+                        <div className='w-full bg-orange-300 p-4 rounded-lg flex justify-between items-center' key={index}>
+                        <div>
+                            {item.name}
+                        </div>
+                        <div className='flex gap-5'>
+                        <Dialog>
+                            <DialogTrigger onClick={()=>setDepartmentName(item.name)}>Edit</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Edit Department</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-1'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} />
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose onClick={()=>handleEditDepartment(item._id)}>Save</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                        <Button className='bg-transparent hover:bg-transparent text-sm border-none shadow-none font-light' onClick={()=>handleDeleteDepartment(item._id)}>Delete</Button>
+                        </div>
+                    </div>
+                    ))}
+                
+                </div>
+            </div>
+
+
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Careers</h1>
         <Button className="bg-primary text-white" onClick={handleClickNewCareer}>

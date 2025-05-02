@@ -14,6 +14,7 @@ interface CareerData {
     experience:string
     type:string
     description:string
+    responsibilities:string[]
   }
 }
 

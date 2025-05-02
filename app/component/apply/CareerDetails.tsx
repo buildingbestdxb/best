@@ -25,7 +25,7 @@ export default function Index({data}:{data:CareerData}) {
   <div className="container">
         <div className="b   p-6">
             <h1 className="text-lg text-black font-bold    uppercase">{data?.data.title}</h1>
-            <p className="text-gray-600 text-md  mb-3">Head Office – {data?.data.location}</p>
+            <p className="text-gray-600 text-md  mb-3">{data?.data.location}</p>
             <p className="text-gray-500 text-sm">Department: <span className="font-semibold">{data?.data.department}</span></p>
             <p className="text-gray-500 text-sm">Experience Required: <span className="font-semibold">{data?.data.experience}</span></p>
             <p className="text-gray-500 text-sm">Employment Type: <span className="font-semibold">{data?.data.type}</span></p>
@@ -53,7 +53,7 @@ export default function Index({data}:{data:CareerData}) {
                 <li>Proficient in ERP systems and Microsoft Office tools</li>
                 <li>Strong leadership, communication, and decision-making skills</li>
             </ul> */}
-            <div className="mt-6">
+            <div className="mt-6 jobdesc">
               {parse(data?.data.description)}
             </div>
 
