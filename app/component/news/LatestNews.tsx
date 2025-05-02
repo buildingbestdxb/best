@@ -1,7 +1,7 @@
 "use client";
 
 import ImageCard from "./ImageCard";
-import Image from "next/image";
+// import Image from "next/image";
 import SecHr from "../common/SecDivider/SecHr";
 import ImageContentCard from "./ImageContentCard";
 // import ImageCol from "./ImageCol";

@@ -6,7 +6,7 @@ import parse from 'html-react-parser'
 import useSWR from "swr";
 import { HomeType } from "@/app/types/HomeType";
 import { SectorType } from "@/app/types/SectorType";
-import Link from "next/link";
+// import Link from "next/link";
 
 
 
