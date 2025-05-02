@@ -202,6 +202,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
               </Select>
             )}
           />
+          {errors.department && <p className="mt-1 text-sm text-red-600">{errors.department.message}</p>}
         </div>
 
         <div>
@@ -256,6 +257,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
                       <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1" />
                     )}
                   />
+                  {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>}
                   </div>
 
 

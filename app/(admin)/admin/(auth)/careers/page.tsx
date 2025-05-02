@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialogue-box'
+import Link from "next/link";
 
 type Career = {
   _id: string;
@@ -37,6 +39,7 @@ const CareersPage = () => {
   const [careers, setCareers] = useState<Career[]>([]);
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
+  const [requests,setRequests] = useState<{fullName:string;email:string;phone:string;appliedFor:string}[]>([])
   const router = useRouter();
 
   const fetchCareers = async () => {
@@ -50,6 +53,7 @@ const CareersPage = () => {
     fetchCareers()
     fetchBanner()
     fetchMeta()
+    fetchRequests()
   }, []);
 
   const handleClickNewCareer = () => {
@@ -132,6 +136,20 @@ const CareersPage = () => {
     }
   }
 
+  const fetchRequests = async() =>{
+    try {
+        const response = await fetch('/api/admin/careers/request')
+        if(response.ok){
+            const data = await response.json()
+            if(data.data){
+                setRequests(() => [...data.data].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0,3));
+            }
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
   if (isLoading) {
     return (
       <div className="p-6 flex justify-center items-center">
@@ -143,6 +161,7 @@ const CareersPage = () => {
     );
   }
   return (
+    <div>
     <div className="p-6 flex flex-col gap-5">
       <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
                                 <div className='flex justify-between'>
@@ -203,6 +222,55 @@ const CareersPage = () => {
           ))}
         </div>
       )}
+    </div>
+
+    <div className='flex flex-col gap-2'>
+                <div className='flex justify-between'>
+                <div className='font-bold'>Applications</div>
+                <Link href={'/admin/careers/allrequest'}>View All</Link>
+                </div>
+                <div className='border h-[200px] p-2 flex flex-col gap-2'>
+                    {requests && requests.map((item:{fullName:string,email:string,phone:string,appliedFor:string},index)=>(
+                        <div className='w-full bg-orange-300 p-4 rounded-lg flex justify-between items-center' key={index}>
+                        <div>
+                            {item.fullName}
+                        </div>
+                        <div className='flex gap-5'>
+                        <Dialog>
+                            <DialogTrigger>View</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Details</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-2'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={item.fullName} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Email</Label>
+                                            <Input value={item.email} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Phone</Label>
+                                            <Input value={item.phone} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Applied For</Label>
+                                            <Input value={item.appliedFor} readOnly/>
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose>Close</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                        {/* <Button className='bg-transparent hover:bg-transparent text-sm border-none shadow-none font-light'>Delete</Button> */}
+                        </div>
+                    </div>
+                    ))}
+                
+                </div>
+            </div>
+
     </div>
   );
 };

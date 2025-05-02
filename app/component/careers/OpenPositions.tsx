@@ -24,7 +24,7 @@ export default function OpenPositions() {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const { data }:{data:CareerType} = useSWR(`/api/admin/careers`, fetcher)
-  const [filteredData,setFilteredData] = useState<{title:string;department:string;location:string;applyLink:string;type:string}[]>([])
+  const [filteredData,setFilteredData] = useState<{title:string;department:string;location:string;applyLink:string;type:string;slug:string}[]>([])
 
 
   useEffect(()=>{
@@ -66,7 +66,7 @@ export default function OpenPositions() {
               </div>
             </div>
           </div>
-          {filteredData?.map((job:{title:string;department:string;type:string;location:string;applyLink:string}, index) => (
+          {filteredData?.map((job:{title:string;department:string;type:string;location:string;applyLink:string,slug:string}, index) => (
             <div key={index} className="w-full">
               <div className="grid lg:grid-cols-2 gap-x-6 items-center  w-full">
                 <div className="grid lg:grid-cols-2 items-center   w-full">
@@ -90,7 +90,7 @@ export default function OpenPositions() {
                   <div className="applybtm w-full flex justify-end">
                     {/* <ButtonWithIcon link={job.applyLink} buttonText="Apply Now" /> */}
 
-                    <ButtonWithIcon link={'/apply'} buttonText="Apply Now" />
+                    <ButtonWithIcon link={`/apply/${job.slug}`} buttonText="Apply Now" />
                   </div>
                 </div>
               </div>

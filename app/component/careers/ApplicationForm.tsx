@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion"; // Import motion
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { careerForm } from "@/app/schemas/careerForm";
 
@@ -34,11 +34,13 @@ type FormData = {
   linkedinProfile:string;
 }
 
-export default function ApplicationForm() {
+export default function ApplicationForm({data:fetchedData}:{data:{data:{title:string}}}) {
 
-  const { register, setValue, formState: { errors }, handleSubmit, setError, reset } = useForm<FormData>({ resolver: zodResolver(careerForm) })
+  const { register, setValue, formState: { errors }, handleSubmit, setError, reset, control,watch } = useForm<FormData>({ resolver: zodResolver(careerForm) })
   const [choosenFile, setChoosenFile] = useState<File | null>(null)
+  const [coverLetter, setCoverLetter] = useState<File | null>(null)
 
+  console.log("errors",errors)
   const onSubmit = async (typedData: FormData) => {
     try {
       const formData = new FormData();
@@ -49,15 +51,35 @@ export default function ApplicationForm() {
         body: formData,
       });
 
+      let coverLetterData = null;
+      if(coverLetter){
+        const coverLetterFormData = new FormData();
+        coverLetterFormData.append("file", coverLetter || "");
+        coverLetterFormData.append("fileType", "coverLetter");
+        const coverLetterResponseAfterUpload = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: coverLetterFormData,
+        });
+        if (coverLetterResponseAfterUpload.status !== 200) {
+          alert("Failed to submit form")
+          return;
+        } else {
+          coverLetterData = await coverLetterResponseAfterUpload.json()
+          console.log("coverLetterUrl", coverLetterData.url)
+          setValue("coverLetter", coverLetterData.url)
+        }
+      }
+
       if (responseAfterUpload.status !== 200) {
         alert("Failed to submit form")
         return;
       } else {
         const data = await responseAfterUpload.json()
         console.log("url", data.url)
+        console.log("title",fetchedData.data.title)
         const response = await fetch("/api/admin/careers/request", {
           method: "POST",
-          body: JSON.stringify({ ...typedData, resume: data.url }),
+          body: JSON.stringify({ ...typedData, resume: data.url,appliedFor:fetchedData.data.title,coverLetter:coverLetterData?.url }),
         });
 
         if (response.ok) {
@@ -83,6 +105,16 @@ export default function ApplicationForm() {
     setValue("resume", file.name)
   }
 
+  const handleCoverLetterChoose = (file: File | null) => {
+    if (file?.type !== "application/pdf") {
+      setError("coverLetter", { message: "Provide only PDFs" })
+      return;
+    }
+    setCoverLetter(file)
+    setValue("coverLetter", file.name)
+  }
+
+
   return (
     <div className=" relative overflow-hidden pb-[100px] pbsts">
       <div className="container p-0">
@@ -97,7 +129,7 @@ export default function ApplicationForm() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }} // Animation resets on scroll
             >
-              Please complete the form below to apply for the position of [Job Title] at Building Co. BEST LLC. Only shortlisted candidates will be contacted.
+              Please complete the form below to apply for the position of {fetchedData?.data.title} at Building Co. BEST LLC. Only shortlisted candidates will be contacted.
             </motion.h2>
 
             <form className="flex flex-col gap-[32px]" onSubmit={handleSubmit(onSubmit)}>
@@ -139,7 +171,7 @@ export default function ApplicationForm() {
                 <div className="flex flex-col">
                   <motion.input
                     className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
-                    type="email"
+                    type="text"
                     placeholder="Mobile Number"
                     {...register("phone")}
                     initial={{ opacity: 0, x: -50 }}
@@ -187,7 +219,7 @@ export default function ApplicationForm() {
                     transition={{ duration: 0.6, delay: 0.6 }}
                     viewport={{ once: true }}>
                     <span className="text-black/50 text-[18px]">Gender:</span>
-                    {["Male", "Female", "Other"].map((gender) => (
+                    {["Male", "Female"].map((gender) => (
                       <label
                         key={gender}
                         className="flex items-center gap-2 cursor-pointer">
@@ -246,7 +278,7 @@ export default function ApplicationForm() {
                   <motion.input
                     className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                     placeholder="Years of experience in construction industry"
-                    {...register("experienceinconstruction")}
+                    {...register("experienceinconstruction",{required:true})}
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
@@ -274,7 +306,7 @@ export default function ApplicationForm() {
                           type="radio"
                           value={experience.toLowerCase()}
                           className="hidden peer"
-                          {...register("experienceinuae")}
+                          {...register("experienceinuae",{required:true})}
                         />
                         <div className="w-4 h-4 border border-black/20 rounded-full flex items-center justify-center peer-checked:bg-[#FE6601] peer-checked:scale-110  transition-all">
                           <div className="w-2 h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100"></div>
@@ -382,34 +414,31 @@ export default function ApplicationForm() {
 
                   </motion.div>
                   {errors.hasrelative && <span className="text-red-500">{errors.hasrelative.message}</span>}
-                  <div>
-                    If Yes, please provide name and relationship.
-                    <div className="flex flex-col">
-                      <motion.input
-                        className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
+                  
+                  {watch("hasrelative") === "yes" && <Controller control={control} name="relativeName" render={({ field }) => (
+                    <div>
+                      If Yes, please provide name and relationship.
+                      <div className="flex flex-col">
+                        <motion.input
+                          className="bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
                         placeholder="Name and relationship"
-                        {...register("relativeName")}
+                        {...field}
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
                         viewport={{ once: true }} // Animation resets on scroll
                       />
-                      {errors.relativeName && <span className="text-red-500">{errors.relativeName.message}</span>}
                     </div>
+                      {errors.relativeName && <span className="text-red-500">{errors.relativeName.message}</span>}
                   </div>
+                  )}
+                />}
                 </div>
-
-
-
-
-
-
-                
 
               </div>
 
               <div className="flex flex-col gap-10">
-                <div className="underline font-bold">Technical Screening - [title] specific</div>
+                <div className="underline font-bold">Technical Screening - {fetchedData?.data.title} specific</div>
 
                 <div className="grid grid-cols-1 gap-10">
 
@@ -439,7 +468,10 @@ export default function ApplicationForm() {
                       </label>
                     ))}
 
+
+
                   </motion.div>
+                  {errors.haspreviouswork && <span className="text-red-500">{errors.haspreviouswork.message}</span>}
 
 
                   <motion.div
@@ -469,6 +501,7 @@ export default function ApplicationForm() {
                     ))}
 
                   </motion.div>
+                  {errors.hasresponsibilities && <span className="text-red-500">{errors.hasresponsibilities.message}</span>}
 
                   <motion.div>
                   <span className="text-black/50 text-[18px]">What software or systems are you proficient in that are relevant to this role?</span>
@@ -519,7 +552,7 @@ export default function ApplicationForm() {
 
 
                   <motion.div>
-                  <span className="text-black/50 text-[18px]">Please describe your experience and skills that make you a strong candidate for the role of [title]<br/>
+                  <span className="text-black/50 text-[18px]">Please describe your experience and skills that make you a strong candidate for the role of {fetchedData?.data.title}<br/>
                   <i className="text-black/50 text-[14px]">You may include relevant projects, challenges you managed, tools or software you used, and key achievements.</i></span>
                     <div className="flex flex-col">
                       <motion.textarea
@@ -579,7 +612,7 @@ export default function ApplicationForm() {
                       id="coverLetter"
                       type="file"
                       className="block w-full text-[16px] text-black/60 file:py-2 file:px-8 file:rounded-lg file:border-0 file:text-[16px] file:bg-black file:text-white hover:file:bg-black/20 pr-[3em]"
-                      onChange={(e)=>handleImageChoose(e?.target?.files?.[0] || null)}
+                      onChange={(e)=>handleCoverLetterChoose(e?.target?.files?.[0] || null)}
                     />
                     
                   </div>

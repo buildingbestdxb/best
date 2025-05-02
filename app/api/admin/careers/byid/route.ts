@@ -6,8 +6,13 @@ import { verifyAdmin } from "@/lib/verifyAdmin";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
+  const slug = searchParams.get("slug");
 
   await connectDB();
+  if(slug){
+    const career = await Careers.findOne({slug});
+    return NextResponse.json({ data: career, success: true }, { status: 200 });
+  }
   const career = await Careers.findById(id);
   return NextResponse.json({ data: career, success: true }, { status: 200 });
 }

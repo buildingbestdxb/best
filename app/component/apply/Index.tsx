@@ -6,24 +6,35 @@ import CareerDetails from "./CareerDetails";
 import HeroSection from "../Banner/Hero";
 import ApplicationForm from "../careers/ApplicationForm";
 
-export default function Index() {
+interface CareerData {
+  data:{
+    title:string
+    location:string
+    department:string
+    experience:string
+    type:string
+    description:string
+  }
+}
+
+export default function Index({data}:{data:CareerData}) {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
 
-  const { data }:{data:{data:{image:string}[]}} = useSWR(`/api/admin/careers/banner`, fetcher)
+  const { data:bannerData }:{data:{data:{image:string}[]}} = useSWR(`/api/admin/careers/banner`, fetcher)
 
   return (
     <>
        <HeroSection
-              imageSrc={data?.data[0]?.image == "" ? "/assets/img/careers/banner.jpg" : data?.data[0]?.image}
+              imageSrc={bannerData?.data[0]?.image == "" ? "/assets/img/careers/banner.jpg" : bannerData?.data[0]?.image}
               title="Careers"
               breadcrumb=""
             />
 
 
 
-              <CareerDetails />
-                <ApplicationForm />
+              <CareerDetails data={data}/>
+                <ApplicationForm data={data}/>
 
     </>
   );

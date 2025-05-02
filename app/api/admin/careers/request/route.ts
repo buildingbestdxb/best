@@ -4,29 +4,63 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     try {
       
-        const { firstName,
-        lastName,
+      const {
+        fullName,
         email,
         phone,
+        nationality,
+        cityandcountry,
         gender,
         dob,
-        nationality,
-        location,
         experience,
+        experienceinconstruction,
+        experienceinuae,
+        currentposition,
+        currentemployer,
+        currentsalary,
+        expectedsalary,
+        noticeperiod,
+        hasrelative,
+        relativeName,
+        haspreviouswork,
+        hasresponsibilities,
+        softwares,
+        companyType,
         skills,
-        resume } = await request.json();
-
-      const jobRequest = await JobRequest.create({ firstName,
-        lastName,
+        resume,
+        coverLetter,
+        linkedinProfile,
+        appliedFor
+      } = await request.json();
+      
+      const jobRequest = await JobRequest.create({
+        fullName,
         email,
         phone,
+        nationality,
+        cityandcountry,
         gender,
         dob,
-        nationality,
-        location,
         experience,
+        experienceinconstruction,
+        experienceinuae,
+        currentposition,
+        currentemployer,
+        currentsalary,
+        expectedsalary,
+        noticeperiod,
+        hasrelative,
+        relativeName,
+        haspreviouswork,
+        hasresponsibilities,
+        softwares,
+        companyType,
         skills,
-        resume });
+        resume,
+        coverLetter,
+        linkedinProfile,
+        appliedFor
+      });
 
       return NextResponse.json({ data: jobRequest, success: true }, { status: 200 });
     } catch (error) {
@@ -34,4 +68,39 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Failed to create job request" }, { status: 500 });
     }
   }
+
+
+  export async function GET(request: NextRequest){
+    try {
+      const searchParams = request.nextUrl.searchParams
+      const id = searchParams.get('id')
+      if(id){
+        const jobRequest = await JobRequest.findById(id)
+        return NextResponse.json({ data: jobRequest, success: true }, { status: 200 });
+      }
+        const jobRequests = await JobRequest.find()
+        return NextResponse.json({ data: jobRequests, success: true }, { status: 200 });
+    } catch (error) {
+        console.error("Error fetching job requests:", error);
+        return NextResponse.json({ error: "Failed to fetch job requests" }, { status: 500 });
+    }
+}
+
+export async function DELETE(request: NextRequest){
+    try {
+        const searchParams = request.nextUrl.searchParams
+        const id = searchParams.get('id')
+        if(id){
+            const jobRequest = await JobRequest.findByIdAndDelete(id)
+            if(!jobRequest){
+                return NextResponse.json({ error: "Job request not found" }, { status: 404 });
+            }
+            return NextResponse.json({ message: "Job request deleted successfully", success: true }, { status: 200 });
+        }
+    } catch (error) {
+        console.error("Error deleting job request:", error);
+        return NextResponse.json({ error: "Failed to delete job request" }, { status: 500 });
+    }
+}
+
   
