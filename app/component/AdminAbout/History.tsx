@@ -26,6 +26,7 @@ interface Values {
     content: string
     image: string;
     title:string;
+    altTag:string;
 }
 
 const History = () => {
@@ -56,7 +57,7 @@ const History = () => {
             formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
-
+            formData.append("altTag", getValues("altTag"))
             const response = await fetch(`/api/admin/about/history?id=${id}`, {
                 method: "PATCH",
                 body: formData,
@@ -94,11 +95,12 @@ const History = () => {
         fetchData()
     }, [])
 
-    const handleSetEditHistory = (year:string,title:string,content:string,image:string) => {
+    const handleSetEditHistory = (year:string,title:string,content:string,image:string,altTag:string) => {
         setValue("year", year)
         setValue("title", title)
         setValue("content", content)
         setValue("image", image)
+        setValue("altTag", altTag)
     }
 
 
@@ -116,7 +118,7 @@ const History = () => {
             formData.append("title", getValues("title"))
             formData.append("content", getValues("content"))
             formData.append("image", getValues("image"))
-
+            formData.append("altTag", getValues("altTag"))
             const response = await fetch(`/api/admin/about/history`, {
                 method: "POST",
                 body: formData
@@ -159,11 +161,15 @@ const History = () => {
                             <DialogTrigger onClick={handleSetAddHistory}>Add History</DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Edit client content</DialogTitle>
+                                    <DialogTitle>Add History</DialogTitle>
                                     <DialogDescription>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Image</Label>
                                             <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Alt Tag</Label>
+                                            <Input {...register("altTag")} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Year</Label>
@@ -191,20 +197,24 @@ const History = () => {
             </div>
 
 
-            {histories && histories.map((item:{title:string;year:string;content:string;_id:string,image:string;})=>(
+            {histories && histories.map((item:{title:string;year:string;content:string;_id:string,image:string;altTag:string})=>(
                 <div className='border-dashed border-2 p-4 flex flex-col gap-5' key={item._id}>
                 
                 <div className='flex justify-end'>
                     <div className='flex gap-5'>
                         <Dialog>
-                            <DialogTrigger onClick={()=>handleSetEditHistory(item.year,item.title,item.content,item.image)}>Edit</DialogTrigger>
+                            <DialogTrigger onClick={()=>handleSetEditHistory(item.year,item.title,item.content,item.image,item.altTag)}>Edit</DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Edit client content</DialogTitle>
+                                    <DialogTitle>Edit History</DialogTitle>
                                     <DialogDescription>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Image</Label>
                                             <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Alt Tag</Label>
+                                            <Input {...register("altTag")} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Year</Label>

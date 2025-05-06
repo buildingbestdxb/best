@@ -21,6 +21,9 @@ interface Values {
     mail: string;
     address_card: string;
     address: string;
+    metaTitle: string;
+    metaDescription: string;
+    bannerAlt: string;
 }
 
 
@@ -95,8 +98,8 @@ const AdminContact = () => {
             if(response.ok){
                 const data = await response.json()
                 if(data.data){
-                    
                     setValue("bannerImage",data.data[0].image)
+                    setValue("bannerAlt",data.data[0].alt)
                 }
             }
         } catch (error) {
@@ -108,6 +111,7 @@ const AdminContact = () => {
         fetchData()
         fetchEnquiry()
         fetchBanner()
+        fetchMeta()
     },[])
 
 
@@ -167,6 +171,7 @@ const AdminContact = () => {
         try {
             const formData = new FormData()
             formData.append("bannerImage",getValues("bannerImage"))
+            formData.append("bannerAlt",getValues("bannerAlt"))
             formData.append("pageName","contact")
             const response = await fetch(`/api/admin/contact/banner`,{
                 method:"PATCH",
@@ -182,9 +187,57 @@ const AdminContact = () => {
         }
     }
 
+    const handleMetaSave = async() =>{
+        try {
+            const formData = new FormData()
+            formData.append("metaTitle",getValues("metaTitle"))
+            formData.append("metaDescription",getValues("metaDescription"))
+            const response = await fetch(`/api/admin/contact/meta`,{
+                method:"PATCH",
+                body:formData
+            })
+            if(response.ok){
+                const data = await response.json()
+                alert(data.message)
+                fetchBanner()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const fetchMeta = async() =>{
+        try {
+            const response = await fetch('/api/admin/contact/meta')
+            if(response.ok){
+                const data = await response.json()
+                if(data){
+                    setValue("metaTitle",data.contact.metaTitle)
+                    setValue("metaDescription",data.contact.metaDescription)
+                }
+            }
+        } catch (error) {
+            console.log("Failed to fetch data:",error)
+        }
+    }
+
     return (
         <div className='flex flex-col gap-5'>
             <div className='text-3xl font-bold'>Contact</div>
+            <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                                <div className='flex justify-between'>
+                                    <div>Meta Section</div>
+                                    <Button onClick={handleMetaSave}>Save</Button>
+                                </div>
+                                <div>
+                                    <Label>Meta Title</Label>
+                                    <Input {...register("metaTitle")} />
+                                </div>
+                                <div>
+                                    <Label>Meta Description</Label>
+                                    <Input {...register("metaDescription")} />
+                                </div>
+                            </div>
             <div className='flex flex-col gap-5'>
                 <div>
                     <div className='flex justify-between mb-5'>
@@ -192,6 +245,8 @@ const AdminContact = () => {
                         <Button onClick={handleBannerSave}>Save Banner</Button>
                     </div>
                     <ImageUploader value={watch('bannerImage')} onChange={(url)=>setValue("bannerImage",url)}/>
+                    <Label>Banner Alt</Label>
+                    <Input {...register("bannerAlt")} />
                 </div>
 
                 <div className='flex justify-between'>

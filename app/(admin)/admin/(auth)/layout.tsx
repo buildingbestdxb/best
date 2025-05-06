@@ -9,6 +9,7 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import ClientSideLink from "../client-side-link";
+import { CodeIcon } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "/admin", icon: HomeIcon },
@@ -19,6 +20,7 @@ const navItems = [
   { name: "Contact", href: "/admin/contact", icon: EnvelopeIcon },
   { name: "Careers", href: "/admin/careers", icon: BriefcaseIcon },
   { name: "Accreditation", href: "/admin/accreditation", icon: CheckBadgeIcon },
+  { name: "Tag Codes", href: "/admin/tags", icon: CodeIcon },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

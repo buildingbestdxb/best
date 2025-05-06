@@ -2,22 +2,25 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type ProjectCardProps = {
   image: string;
   title: string;
   locationName: string;
   href:string;
+  imageAlt?: string;
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   title,
   locationName,
-  href
+  href,
+  imageAlt
 }) => {
   return (
-    <a href={href}>
+    <Link href={href}>
       <motion.div
         className="relative h-[300px] lg:h-[449px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
         initial={{ opacity: 0, y: 30 }}
@@ -26,7 +29,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         viewport={{ once: true }}>
         {/* Image with gradient overlay */}
         <div className="relative w-full h-full">
-          <Image src={image || "data:"} alt={title} fill className="object-cover" />
+          <Image src={image || "data:"} alt={imageAlt || title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/0 rounded-custom"></div>
         </div>
 
@@ -72,7 +75,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </motion.div>
         </motion.div>
       </motion.div>
-    </a>
+    </Link>
   );
 };
 

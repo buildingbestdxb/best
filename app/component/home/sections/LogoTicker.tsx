@@ -7,25 +7,28 @@ import React from "react";
 import Image from "next/image";
 import { AboutType } from "@/app/types/AboutType";
 
-const logos = [
-  "/assets/img/clients/cl-01.png",
-  // "/assets/img/clients/cl-02.png",
-  "/assets/img/clients/cl-03.png",
-  "/assets/img/clients/cl-04.png",
-  "/assets/img/clients/cl-05.png",
-  "/assets/img/clients/cl-06.png",
-  "/assets/img/clients/cl-07.png",
-  "/assets/img/clients/cl-08.png",
+// const logos = [
+//   "/assets/img/clients/cl-01.png",
+//   // "/assets/img/clients/cl-02.png",
+//   "/assets/img/clients/cl-03.png",
+//   "/assets/img/clients/cl-04.png",
+//   "/assets/img/clients/cl-05.png",
+//   "/assets/img/clients/cl-06.png",
+//   "/assets/img/clients/cl-07.png",
+//   "/assets/img/clients/cl-08.png",
 
-  "/assets/img/clients/cl-01.png",
-  // "/assets/img/clients/cl-02.png",
-  "/assets/img/clients/cl-03.png",
-  "/assets/img/clients/cl-04.png",
-  "/assets/img/clients/cl-05.png",
-  "/assets/img/clients/cl-06.png",
-  "/assets/img/clients/cl-07.png",
-  "/assets/img/clients/cl-08.png",
-];
+//   "/assets/img/clients/cl-01.png",
+//   // "/assets/img/clients/cl-02.png",
+//   "/assets/img/clients/cl-03.png",
+//   "/assets/img/clients/cl-04.png",
+//   "/assets/img/clients/cl-05.png",
+//   "/assets/img/clients/cl-06.png",
+//   "/assets/img/clients/cl-07.png",
+//   "/assets/img/clients/cl-08.png",
+//   "/assets/img/clients/cl-08.png",
+//   "/assets/img/clients/cl-08.png",
+//   "/assets/img/clients/cl-08.png",
+// ];
 
 const LogoTicker = ({data}:{
   data?:AboutType
@@ -77,7 +80,7 @@ const LogoTicker = ({data}:{
         className="mySwiper"
       >
 
-          {data ? data?.data[0]?.strength_and_vision.clients.map((item, index) => (
+{[...(data?.data[0]?.strength_and_vision.clients || []), ...(data?.data[0]?.strength_and_vision.clients || [])].map((item, index) => (
 
             <SwiperSlide key={index} className="!w-auto">
             <Image
@@ -88,8 +91,8 @@ const LogoTicker = ({data}:{
               className="logo-ticker-image"
             />
           </SwiperSlide>
-            )) :
-              logos.map((logo, index) => (
+            ))}
+              {/* logos.copyWithin(logos.length, 0, logos.length-1).map((logo, index) => (
                 <SwiperSlide key={index} className="!w-auto">
                   <Image
                     src={logo || "data:"}
@@ -99,8 +102,7 @@ const LogoTicker = ({data}:{
                     className="logo-ticker-image"
                   />
                 </SwiperSlide>
-              ))
-          }
+              )) */}
 
 
 

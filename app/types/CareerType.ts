@@ -8,5 +8,6 @@ export type CareerType = {
         datePosted:Date;
         createdAt:Date;
         type:string;
+        slug:string;
     }[]
 }

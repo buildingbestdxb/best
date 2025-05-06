@@ -12,6 +12,7 @@ type ImageContentProps = {
   date: Date;
   _id: string;
   tags: string[];
+  slug:string;
 };
 
 const ImageContentCard: React.FC<ImageContentProps> = ({
@@ -20,9 +21,10 @@ const ImageContentCard: React.FC<ImageContentProps> = ({
   date,
   tags,
   _id,
+  slug,
 }) => {
   return (
-    <Link href={`/news-details/${_id}`}>
+    <Link href={`/news-details/${slug}`}>
       <div className="flex items-center gap-5 lg:gap-[32px]">
         {/* Image Section */}
         <motion.div

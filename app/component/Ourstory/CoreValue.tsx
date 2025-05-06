@@ -68,7 +68,7 @@ const CoreValue = ({data}:{
             className="relative w-full h-[300px] md:h-[500px] col-span-4">
             <Image
               src={data?.data[0].core_value.image || "data:"}
-              alt="About Us"
+              alt={data?.data[0].core_value.altTag}
               layout="fill"
               objectFit="cover"
               className="rounded-xl shadow-lg"

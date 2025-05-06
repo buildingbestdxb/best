@@ -83,7 +83,7 @@ const MobileNav = () => {
           {/* Navigation Items */}
           <ul className="flex flex-col gap-4">
             {menuItems.map((item, index) =>
-              item.children ? (
+              item.children && item.children.length > 0 ? (
                 <li key={index}>
                   <div
                     className="pb-2 flex justify-between items-center cursor-pointer"

@@ -6,7 +6,7 @@ import parse from 'html-react-parser'
 import useSWR from "swr";
 import { HomeType } from "@/app/types/HomeType";
 import { SectorType } from "@/app/types/SectorType";
-import Link from "next/link";
+// import Link from "next/link";
 
 
 
@@ -62,7 +62,8 @@ const SectorsSec = ({data}:{
         {/* Grid Section with Sectors */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectorData?.data.map((sector, index) => (
-            <Link href={`/projects/${sector.name.toLowerCase()}`} key={sector._id}><motion.div
+            // <Link href={`/projects/${sector.name.toLowerCase()}`} key={sector._id}>
+              <motion.div key={sector._id}
               
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
@@ -71,7 +72,7 @@ const SectorsSec = ({data}:{
               viewport={{ once: true }}>
               <Image
                 src={sector.image}
-                alt="Background Image"
+                alt={sector.imageAlt}
                 fill
                 className="object-cover"
               />
@@ -84,7 +85,7 @@ const SectorsSec = ({data}:{
                 viewport={{ once: true }}>
                 <Image
                   src={sector.icon}
-                  alt=""
+                  alt={sector.iconAlt}
                   width={20}
                   height={20}
                   className="transition-all duration-500 group-hover:invert group-hover:brightness-0"
@@ -95,17 +96,16 @@ const SectorsSec = ({data}:{
                   <h4 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.name}
                   </h4>
-                  <Image
+                  {/* <Image
                     src="/assets/img/icons/arwtp.svg"
                     alt=""
                     width={0}
                     height={0}
                     className="transition-all duration-500 ease-in-out group-hover:w-[14px]"
-                  />
+                  /> */}
                 </motion.div>
               </motion.div>
             </motion.div>
-            </Link>
           ))}
         </div>
       </div>

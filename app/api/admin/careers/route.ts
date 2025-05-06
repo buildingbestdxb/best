@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
   }
   try {
-    const { title, department, location, applyLink, datePosted,type } = await request.json();
-    const career = await Careers.create({ title, department, location, applyLink, datePosted,type });
+    const { title, slug, department, location, applyLink, datePosted,type,description,experience } = await request.json();
+    const career = await Careers.create({ title, slug, department, location, applyLink, datePosted,type,description,experience });
     return NextResponse.json({ data: career, success: true }, { status: 200 });
   } catch (error) {
     console.error("Error creating news:", error);

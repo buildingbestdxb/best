@@ -1,7 +1,7 @@
 "use client";
 
 import ImageCard from "./ImageCard";
-import Image from "next/image";
+// import Image from "next/image";
 import SecHr from "../common/SecDivider/SecHr";
 import ImageContentCard from "./ImageContentCard";
 // import ImageCol from "./ImageCol";
@@ -107,12 +107,14 @@ const LatestNews = () => {
                 title={latestNews && latestNews[0].title}
                 subTitle={latestNews && latestNews[0].tags}
                 _id={latestNews && latestNews[0]._id}
+                altTag={latestNews && latestNews[0].altTag}
+                slug={latestNews && latestNews[0].slug}
               />
             </div>
             <div className="xl:col-span-6 h-full">
               <div className="flex flex-col gap-[40px]">
                 {latestNews &&
-                  latestNews.slice(1, 3).map((latestnews, index) => {
+                  latestNews.slice(1).map((latestnews, index) => {
                     return <ImageContentCard key={index} {...latestnews} />;
                   })}
               </div>
@@ -120,17 +122,17 @@ const LatestNews = () => {
           </div>
         </div>
       </section>
-      <section className="bg-[#F2F2F2] py-[100px]">
+      {/* <section className="bg-[#F2F2F2] py-[100px]">
         <div className="container">
           <div className="mb-5 lg:mb-[60px]">
             <SecHr title="Previous News & Events" />
           </div>
-          {/* <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-[32px] items-center ">
+          <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-[32px] items-center ">
             {prevNewsData &&
               prevNewsData
                 .slice(3)
                 .map((news, index) => <ImageCol key={index} {...news} />)}
-          </div> */}
+          </div>
           <div className="border-b border-[#1E1E1E]/30 lg:pt-[80px]">
             <div className="flex items-center justify-center  pb-[20px] cursor-pointer ">
               <p className="text-[#1E1E1E] text-[22px] font-[500]">More News</p>
@@ -144,7 +146,7 @@ const LatestNews = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

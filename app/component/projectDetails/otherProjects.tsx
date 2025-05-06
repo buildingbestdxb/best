@@ -2,10 +2,27 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import ProjectCard from "../projectsLists/ProjectCard";
-import { ProjectType } from "@/app/types/ProjectType";
+// import { ProjectType } from "@/app/types/ProjectType";
+
+interface RandomProjects  {
+  description:string;
+  thumbnail:string;
+  slug:string;
+  images:string[];
+  location:string;
+  name:string;
+  specifications:{
+      name:string;
+      value:string;
+      _id:string;
+  }[]
+  type:string;
+  status:string;
+  _id:string;
+}
 
 const ProjectList = ({data}:{
-  data:ProjectType
+  data:RandomProjects[]
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -81,7 +98,7 @@ const ProjectList = ({data}:{
     <section className="section-spacing">
       <div className="container">
         <h2 className="text-lg text-black uppercase font-bold leading-none">
-          Other Commercial Projects
+          Other Projects
         </h2>
 
         <div className="mt-5 lg:mt-[60px] relative">
@@ -90,7 +107,7 @@ const ProjectList = ({data}:{
             ref={sliderRef}
             className="flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-            {data?.data.map((project, index) => (
+            {data?.map((project, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 px-2"
@@ -99,7 +116,7 @@ const ProjectList = ({data}:{
                   locationName={project.location}
                   title={project.name}
                   image={project.thumbnail}
-                  href={`/project-details/${project._id}?type=${project.type}`}
+                  href={`/project-details/${project.slug}`}
                 />
               </div>
             ))}

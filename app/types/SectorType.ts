@@ -4,5 +4,7 @@ export type SectorType = {
        image:string;
        icon:string;
        _id:string;
+       imageAlt:string;
+       iconAlt:string;
     }[]
 }

@@ -280,3 +280,21 @@ p {
 .urbn-fnt-fmly {
   font-family: var(--font-urbanist), sans-serif;
 }
+
+.jobdesc {
+  h2{
+    @apply text-lg font-semibold;
+  }
+  li{
+    @apply list-disc list-inside text-gray-600 mt-2 text-sm;
+  }
+  p{
+    @apply text-gray-600;
+  }
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+
+

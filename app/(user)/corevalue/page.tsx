@@ -1,9 +1,10 @@
-import Index from "@/app/component/Ourstory";
+// import Index from "@/app/component/Ourstory";
 
 export default function ProjectsDetails() {
-  return (
-    <>
-      <Index />
-    </>
-  );
+  // return (
+  //   <>
+  //     <Index />
+  //   </>
+  // );
+  return null;
 }

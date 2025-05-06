@@ -16,6 +16,24 @@ const sectorSchema = new mongoose.Schema({
         type: String,
         default:""
     },
+    bannerAlt: {
+        type: String,
+        default:""
+    },
+    imageAlt: {
+        type: String,
+        default:""
+    },
+    iconAlt: {
+        type: String,
+        default:""
+    },
+    metaTitle:{
+        type:String
+    },
+    metaDescription:{
+        type:String
+    }
 });
 
 const Sector = mongoose.models.Sector || mongoose.model("Sector", sectorSchema);

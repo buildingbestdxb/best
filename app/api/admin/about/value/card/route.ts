@@ -16,6 +16,7 @@ export async function PATCH(request: NextRequest) {
       const formData = await request.formData();
       const cardTitle = formData.get("cardTitle")
       const cardLogo = formData.get("cardLogo")
+      const cardLogoAlt = formData.get("cardLogoAlt")
 
       console.log(cardTitle,cardLogo)
 
@@ -25,6 +26,7 @@ export async function PATCH(request: NextRequest) {
         if(toBeEditedItem){
             toBeEditedItem.title = cardTitle;
             toBeEditedItem.logo = cardLogo;
+            toBeEditedItem.logoAlt = cardLogoAlt;
             await about.save()
             return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 });
         }

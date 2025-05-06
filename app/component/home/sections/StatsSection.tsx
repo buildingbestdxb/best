@@ -72,7 +72,7 @@ interface HeroSectionProps {
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <Image src={stat.logo} alt="" className="w-[30px] lg:w-[50px]" width={50} height={50} />
+                  <Image src={stat.logo} alt={stat.logoAlt} className="w-[30px] lg:w-[50px]" width={50} height={50} />
                 </motion.div>
               </div>
               <span className="text-sm mt-1 text-left flex w-full text-white/80">{stat.title}</span>

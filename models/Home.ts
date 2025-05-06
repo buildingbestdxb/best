@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const HomeSchema  = new mongoose.Schema({
+    metaTitle:{
+        type:String,
+    },
+    metaDescription:{
+        type:String,
+    },
     pageHeading:{
         type:String,
         required:true
@@ -15,11 +21,15 @@ const HomeSchema  = new mongoose.Schema({
         image:{
             type:String,
         },
+        altTag:{
+            type:String,
+        },
         cards:[
             {
                 logo:{type:String},
                 title:{type:String},
-                number:{type:String}
+                number:{type:String},
+                logoAlt:{type:String}
             },
         ],
         seals:[{

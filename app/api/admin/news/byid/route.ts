@@ -6,8 +6,13 @@ import { verifyAdmin } from "@/lib/verifyAdmin";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
+  const slug = searchParams.get("slug")
 
   await connectDB();
+  if(slug){
+    const news = await News.findOne({ slug });
+    return NextResponse.json({ data: news, success: true }, { status: 200 });
+  }
   const news = await News.findById(id);
   return NextResponse.json({ data: news, success: true }, { status: 200 });
 }
@@ -20,8 +25,8 @@ export async function PATCH(request: NextRequest) {
   }
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  const { title, description, images, tags, date, type } = await request.json();
-  const news = await News.findByIdAndUpdate(id, { title, description, images, tags, date, type });
+  const { title, slug, description, images, tags, date, metaTitle, metaDescription, altTag, type } = await request.json();
+  const news = await News.findByIdAndUpdate(id, { title, slug, description, images, tags, date, metaTitle, metaDescription, altTag, type });
   return NextResponse.json({ data: news, success: true }, { status: 200 });
 }
 

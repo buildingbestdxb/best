@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
 
 const AboutSchema  = new mongoose.Schema({
+    metaTitle:{
+        type:String
+    },
+    metaDescription:{
+        type:String
+    },
     bannerImage:{
+        type:String
+    },
+    bannerAlt:{
         type:String
     },
     who_we_are:{
@@ -18,10 +27,14 @@ const AboutSchema  = new mongoose.Schema({
         image:{
             type:String,
         },
+        altTag:{
+            type:String,
+        },
         cards:[
             {
                 logo:{type:String},
-                title:{type:String}
+                title:{type:String},
+                logoAlt:{type:String}
             },
         ],
         seals:[{
@@ -33,6 +46,9 @@ const AboutSchema  = new mongoose.Schema({
             type:String,
         },
         image:{
+            type:String,
+        },
+        altTag:{
             type:String,
         },
         clients:[
@@ -49,6 +65,9 @@ const AboutSchema  = new mongoose.Schema({
             type:String,
         },
         image:{
+            type:String,
+        },
+        altTag:{
             type:String,
         },
         content:{

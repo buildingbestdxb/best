@@ -7,6 +7,10 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import DeleteCareerDialog from "./components/DeleteCareerDialog";
 import { useForm } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialogue-box'
+import Link from "next/link";
 
 type Career = {
   _id: string;
@@ -19,6 +23,7 @@ type Career = {
 
 interface Values {
   bannerImage: string;
+  bannerAlt: string;
 }
 
 const CareersPage = () => {
@@ -32,6 +37,11 @@ const CareersPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [careers, setCareers] = useState<Career[]>([]);
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
+  const [requests,setRequests] = useState<{fullName:string;email:string;phone:string;appliedFor:string}[]>([])
+  const [departments,setDepartments] = useState<{_id:string,name:string}[]>([])
+  const [departmentName,setDepartmentName] = useState("")
   const router = useRouter();
 
   const fetchCareers = async () => {
@@ -42,8 +52,11 @@ const CareersPage = () => {
   };
 
   useEffect(() => {
-    fetchCareers();
+    fetchCareers()
     fetchBanner()
+    fetchMeta()
+    fetchRequests()
+    fetchDepartments()
   }, []);
 
   const handleClickNewCareer = () => {
@@ -62,6 +75,7 @@ const CareersPage = () => {
         if (data.data) {
 
           setValue("bannerImage", data.data[0].image)
+          setValue("bannerAlt", data.data[0].alt)
         }
       }
     } catch (error) {
@@ -74,6 +88,7 @@ const CareersPage = () => {
     try {
       const formData = new FormData()
       formData.append("bannerImage", getValues("bannerImage"))
+      formData.append("bannerAlt", getValues("bannerAlt"))
       formData.append("pageName", "career")
       const response = await fetch(`/api/admin/careers/banner`, {
         method: "PATCH",
@@ -89,6 +104,116 @@ const CareersPage = () => {
     }
   }
 
+  const handleMetaSave = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("metaTitle", metaTitle)
+      formData.append("metaDescription", metaDescription)
+      formData.append("pageName", "career")
+      const response = await fetch(`/api/admin/careers/meta`, {
+        method: "PATCH",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchMeta()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const fetchMeta = async () => {
+    try {
+      const response = await fetch('/api/admin/careers/meta')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.data) {
+          setMetaTitle(data.data.metaTitle)
+          setMetaDescription(data.data.metaDescription)
+        }
+      }
+    } catch (error) {
+      console.log("Failed to fetch data:", error)
+    }
+  }
+
+  const fetchRequests = async() =>{
+    try {
+        const response = await fetch('/api/admin/careers/request')
+        if(response.ok){
+            const data = await response.json()
+            if(data.data){
+                setRequests(() => [...data.data].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0,3));
+            }
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
+const handleAddNewDepartment = async () =>{
+    try {
+        const response = await fetch('/api/admin/careers/department', {
+            method: "POST",
+            body: JSON.stringify({ name: departmentName })
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
+const fetchDepartments = async () => {
+    try {
+        const response = await fetch('/api/admin/careers/department')
+        if (response.ok) {
+            const data = await response.json()
+            if (data.data) {
+                setDepartments(data.data)
+            }
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:", error)
+    }
+}
+
+const handleEditDepartment = async (id:string) =>{
+    try {
+        const response = await fetch(`/api/admin/careers/department?id=${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ name: departmentName })
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
+const handleDeleteDepartment = async (id:string) =>{
+    try {
+        const response = await fetch(`/api/admin/careers/department?id=${id}`, {
+            method: "DELETE"
+        })
+        if (response.ok) {
+            const data = await response.json()
+            alert(data.message)
+            fetchDepartments()
+        }
+    } catch (error) {
+        console.log("Failed to fetch data:",error)
+    }
+}
+
   if (isLoading) {
     return (
       <div className="p-6 flex justify-center items-center">
@@ -100,14 +225,83 @@ const CareersPage = () => {
     );
   }
   return (
+    <div>
     <div className="p-6 flex flex-col gap-5">
+      <div className='border-dashed border-2 p-4 flex flex-col gap-5'>
+                                <div className='flex justify-between'>
+                                    <div>Meta Section</div>
+                                    <Button onClick={handleMetaSave}>Save</Button>
+                                </div>
+                                <div>
+                                    <Label>Meta Title</Label>
+                                    <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} />
+                                </div>
+                                <div>
+                                    <Label>Meta Description</Label>
+                                    <Input value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} />
+                                </div>
+                            </div>
       <div>
         <div className='flex justify-between mb-5'>
           <h2 className='font-bold text-3xl'>Banner Image</h2>
           <Button onClick={handleBannerSave}>Save Banner</Button>
         </div>
         <ImageUploader value={watch('bannerImage')} onChange={(url) => setValue("bannerImage", url)} />
+        <Label>Banner Alt</Label>
+        <Input value={watch('bannerAlt')} onChange={(e) => setValue("bannerAlt", e.target.value)} />
       </div>
+
+
+      <div className='flex flex-col gap-2'>
+                <div className='flex justify-between'>
+                <h1 className='font-bold text-3xl'>Departments</h1>
+                <Dialog>
+                            <DialogTrigger onClick={()=>setDepartmentName("")}>Add New</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Add New Department</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-1'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} />
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose onClick={handleAddNewDepartment}>Save</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                </div>
+                <div className='border h-[200px] p-2 flex flex-col gap-2 overflow-y-auto'>
+                    {departments && departments.map((item:{_id:string,name:string},index)=>(
+                        <div className='w-full bg-orange-300 p-4 rounded-lg flex justify-between items-center' key={index}>
+                        <div>
+                            {item.name}
+                        </div>
+                        <div className='flex gap-5'>
+                        <Dialog>
+                            <DialogTrigger onClick={()=>setDepartmentName(item.name)}>Edit</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Edit Department</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-1'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={departmentName} onChange={(e) => setDepartmentName(e.target.value)} />
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose onClick={()=>handleEditDepartment(item._id)}>Save</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                        <Button className='bg-transparent hover:bg-transparent text-sm border-none shadow-none font-light' onClick={()=>handleDeleteDepartment(item._id)}>Delete</Button>
+                        </div>
+                    </div>
+                    ))}
+                
+                </div>
+            </div>
+
+
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Careers</h1>
         <Button className="bg-primary text-white" onClick={handleClickNewCareer}>
@@ -144,6 +338,55 @@ const CareersPage = () => {
           ))}
         </div>
       )}
+    </div>
+
+    <div className='flex flex-col gap-2'>
+                <div className='flex justify-between'>
+                <div className='font-bold'>Applications</div>
+                <Link href={'/admin/careers/allrequest'}>View All</Link>
+                </div>
+                <div className='border h-[200px] p-2 flex flex-col gap-2'>
+                    {requests && requests.map((item:{fullName:string,email:string,phone:string,appliedFor:string},index)=>(
+                        <div className='w-full bg-orange-300 p-4 rounded-lg flex justify-between items-center' key={index}>
+                        <div>
+                            {item.fullName}
+                        </div>
+                        <div className='flex gap-5'>
+                        <Dialog>
+                            <DialogTrigger>View</DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Details</DialogTitle>
+                                    <DialogDescription className='gap-2 grid grid-cols-2'>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Name</Label>
+                                            <Input value={item.fullName} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Email</Label>
+                                            <Input value={item.email} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Phone</Label>
+                                            <Input value={item.phone} readOnly/>
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label>Applied For</Label>
+                                            <Input value={item.appliedFor} readOnly/>
+                                        </div>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <DialogClose>Close</DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                        {/* <Button className='bg-transparent hover:bg-transparent text-sm border-none shadow-none font-light'>Delete</Button> */}
+                        </div>
+                    </div>
+                    ))}
+                
+                </div>
+            </div>
+
     </div>
   );
 };
