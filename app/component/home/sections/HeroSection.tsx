@@ -122,16 +122,16 @@ const HeroSection = () => {
                 variants={containerVariants}
                 className="absolute inset-0 flex flex-col justify-center items-start text-left z-[2] lg:top-[10%]">
                 <div className="container">
-                  <motion.h1
+                  <motion.p
                     variants={textVariants}
                     className="text-white text-xxl leading-none font-light">
                     {slide.title}
-                  </motion.h1>
-                  <motion.h1
+                  </motion.p>
+                  <motion.p
                     variants={textVariants}
                     className="text-white text-xxl leading-none font-black">
                     {slide.subtitle}
-                  </motion.h1>
+                  </motion.p>
                 </div>
               </motion.div>
             </div>

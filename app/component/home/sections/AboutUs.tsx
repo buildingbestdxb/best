@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 import { HomeType } from "@/app/types/HomeType";
 
 const fadeIn = {
@@ -20,9 +20,7 @@ const slideRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
-const AboutUs = ({data}:{
-  data:HomeType
-}) => {
+const AboutUs = ({ data }: { data: HomeType }) => {
   return (
     <motion.section
       className="section-spacing overflow-hidden"
@@ -56,16 +54,16 @@ const AboutUs = ({data}:{
               <motion.div
                 variants={fadeIn}
                 className="flex gap-4 justify-center bg-white/10 backdrop-blur-[10px]  px-4 py-3 rounded-full">
-                {data && data?.data[0]?.about?.seals.map((item,index)=>(
-                  <Image
-                  key={index}
-                  src={item.logo || "data:"}
-                  alt=""
-                  width={89}
-                  height={89}
-                />
-                ))}
-
+                {data &&
+                  data?.data[0]?.about?.seals.map((item, index) => (
+                    <Image
+                      key={index}
+                      src={item.logo || "data:"}
+                      alt=""
+                      width={89}
+                      height={89}
+                    />
+                  ))}
               </motion.div>
             </div>
           </motion.div>
@@ -74,9 +72,9 @@ const AboutUs = ({data}:{
             <motion.div
               className="flex flex-col  gap-[20px] lg:gap-[60px] leading-none"
               variants={slideRight}>
-              <h2 className="text-lg font-bold text-black">
+              <h1 className="text-lg font-bold text-black">
                 {data?.data[0].about?.title}
-              </h2>
+              </h1>
               {/* <p className="leading-relaxed text-black/75">
                 Since 1975, Building Co. (BEST) L.L.C has been shaping the UAE’s
                 construction landscape with a commitment to excellence,
