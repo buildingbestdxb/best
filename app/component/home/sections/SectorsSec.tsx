@@ -2,26 +2,24 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 import useSWR from "swr";
 import { HomeType } from "@/app/types/HomeType";
 import { SectorType } from "@/app/types/SectorType";
 // import Link from "next/link";
 
+const SectorsSec = ({ data }: { data: HomeType }) => {
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
+  const { data: sectorData }: { data: SectorType } = useSWR(
+    `/api/admin/sector`,
+    fetcher
+  );
 
+  useEffect(() => {
+    console.log(sectorData);
+  }, [sectorData]);
 
-const SectorsSec = ({data}:{
-  data:HomeType
-}) => {
-
-  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data:sectorData }:{data:SectorType} = useSWR(`/api/admin/sector`, fetcher)
-
-
-  useEffect(()=>{
-    console.log(sectorData)
-  },[sectorData])
-  
   return (
     <section className="section-spacing bg-custom-gray overflow-hidden">
       <div className="container">
@@ -55,7 +53,7 @@ const SectorsSec = ({data}:{
             and reliability.
           </p> */}
           <div className="text-black/75">
-              {parse(data?.data[0]?.sectorDescription || "")}
+            {parse(data?.data[0]?.sectorDescription || "")}
           </div>
         </motion.div>
 
@@ -63,8 +61,8 @@ const SectorsSec = ({data}:{
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-[10px] items-center mt-5 lg:mt-[60px]">
           {sectorData?.data.map((sector, index) => (
             // <Link href={`/projects/${sector.name.toLowerCase()}`} key={sector._id}>
-              <motion.div key={sector._id}
-              
+            <motion.div
+              key={sector._id}
               className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -93,9 +91,9 @@ const SectorsSec = ({data}:{
                 <motion.div
                   className="flex justify-between items-center w-full"
                   whileHover={{ opacity: 1 }}>
-                  <h4 className="text-md font-semibold text-white transition-opacity duration-500">
+                  <h3 className="text-md font-semibold text-white transition-opacity duration-500">
                     {sector.name}
-                  </h4>
+                  </h3>
                   {/* <Image
                     src="/assets/img/icons/arwtp.svg"
                     alt=""
