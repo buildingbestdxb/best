@@ -9,3 +9,5 @@ Disallow: /author/
 Disallow: */embed$                       
 Disallow: *utm*=                
 Disallow: *openstat=           
+
+Sitemap: https://best-weld-iota.vercel.app/sitemap.xml
