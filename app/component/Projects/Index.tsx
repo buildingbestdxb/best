@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import ProjectList from "../projectsLists/ProjectList";
 import HeroSection from "../common/Banner/Hero";
-import Sectors from "../projectsLists/Sectors";
+/* import Sectors from "../projectsLists/Sectors"; */
 import useSWR from "swr";
 
 interface DataType {
@@ -60,7 +60,7 @@ export default function Projects({ data }: { data: Banner }) {
             />
 
             {projectData && <ProjectList data={actualData}/>}
-            <Sectors />
+           {/*  <Sectors /> */}
         </>
     );
 }

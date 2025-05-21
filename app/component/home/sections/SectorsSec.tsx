@@ -63,7 +63,7 @@ const SectorsSec = ({ data }: { data: HomeType }) => {
             // <Link href={`/projects/${sector.name.toLowerCase()}`} key={sector._id}>
             <motion.div
               key={sector._id}
-              className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
+              className="relative h-[300px] lg:h-[400px] overflow-hidden rounded-custom shadow-lg group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
