@@ -35,7 +35,7 @@ export default function Index({data}:{data:IndiProjectType}) {
   const breadcrumb = [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/" },
-    { label: `${data?.data.type} Projects`, href: "/" },
+ /*    { label: `${data?.data.type} Projects`, href: "/" }, */
     { label: `${data?.data?.name}`, href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
