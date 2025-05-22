@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ProjectCard from "./ProjectCard";
+import StatusDropdown from "./StatusDropdown";
 
 const ProjectList = ({ data }: {
   data: {
@@ -102,11 +103,13 @@ useEffect(()=>{
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-[40px]">
                   <div className="col-span-4">
                     <div className="relative w-full">
-                      <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedStatus} onChange={(e)=>setSelectedStatus(e.target.value)}>
+
+<StatusDropdown selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
+                      {/* <select className="w-full bg-transparent text-white py-2 pr-8 pl-3 border-b border-white appearance-none focus:outline-none focus:border-gray-300 transition duration-300" value={selectedStatus} onChange={(e)=>setSelectedStatus(e.target.value)}>
                         <option className="bg-black text-white" value="">Status</option>
                         <option className="bg-black text-white" value="Completed">Completed</option>
                         <option className="bg-black text-white" value="Ongoing">Ongoing</option>
-                      </select>
+                      </select> */}
 
                     </div>
                   </div>
@@ -124,7 +127,7 @@ useEffect(()=>{
 
                   <div className="relative w-full bg-primary flex items-center justify-center cursor-pointer" onClick={()=>{
                     setSelectedStatus("")
-                    
+
                     setSelectedType("")
                   }}>
                   <p className="font-[500] text-white">
@@ -132,7 +135,7 @@ useEffect(()=>{
                   </p>
 
                     </div>
-                  
+
                </div>
               </div>
             </div>
