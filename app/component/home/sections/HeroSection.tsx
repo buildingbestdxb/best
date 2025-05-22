@@ -171,21 +171,9 @@ const HeroSection = () => {
                     </h3>
                   </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                  <div className="space-y-6 text-center flex flex-col items-center">
-                    <Image
-                      src={"/assets/img/icons/excellence.svg"}
-                      alt=""
-                      width={34}
-                      height={34}
-                    />
-                    <h3 className="text-center text-[22px]">
-                      50 Years of Excellence in the UAE Construction Industry
-                    </h3>
-                  </div>
-                </SwiperSlide>
+                
               </Swiper>
-              <div className="custom-pag text-white flex space-x-3 justify-center mt-5"></div>
+            {/*   <div className="custom-pag text-white flex space-x-3 justify-center mt-5"></div> */}
             </div>
           </div>
         </div>
