@@ -38,7 +38,12 @@ async function connectDB(): Promise<mongoose.Connection> {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose.connection);
+    
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.disconnect(); // Close any stale connections
+    }
+
+    cached.promise = mongoose.connect(MONGODB_URI,{bufferCommands:false,connectTimeoutMS:20000,serverSelectionTimeoutMS: 20000,}).then((mongoose) => mongoose.connection);
   }
 
   try {
