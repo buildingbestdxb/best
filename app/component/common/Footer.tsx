@@ -15,7 +15,7 @@ const Footer = () => {
     "Sharjah (Headquarters)":
       "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
     Dubai: "Office No. 401, The Exchange Tower, Business Bay, Dubai, UAE.",
-    AbuDhabi:
+    "Abu Dhabi":
       "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
   };
 
