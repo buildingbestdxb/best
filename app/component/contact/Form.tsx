@@ -69,7 +69,7 @@ const Form = () => {
               viewport={{ once: true }} // Animation resets on scroll
             >
               Reach out to us to discuss your project needs and discover how
-              Safe Tech can deliver the perfect solution
+              Best can deliver the perfect solution
             </motion.p>
             <form className="flex flex-col gap-[32px]" onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-1 gap-4">
