@@ -280,7 +280,15 @@ p {
 .urbn-fnt-fmly {
   font-family: var(--font-urbanist), sans-serif;
 }
-
+.aftre::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background: #FFFFFF30;
+  background: linear-gradient(180deg, #ffffff57, #010101bf);
+}
 .jobdesc {
   h2{
     @apply text-lg font-semibold;
@@ -296,5 +304,7 @@ p {
   gap:20px;
 }
 
-
+.addrea p{
+  @apply lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%];
+}
 

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface HeroSectionProps {
   imageSrc: string;
@@ -62,7 +63,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             variants={textVariants}
             className="text-white/50 lg:pt-[160px] pt-[100px] text-[16px] font- uppercase"
             style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
-            Home / {breadcrumb}
+            <Link href={"/"}>Home</Link> / {breadcrumb}
             <span
               className="font-bold text-primary"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
