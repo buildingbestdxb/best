@@ -33,7 +33,7 @@ export const MenuItem = ({
     <div
       onMouseEnter={() => (noMenu ? setActive(null) : setActive(item))}
       className="relative">
-      <div className="flex gap-2 mb-3">
+      <div className="flex gap-2">
         <Link href={url}>
           <motion.div
             transition={{ duration: 0.3 }}
@@ -86,9 +86,10 @@ export const Menu = ({
               src="/Logo.svg"
               alt="Crest Logo"
               width={80}
-              height={50}
-              className="h-[50px] w-auto"
+              height={60}
+              className="h-[60px] w-auto"
             />
+            <p className="text-[16px] font-[300] mt-2 text-center ">Building Co. BEST L.L.C</p>
           </Link>
         </div>
         <div className="flex space-x-[25px] xl:space-x-[35px] items-center">
