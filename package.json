@@ -22,6 +22,7 @@
     "@tinymce/tinymce-react": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
+    "pdfjs-dist": "3.11.174",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
