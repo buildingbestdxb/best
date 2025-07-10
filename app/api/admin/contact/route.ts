@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
       const mail = formData.get("mail")
       const address_card = formData.get("address_card")
       const address = formData.get("address")
-      const contact = await Contact.create({region,phone,fax,mail,address_card,address});
+      const map = formData.get("map")
+      const contact = await Contact.create({region,phone,fax,mail,address_card,address,map});
       if(contact){
         return NextResponse.json({ message: "Region added successfully", success: true }, { status: 201 });
       }
@@ -59,7 +60,8 @@ export async function POST(request: NextRequest) {
       const mail = formData.get("mail")
       const address_card = formData.get("address_card")
       const address = formData.get("address")
-      const contact = await Contact.findByIdAndUpdate({_id:id},{$set:{region,phone,fax,mail,address_card,address}});
+      const map = formData.get("map")
+      const contact = await Contact.findByIdAndUpdate({_id:id},{$set:{region,phone,fax,mail,address_card,address,map}});
       if(contact){
         return NextResponse.json({ message: "Region updated successfully", success: true }, { status: 201 });
       }
