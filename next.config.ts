@@ -8,13 +8,11 @@ const nextConfig: NextConfig = {
     compiler:{
     removeConsole : process.env.NODE_ENV === 'production'
   },
-  webpack(config, { isServer }) {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        canvas: false, // Prevents trying to resolve 'canvas' in the browser
-      };
+  webpack(config, { nextRuntime }) {
+    if (nextRuntime === "nodejs") {
+      config.resolve.alias.canvas = false;
     }
+
     return config;
   },
 };
