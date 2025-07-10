@@ -6,6 +6,7 @@ export type ContactType = {
         mail:string;
         phone:string;
         region:string;
+        map:string;
         _id:string;
     }[]
 }
