@@ -196,6 +196,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
               <TinyEditor setNewsContent={setNewsContent} newsContent={newsContent}/>
           {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>}
         </div>
+        
 
         {/* Tags Field */}
         <div>
