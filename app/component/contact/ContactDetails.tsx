@@ -126,8 +126,9 @@ const ContactDetails = () => {
             Address
           </span>
         </div>
-        <div className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%]">
+        <div className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px]  addrea">
           {parse(data?.data[activeTab].address || "")}
+          
         </div>
       </div>}
     </motion.div>

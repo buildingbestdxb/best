@@ -14,9 +14,9 @@ const Certificates = () => {
   );
 
   useEffect(() => {
+    console.log('sdsdsdsdsd');
     console.log(data);
-  }, [data]);
-
+  }, [data]); 
   const [openCertificateId, setOpenCertificateId] = useState<string | null>(null);
   useEffect(() => {
     if (openCertificateId !== null) {
@@ -55,11 +55,12 @@ const Certificates = () => {
                 <div
                 key={sector._id}>
                 <motion.div
-                  className="relative h-[300px] lg:h-[663px] overflow-hidden rounded-custom shadow-lg group cursor-pointer"
+                  className="relative h-[300px] lg:h-[663px] overflow-hidden rounded-custom shadow-lg group cursor-pointer aftre"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
+                  onClick={() => setOpenCertificateId(sector._id)}
                 >
                   <Image
                     src={sector.files[0].thumbnail}
@@ -70,7 +71,7 @@ const Certificates = () => {
                   />
 
                   <motion.div
-                    className="absolute flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom gap-[20px] group-hover:bg-primary transition-all"
+                    className="absolute z-[1] flex flex-col inset-x-[10px] xxl:inset-x-[20px] bottom-[10px] xxl:bottom-[20px] p-[10px] xxl:p-[20px] backdrop-blur-[10px] bg-white/10 text-white rounded-custom gap-[20px] group-hover:bg-primary transition-all"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
@@ -86,7 +87,7 @@ const Certificates = () => {
                       </h4>
                       <div className="flex items-center">
                         <div className="w-[8px] h-[8px] bg-primary rounded-full transition-opacity duration-500 opacity-100 group-hover:opacity-0"></div>
-                        <Image
+                         <Image
                           src="/assets/img/icons/arwtp.svg"
                           alt=""
                           width={0}
@@ -112,6 +113,7 @@ const Certificates = () => {
                       {/* Image & Title */}
                       <h2 className="text-base sm:text-lg font-bold mb-3 btnfrtss">{sector.title}</h2>
                       <div className="relative w-full h-[calc(100%-3rem)]">
+                     
                         <Image
                           src={sector.files[0].thumbnail}
                           alt={`Certificate for ${sector.title}`}

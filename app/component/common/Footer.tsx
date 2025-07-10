@@ -54,6 +54,7 @@ const Footer = () => {
               <FaYoutube className="" />
             </div>
           </div>
+          <div className="mt-4"><a href={"/assets/img/profile.pdf"} download  className="hover:text-orange-500">Download Profile</a></div>
         </motion.div>
 
         <motion.div
