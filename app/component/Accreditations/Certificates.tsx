@@ -115,7 +115,7 @@ const Certificates = () => {
                       </button>
 
             <div className="w-full h-full">
-              <Worker workerUrl={`/pdf-worker/pdf.worker.min.js`}>
+              <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.js`}>
                 <Viewer fileUrl={sector.files[0].file} />
               </Worker>
             </div>
