@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const filePath = `/uploads/${fileType}/${file.name+Date.now()}}`;
+    const filePath = `/uploads/${fileType}/${Date.now()}${file.name}`;
     const uploadResult = await uploadToDropbox(file, filePath);
 
     return NextResponse.json(
