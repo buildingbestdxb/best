@@ -24,6 +24,7 @@ interface Values {
     metaTitle: string;
     metaDescription: string;
     bannerAlt: string;
+    map: string;
 }
 
 
@@ -51,6 +52,7 @@ const AdminContact = () => {
             formData.append("mail",getValues("mail"))
             formData.append("address_card",getValues("address_card"))
             formData.append("address",getValues("address"))
+            formData.append("map",getValues("map"))
             const response = await fetch('/api/admin/contact',{
                 method:"POST",
                 body:formData
@@ -119,13 +121,14 @@ const AdminContact = () => {
         reset()
     }
 
-    const handleSetEditRegion = (region:string,phone:string,fax:string,mail:string,address_card:string,address:string) =>{
+    const handleSetEditRegion = (region:string,phone:string,fax:string,mail:string,address_card:string,address:string,map:string) =>{
         setValue("region",region)
         setValue("phone",phone)
         setValue("fax",fax)
         setValue("mail",mail)
         setValue("address_card",address_card)
         setValue("address",address)
+        setValue("map",map)
     }
 
     const handleEditRegion = async(id:string) =>{
@@ -137,6 +140,7 @@ const AdminContact = () => {
             formData.append("mail",getValues("mail"))
             formData.append("address_card",getValues("address_card"))
             formData.append("address",getValues("address"))
+            formData.append("map",getValues("map"))
             const response = await fetch(`/api/admin/contact?id=${id}`,{
                 method:"PATCH",
                 body:formData
@@ -289,6 +293,10 @@ const AdminContact = () => {
                                             )}
                                         />
                                     </div>
+                                    <div className='flex flex-col gap-2'>
+                                        <Label>Map</Label>
+                                        <Input {...register("map")} />
+                                    </div>
                                 </DialogDescription>
                             </DialogHeader>
                             <DialogClose onClick={handleAddRegion}>Save</DialogClose>
@@ -296,14 +304,14 @@ const AdminContact = () => {
                     </Dialog>
                 </div>
                 <div className='h-[300px] border p-2 flex flex-col gap-4 overflow-y-scroll'>
-                {regions && regions.map((item:{_id:string,region:string,phone:string,fax:string,mail:string,address_card:string,address:string})=>(
+                {regions && regions.map((item:{_id:string,region:string,phone:string,fax:string,mail:string,address_card:string,address:string,map:string})=>(
                     <div className='w-full bg-orange-300 p-4 rounded-lg flex justify-between items-center' key={item._id}>
                     <div>
                         {item.region}
                     </div>
                     <div className='flex gap-5'>
                     <Dialog>
-                        <DialogTrigger onClick={()=>handleSetEditRegion(item.region,item.phone,item.fax,item.mail,item.address_card,item.address)}>Edit</DialogTrigger>
+                        <DialogTrigger onClick={()=>handleSetEditRegion(item.region,item.phone,item.fax,item.mail,item.address_card,item.address,item.map)}>Edit</DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>Edit region details</DialogTitle>
@@ -335,6 +343,10 @@ const AdminContact = () => {
                                                 <ReactQuill theme="snow" value={field.value} onChange={field.onChange} className="mt-1" />
                                             )}
                                         />
+                                    </div>
+                                    <div className='flex flex-col gap-2'>
+                                        <Label>Map</Label>
+                                        <Input {...register("map")} />
                                     </div>
                                 </DialogDescription>
                             </DialogHeader>
