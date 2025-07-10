@@ -6,19 +6,27 @@ import useSWR from "swr";
 import parse from 'html-react-parser'
 import { ContactType } from "@/app/types/ContactType";
 
-const ContactDetails = () => {
+interface ContactDetailsProps {
+  setMapactive: (map: string) => void;
+}
+
+const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const { data }:{data:ContactType} = useSWR(`/api/admin/contact`, fetcher)
 
 
   useEffect(()=>{
-    console.log(data)
+    console.log(data) 
+    setMapactive(data?.data[0].map);
   },[data])
 
 
   const [activeTab, setActiveTab] = useState(0);
-
+  const handleTabClick = (index:number) => {
+    setActiveTab(index);  
+    setMapactive(data?.data[index].map);
+  };
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -35,7 +43,7 @@ const ContactDetails = () => {
                 ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[18px]"
                 : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[18px]"
             }`}
-            onClick={() => setActiveTab(index)}>
+            onClick={() => handleTabClick(index)}>
             <div
               className={`w-[10px]  h-[10px] rounded-full ${
                 data?.data[activeTab].region === item.region ? "bg-primary" : "bg-black/30"
