@@ -3,6 +3,7 @@ export type Accreditation = {
     description:string;
     files:{
         thumbnail:string;
+        file:string;
     }[]
     title:string;
     _id:string;
