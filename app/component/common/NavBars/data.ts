@@ -1,11 +1,11 @@
 export const menuItems = [
   {
     title: "About Us",
-    url: "our-story",
+    url: "/our-story",
   },
   {
     title: "Accreditation",
-    url: "accreditations",
+    url: "/accreditations",
   },
   {
     title: "Projects",
