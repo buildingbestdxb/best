@@ -28,8 +28,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
       <div
         className="flex transition-transform duration-700 ease-in-out h-full w-full"
         style={{
-          transform: `translateX(-${activeIndex * 100}%)`,
-          width: `${data.length * 100}%`,
+          transform: `translateX(-${activeIndex * 100}%)`, 
         }}
       >
         {data.map((img, index) => (
@@ -57,7 +56,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
       {/* Thumbnails */}
       <div className="absolute bottom-[32px] left-1/2 transform -translate-x-1/2 flex gap-2 backdrop-blur-[24px] bg-[#0E3F7E]/4 p-[12px] rounded-[16px]">
       <button
-        className="me-3 left-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  text-primary p-[20px] rounded-[16px]"
+        className="me-3 left-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group"
         onClick={handlePrev}
       >
         <Image
@@ -65,6 +64,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           alt="Previous"
           width={18}
           height={18}
+          className="invert-[1] brightness-[0] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
       </button>
 
@@ -87,7 +87,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           </div>
         ))}
         <button
-        className=" ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  text-primary p-[20px] rounded-[16px]"
+        className=" ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
         onClick={handleNext}
       >
         <Image
@@ -95,6 +95,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           alt="Next"
           width={18}
           height={18}
+          className="invert-[1] brightness-[0] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
       </button>
       </div>
