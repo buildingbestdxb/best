@@ -22,7 +22,9 @@ p {
   letter-spacing: 0px;
   font-weight: 400;
 }
-
+.scrollbar-whide {
+  scrollbar-width: none;
+} 
 @layer base {
   :root {
     --background: 0 0% 100%;

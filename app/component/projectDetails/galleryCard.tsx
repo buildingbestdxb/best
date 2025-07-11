@@ -70,7 +70,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
       </button>
 
       
-        <div className="flex   gap-2 max-w-[180px] md:max-w-[400px]   lg:max-w-[250px] xl:max-w-[500px] overflow-scroll" >
+        <div className="flex   gap-2 max-w-[180px] md:max-w-[400px]   lg:max-w-[250px] xl:max-w-[500px] overflow-scroll scrollbar-whide" >
             {data.map((img, index) => (
               <div
                 key={index}
