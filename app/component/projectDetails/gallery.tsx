@@ -8,7 +8,7 @@ const Gallery = ({data}:{
 }) => {
 
   return (
-    <section className="section-spacing mb-0">
+    <section className="  mb-0 pb-0 pt-[50px] md-py-[60px] lg-py-[100px] ">
       <div className="container">
         <div className="grid lg:grid-cols-2 xl:grid-cols-12">
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
@@ -40,7 +40,7 @@ const Gallery = ({data}:{
             </div>
           </div>
 
-          <div className="xl:col-span-7 text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400]">
+          <div className="xl:col-span-7 text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 lg:mb-6 leading-[25.2px] font-[400]">
             {/* <p className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400] ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

@@ -22,11 +22,12 @@ export default function ImageCarousel({ data }: { data: string[] }) {
   }, [data.length]);
 
   return (
-    <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-full aspect-video">
+    <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]   ">
 
       {/* Slide Track */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full w-full"
+         
         style={{
           transform: `translateX(-${activeIndex * 100}%)`, 
         }}
@@ -64,28 +65,30 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           alt="Previous"
           width={18}
           height={18}
-          className="invert-[1] brightness-[0] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
       </button>
 
       
-        {data.map((img, index) => (
-          <div
-            key={index}
-            onClick={() => setActiveIndex(index)}
-            className={`cursor-pointer rounded-[8px] overflow-hidden border-2 w-[54px] h-[54px] ${
-              index === activeIndex ? "border-[#FE6601]" : "border-transparent"
-            }`}
-          >
-            <Image
-              src={img}
-              alt={`Thumbnail ${index + 1}`}
-              width={64}
-              height={40}
-              className="object-cover h-full"
-            />
+        <div className="flex   gap-2 max-w-[180px] md:max-w-[400px]   lg:max-w-[250px] xl:max-w-[500px] overflow-scroll" >
+            {data.map((img, index) => (
+              <div
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`cursor-pointer rounded-[8px] overflow-hidden border-2 min-w-[54px] h-[54px] ${
+                  index === activeIndex ? "border-[#FE6601]" : "border-transparent"
+                }`}
+              >
+                <Image
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  width={64}
+                  height={40}
+                  className="object-cover h-full"
+                />
+              </div>
+            ))}
           </div>
-        ))}
         <button
         className=" ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
         onClick={handleNext}
@@ -95,7 +98,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           alt="Next"
           width={18}
           height={18}
-          className="invert-[1] brightness-[0] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
       </button>
       </div>
