@@ -56,7 +56,7 @@ export default function Projects({ data }: { data: Banner }) {
                 imageSrc={data.data.image}
                 altTag={data.data.alt}
                 title={`All Projects`}
-                breadcrumb="Projects /"
+                breadcrumb=""
             />
 
             {projectData && <ProjectList data={actualData}/>}
