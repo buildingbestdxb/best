@@ -29,7 +29,7 @@ const MobileNav = () => {
                 className="h-[50px] w-auto"
               />
               
-            <p className="text-[14px] font-[300] mt-1 text-center ">Building Co. BEST L.L.C</p>
+            <p className="text-[14px] font-[500] mt-1 text-center ">Building Co. BEST L.L.C</p>
             </Link>
           </div>
           {/* Hamburger Button */}
@@ -79,7 +79,7 @@ const MobileNav = () => {
                 height={50}
                 className="h-[50px] w-auto"
               />
-              <p className="text-[14px] font-[300] mt-1 text-center w-[182px] ">Building Co. BEST L.L.C</p>
+              <p className="text-[14px] font-[500] mt-1 text-center w-[182px] ">Building Co. BEST L.L.C</p>
             </Link>
           </div>
 
