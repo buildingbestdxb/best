@@ -31,10 +31,10 @@ export default function Index({data}:{data:IndiProjectType}) {
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const {data:relatedProjects} = useSWR(`/api/admin/projects`,fetcher)
   const [randomProjects,setRandomProjects] = useState<RandomProjects[]>([])
-
+ 
   const breadcrumb = [
     { label: "Home", href: "/" },
-    { label: "Projects", href: "/" },
+    { label: "Projects", href: "/projects" },
  /*    { label: `${data?.data.type} Projects`, href: "/" }, */
     { label: `${data?.data?.name}`, href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
