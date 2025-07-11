@@ -28,16 +28,22 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           className="col-span-4">
+          <div className="mb-5 lg:mb-[40px] text-center w-fit">
+          <Link href="/" >
           <div className="inline-block">
             <Image
               src="/Logo.svg"
-              className="mb-5 lg:mb-[40px] h-[80px] lg:h-[95px] w-auto"
+              className=" h-[80px] lg:h-[95px] w-auto"
               alt=""
               width={150}
               height={80}
             />
           </div>
-          <h4 className="text-[18px] uppercase leading-none font-bold mb-3 lg:mb-[20px]">
+          
+          <p className="text-sm font-[500] text-white mt-1 text-center   ">Building Co. BEST L.L.C</p>
+          </Link>
+          </div>
+          <h4 className="text-[18px]  uppercase leading-none font-bold mb-3 lg:mb-[20px]">
             Follow us
           </h4>
           <div className="flex space-x-3 mt-4">
@@ -54,7 +60,20 @@ const Footer = () => {
               <FaYoutube className="" />
             </div>
           </div>
-          <div className="mt-4"><a href={"/assets/img/profile.pdf"} download  className="hover:text-orange-500">Download Profile</a></div>
+          <div className="mt-5 md:pt-5 "> 
+          <Link href={"/assets/img/profile.pdf"} download 
+                className="self-start py-4 text-white bg-primary   rounded-lg text-sm font-medium transition spckbtn uppercase " style={{display:'inline-block'}}>
+                <div>
+                  <Image
+                    src={"/assets/img/icons/arrow.svg"}
+                    alt=""
+                    width={30}
+                    height={30}
+                  />
+                </div>{" "}
+                Download Profile
+              </Link></div>
+
         </motion.div>
 
         <motion.div

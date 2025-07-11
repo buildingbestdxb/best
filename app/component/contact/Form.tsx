@@ -46,12 +46,12 @@ const Form = () => {
 
       
   return (
-    <div className=" relative overflow-hidden">
-      <div className="container p-0">
+    <div className=" relative overflow-hidden h-full">
+      <div className="container p-0 h-full">
         {/* Section Header with Animation */}
 
-        <div>
-          <div className=" bg-black/5 text-black rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px]">
+        <div className="h-full">
+          <div className=" bg-black/5 text-black rounded-custom overflow-hidden text-left p-[25px] lg:p-[40px] h-full">
             <motion.h2
               className="md:text-lg text-[18px] font-bold uppercase mb-3 lg:mb-[20px]"
               initial={{ opacity: 0, y: 20 }}

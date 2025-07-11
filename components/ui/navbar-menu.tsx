@@ -89,7 +89,7 @@ export const Menu = ({
               height={60}
               className="h-[60px] w-auto"
             />
-            <p className="text-[16px] font-[300] mt-2 text-center ">Building Co. BEST L.L.C</p>
+            <p className="text-[16px] font-[500] mt-2 text-center ">Building Co. BEST L.L.C</p>
           </Link>
         </div>
         <div className="flex space-x-[25px] xl:space-x-[35px] items-center">

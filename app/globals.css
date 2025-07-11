@@ -308,6 +308,6 @@ p {
 }
 
 .addrea p{
-  @apply lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] lg:w-[60%];
+  @apply lg:text-[22px] text-[16px] text-black font-[500]   lg:w-[60%];
 }
 

@@ -105,8 +105,12 @@ const Certificates = () => {
                 </motion.div>
                
                 {openCertificateId === sector._id && isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-          <div className="relative w-[80%] md:w-[65%] xl:w-[40%] h-[80%] bg-white rounded-lg shadow-lg overflow-hidden">
+                  <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
+                  onClick={() => setOpenCertificateId(null)}
+                > 
+          <div className="relative w-[80%] md:w-[65%] xl:w-[40%] h-[80%] bg-white rounded-lg shadow-lg overflow-hidden"
+           onClick={(e) => e.stopPropagation()} >
                       <button
               className="absolute top-2 right-5 text-black hover:text-red-600 text-2xl font-bold z-[1] "
               onClick={() => setOpenCertificateId(null)}
@@ -119,8 +123,8 @@ const Certificates = () => {
                 <Viewer fileUrl={sector.files[0].file} />
               </Worker>
             </div>
+          </div> 
           </div>
-        </div>
       )}
     </div>
                  

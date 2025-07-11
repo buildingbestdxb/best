@@ -6,26 +6,22 @@ import useSWR from "swr";
 import parse from 'html-react-parser'
 import { ContactType } from "@/app/types/ContactType";
 
-interface ContactDetailsProps {
-  setMapactive: (map: string) => void;
-}
+ 
 
-const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
+const ContactDetails = () => {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data }:{data:ContactType} = useSWR(`/api/admin/contact`, fetcher)
+  const { data }: { data: ContactType } = useSWR(`/api/admin/contact`, fetcher)
 
 
-  useEffect(()=>{
-    console.log(data) 
-    setMapactive(data?.data[0].map);
-  },[data])
+  useEffect(() => {
+    // console.log(data) 
+  }, [data])
 
 
   const [activeTab, setActiveTab] = useState(0);
-  const handleTabClick = (index:number) => {
-    setActiveTab(index);  
-    setMapactive(data?.data[index].map);
+  const handleTabClick = (index: number) => {
+    setActiveTab(index); 
   };
   return (
     <motion.div
@@ -35,25 +31,23 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
       viewport={{ once: true }}
       className="">
       <div className="flex mb-3 lg:mb-[20px] pb-[15px] border-b-[1px] border-[#1E1E1E] xl:gap-[40px] lg:gap-[20px] gap-3 h-[50px]">
-        {data?.data?.map((item,index) => (
+        {data?.data?.map((item, index) => (
           <button
             key={index}
-            className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${
-              data?.data[activeTab].region === item.region
+            className={`flex items-center gap-2   font-[700] uppercase transition-all ease-in-out duration-300 ${data?.data[activeTab].region === item.region
                 ? "text-black xxl:text-[29px] xl:text-[26px] lg:text-[21px] text-[18px]"
                 : "bg-transparent text-black/50 xxl:text-[28px] xl:text-[25px] lg:text-[20px] text-[18px]"
-            }`}
+              }`}
             onClick={() => handleTabClick(index)}>
             <div
-              className={`w-[10px]  h-[10px] rounded-full ${
-                data?.data[activeTab].region === item.region ? "bg-primary" : "bg-black/30"
-              }`}></div>
+              className={`w-[10px]  h-[10px] rounded-full ${data?.data[activeTab].region === item.region ? "bg-primary" : "bg-black/30"
+                }`}></div>
             {item.region}
           </button>
         ))}
       </div>
-      <div className="grid  lg:grid-cols-2 gap-[40px]   items-center mt-5 lg:mt-[60px]">
-        {data?.data[activeTab].phone !== "" && <div className="">
+      <div className="grid  lg:grid-cols-2 gap-4   items-center ">
+        {data?.data[activeTab].phone !== "" && <div className="mt-3">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/phone.svg"
@@ -65,11 +59,11 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
               Phone
             </span>
           </div>
-          <p className="lg:text-[22px] text-[16px]  text-black font-[500] mt-[16px] xl:w-[80%]">
+          <p className="lg:text-[22px] text-[16px]  text-black font-[500] mt-3 xl:w-[80%]">
             {data?.data[activeTab].phone}
           </p>
         </div>}
-        {data?.data[activeTab].fax !== "" && <div className="">
+        {data?.data[activeTab].fax !== "" && <div className="mt-3">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/fax.svg"
@@ -85,7 +79,7 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
             {data?.data[activeTab].fax}
           </p>
         </div>}
-        {data?.data[activeTab].mail !== "" && <div className="lg:mb-[40px] ">
+        {data?.data[activeTab].mail !== "" && <div className="mt-3 ">
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/mail.svg"
@@ -105,7 +99,7 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
             {/* </a> */}
           </p>
         </div>}
-        {data?.data[activeTab].address_card !== "" && <div className="mb-[40px]">
+        {data?.data[activeTab].address_card !== "" && <div>
           <div className="flex gap-2">
             <Image
               src="/assets/img/contact/addresscard.svg"
@@ -117,12 +111,12 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
               Address Card
             </span>
           </div>
-          <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px] xl:w-[75%] ">
+          <p className="lg:text-[22px] text-[16px] text-black font-[500] mt-2 xl:w-[75%] ">
             {data?.data[activeTab].address_card}
           </p>
         </div>}
       </div>
-      {data?.data[activeTab].address !== "" && <div className=" lg:mb-0 mb-9">
+      {data?.data[activeTab].address !== "" && <div className=" lg:mb-0 mb-9 mt-5">
         <div className="flex gap-2">
           <Image
             src="/assets/img/contact/location.svg"
@@ -136,8 +130,20 @@ const ContactDetails = ({setMapactive}: ContactDetailsProps) => {
         </div>
         <div className="lg:text-[22px] text-[16px] text-black font-[500] mt-[16px]  addrea">
           {parse(data?.data[activeTab].address || "")}
-          
+
         </div>
+        
+        <div className="w-full h-[300px] lg:h-[310px] rounded-xl overflow-hidden mt-10">
+            <iframe
+              src={data?.data[activeTab].map}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+ 
+          </div>
       </div>}
     </motion.div>
   );
