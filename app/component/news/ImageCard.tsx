@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+// import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 import Link from "next/link";
 
 type ImageCardProps = {
@@ -20,7 +20,6 @@ const ImageCard: React.FC<ImageCardProps> = ({
   title,
   subTitle,
   date,
-  _id,
   altTag,
   slug
 }) => {
@@ -61,7 +60,17 @@ const ImageCard: React.FC<ImageCardProps> = ({
           <h4 className="lg:text-[22px] text-[20px]  font-[600] text-white  lg:w-[90%] leading-[28.6px] mt-0 lg:mb-[32px] mb-[10px]">
             {title}
           </h4>
-          <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" />
+          <div className="flex items-center gap-2   text-primary  rounded-lg text-[14px] uppercase">
+          <span>Read More</span>
+                <Image
+                  src="/assets/img/news/arrow-orange.svg"
+                  alt="arrow"
+                  width={11.47}
+                  height={11.47}
+                  className=""
+                />
+                </div>
+          {/* <ButtonWithIcon link={`/news-details/${_id}`} buttonText="Read More" /> */}
         </div>
       </motion.div>
     </motion.div>
