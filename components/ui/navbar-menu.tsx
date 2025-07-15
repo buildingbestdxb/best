@@ -95,7 +95,7 @@ export const Menu = ({
         <div className="flex space-x-[25px] xl:space-x-[35px] items-center">
           {children}
           <Link
-            href="contact"
+            href="/contact"
             className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn">
             <div>
               <Image

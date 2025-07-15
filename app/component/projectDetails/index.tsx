@@ -65,7 +65,7 @@ export default function Index({data}:{data:IndiProjectType}) {
         imageSrc={data?.data?.bannerImage == "" ? "/assets/img/projects-details/banner2.jpg"  : data?.data?.bannerImage}
         title={data?.data?.name}
         breadcrumbs={breadcrumb}
-        altTag={data?.data.bannerAlt}
+        altTag={data?.data?.bannerAlt}
       />
 
       <Gallery data={data}/>
