@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
+// import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 import Link from "next/link";
 
 type ImageCardProps = {
@@ -20,7 +20,6 @@ const ImageCard: React.FC<ImageCardProps> = ({
   title,
   subTitle,
   date,
-  _id,
   altTag,
   slug
 }) => {
