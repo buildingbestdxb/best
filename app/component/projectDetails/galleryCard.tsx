@@ -23,7 +23,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
 
   return (
     <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]   ">
-<button
+{data.length > 1 && <button
         className="absolute me-3 top-[50%] left-4 backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group z-50"
         onClick={handlePrev}
       >
@@ -34,7 +34,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           height={18}
           className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
-      </button>
+      </button>}
       {/* Slide Track */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full w-full"
@@ -62,7 +62,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
         ))}
       </div>
 
-      <button
+      {data.length > 1 && <button
         className="absolute ms-3 right-4 top-[50%] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
         onClick={handleNext}
       >
@@ -73,7 +73,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
           height={18}
           className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
-      </button>
+      </button>}
 
       {/* Navigation */}
      
