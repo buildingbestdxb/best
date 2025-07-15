@@ -1,12 +1,36 @@
+'use client'
 
 import Image from "next/image";
 import GalleryCard from "./galleryCard";
 import { IndiProjectType } from "@/app/types/IndiProjectType";
+import { useEffect, useState } from "react";
 /* import parse from 'html-react-parser' */
 
 const Gallery = ({data}:{
   data:IndiProjectType
 }) => {
+
+  const [specifications,setSpecifications] = useState<{logo:string,name:string,value:string}[]>([])
+
+  useEffect(() => {
+    if (data.data.specifications) {
+      console.log(data.data.status);
+  
+      const newSpecification = {
+        logo: "/assets/img/projects/status_logo.svg",
+        name: "Status",
+        value: data.data.status,
+      };
+  
+      const specifications = [
+        ...data.data.specifications.slice(0, 2),
+        newSpecification,
+        ...data.data.specifications.slice(2),
+      ];
+  
+      setSpecifications(specifications);
+    }
+  }, [data]);
 
 
   return (
@@ -15,7 +39,7 @@ const Gallery = ({data}:{
         <div className="grid lg:grid-cols-2 xl:grid-cols-12">
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
             <div className="bg-[#F2F2F2] md:px-[60px] md:pt-[60px] md:pb-[30px] px-8 pt-8 pb-6 rounded-custom">
-              {data?.data?.specifications?.map((sector, index) => (
+              {specifications?.map((sector, index) => (
                 <div
                   key={index}
                   className="grid lg:grid-cols-12 lg:gap-6 gap-2  lg:mb-[30px] mb-4 border-b border-[#1E1E1E]/30 lg:pb-[32px] pb-3 items-center ">

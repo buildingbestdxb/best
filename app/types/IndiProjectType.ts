@@ -6,6 +6,7 @@ export type IndiProjectType = {
         images:string[];
         location:string;
         name:string;
+        status:string;
         specifications:{
             name:string;
             value:string;
