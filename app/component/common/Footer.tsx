@@ -56,9 +56,9 @@ const Footer = () => {
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
             <Link href={'https://www.instagram.com/buildingco.best/'} target="_blank">      <FaInstagram className="" /></Link>
             </div>
-            <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
+            {/* <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
               <FaYoutube className="" />
-            </div>
+            </div> */}
           </div>
           <div className="mt-5 md:pt-5 "> 
           <a href={"/assets/img/profile.pdf"} download 
