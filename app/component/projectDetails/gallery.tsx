@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import GalleryCard from "./galleryCard";
 import { IndiProjectType } from "@/app/types/IndiProjectType";
@@ -6,6 +7,7 @@ import { IndiProjectType } from "@/app/types/IndiProjectType";
 const Gallery = ({data}:{
   data:IndiProjectType
 }) => {
+
 
   return (
     <section className="  mb-0 pb-0 pt-[50px] md-py-[60px] lg-py-[100px] ">
