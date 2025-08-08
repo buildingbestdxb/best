@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   const [activeTab, setActiveTab] = useState<keyof typeof addresses>(
@@ -15,7 +15,7 @@ const Footer = () => {
     "Sharjah (Headquarters)":
       "1st Floor, Faya Business Building, Al Majaz Northern Park St., Al Majaz 2, Sharjah – UAE",
     Dubai: "Office No. 401, The Exchange Tower, Business Bay, Dubai, UAE.",
-    AbuDhabi:
+    "Abu Dhabi":
       "Office 1814, 18th Floor, Najda Street, Al Khazana Tower, Abu Dhabi, United Arab Emirates",
   };
 
@@ -28,16 +28,22 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           className="col-span-4">
+          <div className="mb-5 lg:mb-[40px] text-center w-fit">
+          <Link href="/" >
           <div className="inline-block">
             <Image
               src="/Logo.svg"
-              className="mb-5 lg:mb-[40px] h-[80px] lg:h-[95px] w-auto"
+              className=" h-[80px] lg:h-[95px] w-auto"
               alt=""
               width={150}
               height={80}
             />
           </div>
-          <h4 className="text-[18px] uppercase leading-none font-bold mb-3 lg:mb-[20px]">
+          
+          <p className="text-sm font-[500] text-white mt-1 text-center   ">Building Co. BEST L.L.C</p>
+          </Link>
+          </div>
+          <h4 className="text-[18px]  uppercase leading-none font-bold mb-3 lg:mb-[20px]">
             Follow us
           </h4>
           <div className="flex space-x-3 mt-4">
@@ -45,15 +51,29 @@ const Footer = () => {
               <FaFacebookF className="" />
             </div> */}
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
-              <FaLinkedinIn className="" />
+            <Link href={'https://www.linkedin.com/company/best-building'} target="_blank">  <FaLinkedinIn className="" /></Link>
             </div>
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
-              <FaInstagram className="" />
+            <Link href={'https://www.instagram.com/buildingco.best/'} target="_blank">      <FaInstagram className="" /></Link>
             </div>
-            <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
+            {/* <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
               <FaYoutube className="" />
-            </div>
+            </div> */}
           </div>
+          <div className="mt-5 md:pt-5 "> 
+          <a href={"/assets/img/profile.pdf"} download 
+                className="self-start py-4 text-white bg-primary   rounded-lg text-sm font-medium transition spckbtn uppercase " style={{display:'inline-block'}}>
+                <div>
+                  <Image
+                    src={"/assets/img/icons/arrow.svg"}
+                    alt=""
+                    width={30}
+                    height={30}
+                  />
+                </div>{" "}
+                Download Profile
+              </a></div>
+
         </motion.div>
 
         <motion.div

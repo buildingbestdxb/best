@@ -31,11 +31,11 @@ export default function Index({data}:{data:IndiProjectType}) {
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const {data:relatedProjects} = useSWR(`/api/admin/projects`,fetcher)
   const [randomProjects,setRandomProjects] = useState<RandomProjects[]>([])
-
+ 
   const breadcrumb = [
     { label: "Home", href: "/" },
-    { label: "Projects", href: "/" },
-    { label: `${data?.data.type} Projects`, href: "/" },
+    { label: "Projects", href: "/projects" },
+ /*    { label: `${data?.data.type} Projects`, href: "/" }, */
     { label: `${data?.data?.name}`, href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
@@ -65,7 +65,7 @@ export default function Index({data}:{data:IndiProjectType}) {
         imageSrc={data?.data?.bannerImage == "" ? "/assets/img/projects-details/banner2.jpg"  : data?.data?.bannerImage}
         title={data?.data?.name}
         breadcrumbs={breadcrumb}
-        altTag={data?.data.bannerAlt}
+        altTag={data?.data?.bannerAlt}
       />
 
       <Gallery data={data}/>

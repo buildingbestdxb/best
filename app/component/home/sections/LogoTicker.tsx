@@ -72,7 +72,7 @@ const LogoTicker = ({data}:{
         </div> */}
       <Swiper
         slidesPerView="auto" // Adjusts number of logos based on screen size
-        spaceBetween={30} // Space between logos
+        spaceBetween={80} // Space between logos
         loop={true} // Enables infinite scrolling
         autoplay={{ delay: 0, disableOnInteraction: false }} // Continuous scroll
         speed={5000} // Adjust for smoothness

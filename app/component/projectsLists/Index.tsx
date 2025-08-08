@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 import ProjectList from "./ProjectList";
 import HeroSection from "../common/Banner/Hero";
-import Sectors from "./Sectors";
+/* import Sectors from "./Sectors"; */
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import { ProjectType } from "@/app/types/ProjectType";
@@ -60,7 +60,7 @@ export default function Index({data:sectorData}:{data:SectorData}) {
       />
 
       {filteredData && <ProjectList data={filteredData} type={type ?? ""}/>}
-      <Sectors />
+{/*       <Sectors /> */}
     </>
   );
 }

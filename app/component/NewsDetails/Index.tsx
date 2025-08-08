@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import moment from "moment";
 import { IndiNews } from "@/app/types/IndiNews";
 import ShareArticle from "./ShareArticle";
+import Link from "next/link";
 
 const NewsDetails = ({data}: {data: IndiNews}) => {
 
@@ -26,7 +27,7 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
         variants={textVariants}
         className="text-white/50 lg:pt-[160px] pt-[100px] text-[16px] font- uppercase"
         style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
-        Home / News Details
+         <Link href={"/"}>Home</Link> / News Details
         <span
           className="font-bold text-primary"
           style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>

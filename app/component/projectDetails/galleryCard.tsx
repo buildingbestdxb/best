@@ -3,98 +3,128 @@
 import { useState } from "react";
 import Image from "next/image";
 
-
-
-
-export default function ImageCarousel({data}:{data:string[]}) {
-
-  console.log(data)
+export default function ImageCarousel({ data }: { data: string[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const updateScreen = (index: number) => {
-    setActiveIndex(index);
-  };
-
   const handleNext = () => {
-    updateScreen((activeIndex + 1) % data.length);
+    setActiveIndex((prev) => (prev + 1) % data.length);
   };
 
   const handlePrev = () => {
-    updateScreen((activeIndex - 1 + data.length) % data.length);
+    setActiveIndex((prev) => (prev - 1 + data.length) % data.length);
   };
 
-  // Function to get 4 thumbnails in a loop
-  const getThumbnails = () => {
-    const start = activeIndex;
-    const thumbnails = [];
-    for (let i = 0; i < data?.length; i++) {
-      thumbnails.push(data && data[(start + i) % data.length]);
-    }
-    return thumbnails;
-  };
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     handleNext();
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, [data.length]);
 
   return (
-    <div className="flex flex-col gap-4 w-full ">
-      {/* Displayed Image with Controls and Thumbnails */}
-      <div className="relative w-full lg:h-[571px] h-full aspect-video overflow-hidden rounded-xl shadow-lg flex flex-col justify-end">
+    <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]   ">
+{data.length > 1 && <button
+        className="absolute me-3 top-[50%] left-4 backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group z-50"
+        onClick={handlePrev}
+      >
         <Image
-          src={data && data[activeIndex] || "data:"}
-          alt="Displayed"
-          fill
-          className="object-cover h-full"
+          src="/assets/img/projects-details/next-icn.svg"
+          alt="Previous"
+          width={18}
+          height={18}
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
-        <div
-          className="absolute inset-0 rounded-custom"
-          style={{
-            background:
-              "linear-gradient(to top, rgb(0 0 0 / 69%) 0%, rgb(0 0 0 / 0%) 75%, rgb(0 0 0 / 0%) 0%)",
-          }}></div>
-
-        {/* Navigation Buttons */}
-        <button
-          className="absolute left-4 bottom-[32px] backdrop-blur-[24px] bg-[#0E3F7E]/4 text-primary p-[20px] rounded-[16px] "
-          onClick={handlePrev}>
-          <Image
-            src="/assets/img/projects-details/next-icn.svg"
-            alt="image"
-            width={12}
-            height={12}
-          />
-          {/* <ChevronLeft className="w-6 h-6" /> */}
-        </button>
-        <button
-          className="absolute right-4 bottom-[32px] backdrop-blur-[24px]  bg-[#0E3F7E]/4
- text-primary p-[20px] rounded-[16px] "
-          onClick={handleNext}>
-          <Image
-            src="/assets/img/projects-details/prev-icn.svg"
-            alt=""
-            width={12}
-            height={12}
-          />
-        </button>
-
-        {/* Thumbnails Inside Main Image */}
-        <div className="absolute bottom-[32px] left-1/2 transform -translate-x-1/2 flex gap-2 backdrop-blur-[24px] bg-[#0E3F7E]/4 p-[12px] rounded-[16px]">
-          {getThumbnails().map((img, index) => (
+      </button>}
+      {/* Slide Track */}
+      <div
+        className="flex transition-transform duration-700 ease-in-out h-full w-full"
+         
+        style={{
+          transform: `translateX(-${activeIndex * 100}%)`, 
+        }}
+      >
+        {data.map((img, index) => (
+          <div key={index} className="relative w-full h-full flex-shrink-0">
+            <Image
+              src={img}
+              alt={`Image ${index + 1}`}
+              fill
+              className="object-cover h-full w-full"
+            />
             <div
-              key={index}
-              className={`cursor-pointer rounded-[8px] overflow-hidden border-2 transition-all w-[54px] h-[54px] ${
-                data.indexOf(img) === activeIndex
-                  ? "border-[#FE6601]"
-                  : "border-transparent"
-              }`}
-              onClick={() => updateScreen(data.indexOf(img))}>
-              <Image
-                src={img || "data:"}
-                alt={`Thumbnail ${index + 1}`}
-                width={64}
-                height={40}
-                className="object-cover h-full"
-              />
-            </div>
-          ))}
-        </div>
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgb(0 0 0 / 69%) 0%, rgb(0 0 0 / 0%) 75%, rgb(0 0 0 / 0%) 0%)",
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+
+      {data.length > 1 && <button
+        className="absolute ms-3 right-4 top-[50%] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
+        onClick={handleNext}
+      >
+        <Image
+          src="/assets/img/projects-details/prev-icn.svg"
+          alt="Next"
+          width={18}
+          height={18}
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
+        />
+      </button>}
+
+      {/* Navigation */}
+     
+
+      {/* Thumbnails */}
+      <div className="absolute bottom-[32px] left-1/2 transform -translate-x-1/2 flex gap-2 backdrop-blur-[24px] bg-[#0E3F7E]/4 p-[12px] rounded-[16px]">
+      {/* <button
+        className="me-3 left-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group"
+        onClick={handlePrev}
+      >
+        <Image
+          src="/assets/img/projects-details/next-icn.svg"
+          alt="Previous"
+          width={18}
+          height={18}
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
+        />
+      </button> */}
+
+      
+        <div className="flex   gap-2 max-w-[180px] md:max-w-[400px]   lg:max-w-[250px] xl:max-w-[500px] overflow-scroll scrollbar-whide" >
+            {data.map((img, index) => (
+              <div
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`cursor-pointer rounded-[8px] overflow-hidden border-2 min-w-[54px] h-[54px] ${
+                  index === activeIndex ? "border-[#FE6601]" : "border-transparent"
+                }`}
+              >
+                <Image
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  width={64}
+                  height={40}
+                  className="object-cover h-full"
+                />
+              </div>
+            ))}
+          </div>
+        {/* <button
+        className=" ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
+        onClick={handleNext}
+      >
+        <Image
+          src="/assets/img/projects-details/prev-icn.svg"
+          alt="Next"
+          width={18}
+          height={18}
+          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
+        />
+      </button> */}
       </div>
     </div>
   );

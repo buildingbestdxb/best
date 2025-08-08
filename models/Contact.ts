@@ -7,23 +7,22 @@ const contactSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true,
     },
     fax: {
         type: String,
-        required: true,
     },
     mail: {
         type: String,
-        required: true,
     },
     address_card: {
         type: String,
-        required: true,
     },
     address: {
         type: String,
         required: true,
+    },
+    map: {
+        type: String,
     }
 });
 
