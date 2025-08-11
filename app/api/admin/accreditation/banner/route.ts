@@ -13,11 +13,7 @@ export async function PATCH(request: NextRequest) {
       await connectDB();
       const {bannerImage, bannerAlt, pageName} = await request.json()
     //   const accreditationBanner = await Banner.findOneAndUpdate({pageName},{$set:{image:bannerImage,alt:bannerAlt}});
-    const accreditationBanner = await Banner.create({
-        image: bannerImage,
-        alt: bannerAlt,
-        pageName: pageName
-      })
+    const accreditationBanner = await Banner.findOneAndUpdate({pageName},{$set:{image:bannerImage,alt:bannerAlt}},{upsert:true});
     if(accreditationBanner){
         return NextResponse.json({ message: "Banner updated successfully", success: true }, { status: 201 });
       }
