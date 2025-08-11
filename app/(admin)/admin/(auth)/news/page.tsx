@@ -90,6 +90,7 @@ export default function AdminProducts() {
 
 const handleBannerSave = async () => {
     try {
+      console.log("banner save")
       const formData = new FormData()
       formData.append("bannerImage", bannerImage)
       formData.append("bannerAlt", bannerAlt)

@@ -15,7 +15,7 @@ export async function PATCH(request: NextRequest) {
       const bannerImage = formData.get("bannerImage")
       const bannerAlt = formData.get("bannerAlt")
       const pageName = formData.get("pageName")
-      const newsBanner = await Banner.create({image:bannerImage,alt:bannerAlt,pageName});
+      const newsBanner = await Banner.findOneAndUpdate({pageName},{$set:{image:bannerImage,alt:bannerAlt}},{upsert:true});
       if(newsBanner){
         return NextResponse.json({ message: "Banner updated successfully", success: true }, { status: 201 });
       }
