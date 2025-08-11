@@ -1,7 +1,11 @@
 export const menuItems = [
   {
-    title: "About Us",
-    url: "/our-story",
+  title: "About Us",
+    url: "",
+    children: [
+      { title: "Company Overview", url: "/company-overview" },
+      { title: "Leadership Message", url: "/leadership-message" },
+    ],
   },
   {
     title: "Accreditation",

@@ -12,7 +12,7 @@ import { AboutType } from "@/app/types/AboutType";
 export default function Index({data}: {data: AboutType}) {
   const breadcrumb = [
     { label: "Home", href: "/" },
-    { label: "About Us", href: "" },
+    { label: "Leadership Message", href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
 
@@ -29,7 +29,7 @@ export default function Index({data}: {data: AboutType}) {
       
       <HeroInner
         imageSrc={data?.data[0].bannerImage == "" ?  "/assets/img/story/banner.jpg" : data?.data[0].bannerImage}
-        title="Our Story"
+        title="Leadership Message"
         breadcrumbs={breadcrumb}
         altTag={data?.data[0].bannerAlt}
       />
