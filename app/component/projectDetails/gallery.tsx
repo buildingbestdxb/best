@@ -57,7 +57,7 @@ const Gallery = ({data}:{
                     </div>
                   </div>
                   <div className="col-span-6">
-                    <h4 className="xl:text-[22px] text-[20px] text-black/75 font-[400]">
+                    <h4 className="text-[16px] text-black/75 font-[400]">
                       {sector.value}
                     </h4>
                   </div>
