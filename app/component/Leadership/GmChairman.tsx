@@ -1,13 +1,9 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import SecHr from "../common/SecDivider/SecHr";
-import parse from 'html-react-parser'
 
-const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1 } },
-};
+
+
 
 const slideLeft = {
     hidden: { opacity: 0, x: -50 },
@@ -18,14 +14,7 @@ const slideRight = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
-  const textVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+
 
 const CoreValue = () => {
     return (

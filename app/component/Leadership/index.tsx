@@ -1,8 +1,8 @@
 'use client'
-import React, { useEffect } from "react";
+import React from "react";
 import HeroInner from "../common/Banner/HeroInner";
 import Message from "../Leadership/GmChairman";
-import { AboutType } from "@/app/types/AboutType";
+
 
 export default function Index() {
   const breadcrumb = [
