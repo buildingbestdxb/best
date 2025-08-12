@@ -35,7 +35,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   return (
-    <section className="relative w-full h-[400px]  overflow-hidden">
+    <section className="relative w-full h-[450px]  overflow-hidden">
       <div className="relative w-full h-full">
         <div
           className="absolute inset-0 z-[1]"
