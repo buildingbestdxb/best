@@ -76,12 +76,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             variants={textVariants}
             className="text-white text-xxl  leading-none pb-6 lg:pb-[60px] font-black uppercase">
             <span
-              className="sm:text-xxl text-[40px]"
+              className="md:text-[45px] text-[34px]"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
               {title.split(" ")[0]}
             </span>{" "}
             <span
-              className="font-light sm:text-xxl text-[40px]"
+              className="font-light md:text-[45px] text-[34px]"
               style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
               {title.split(" ").slice(1).join(" ")}
             </span>
