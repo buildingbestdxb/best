@@ -1,18 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 
-export default function ImageCarousel({ data }: { data: string[] }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { data: string[],activeIndex:number,setActiveIndex:React.Dispatch<React.SetStateAction<number>> }) {
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % data.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + data.length) % data.length);
-  };
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -23,18 +14,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
 
   return (
     <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]   ">
-{data.length > 1 && <button
-        className="absolute me-3 top-[50%] left-4 backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group z-50"
-        onClick={handlePrev}
-      >
-        <Image
-          src="/assets/img/projects-details/next-icn.svg"
-          alt="Previous"
-          width={18}
-          height={18}
-          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
-        />
-      </button>}
+
       {/* Slide Track */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full w-full"
@@ -62,18 +42,7 @@ export default function ImageCarousel({ data }: { data: string[] }) {
         ))}
       </div>
 
-      {data.length > 1 && <button
-        className="absolute ms-3 right-4 top-[50%] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
-        onClick={handleNext}
-      >
-        <Image
-          src="/assets/img/projects-details/prev-icn.svg"
-          alt="Next"
-          width={18}
-          height={18}
-          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
-        />
-      </button>}
+
 
       {/* Navigation */}
      

@@ -54,6 +54,9 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  index:{
+    type:Number,
+  },
   metaTitle:{
     type:String
   },

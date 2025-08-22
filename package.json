@@ -10,6 +10,8 @@
     "create-admin": "ts-node --project tsconfig.json scripts/create-admin.ts"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.0",
@@ -22,7 +24,6 @@
     "@tinymce/tinymce-react": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
-    "pdfjs-dist": "3.11.174",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -36,6 +37,7 @@
     "motion": "^12.1.0",
     "next": "15.1.6",
     "node-fetch": "^2.6.1",
+    "pdfjs-dist": "3.11.174",
     "quill-html-edit-button": "^3.0.0",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
