@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
       await connectDB();
-      const projects = await Project.find();
+      const projects = await Project.find().sort({index:1});
       return NextResponse.json({ projects, success: true }, { status: 200 });
     } catch (error) {
       console.error("Error fetching projects:", error);

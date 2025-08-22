@@ -9,6 +9,11 @@ import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import {closestCorners, DndContext, DragEndEvent} from '@dnd-kit/core'
+import {arrayMove, SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable'
+import ProjectCard from "./ProjectCard";
+
+
 type Project = {
   _id: string;
   name: string;
@@ -29,6 +34,8 @@ export default function Projects() {
   const [metaDescription, setMetaDescription] = useState("");
   const [bannerImage, setBannerImage] = useState("");
   const [bannerAlt, setBannerAlt] = useState("");
+  const [reorderMode, setReorderMode] = useState(false);
+  const [isReorderMode, setIsReorderMode] = useState(false);
 
   const fetchProjects = async () => {
     const response = await fetch("/api/admin/projects");
@@ -121,6 +128,48 @@ export default function Projects() {
     }
   }
 
+
+  const getTaskPos = (id: number | string) => projects.findIndex((item:{_id:string})=>( item._id == id))
+  const handleDragEnd = (event: DragEndEvent) => {
+      const { active, over } = event;
+    
+      if (!over || active.id === over.id) return;
+    
+      setProjects((projects:Project[]) => {
+        const originalPos = getTaskPos(active.id);
+        const newPos = getTaskPos(over.id);
+        return arrayMove(projects, originalPos, newPos);
+      });
+    };
+
+
+    const confirmPosition = async() => {
+      setReorderMode(!reorderMode);
+      setIsReorderMode(true);
+
+      const updatedProjects = projects.map((project, index) => ({
+          ...project,
+          index: index + 1,
+      }));
+
+      setProjects(updatedProjects); 
+
+      const formData = new FormData()
+      formData.append('projects',JSON.stringify(updatedProjects))
+      const response = await fetch(`/api/admin/projects/reorder`,{
+          method:"POST",
+          body:formData
+      })
+      if(response.ok){
+          const data = await response.json()
+          if(data.success){
+              alert(data.message)
+          }
+      }
+      setIsReorderMode(false);
+  };
+
+
   if (isLoading) {
     return (
       <div className="p-6 flex justify-center items-center">
@@ -161,23 +210,29 @@ export default function Projects() {
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Projects</h1>
-        <Button className="bg-primary text-white" onClick={handleClickNewProject}>
+        <div className="flex gap-5">
+        <Button disabled={isReorderMode} className="bg-primary text-white" onClick={handleClickNewProject}>
           <span className="mr-2">+</span>
           Add Project
         </Button>
+        <Button disabled={isReorderMode} className={`text-white ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => reorderMode ? confirmPosition() : setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
+        </div>
       </div>
 
+      
       {projects.length === 0 ? (
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <h3 className="text-xl font-semibold text-gray-600 mb-2">No projects found</h3>
           <p className="text-gray-500 mb-4">Get started by creating your first project</p>
-          <Button className="bg-primary text-white" onClick={handleClickNewProject}>
+          <Button disabled={isReorderMode} className="bg-primary text-white" onClick={handleClickNewProject}>
             <span className="mr-2">+</span>
             Add Project
           </Button>
+          
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      ) : 
+        
+        !reorderMode ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <Card key={index} className="group">
               <CardContent className="p-4">
@@ -200,6 +255,15 @@ export default function Projects() {
               </CardContent>
             </Card>
           ))}
+        </div>) : (
+          <div className="grid grid-cols-1 gap-6">
+            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+            <SortableContext items={projects.map((project)=>project._id)} strategy={verticalListSortingStrategy}>
+                {projects?.map((project, index) => (
+                    <ProjectCard key={index} project={project} id={project._id} />
+                ))}
+            </SortableContext>
+        </DndContext>
         </div>
       )}
     </div>
