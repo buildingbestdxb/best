@@ -96,7 +96,7 @@ const Gallery = ({data}:{
             <h3 className="text-lg text-black font-bold mb-[40px]  uppercase">
               Gallery
             </h3>
-            <div className="mb-[40px] flex items-center gap-4">
+            <div className="mb-[40px] flex items-center">
             {data.data.images.length > 1 && <button
                     className="backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group z-50"
                     onClick={handlePrev}
