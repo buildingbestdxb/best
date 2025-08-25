@@ -4,12 +4,38 @@ import Image from "next/image";
 import GalleryCard from "./galleryCard";
 import { IndiProjectType } from "@/app/types/IndiProjectType";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 /* import parse from 'html-react-parser' */
 
-const Gallery = ({data}:{
-  data:IndiProjectType
+
+interface AllProjects {
+  projects: {
+      description: string;
+      slug:string;
+      thumbnail:string;
+      thumbnailAlt: string;
+      images: string[];
+      location: string;
+      name: string;
+      specifications: {
+          name: string;
+          value: string;
+          _id: string;
+      }[];
+      type: string;
+      status: string;
+      _id: string;
+  }[]
+}
+
+
+
+const Gallery = ({data,allProjects}:{
+  data:IndiProjectType,
+  allProjects:AllProjects
 }) => {
 
+  const router = useRouter()
   const [specifications,setSpecifications] = useState<{logo:string,name:string,value:string}[]>([])
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -34,13 +60,16 @@ const Gallery = ({data}:{
   }, [data]);
 
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % data.data.images.length);
-  };
+  const handleNavigateToNextProject = () => {
+    const currentSlug = data.data.slug;
+    const currentIndex = allProjects.projects.findIndex((project) => project.slug === currentSlug);
+    const nextIndex = (currentIndex + 1) % allProjects.projects.length;
+    const nextSlug = allProjects.projects[nextIndex].slug;
+    router.push(`/project-details/${nextSlug}`);
+  }
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + data.data.images.length) % data.data.images.length);
-  };
+
+
 
 
   return (
@@ -91,37 +120,24 @@ const Gallery = ({data}:{
             </p> */}
       {/*       <div className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400]">
             {parse(data?.data?.description || "")}</div> mt-[60px] */}
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between gap-5">
 
             <h3 className="text-lg text-black font-bold mb-[40px]  uppercase">
               Gallery
             </h3>
-            <div className="mb-[40px] flex items-center">
-            {data.data.images.length > 1 && <button
-                    className="backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group z-50"
-                    onClick={handlePrev}
-                  >
-                    <Image
-                      src="/assets/img/projects-details/next-icn.svg"
-                      alt="Previous"
-                      width={18}
-                      height={18}
-                      className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
-                    />
-                  </button>}
-            {data.data.images.length > 1 && <button
-        className="ms-3 right-4 top-[50%] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
-        onClick={handleNext}
-      >
-        <Image
-          src="/assets/img/projects-details/prev-icn.svg"
-          alt="Next"
-          width={18}
-          height={18}
-          className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
-        />
-      </button>}
-      </div>
+            <button onClick={handleNavigateToNextProject}
+                            
+                            className="mb-[40px] self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
+                            <div>
+                              <Image
+                                src={"/assets/img/icons/arrow.svg"}
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>{" "}
+                            NEXT PROJECT
+                          </button>
       </div>
             <GalleryCard data={data?.data?.images} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
             {/* <Image
