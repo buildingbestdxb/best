@@ -12,6 +12,16 @@ export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { dat
   //   return () => clearInterval(interval);
   // }, [data.length]);
 
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % data.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + data.length) % data.length);
+  };
+
+
+
   return (
     <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]   ">
 
@@ -45,12 +55,8 @@ export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { dat
 
 
       {/* Navigation */}
-     
-
-      {/* Thumbnails */}
-      <div className="absolute bottom-[32px] left-1/2 transform -translate-x-1/2 flex gap-2 backdrop-blur-[24px] bg-[#0E3F7E]/4 p-[12px] rounded-[16px]">
-      {/* <button
-        className="me-3 left-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group"
+      <button
+        className="absolute top-[50%] h-fit me-3 left-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group"
         onClick={handlePrev}
       >
         <Image
@@ -60,7 +66,11 @@ export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { dat
           height={18}
           className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
-      </button> */}
+      </button>
+
+      {/* Thumbnails */}
+      <div className="absolute bottom-[32px] left-1/2 transform -translate-x-1/2 flex gap-2 backdrop-blur-[24px] bg-[#0E3F7E]/4 p-[12px] rounded-[16px]">
+      
 
       
         <div className="flex   gap-2 max-w-[180px] md:max-w-[400px]   lg:max-w-[250px] xl:max-w-[500px] overflow-scroll scrollbar-whide" >
@@ -82,8 +92,10 @@ export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { dat
               </div>
             ))}
           </div>
-        {/* <button
-        className=" ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
+        
+      </div>
+      <button
+        className="absolute top-[50%] h-fit ms-3 right-4 bottom-[32px] backdrop-blur-[10px] bg-[#435368]  hover:bg-[#435368a3] transition-all duration-100 ease-in-out text-primary p-[20px] rounded-[16px] group  "
         onClick={handleNext}
       >
         <Image
@@ -93,8 +105,7 @@ export default function ImageCarousel({ data,activeIndex,setActiveIndex }: { dat
           height={18}
           className="invert-[1] brightness-[0] min-w-[18px] min-h-[18px] group-hover:brightness-[1] group-hover:invert-[0]  transition-all duration-300 ease-in-out"
         />
-      </button> */}
-      </div>
+      </button>
     </div>
   );
 }

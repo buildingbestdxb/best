@@ -1,5 +1,6 @@
 export type IndiProjectType = {
     data:{
+        slug:string;
         bannerImage:string;
         bannerAlt:string;
         description:string;
