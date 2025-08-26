@@ -29,7 +29,7 @@ const ProjectList = ({
 }) => {
   const limit = 8;
   // const [visible, setVisible] = useState(limit);
-  const [displayData, setDisplayData] = useState(data?.slice(0, limit));
+  const [displayData, setDisplayData] = useState(data);
   // const [noLoadMore, setNoLoadMore] = useState(false);
   const [selectedType, setSelectedType] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
@@ -50,7 +50,7 @@ const sortedData = useMemo(() => {
 }, [data, selectedType, selectedStatus]);
 
   useEffect(() => {
-    setDisplayData(sortedData.slice(0, limit));
+    setDisplayData(sortedData);
     // setVisible(limit);
     // setNoLoadMore(sortedData.length <= limit);
   }, [sortedData]);
