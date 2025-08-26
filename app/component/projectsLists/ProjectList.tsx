@@ -27,7 +27,7 @@ const ProjectList = ({
   type?: string | string[];
   handleLoadMore?: () => void;
 }) => {
-  const limit = 8;
+  // const limit = 8;
   // const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data);
   // const [noLoadMore, setNoLoadMore] = useState(false);
