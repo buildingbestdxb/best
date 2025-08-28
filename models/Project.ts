@@ -57,6 +57,10 @@ const ProjectSchema = new mongoose.Schema({
   index:{
     type:Number,
   },
+  hidden:{
+    type:Boolean,
+    default:false
+  },
   metaTitle:{
     type:String
   },

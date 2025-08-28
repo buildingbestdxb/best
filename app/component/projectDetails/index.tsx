@@ -80,11 +80,6 @@ export default function Index({data}:{data:IndiProjectType}) {
     }
   }, [relatedProjects, data]);
 
-  useEffect(() => {
-    if (allProjects) {
-      console.log(allProjects.projects)
-    }
-  }, [allProjects]);
 
 
   return (

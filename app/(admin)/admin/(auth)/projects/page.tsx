@@ -12,6 +12,8 @@ import { ImageUploader } from "@/components/ui/image-uploader";
 import {closestCorners, DndContext, DragEndEvent} from '@dnd-kit/core'
 import {arrayMove, SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable'
 import ProjectCard from "./ProjectCard";
+import { BiHide } from "react-icons/bi";
+import { GoEye } from "react-icons/go";
 
 
 type Project = {
@@ -23,6 +25,7 @@ type Project = {
     name: string;
     value: string;
   }[];
+  hidden: boolean;
 };
 
 export default function Projects() {
@@ -57,6 +60,21 @@ export default function Projects() {
   const handleEditProject = (projectId: string) => {
     router.push(`/admin/projects/${projectId}`);
   };
+
+  const handleHideProject = async(projectId: string) => {
+    try {
+      const response = await fetch(`/api/admin/projects/byid?id=${projectId}`, {
+        method: "POST",
+      });
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        fetchProjects()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleMetaSave = async() =>{
     try {
@@ -248,6 +266,14 @@ export default function Projects() {
                       onClick={() => handleEditProject(project._id)}
                     >
                       <PencilIcon className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className={project.hidden ? "h-8 w-8 text-gray-500 hover:text-primary hover:bg-primary/10 bg-red-100" : "h-8 w-8 text-gray-500 hover:text-primary hover:bg-primary/10"}
+                      onClick={() => handleHideProject(project._id)}
+                    >
+                      {project.hidden ? <GoEye className="h-4 w-4"/> : <BiHide className="h-4 w-4"/>}
                     </Button>
                     <DeleteProjectDialog projectId={project._id} onDelete={fetchProjects} />
                   </div>
