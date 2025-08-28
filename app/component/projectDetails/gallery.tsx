@@ -79,7 +79,7 @@ const Gallery = ({data,allProjects}:{
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
             <div className="bg-[#F2F2F2] md:px-[60px] md:pt-[60px] md:pb-[30px] px-8 pt-8 pb-6 rounded-custom">
               {specifications?.map((sector, index) => (
-                <div
+                sector.value !== "" && <div
                   key={index}
                   className="grid lg:grid-cols-12 lg:gap-6 gap-2  lg:mb-[30px] mb-4 border-b border-[#1E1E1E]/30 lg:pb-[32px] pb-3 items-center ">
                   <div className="col-span-6">
