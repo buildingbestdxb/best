@@ -16,6 +16,7 @@ interface DataType {
         images: string[];
         location: string;
         name: string;
+        hidden: boolean;
         specifications: {
             name: string;
             value: string;
