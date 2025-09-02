@@ -4,13 +4,40 @@ import Image from "next/image";
 import GalleryCard from "./galleryCard";
 import { IndiProjectType } from "@/app/types/IndiProjectType";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 /* import parse from 'html-react-parser' */
 
-const Gallery = ({data}:{
-  data:IndiProjectType
+
+interface AllProjects {
+  projects: {
+      description: string;
+      slug:string;
+      thumbnail:string;
+      thumbnailAlt: string;
+      images: string[];
+      location: string;
+      name: string;
+      specifications: {
+          name: string;
+          value: string;
+          _id: string;
+      }[];
+      type: string;
+      status: string;
+      _id: string;
+  }[]
+}
+
+
+
+const Gallery = ({data,allProjects}:{
+  data:IndiProjectType,
+  allProjects:AllProjects
 }) => {
 
+  const router = useRouter()
   const [specifications,setSpecifications] = useState<{logo:string,name:string,value:string}[]>([])
+    const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (data.data.specifications) {
@@ -33,6 +60,18 @@ const Gallery = ({data}:{
   }, [data]);
 
 
+  const handleNavigateToNextProject = () => {
+    const currentSlug = data.data.slug;
+    const currentIndex = allProjects.projects.findIndex((project) => project.slug === currentSlug);
+    const nextIndex = (currentIndex + 1) % allProjects.projects.length;
+    const nextSlug = allProjects.projects[nextIndex].slug;
+    router.push(`/project-details/${nextSlug}`);
+  }
+
+
+
+
+
   return (
     <section className="  mb-0 pb-0 pt-[50px] md-py-[60px] lg-py-[100px] ">
       <div className="container">
@@ -40,7 +79,7 @@ const Gallery = ({data}:{
           <div className="xl:col-span-5 xl:pr-[100px] lg:pr-[60px]  ">
             <div className="bg-[#F2F2F2] md:px-[60px] md:pt-[60px] md:pb-[30px] px-8 pt-8 pb-6 rounded-custom">
               {specifications?.map((sector, index) => (
-                <div
+                sector.value !== "" && <div
                   key={index}
                   className="grid lg:grid-cols-12 lg:gap-6 gap-2  lg:mb-[30px] mb-4 border-b border-[#1E1E1E]/30 lg:pb-[32px] pb-3 items-center ">
                   <div className="col-span-6">
@@ -81,10 +120,26 @@ const Gallery = ({data}:{
             </p> */}
       {/*       <div className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400]">
             {parse(data?.data?.description || "")}</div> mt-[60px] */}
+            <div className="flex items-center justify-between gap-5">
+
             <h3 className="text-lg text-black font-bold mb-[40px]  uppercase">
               Gallery
             </h3>
-            <GalleryCard data={data?.data?.images}/>
+            <button onClick={handleNavigateToNextProject}
+                            
+                            className="mb-[40px] self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
+                            <div>
+                              <Image
+                                src={"/assets/img/icons/arrow.svg"}
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>{" "}
+                            NEXT PROJECT
+                          </button>
+      </div>
+            <GalleryCard data={data?.data?.images} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
             {/* <Image
               src="/assets/img/projects-details/gallery.jpg"
               alt=""

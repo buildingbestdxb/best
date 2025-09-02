@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import Image from "next/image";
 import ProjectCard from "./ProjectCard";
 import StatusTab from "./StatusTab";
 
@@ -28,23 +27,15 @@ const ProjectList = ({
   type?: string | string[];
   handleLoadMore?: () => void;
 }) => {
-  const limit = 8;
-  const [visible, setVisible] = useState(limit);
-  const [displayData, setDisplayData] = useState(data?.slice(0, limit));
-  const [noLoadMore, setNoLoadMore] = useState(false);
+  // const limit = 8;
+  // const [visible, setVisible] = useState(limit);
+  const [displayData, setDisplayData] = useState(data);
+  // const [noLoadMore, setNoLoadMore] = useState(false);
   const [selectedType, setSelectedType] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
 
-  const handleLoadMore = () => {
-    const newVisible = visible + limit;
-    setDisplayData((prev) => [
-      ...prev,
-      ...sortedData.slice(visible, newVisible),
-    ]);
-    setVisible(newVisible);
-  };
 
-  // Sort Ongoing first, then Completed
+  //Sort Ongoing first, then Completed
 const sortedData = useMemo(() => {
   const list = Array.isArray(data) ? data : []; // ✅ ensure iterable
   if (selectedStatus || selectedType) {
@@ -54,21 +45,20 @@ const sortedData = useMemo(() => {
       return typeMatch && statusMatch;
     });
   }
-  return [...list].sort((a, b) =>
-    a.status === b.status ? 0 : a.status === "Ongoing" ? -1 : 1
-  );
+  return [...list]
+  
 }, [data, selectedType, selectedStatus]);
 
   useEffect(() => {
-    setDisplayData(sortedData.slice(0, limit));
-    setVisible(limit);
-    setNoLoadMore(sortedData.length <= limit);
+    setDisplayData(sortedData);
+    // setVisible(limit);
+    // setNoLoadMore(sortedData.length <= limit);
   }, [sortedData]);
 
   return (
     <section className="section-spacing">
       <div className="container">
-        <div className="block md:flex bg-black p-6 md:p-8 pt-3 items-center mb-6 rounded-sm">
+        <div className="block md:flex bg-primary p-6 md:p-8 pt-3 items-center mb-6 rounded-xl">
           <div className="w-full md:w-full">
             <div className="grid grid-cols-1 md:grid-cols-5 md:gap-[40px]">
               <div className="col-span-4">
@@ -78,13 +68,13 @@ const sortedData = useMemo(() => {
                 />
               </div>
               <div
-                className="relative w-full bg-primary flex items-center justify-center cursor-pointer"
+                className="relative w-full h-[50px] bg-black flex items-center rounded-xl group justify-center cursor-pointer border-primary hover:bg-transparent hover:border-[2px] hover:border-black hover:text-black transition-all duration-300"
                 onClick={() => {
                   setSelectedStatus("");
                   setSelectedType("");
                 }}
               >
-                <p className="font-[500] text-white">Reset</p>
+                <p className="font-[500] text-white group-hover:text-black">Reset</p>
               </div>
             </div>
           </div>
@@ -116,11 +106,10 @@ const sortedData = useMemo(() => {
           )}
         </div>
 
-        <div className="border-b border-[#1E1E1E]/30 pt-[80px]">
+        {/* <div className="border-b border-[#1E1E1E]/30 pt-[80px]">
           {!noLoadMore && (
             <div
               className="flex items-center justify-center pb-[20px] cursor-pointer"
-              onClick={handleLoadMore}
             >
               <p className="text-[#1E1E1E] text-[22px] font-[500]">
                 More Projects
@@ -134,7 +123,7 @@ const sortedData = useMemo(() => {
               />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </section>
   );

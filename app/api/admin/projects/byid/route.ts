@@ -59,3 +59,30 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
   }
 }
+
+export async function POST(request: NextRequest) {
+  const isAdmin = await verifyAdmin(request);
+
+  if (!isAdmin) {
+    return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  }
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    await connectDB();
+    const project = await Project.findById(id);
+    if(!project.hidden){
+      project.hidden = true;
+      await project.save();
+      return NextResponse.json({ data: project, success: true, message: "Project hidden successfully" }, { status: 200 });
+    }else{
+      project.hidden = false;
+      await project.save();
+      return NextResponse.json({ data: project, success: true, message: "Project unhidden successfully" }, { status: 200 });
+    }
+  } catch (error) {
+    console.error("Error updating project:", error);
+    return NextResponse.json({ error: "Failed to update project" }, { status: 500 });
+  }
+}
+

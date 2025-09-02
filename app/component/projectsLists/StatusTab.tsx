@@ -10,7 +10,7 @@ export default function StatusTab({
   setSelectedStatus: (val: string) => void;
 }) {
   return (
-    <div className="md:flex space-x-4 md:space-x-8 mb-3 md:mb-0 ">
+    <div className="md:flex space-x-4 md:space-x-8 mb-3 md:mb-0">
       {tabs.map((tab) => {
         const isActive =
           selectedStatus === tab || (tab === 'All Projects' && selectedStatus === '');
@@ -21,7 +21,7 @@ export default function StatusTab({
             className={`pb-3 
               relative  text-[20px] font-medium
               transition-colors duration-500 ease-out
-              ${isActive ? 'text-white' : 'text-gray-400 hover:text-white'}
+              ${isActive ? 'text-white' : 'text-black hover:text-white'}
               after:content-[''] after:absolute after:left-0 after:bottom-0
               after:h-[2px] after:bg-white after:w-full
               after:transform after:scale-x-0 after:origin-left

@@ -26,10 +26,32 @@ interface RandomProjects  {
 }
 
 
+interface AllProjects {
+  projects: {
+      description: string;
+      slug:string;
+      thumbnail:string;
+      thumbnailAlt: string;
+      images: string[];
+      location: string;
+      name: string;
+      specifications: {
+          name: string;
+          value: string;
+          _id: string;
+      }[];
+      type: string;
+      status: string;
+      _id: string;
+  }[]
+}
+
+
 export default function Index({data}:{data:IndiProjectType}) {
 
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   const {data:relatedProjects} = useSWR(`/api/admin/projects`,fetcher)
+  const {data:allProjects}:{data:AllProjects} = useSWR(`/api/admin/projects/all`,fetcher)
   const [randomProjects,setRandomProjects] = useState<RandomProjects[]>([])
  
   const breadcrumb = [
@@ -59,6 +81,7 @@ export default function Index({data}:{data:IndiProjectType}) {
   }, [relatedProjects, data]);
 
 
+
   return (
     <>
       <HeroInner
@@ -68,7 +91,7 @@ export default function Index({data}:{data:IndiProjectType}) {
         altTag={data?.data?.bannerAlt}
       />
 
-      <Gallery data={data}/>
+      <Gallery data={data} allProjects={allProjects}/>
       <OtherProjects data={randomProjects}/>
     </>
   );
