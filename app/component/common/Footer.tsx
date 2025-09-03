@@ -61,7 +61,7 @@ const Footer = () => {
             </div> */}
           </div>
           <div className="mt-5 md:pt-5 "> 
-          <a href={"/assets/img/profile.pdf"} download 
+          <a href={"/assets/pdf/profile.pdf"} download 
                 className="self-start py-4 text-white bg-primary   rounded-lg text-sm font-medium transition spckbtn uppercase " style={{display:'inline-block'}}>
                 <div>
                   <Image
