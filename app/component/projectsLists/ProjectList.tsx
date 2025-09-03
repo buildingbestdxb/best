@@ -31,7 +31,7 @@ const ProjectList = ({
   // const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data);
   // const [noLoadMore, setNoLoadMore] = useState(false);
-  const [selectedType, setSelectedType] = useState("");
+  // const [selectedType, setSelectedType] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
 
 
@@ -39,14 +39,11 @@ const ProjectList = ({
 const sortedData = useMemo(() => {
   const list = Array.isArray(data) ? data : [];
 
-  // First filter by type/status if selected
   const filtered = list.filter((item) => {
-    const typeMatch = selectedType === "" || item.type === selectedType;
     const statusMatch = selectedStatus === "" || item.status === selectedStatus;
-    return typeMatch && statusMatch;
+    return statusMatch;
   });
 
-  // Sort by status priority
   const statusPriority: Record<string, number> = {
     Ongoing: 1,
     Completed: 2,
@@ -57,7 +54,7 @@ const sortedData = useMemo(() => {
     const bPriority = statusPriority[b.status] ?? 99;
     return aPriority - bPriority;
   });
-}, [data, selectedType, selectedStatus]);
+}, [data, selectedStatus]);
 
 
   useEffect(() => {
