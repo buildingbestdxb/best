@@ -31,23 +31,31 @@ const ProjectList = ({
   // const [visible, setVisible] = useState(limit);
   const [displayData, setDisplayData] = useState(data);
   // const [noLoadMore, setNoLoadMore] = useState(false);
-  const [selectedType, setSelectedType] = useState("");
+  // const [selectedType, setSelectedType] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
 
 
-  //Sort Ongoing first, then Completed
+// Sort Ongoing first, then Completed
 const sortedData = useMemo(() => {
-  const list = Array.isArray(data) ? data : []; // ✅ ensure iterable
-  if (selectedStatus || selectedType) {
-    return list.filter((item) => {
-      const typeMatch = selectedType === "" || item.type === selectedType;
-      const statusMatch = selectedStatus === "" || item.status === selectedStatus;
-      return typeMatch && statusMatch;
-    });
-  }
-  return [...list]
-  
-}, [data, selectedType, selectedStatus]);
+  const list = Array.isArray(data) ? data : [];
+
+  const filtered = list.filter((item) => {
+    const statusMatch = selectedStatus === "" || item.status === selectedStatus;
+    return statusMatch;
+  });
+
+  const statusPriority: Record<string, number> = {
+    Ongoing: 1,
+    Completed: 2,
+  };
+
+  return filtered.sort((a, b) => {
+    const aPriority = statusPriority[a.status] ?? 99;
+    const bPriority = statusPriority[b.status] ?? 99;
+    return aPriority - bPriority;
+  });
+}, [data, selectedStatus]);
+
 
   useEffect(() => {
     setDisplayData(sortedData);
@@ -67,7 +75,7 @@ const sortedData = useMemo(() => {
                   setSelectedStatus={setSelectedStatus}
                 />
               </div>
-              <div
+              {/* <div
                 className="relative w-full h-[50px] bg-black flex items-center rounded-xl group justify-center cursor-pointer border-primary hover:bg-transparent hover:border-[2px] hover:border-black hover:text-black transition-all duration-300"
                 onClick={() => {
                   setSelectedStatus("");
@@ -75,7 +83,7 @@ const sortedData = useMemo(() => {
                 }}
               >
                 <p className="font-[500] text-white group-hover:text-black">Reset</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
