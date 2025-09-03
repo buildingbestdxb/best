@@ -25,7 +25,7 @@ export default function ImageCarousel({
   return (
     <>
       {/* Main Carousel */}
-      <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px] group">
+      <div className="relative overflow-hidden rounded-xl shadow-lg w-full lg:h-[571px] h-[400px]">
         {/* Slide Track */}
         <div
           className="flex transition-transform duration-700 ease-in-out h-full w-full"
@@ -36,7 +36,7 @@ export default function ImageCarousel({
           {data.map((img, index) => (
             <div
               key={index}
-              className="relative w-full h-full flex-shrink-0"
+              className="relative w-full h-full flex-shrink-0 group"
             >
               <Image
                 src={img}
@@ -52,15 +52,17 @@ export default function ImageCarousel({
                 }}
               ></div>
 
-              {/* + Button (appears on hover) */}
+              {/* + Button (appears only when hovering main image) */}
              <button
   onClick={() => setIsLightboxOpen(true)}
-  className="absolute top-[50%] h-fit inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 top-[50%]"
+  className="absolute top-[50%] h-fit inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300"
 >
-  <span className="bg-white text-black w-14 h-14 pb-1 flex items-center justify-center rounded-full shadow-lg text-3xl font-bold">
+  <span className="w-14 h-14 flex items-center justify-center rounded-full shadow-lg text-3xl font-bold pb-1
+    bg-white/60  text-black ">
     +
   </span>
 </button>
+
             </div>
           ))}
         </div>
@@ -119,38 +121,44 @@ export default function ImageCarousel({
 
       {/* Fullscreen Lightbox */}
       {isLightboxOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
-          {/* Close Button */}
-          <button
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 text-white text-3xl font-bold"
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={() => setIsLightboxOpen(false)} // close when clicking outside
+        >
+          {/* Prevent close when clicking image container */}
+          <div
+            className="relative w-[90%] h-[80%]"
+            onClick={(e) => e.stopPropagation()}
           >
-            ✕
-          </button>
-
-          {/* Image */}
-          <div className="relative w-[90%] h-[80%]">
-            <Image
+            <Image  onClick={() => setIsLightboxOpen(false)}
               src={data[activeIndex]}
               alt="Fullscreen"
               fill
-              className="object-contain"
+              className="object-contain cursor-pointer"
             />
-          </div>
 
-          {/* Prev & Next in Lightbox */}
-          <button
-            className="absolute left-6 text-white text-4xl"
-            onClick={handlePrev}
-          >
-            ‹
-          </button>
-          <button
-            className="absolute right-6 text-white text-4xl"
-            onClick={handleNext}
-          >
-            ›
-          </button>
+            {/* Close Button */}
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-6 right-6 text-white text-3xl font-bold"
+            >
+              ✕
+            </button>
+
+            {/* Prev & Next in Lightbox */}
+            <button
+              className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl"
+              onClick={handlePrev}
+            >
+              ‹
+            </button>
+            <button
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl"
+              onClick={handleNext}
+            >
+              ›
+            </button>
+          </div>
         </div>
       )}
     </>
