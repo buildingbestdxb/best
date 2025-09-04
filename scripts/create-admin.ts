@@ -6,7 +6,7 @@ async function createAdmin() {
   try {
     await connectDB();
 
-    const hashedPassword = await bcrypt.hash("admin@1234", 10);
+    const hashedPassword = await bcrypt.hash("B#$t@dmiN25", 10);
 
     await Admin.create({
       username: "admin",
