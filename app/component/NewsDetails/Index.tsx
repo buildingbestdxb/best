@@ -42,8 +42,8 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
             src={data?.data?.images[0]}
             alt={data?.data?.altTag}
             className="object-cover w-full h-full absolute object-center"
-            width={500}
-            height={500}
+            width={1500}
+            height={1500}
           />
         </div>
 
