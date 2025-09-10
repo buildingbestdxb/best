@@ -90,7 +90,7 @@ const AboutUs = ({ data }: { data: HomeType }) => {
                 {parse(data?.data[0].about?.content || "")}
               </div>
               <Link
-                href="/our-story"
+                href="/company-overview"
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
                 <div>
                   <Image
