@@ -12,7 +12,7 @@ const slides = [
   {
     id: 1,
     type: "video",
-    videoSrc: "/assets/video/banner.mp4", // Replace with your video path
+    videoSrc: "/assets/video/banner1.mp4", // Replace with your video path
     poster: "/assets/img/banner.jpg", // Poster image
     title: "BUILDING EXCELLENCE",
     subtitle: "DELIVERING TRUST",
