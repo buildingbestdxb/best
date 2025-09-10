@@ -21,7 +21,7 @@ const slides = [
   {
     id: 2,
     type: "video",
-    videoSrc: "/assets/video/banner-002.mp4",
+    videoSrc: "/assets/video/banner2.mp4",
     poster: "/assets/img/banner.jpg",
     title: "BUILDING EXCELLENCE",
     subtitle: "DELIVERING TRUST",
