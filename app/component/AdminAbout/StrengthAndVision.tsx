@@ -19,6 +19,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { DialogClose } from '@radix-ui/react-dialog'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
+import { generateDimentions } from '@/lib/generateDimentions'
 
 
 interface Values {
@@ -192,6 +193,7 @@ const handleDeleteClient = async(id:string) =>{
                             Image
                         </Label>
                         <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                        <p className='text-xs text-gray-500'>{generateDimentions("about", "strength_and_vision_main")}</p>
                         <Label htmlFor="altTag" className="block text-sm font-medium text-gray-700">
                             Alt Tag
                         </Label>
@@ -207,11 +209,12 @@ const handleDeleteClient = async(id:string) =>{
                             <DialogTrigger onClick={handleSetAddClient}>Add Client</DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Edit client content</DialogTitle>
+                                    <DialogTitle>Add client content</DialogTitle>
                                     <DialogDescription>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Logo</Label>
                                             <ImageUploader value={watch("clientLogo")} onChange={(url) => setValue("clientLogo", url)} />
+                                            <p className='text-xs text-gray-500'>{generateDimentions("about", "strength_and_vision_clients")}</p>
                                         </div>
                                     </DialogDescription>
                                 </DialogHeader>
@@ -238,6 +241,7 @@ const handleDeleteClient = async(id:string) =>{
                                         <div className='flex flex-col gap-2'>
                                             <Label>Logo</Label>
                                             <ImageUploader value={watch("clientLogo")} onChange={(url) => setValue("clientLogo", url)} />
+                                            <p className='text-xs text-gray-500'>{generateDimentions("about", "strength_and_vision_clients")}</p>
                                         </div>
                                     </DialogDescription>
                                 </DialogHeader>

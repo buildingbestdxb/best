@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import ButtonWithIcon from "../common/Buttons/ButtonWithIcon";
 import useSWR from "swr";
-import { departments } from "@/app/(admin)/admin/(auth)/careers/departmentData";
+// import { departments } from "@/app/(admin)/admin/(auth)/careers/departmentData";
 import { CareerType } from "@/app/types/CareerType";
 
-export default function OpenPositions() {
+export default function OpenPositions({departmentData}:{departmentData:{data:{name:string}[]}}) {
   const [open, setOpen] = useState(false);
   const [selectedDept, setSelectedDept] = useState("Department");
 
@@ -53,12 +53,12 @@ export default function OpenPositions() {
 
                 {open && (
                   <ul className="absolute w-[230px] mt-2 bg-white border rounded-lg shadow-lg z-10 ">
-                    {departments.map((dept,index) => (
+                    {departmentData?.data.map((dept,index) => (
                       <li
                         key={index}
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer uppercase"
-                        onClick={() => handleSelect(dept.title)}>
-                        {dept.title}
+                        onClick={() => handleSelect(dept.name)}>
+                        {dept.name}
                       </li>
                     ))}
                   </ul>

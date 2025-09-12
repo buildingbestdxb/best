@@ -14,6 +14,7 @@ import { ImageUploader } from "@/components/ui/image-uploader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import TinyEditor from "@/app/component/TinyMce/TinyEditor";
 import { uploadImagesFromEditor } from "@/app/helpers/uploadImagesFromEditore";
+import { generateDimentions } from "@/lib/generateDimentions";
 
 interface NewsFormData {
   title: string;
@@ -21,6 +22,7 @@ interface NewsFormData {
   tags: string[];
   date: string;
   images: string[];
+  gallery: string[];
   metaTitle: string;
   metaDescription: string;
   altTag: string;
@@ -36,6 +38,7 @@ interface NewsFormProps {
 
 const NewsForm = ({ newsId }: NewsFormProps) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [multipleImageUrls, setMultipleImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newsContent,setNewsContent] = useState("")
   const router = useRouter();
@@ -70,6 +73,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
       setValue("description", data.data.description);
       setValue("tags", data.data.tags);
       setValue("images", data.data.images);
+      setValue("gallery", data.data.gallery);
       setValue("metaTitle", data.data.metaTitle);
       setValue("metaDescription", data.data.metaDescription);
       setValue("altTag", data.data.altTag);
@@ -78,6 +82,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
         setNewsContent(data.data.description)
       }
       setImageUrls(data.data.images);
+      setMultipleImageUrls(data.data.gallery ?? []);
     };
     fetchNews();
   }, [newsId]);
@@ -87,11 +92,24 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
     setValue("images", [...imageUrls, uploadedUrl]);
   };
 
+  const handleMultipleImagesUpload = async (uploadedUrl: string) => {
+    setMultipleImageUrls((prev) => [...prev, uploadedUrl]);
+    setValue("gallery", [...multipleImageUrls, uploadedUrl]);
+  };
+
   const handleRemoveImage = (indexToRemove: number) => {
     setImageUrls((prev) => prev.filter((_, index) => index !== indexToRemove));
     setValue(
       "images",
       imageUrls.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
+  const handleRemoveMultipleImage = (indexToRemove: number) => {
+    setMultipleImageUrls((prev) => prev.filter((_, index) => index !== indexToRemove));
+    setValue(
+      "gallery",
+      multipleImageUrls.filter((_, index) => index !== indexToRemove)
     );
   };
 
@@ -249,6 +267,7 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
               </div>
             ))}
           </div>
+          <p className='text-xs text-gray-500'>{generateDimentions("news", "cover")}</p>
           </div>
           <div>
             <Label>Alt Tag</Label>
@@ -256,6 +275,35 @@ const NewsForm = ({ newsId }: NewsFormProps) => {
           </div>
         </div>
       </div>
+
+
+      <div>
+                  <Label className="block text-sm font-medium text-gray-700">Gallery</Label>
+                  <p className='text-xs text-gray-500'>{generateDimentions("news", "gallery")}</p>
+                  <div className="mt-2">
+                    <ImageUploader onChange={handleMultipleImagesUpload} deleteAfterUpload={true} />
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-4">
+                    {multipleImageUrls?.map((url, index) => (
+                      <div key={index} className="relative h-40">
+                        <Image
+                          src={url}
+                          alt={`Uploaded image ${index + 1}`}
+                          className="h-full w-full object-cover rounded-lg"
+                          width={100}
+                          height={100}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveMultipleImage(index)}
+                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
 
       <div>

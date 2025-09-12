@@ -5,6 +5,7 @@ import AccreditaionList from "./accreditation-list";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { generateDimentions } from "@/lib/generateDimentions";
 
 export default function AccreditationPage() {
   const [metaTitle, setMetaTitle] = useState("");
@@ -108,6 +109,7 @@ export default function AccreditationPage() {
           <Button onClick={handleBannerSave}>Save Banner</Button>
         </div>
         <ImageUploader value={bannerImage} onChange={(url) => setBannerImage(url)} />
+        <p className='text-xs text-gray-500'>{generateDimentions("accreditation", "banner")}</p>
         <Label>Banner Alt</Label>
         <Input value={bannerAlt} onChange={(e) => setBannerAlt(e.target.value)} />
       </div>

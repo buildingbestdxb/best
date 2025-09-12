@@ -9,7 +9,7 @@ import { IndiNews } from "@/app/types/IndiNews";
 import ShareArticle from "./ShareArticle";
 import Link from "next/link";
 
-const NewsDetails = ({data}: {data: IndiNews}) => {
+const NewsDetails = ({ data }: { data: IndiNews }) => {
 
 
   const textVariants = {
@@ -27,7 +27,7 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
         variants={textVariants}
         className="text-white/50 lg:pt-[160px] pt-[100px] text-[16px] font- uppercase"
         style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
-         <Link href={"/"}>Home</Link> / News Details
+        <Link href={"/"}>Home</Link> / News Details
         <span
           className="font-bold text-primary"
           style={{ fontFamily: "var(--font-urbanist), sans-serif" }}>
@@ -79,7 +79,7 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
               <div className="flex flex-col">
                 <div className="uppercase font-[800] text-[#FE6601] flex gap-2 items-center">
                   {/* <Image src={shareIcon} alt="share-icon" /> Share article */}
-                <ShareArticle/>
+                  <ShareArticle />
                 </div>
               </div>
             </div>
@@ -105,9 +105,31 @@ const NewsDetails = ({data}: {data: IndiNews}) => {
               </>
             ))} */}
             {parse(data?.data.description || "")}
+
+            <section className="mt-5">
+
+              <div className="grid grid-cols-2 gap-2 w-full">
+                {data?.data.gallery.map((item, index) => (
+                  <div key={index} className="h-[240px] w-full relative">
+                    <Image
+                      key={index}
+                      src={item}
+                      alt={data?.data.altTag}
+                      className="object-cover w-full h-full absolute object-center"
+                      width={1500}
+                      height={1500}
+                    />
+                  </div>
+                ))}
+
+              </div>
+            </section>
+
           </div>
+
         </div>
       </section>
+
     </div>
   );
 };

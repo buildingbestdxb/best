@@ -38,7 +38,7 @@ const Index = ({data}: {data: HomeType}) => {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection data={data.data[0].bannerSection}/>
       <AboutUs data={data}/>
       <StatsSection
         data={data}

@@ -19,6 +19,7 @@ import {
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { DialogClose } from '@radix-ui/react-dialog'
 import Image from 'next/image'
+import { generateDimentions } from '@/lib/generateDimentions'
 
 
 interface Values {
@@ -210,6 +211,7 @@ const ValuesSection = () => {
                             Image
                         </Label>
                         <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                        <p className='text-xs text-gray-500'>{generateDimentions("about", "main")}</p>
                         <Label>Alt Tag</Label>
                         <Input {...register("altTag", { required: "Alt tag is required" })} />
                     </div>
@@ -233,6 +235,7 @@ const ValuesSection = () => {
                                                 <Label>Logo</Label>
                                                 <ImageUploader value={watch("seal")} onChange={(url) => setValue("seal", url)} />
                                             </div>
+                                            <p className='text-xs text-gray-500'>{generateDimentions("about", "seals")}</p>
                                         </DialogDescription>
                                     </DialogHeader>
                                     <DialogClose onClick={handleAddSeal}>Save</DialogClose>
@@ -281,6 +284,7 @@ const ValuesSection = () => {
                                                     <div className='flex flex-col gap-2'>
                                                         <Label>Logo</Label>
                                                         <ImageUploader value={watch("cardLogo")} onChange={(url) => setValue("cardLogo", url)} />
+                                                        <p className='text-xs text-gray-500'>{generateDimentions("about", "card_logo")}</p>
                                                         <Label>Alt Tag</Label>
                                                         <Input {...register("cardLogoAlt")} />
                                                         <Label>Title</Label>

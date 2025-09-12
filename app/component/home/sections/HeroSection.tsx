@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -8,28 +8,43 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const slides = [
-  {
-    id: 1,
-    type: "video",
-    videoSrc: "/assets/video/banner1.mp4", // Replace with your video path
-    poster: "/assets/img/banner.jpg", // Poster image
-    title: "BUILDING EXCELLENCE",
-    subtitle: "DELIVERING TRUST",
-    imageSrc: "/assets/img/slide1.jpg", // Add imageSrc property
-  },
-  {
-    id: 2,
-    type: "video",
-    videoSrc: "/assets/video/banner2.mp4",
-    poster: "/assets/img/banner.jpg",
-    title: "BUILDING EXCELLENCE",
-    subtitle: "DELIVERING TRUST",
-    imageSrc: "/assets/img/slide2.jpg", // Add imageSrc property
-  },
-];
+// const slides = [
+//   {
+//     id: 1,
+//     type: "video",
+//     videoSrc: "/assets/video/banner1.mp4", // Replace with your video path
+//     poster: "/assets/img/banner.jpg", // Poster image
+//     title: "BUILDING EXCELLENCE",
+//     subtitle: "DELIVERING TRUST",
+//     imageSrc: "/assets/img/slide1.jpg", // Add imageSrc property
+//   },
+//   {
+//     id: 2,
+//     type: "video",
+//     videoSrc: "/assets/video/banner2.mp4",
+//     poster: "/assets/img/banner.jpg",
+//     title: "BUILDING EXCELLENCE",
+//     subtitle: "DELIVERING TRUST",
+//     imageSrc: "/assets/img/slide2.jpg", // Add imageSrc property
+//   },
+// ];
 
-const HeroSection = () => {
+type BannerSectionType = {
+  items:[{
+    mainTitle:string,
+    subTitle:string,
+    video:string,
+    poster:string,
+    logo:string,
+    logoAlt:string,
+    image:string,
+    imageAlt:string,
+    style:string,
+    cardText:string
+}]
+}
+
+const HeroSection = ({data}: {data: BannerSectionType}) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -45,10 +60,11 @@ const HeroSection = () => {
   };
 
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    videoRefs.current = videoRefs.current.slice(0, slides.length);
-  }, [slides.length]);
+    videoRefs.current = videoRefs.current.slice(0, data.items.length);
+  }, [data.items.length]);
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
@@ -78,6 +94,7 @@ const HeroSection = () => {
             if (video) {
               if (swiper.realIndex === index) {
                 video.play();
+                setActiveIndex(index);
               } else {
                 video.pause();
                 video.currentTime = 0;
@@ -85,17 +102,17 @@ const HeroSection = () => {
             }
           });
         }}>
-        {slides.map((slide, index) => (
+        {data.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
               <div className="overlay absolute w-full h-full bg-black opacity-50 z-[1]"></div>
               {/* Video Slide with Poster */}
-              {slide.type === "video" ? (
+              {slide.style === "Video" ? (
                 <video
                   ref={(el) => {
                     videoRefs.current[index] = el;
                   }}
-                  src={slide.videoSrc}
+                  src={slide.video}
                   className="absolute inset-0 w-full h-full object-cover"
                   loop
                   muted
@@ -105,7 +122,7 @@ const HeroSection = () => {
               ) : (
                 /* Image Slide */
                 <Image
-                  src={slide.imageSrc ?? "/assets/img/slide2.jpg"}
+                  src={slide.image ?? "/assets/img/slide2.jpg"}
                   alt="Hero Background"
                   layout="fill"
                   objectFit="cover"
@@ -125,12 +142,12 @@ const HeroSection = () => {
                   <motion.p
                     variants={textVariants}
                     className="text-white text-xxl leading-none font-light">
-                    {slide.title}
+                    {slide.mainTitle}
                   </motion.p>
                   <motion.p
                     variants={textVariants}
                     className="text-white text-xxl leading-none font-black">
-                    {slide.subtitle}
+                    {slide.subTitle}
                   </motion.p>
                 </div>
               </motion.div>
@@ -161,13 +178,13 @@ const HeroSection = () => {
                 <SwiperSlide>
                   <div className="space-y-6 text-center flex flex-col items-center">
                     <Image
-                      src={"/assets/img/icons/excellence.svg"}
-                      alt=""
+                      src={data.items[activeIndex].logo}
+                      alt={data.items[activeIndex].logoAlt}
                       width={34}
                       height={34}
                     />
                     <h3 className="text-center text-[22px]">
-                      50 Years of Excellence in the UAE Construction Industry
+                      {data.items[activeIndex].cardText}
                     </h3>
                   </div>
                 </SwiperSlide>
