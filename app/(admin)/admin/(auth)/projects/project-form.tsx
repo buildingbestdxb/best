@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { generateDimentions } from "@/lib/generateDimentions";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type ProjectData = {
@@ -176,6 +177,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                         Banner Image
                       </Label>
                       <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+            <p className='text-xs text-gray-500'>{generateDimentions("projects", "indi_project_banner")}</p>
             </div>
             <div>
                     <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
@@ -205,7 +207,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
               <div>
               <Label htmlFor="name">Thumbnail</Label>
               <ImageUploader value={watch(`thumbnail`)} onChange={(url) => setValue("thumbnail",url)} deleteAfterUpload={true} />
-            
+              <p className='text-xs text-gray-500'>{generateDimentions("projects", "indi_project_thumbnail")}</p>
             </div>
             <div>
               <Label htmlFor="name">Thumbnail Alt</Label>
@@ -291,6 +293,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.name`}>Logo</Label>
                   <ImageUploader value={watch(`specifications.${index}.logo`)} onChange={(url) => handleSpecLogoUpload(index, url)} deleteAfterUpload={true} />
+                <p className='text-xs text-gray-500'>{generateDimentions("projects", "indi_project_logo")}</p>
                 </div>
                 <div className="space-y-2 flex-1">
                   <Label htmlFor={`specifications.${index}.logoAlt`}>Logo Alt</Label>
@@ -313,6 +316,7 @@ const ProjectForm = ({ projectId }: ProjectFormData) => {
           {/* Images */}
           <div>
             <Label className="block text-sm font-medium text-gray-700">Gallery</Label>
+            <p className='text-xs text-gray-500'>{generateDimentions("projects", "indi_project_gallery")}</p>
             <div className="mt-2">
               <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} />
             </div>

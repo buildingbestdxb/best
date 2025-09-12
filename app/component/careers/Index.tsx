@@ -5,7 +5,7 @@ import HeroSection from "../common/Banner/Hero";
 import OpenPositions from "./OpenPositions";
 // import ApplicationForm from "./ApplicationForm";
 
-export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) {
+export default function Index({data,departmentData}:{data:{data:{image:string,alt:string}[]},departmentData:{data:{name:string}[]}}) {
 
   // const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
   // const { data }:{data:{data:{image:string}[]}} = useSWR(`/api/admin/careers/banner`, fetcher)
@@ -19,7 +19,7 @@ export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) 
         breadcrumb=""
         altTag={data?.data[0].alt}
       />
-      <OpenPositions />
+      <OpenPositions departmentData={departmentData}/>
 
       {/* <ApplicationForm /> */}
     </>

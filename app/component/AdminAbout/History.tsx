@@ -19,6 +19,7 @@ import {
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { DialogClose } from '@radix-ui/react-dialog'
 import Image from 'next/image'
+import { generateDimentions } from '@/lib/generateDimentions'
 
 
 interface Values {
@@ -166,6 +167,7 @@ const History = () => {
                                         <div className='flex flex-col gap-2'>
                                             <Label>Image</Label>
                                             <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                                            <p className='text-xs text-gray-500'>{generateDimentions("about", "history")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Alt Tag</Label>
@@ -204,13 +206,14 @@ const History = () => {
                     <div className='flex gap-5'>
                         <Dialog>
                             <DialogTrigger onClick={()=>handleSetEditHistory(item.year,item.title,item.content,item.image,item.altTag)}>Edit</DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className='h-[calc(100vh-10rem)] overflow-y-auto'>
                                 <DialogHeader>
                                     <DialogTitle>Edit History</DialogTitle>
                                     <DialogDescription>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Image</Label>
                                             <ImageUploader value={watch("image")} onChange={(url) => setValue("image", url)} />
+                                            <p className='text-xs text-gray-500'>{generateDimentions("about", "history")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <Label>Alt Tag</Label>

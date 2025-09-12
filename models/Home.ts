@@ -7,9 +7,19 @@ const HomeSchema  = new mongoose.Schema({
     metaDescription:{
         type:String,
     },
-    pageHeading:{
-        type:String,
-        required:true
+    bannerSection:{
+        items:[{
+            mainTitle:{type:String},
+            subTitle:{type:String},
+            video:{type:String},
+            poster:{type:String},
+            logo:{type:String},
+            logoAlt:{type:String},
+            image:{type:String},
+            imageAlt:{type:String},
+            style:{type:String},
+            cardText:{type:String}
+        }]
     },
     about:{
         title:{

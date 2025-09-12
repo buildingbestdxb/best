@@ -5,6 +5,7 @@ const NewsSchema = new mongoose.Schema({
   slug: String,
   description: String,
   images: [String],
+  gallery:[String],
   date: Date,
   tags: [String],
   type: {
