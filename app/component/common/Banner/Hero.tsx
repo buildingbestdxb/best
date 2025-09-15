@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import Link from "next/link";
 
 interface HeroSectionProps {
@@ -30,7 +30,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: easeOut },
     },
   };
 

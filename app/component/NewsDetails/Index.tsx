@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import Image from "next/image";
 import parse from "html-react-parser";
 import moment from "moment";
@@ -17,7 +17,7 @@ const NewsDetails = ({ data }: { data: IndiNews }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: easeOut },
     },
   };
 

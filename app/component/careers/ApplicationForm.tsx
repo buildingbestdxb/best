@@ -5,6 +5,7 @@ import { motion } from "framer-motion"; // Import motion
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { careerForm } from "@/app/schemas/careerForm";
+import { sendMailToJobSeeker } from "@/app/actions/sendMailToJobSeeker";
 
 type FormData = {
   fullName: string;
@@ -36,12 +37,13 @@ type FormData = {
 
 export default function ApplicationForm({data:fetchedData}:{data:{data:{title:string,responsibilities:string[]}}}) {
 
-  const { register, setValue, formState: { errors }, handleSubmit, setError, reset, control,watch } = useForm<FormData>({ resolver: zodResolver(careerForm) })
+  const { register, setValue, formState: { errors,isSubmitting }, handleSubmit, setError, reset, control,watch} = useForm<FormData>({ resolver: zodResolver(careerForm) })
   const [choosenFile, setChoosenFile] = useState<File | null>(null)
   const [coverLetter, setCoverLetter] = useState<File | null>(null)
 
   console.log("errors",errors)
   const onSubmit = async (typedData: FormData) => {
+    console.log("typedData",typedData)
     try {
       const formData = new FormData();
       formData.append("file", choosenFile || "");
@@ -84,6 +86,7 @@ export default function ApplicationForm({data:fetchedData}:{data:{data:{title:st
 
         if (response.ok) {
           alert("Thank you, we will reach out to you soon")
+          sendMailToJobSeeker(typedData.fullName,typedData.email)
         } else {
           alert("Failed to submit form after upload")
         }
@@ -646,6 +649,7 @@ export default function ApplicationForm({data:fetchedData}:{data:{data:{title:st
 
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn orng">
                 <div>
                   <Image
