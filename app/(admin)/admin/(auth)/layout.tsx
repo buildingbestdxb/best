@@ -9,7 +9,7 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import ClientSideLink from "../client-side-link";
-import { CodeIcon, GroupIcon, PowerIcon } from "lucide-react";
+import { CodeIcon, GroupIcon } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "/admin", icon: HomeIcon },
