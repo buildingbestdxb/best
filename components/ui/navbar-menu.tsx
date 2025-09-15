@@ -1,12 +1,12 @@
 "use client";
 import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, spring } from "framer-motion";
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
 import arrow from "@/public/assets/img/home/arrow.svg";
 
 const transition = {
-  type: "spring",
+  type: spring,
   mass: 0.5,
   damping: 11.5,
   stiffness: 100,
