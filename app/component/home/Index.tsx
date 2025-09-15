@@ -11,7 +11,7 @@ import VisionMission from "./sections/VisionMission";
 import OurLocation from "./sections/OurLocation";
 import ContactUs from "./sections/ContactUs";
 import { HomeType } from "@/app/types/HomeType";
-import useSWR from "swr";
+import { AboutType } from "@/app/types/AboutType"; 
 const stats = {
   bannerimage: "/assets/img/home/stastsc.jpg",
   data: [
@@ -32,9 +32,7 @@ const stats = {
     },
   ],
 };
-const Index = ({data}: {data: HomeType}) => {
-  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json())
-  const { data:tickerData } = useSWR(`/api/admin/about/intro`, fetcher)
+const Index = ({data,data1}: {data: HomeType,data1: AboutType}) => { 
 
   return (
     <>
@@ -45,7 +43,7 @@ const Index = ({data}: {data: HomeType}) => {
         colms={3}
         bannerimage={stats.bannerimage}
       />
-      <LogoTicker data={tickerData}/>
+      <LogoTicker data={data1}/>
       <SectorsSec data={data}/>
       <QualitySafety data={data}/>
       <VisionMission data={data}/>
