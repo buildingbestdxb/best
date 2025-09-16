@@ -45,6 +45,9 @@ type BannerSectionType = {
 }
 
 const HeroSection = ({data}: {data: BannerSectionType}) => {
+
+  const [isReady, setIsReady] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,7 +73,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
     <section className="relative w-full h-screen overflow-hidden">
       <Swiper
         modules={[Autoplay, Pagination]}
-        autoplay={{ delay: 10000, disableOnInteraction: false }}
+        // autoplay={{ delay: 10000, disableOnInteraction: false }}
         pagination={{
           el: ".custom-pagination",
           clickable: true,
@@ -105,7 +108,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
         {data.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
-              <div className="overlay absolute w-full h-full bg-black opacity-50 z-[1]"></div>
+              <div className="overlay absolute w-full h-full  z-[1]"></div>
               {/* Video Slide with Poster */}
               {slide.style === "Video" ? (
                 <video
@@ -113,11 +116,13 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
                     videoRefs.current[index] = el;
                   }}
                   src={slide.video}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isReady ? "opacity-100" : "opacity-0"}`}
                   loop
                   muted
                   playsInline
-                  poster={slide.poster} // Poster image
+                  poster={slide.poster}
+                  preload="auto"
+                  onCanPlayThrough={() => setIsReady(true)} // Poster image
                 />
               ) : (
                 /* Image Slide */
@@ -176,7 +181,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
                 loop={true}
                 className=" ">
                 <SwiperSlide>
-                  <div className="space-y-6 text-center flex flex-col items-center">
+                  <div className={`space-y-6 text-center flex flex-col items-center ${isReady ? "opacity-100" : "opacity-0"}`}>
                     <Image
                       src={data.items[activeIndex].logo}
                       alt={data.items[activeIndex].logoAlt}
