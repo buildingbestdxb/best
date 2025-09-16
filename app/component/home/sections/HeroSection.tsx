@@ -73,7 +73,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
     <section className="relative w-full h-screen overflow-hidden">
       <Swiper
         modules={[Autoplay, Pagination]}
-        // autoplay={{ delay: 10000, disableOnInteraction: false }}
+        autoplay={{ delay: 10000, disableOnInteraction: false }}
         pagination={{
           el: ".custom-pagination",
           clickable: true,
