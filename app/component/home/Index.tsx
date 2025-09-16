@@ -33,7 +33,7 @@ const stats = {
   ],
 };
 const Index = ({data,data1}: {data: HomeType,data1: AboutType}) => { 
-
+console.log(data);
   return (
     <>
       <HeroSection data={data.data[0].bannerSection}/>
