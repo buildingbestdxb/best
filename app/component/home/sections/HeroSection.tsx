@@ -78,7 +78,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
           el: ".custom-pagination",
           clickable: true,
           renderBullet: (index, className) =>
-            `<span class="custom-bullet ${className}">
+            `<span class="custom-bullet ${className} ${isReady ? "opacity-100" : "opacity-0"}">
                ${(index + 1).toString().padStart(2, "0")}
                <hr class="progress-bar"></hr>
             </span>`,
