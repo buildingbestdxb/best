@@ -5,10 +5,6 @@ export const contactForm = z.object({
     email: z.string().email(),
     subject: z.string().trim().min(5, { message: 'Subject is required' }),
     message: z.string().trim().min(1, { message: 'Message is required' }),
-    phone: z
-    .string()
-    .trim()
-    .regex(/^\d+$/, { message: 'Phone must contain only numbers' })
   });
 
   export const contactFormHome = z.object({
