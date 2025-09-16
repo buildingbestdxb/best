@@ -1,5 +1,9 @@
+import SenderTemplate from "@/emails/SenderTemplate";
 import JobRequest from "@/models/JobRequest";
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
     try {
@@ -61,6 +65,14 @@ export async function POST(request: NextRequest) {
         linkedinProfile,
         appliedFor
       });
+
+      await resend.emails.send({
+        from: `Best BCC <enquiry@bestbcc.com>`,
+        to: ['careers@bestbcc.com'],
+        subject: 'Enquiry from website [bestbcc.com]',
+        react: SenderTemplate({ fullName, email, phone, appliedFor }),
+        replyTo: email,
+    });
 
       return NextResponse.json({ data: jobRequest, success: true }, { status: 200 });
     } catch (error) {
