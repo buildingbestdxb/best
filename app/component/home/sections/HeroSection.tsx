@@ -84,7 +84,7 @@ const HeroSection = ({data}: {data: BannerSectionType}) => {
             </span>`,
         }}
         loop={true}
-        className="h-full"
+        className={`h-full ${isReady ? "opacity-100" : "opacity-0"}`}
         onSlideChange={(swiper) => {
           document.querySelectorAll(".progress-bar").forEach((el) => {
             (el as HTMLElement).style.animation = "none"; // Reset animation
