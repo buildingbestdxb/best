@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       const enquiry = await Enquiry.create({ name,email,subject,phone,message });
       if(enquiry){
         await resend.emails.send({
-          from: `Best BCC <enquiry@bestbcc.com>`,
+          from: `Best BCC <noreply@bestbcc.com>`,
           to: ['info@bestbcc.com'],
           subject: 'Enquiry from website [bestbcc.com]',
           react: ContactTemplate({ name, email, phone, subject, message }),

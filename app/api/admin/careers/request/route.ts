@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       });
 
       await resend.emails.send({
-        from: `Best BCC <enquiry@bestbcc.com>`,
+        from: `Best BCC <noreply@bestbcc.com>`,
         to: ['careers@bestbcc.com'],
         subject: 'Enquiry from website [bestbcc.com]',
         react: SenderTemplate({ fullName, email, phone, appliedFor }),
