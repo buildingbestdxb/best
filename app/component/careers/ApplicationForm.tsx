@@ -37,7 +37,16 @@ type FormData = {
 
 export default function ApplicationForm({data:fetchedData}:{data:{data:{title:string,responsibilities:string[]}}}) {
 
-  const { register, setValue, formState: { errors,isSubmitting }, handleSubmit, setError, reset, control,watch} = useForm<FormData>({ resolver: zodResolver(careerForm) })
+  const { 
+    register, 
+    setValue, 
+    formState: { errors,isSubmitting }, 
+    handleSubmit, 
+    setError, 
+    reset, 
+    control,
+    watch
+  } = useForm<FormData>({ resolver: zodResolver(careerForm) })
   const [choosenFile, setChoosenFile] = useState<File | null>(null)
   const [coverLetter, setCoverLetter] = useState<File | null>(null)
 
@@ -248,14 +257,29 @@ export default function ApplicationForm({data:fetchedData}:{data:{data:{title:st
                 <div className="relative">
                   <motion.input
                     className=" w-full bg-transparent border-b-[1px] text-[18px] border-black/10 h-[50px] text-black/50 placeholder:text-black/50 focus:outline-none"
-                    placeholder="Date of Birth"
+                    // placeholder="Date of Birth"
                     {...register("dob")}
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                     viewport={{ once: true }} // Animation resets on scroll
                   />
-                  <input type="date" onChange={(e) => setValue("dob", e.target.value)} className="outline-none top-3 text-transparent w-full left-0 absolute bg-transparent"></input>
+                  {/* <input type="date" onChange={(e) => setValue("dob", e.target.value)} 
+                  className="outline-none top-3 text-transparent w-full left-0 absolute bg-transparent"></input> */}
+                  
+                  <div className="absolute top-0 h-full w-full">
+                    <input
+                      type="date"
+                      id="dob"
+                      // value={watch('dob')}
+                      onChange={(e) => setValue("dob", e.target.value)}
+                      onClick={(e) => (e.target as HTMLInputElement).showPicker()}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
+                    />
+                    <div className="  py-2 text-black/50 text-[18px]">
+                      {watch('dob') ? '' : "Date of Birth"}
+                    </div>
+                  </div>
                   {errors.dob && <span className="text-red-500">{errors.dob.message}</span>}
                 </div>
 
