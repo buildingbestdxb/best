@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
       protocol: "https",
       hostname: "plus.unsplash.com",
     },
-  ], // Add Dropbox domain here
+  ],
+  unoptimized:true // Add Dropbox domain here
   },
     compiler:{
     removeConsole : process.env.NODE_ENV === 'production'
