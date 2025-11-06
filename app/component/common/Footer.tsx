@@ -212,21 +212,21 @@ const Footer = () => {
               <li>
                 <Link
                   href=""
-                  className="text-white/50 text-[14px] font-light hover:text-white">
+                  className="text-white/50 text-[14px] font-light hover:text-white transition-all ease-in-out duration-500">
                   Privacy policy
                 </Link>
               </li>
               <li>
                 <Link
                   href=""
-                  className="text-white/50 text-[14px] pl-3 border-l border-white/20 hover:text-white">
+                  className="text-white/50 text-[14px] pl-3 border-l border-white/20 hover:text-white transition-all ease-in-out duration-500">
                   Terms of use
                 </Link>
               </li>
             </ul>
             <p className="text-[14px] text-white/50 font-light">
               {" "}
-              © {new Date().getFullYear()} BUILDING CO. (BEST) L.L.C . All Rights reserved | by <a className="text-white/50" href="https://www.globalsurf.ae/" target="_blank">Global Surf </a>
+              © {new Date().getFullYear()} BUILDING CO. (BEST) L.L.C . All Rights reserved | by <a className="text-white/50 hover:text-white transition-all ease-in-out duration-500" href="https://www.globalsurf.ae/" target="_blank">Global Surf </a>
             </p>
           </motion.div>
         </div>
