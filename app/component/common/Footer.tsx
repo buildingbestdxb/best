@@ -226,7 +226,7 @@ const Footer = () => {
             </ul>
             <p className="text-[14px] text-white/50 font-light">
               {" "}
-              © {new Date().getFullYear()} BUILDING CO. (BEST) L.L.C . All Rights reserved | by <a className="text-white/50 hover:text-white transition-all ease-in-out duration-500" href="https://www.globalsurf.ae/" target="_blank">Global Surf </a>
+              © {new Date().getFullYear()} BUILDING CO. (BEST) L.L.C . All Rights reserved. | by <a className="text-white/50 hover:text-white transition-all ease-in-out duration-500" href="https://www.globalsurf.ae/" target="_blank">Global Surf </a>
             </p>
           </motion.div>
         </div>
