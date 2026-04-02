@@ -5,7 +5,7 @@ import WhoWeare from "./WhoWeare";
 import CoreValue from "./CoreValue";
 import Strength from "./Strength";
 import LogoTicker from "../home/sections/LogoTicker";
-// import Historysec from "./Historysec";
+import Historysec from "./Historysec";
 import ValueIc from "./ValueIc";
 import { AboutType } from "@/app/types/AboutType";
 
@@ -38,7 +38,7 @@ export default function Index({ data }: { data: AboutType }) {
       <ValueIc />
       <Strength data={data} />
       <LogoTicker data={data} />
-      {/* <Historysec data={data} /> */}
+      <Historysec data={data} />
 
     </>
   );
