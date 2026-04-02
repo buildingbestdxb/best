@@ -1,6 +1,6 @@
 export const menuItems = [
   {
-  title: "About Us",
+    title: "About Us",
     url: "",
     children: [
       { title: "Company Overview", url: "/company-overview" },
@@ -9,7 +9,8 @@ export const menuItems = [
   },
   {
     title: "Accreditation",
-    url: "/accreditations",
+    // url: "/accreditations",
+    url: "#"
   },
   {
     title: "Projects",
@@ -17,12 +18,14 @@ export const menuItems = [
   },
   {
     title: "News & Events",
-    url: "/news-and-events",
+    // url: "/news-and-events",
+    url: "#",
     children: [],
   },
 
   {
     title: "Careers",
-    url: "/careers",
+    // url: "/careers",,
+    url: "#"
   },
 ];

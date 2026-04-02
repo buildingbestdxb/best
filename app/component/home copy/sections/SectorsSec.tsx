@@ -71,7 +71,9 @@ const SectorsSec = () => {
             Sectors We Support
           </h2>
           <p className="text-black/75">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            We build across diverse sectors, delivering tailored construction
+            solutions that meet industry demands with excellence, innovation,
+            and reliability.
           </p>
         </motion.div>
 

@@ -9,7 +9,7 @@ import Historysec from "./Historysec";
 import ValueIc from "./ValueIc";
 import { AboutType } from "@/app/types/AboutType";
 
-export default function Index({data}: {data: AboutType}) {
+export default function Index({ data }: { data: AboutType }) {
   const breadcrumb = [
     { label: "Home", href: "/" },
     { label: "Company Overview", href: "" },
@@ -20,25 +20,25 @@ export default function Index({data}: {data: AboutType}) {
   // const { data }:{data:AboutType} = useSWR(`/api/admin/about/intro`, fetcher)
 
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(data)
-  },[data])
+  }, [data])
 
   return (
     <>
-      
+
       <HeroInner
-        imageSrc={data?.data[0].bannerImage == "" ?  "/assets/img/story/banner.jpg" : data?.data[0].bannerImage}
+        imageSrc={data?.data[0].bannerImage == "" ? "/assets/img/story/banner.jpg" : data?.data[0].bannerImage}
         title="Company Overview"
         breadcrumbs={breadcrumb}
         altTag={data?.data[0].bannerAlt}
       />
-      <WhoWeare data={data}/>
-      <CoreValue data={data}/>
-      <ValueIc data={data}/>
-      <Strength data={data}/>
-      <LogoTicker data={data}/>
-      <Historysec data={data}/>
+      <WhoWeare data={data} />
+      <CoreValue data={data} />
+      <ValueIc />
+      <Strength data={data} />
+      <LogoTicker data={data} />
+      <Historysec data={data} />
 
     </>
   );

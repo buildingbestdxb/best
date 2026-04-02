@@ -2,11 +2,10 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { AboutType } from "@/app/types/AboutType";
+// import { AboutType } from "@/app/types/AboutType";
+import { cardData } from "./data";
 
-const ValueIc = ({data}:{
-  data:AboutType
-}) => {
+const ValueIc = () => {
 
 
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
@@ -35,7 +34,7 @@ const ValueIc = ({data}:{
 
       <div className="container">
         <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-2 gap-6 xxl:gap-[60px] xl-gap-[40px] w-full">
-          {data?.data[0].core_value.cards.map((stat, index) => (
+          {cardData.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -47,18 +46,18 @@ const ValueIc = ({data}:{
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 }}>
-                <motion.div
-  animate={{ scale: [1, 1.2, 1], rotate: [0, 5, 0] }}
-  transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity }}
->
-  <Image
-    src={stat.logo || "data:"}
-    alt={stat.logoAlt}
-    className="h-[30px] lg:h-[40px]"
-    width={50}
-    height={50}
-  />
-</motion.div>
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], rotate: [0, 5, 0] }}
+                    transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity }}
+                  >
+                    <Image
+                      src={stat.logo || "data:"}
+                      alt={stat.logoAlt}
+                      className="h-[30px] lg:h-[40px]"
+                      width={50}
+                      height={50}
+                    />
+                  </motion.div>
                 </motion.div>
               </div>
               <h4 className="text-left flex w-full text-white uppercase text-md font-bold">
