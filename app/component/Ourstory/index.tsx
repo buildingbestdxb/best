@@ -38,7 +38,7 @@ export default function Index({ data }: { data: AboutType }) {
       <ValueIc />
       <Strength data={data} />
       <LogoTicker data={data} />
-      <Historysec data={data} />
+      {/* <Historysec data={data} /> */}
 
     </>
   );

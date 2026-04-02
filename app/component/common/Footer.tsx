@@ -29,19 +29,19 @@ const Footer = () => {
           viewport={{ once: true }}
           className="col-span-4">
           <div className="mb-5 lg:mb-[40px] text-center w-fit">
-          <Link href="/" >
-          <div className="inline-block">
-            <Image
-              src="/Logo.svg"
-              className=" h-[80px] lg:h-[95px] w-auto"
-              alt=""
-              width={150}
-              height={80}
-            />
-          </div>
-          
-          <p className="text-sm font-[500] text-white mt-1 text-center   ">Building Co. BEST L.L.C</p>
-          </Link>
+            <Link href="/" >
+              <div className="inline-block">
+                <Image
+                  src="/Logo.svg"
+                  className=" h-[80px] lg:h-[95px] w-auto"
+                  alt=""
+                  width={150}
+                  height={80}
+                />
+              </div>
+
+              <p className="text-sm font-[500] text-white mt-1 text-center   ">Building Co. BEST L.L.C</p>
+            </Link>
           </div>
           <h4 className="text-[18px]  uppercase leading-none font-bold mb-3 lg:mb-[20px]">
             Follow us
@@ -51,28 +51,28 @@ const Footer = () => {
               <FaFacebookF className="" />
             </div> */}
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
-            <Link href={'https://www.linkedin.com/company/best-building'} target="_blank">  <FaLinkedinIn className="" /></Link>
+              <Link href={'https://www.linkedin.com/company/best-building'} target="_blank">  <FaLinkedinIn className="" /></Link>
             </div>
             <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
-            <Link href={'https://www.instagram.com/buildingco.best/'} target="_blank">      <FaInstagram className="" /></Link>
+              <Link href={'https://www.instagram.com/buildingco.best/'} target="_blank">      <FaInstagram className="" /></Link>
             </div>
             {/* <div className="cursor-pointer bg-white/10 w-[50px] h-[50px] rounded-full flex justify-center items-center hover:bg-primary transition-all duration-500 ease-in-out">
               <FaYoutube className="" />
             </div> */}
           </div>
-          <div className="mt-5 md:pt-5 "> 
-          <a href={"/assets/pdf/profile.pdf"} download 
-                className="self-start py-4 text-white bg-primary   rounded-lg text-sm font-medium transition spckbtn uppercase " style={{display:'inline-block'}}>
-                <div>
-                  <Image
-                    src={"/assets/img/icons/arrow.svg"}
-                    alt=""
-                    width={30}
-                    height={30}
-                  />
-                </div>{" "}
-                Download Profile
-              </a></div>
+          <div className="mt-5 md:pt-5 ">
+            <a href={"/assets/pdf/profile.pdf"} download
+              className="self-start py-4 text-white bg-primary   rounded-lg text-sm font-medium transition spckbtn uppercase " style={{ display: 'inline-block' }}>
+              <div>
+                <Image
+                  src={"/assets/img/icons/arrow.svg"}
+                  alt=""
+                  width={30}
+                  height={30}
+                />
+              </div>{" "}
+              Download Profile
+            </a></div>
 
         </motion.div>
 
@@ -97,12 +97,12 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/projects" className="hover:text-orange-500">
+              <Link href="#" className="hover:text-orange-500">
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="/accreditations" className="hover:text-orange-500">
+              <Link href="#" className="hover:text-orange-500">
                 Accreditations
               </Link>
             </li>
@@ -160,16 +160,14 @@ const Footer = () => {
               (city) => (
                 <button
                   key={city}
-                  className={`flex items-center gap-2 text-[16px] uppercase ${
-                    activeTab === city
+                  className={`flex items-center gap-2 text-[16px] uppercase ${activeTab === city
                       ? "text-white"
                       : "bg-transparent text-white/50"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab(city)}>
                   <div
-                    className={`w-[5px] h-[5px] rounded-full ${
-                      activeTab === city ? "bg-primary" : "bg-white/50"
-                    }`}></div>{" "}
+                    className={`w-[5px] h-[5px] rounded-full ${activeTab === city ? "bg-primary" : "bg-white/50"
+                      }`}></div>{" "}
                   {city}
                 </button>
               )
