@@ -19,9 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Careers() {
   const response = await fetch(`${process.env.BASE_URL}/api/admin/careers/banner`)
   const data = await response.json()
+  const departmentResponse = await fetch(`${process.env.BASE_URL}/api/admin/careers/department`)
+  const departmentData = await departmentResponse.json()
   return (
     <>
-      <Index data={data}/>
+      <Index data={data} departmentData={departmentData}/>
     </>
   );
 }

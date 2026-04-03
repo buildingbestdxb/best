@@ -6,7 +6,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 const slides = [
   {
     id: 1,
@@ -37,7 +37,7 @@ const HeroSection = () => {
   // Child Elements Animation
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: easeOut } },
   };
 
 /*   const [activeIndex, setActiveIndex] = useState(0); */

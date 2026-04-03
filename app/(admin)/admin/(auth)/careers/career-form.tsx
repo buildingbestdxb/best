@@ -10,7 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { IoIosCloseCircle } from "react-icons/io";
 
 interface CareerFormData {
   title: string;
@@ -22,7 +21,7 @@ interface CareerFormData {
   type:string;
   description: string;
   experience:string;
-  responsibilities:string[]
+  // responsibilities:string[]
 }
 
 interface CareerFormProps {
@@ -31,8 +30,8 @@ interface CareerFormProps {
 
 const CareerForm = ({ careerId }: CareerFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [responsibility,setResponsibility] = useState("")
-  const [responsibilities,setResponsibilities] = useState<string[]>([])
+  // const [responsibility,setResponsibility] = useState("")
+  // const [responsibilities,setResponsibilities] = useState<string[]>([])
   const [departments,setDepartments] = useState<{_id:string,name:string}[]>([])
   const router = useRouter();
   const {
@@ -42,7 +41,6 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
     control,
     watch,
     getValues,
-    setError,
     formState: { errors },
   } = useForm<CareerFormData>({
     defaultValues: {
@@ -55,7 +53,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       type: "",
       description: "",
       experience: "",
-      responsibilities:[]
+      // responsibilities:[]
     },
   });
 
@@ -76,10 +74,10 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
       setValue("type",data.data.type)
       setValue("experience",data.data.experience)
       setValue("description",data.data.description)
-      if(data.data.responsibilities){
-        setResponsibilities(data.data.responsibilities)
-        setValue("responsibilities",data.data.responsibilities)
-      }
+      // if(data.data.responsibilities){
+      //   setResponsibilities(data.data.responsibilities)
+      //   setValue("responsibilities",data.data.responsibilities)
+      // }
     };
 
     if(careerId){
@@ -93,10 +91,10 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
 
   const onSubmit = async (data: CareerFormData) => {
     try {
-      if(responsibilities.length === 0){
-        setError("responsibilities", { type: "required", message: "Responsibilities is required" });
-        return
-      }
+      // if(responsibilities.length === 0){
+      //   setError("responsibilities", { type: "required", message: "Responsibilities is required" });
+      //   return
+      // }
       setIsLoading(true);
       if (careerId) {
         const response = await fetch(`/api/admin/careers/byid?id=${careerId}`, {
@@ -133,21 +131,21 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
   }
 
 
-  const handleAddResponsibility = () =>{
-    if(!responsibility){
-      return
-    }
-    setResponsibilities([...responsibilities,responsibility])
-    setResponsibility("")
-    setValue("responsibilities",[...responsibilities,responsibility])
-  }
+  // const handleAddResponsibility = () =>{
+  //   if(!responsibility){
+  //     return
+  //   }
+  //   setResponsibilities([...responsibilities,responsibility])
+  //   setResponsibility("")
+  //   setValue("responsibilities",[...responsibilities,responsibility])
+  // }
 
-  const handleRemoveResponsibility = (index:number) => {
-    const updatedResponsibilities = [...responsibilities]
-    updatedResponsibilities.splice(index, 1)
-    setResponsibilities(updatedResponsibilities)
-    setValue("responsibilities",updatedResponsibilities)
-  }
+  // const handleRemoveResponsibility = (index:number) => {
+  //   const updatedResponsibilities = [...responsibilities]
+  //   updatedResponsibilities.splice(index, 1)
+  //   setResponsibilities(updatedResponsibilities)
+  //   setValue("responsibilities",updatedResponsibilities)
+  // }
 
   useEffect(()=>{
     console.log("called")
@@ -290,7 +288,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
           {errors.datePosted && <p className="mt-1 text-sm text-red-600">{errors.datePosted.message}</p>}
         </div>
 
-           <div>
+           {/* <div>
             <Label htmlFor="title" className="block text-sm font-medium text-gray-700">
             Responsibilities
             </Label>
@@ -309,7 +307,7 @@ const CareerForm = ({ careerId }: CareerFormProps) => {
             </div>
         </div>
         </div>
-        {errors.responsibilities && <p className="mt-1 text-sm text-red-600">{errors.responsibilities.message}</p>}
+        {errors.responsibilities && <p className="mt-1 text-sm text-red-600">{errors.responsibilities.message}</p>} */}
 
         <div>
                   <Label htmlFor="title" className="block text-sm font-medium text-gray-700">

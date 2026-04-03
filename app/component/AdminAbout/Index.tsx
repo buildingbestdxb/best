@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ImageUploader } from '@/components/ui/image-uploader'
+import { generateDimentions } from '@/lib/generateDimentions';
 
 
 
@@ -146,6 +147,7 @@ const AdminAbout = () => {
               Banner Image
             </Label>
             <ImageUploader value={watch("bannerImage")} onChange={(url) => setValue("bannerImage", url)} />
+              <p className='text-xs text-gray-500'>{generateDimentions("about", "banner")}</p>
           </div>
 
           <div>

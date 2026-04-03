@@ -30,9 +30,7 @@ import { AboutType } from "@/app/types/AboutType";
 //   "/assets/img/clients/cl-08.png",
 // ];
 
-const LogoTicker = ({data}:{
-  data?:AboutType
-}) => {
+const LogoTicker = ({ data }: { data?: AboutType }) => {
   return (
     <section className="section-spacing overflow-hidden">
       <div className="container-fluid">
@@ -70,29 +68,30 @@ const LogoTicker = ({data}:{
             }
           </motion.div>
         </div> */}
-      <Swiper
-        slidesPerView="auto" // Adjusts number of logos based on screen size
-        spaceBetween={80} // Space between logos
-        loop={true} // Enables infinite scrolling
-        autoplay={{ delay: 0, disableOnInteraction: false }} // Continuous scroll
-        speed={5000} // Adjust for smoothness
-        modules={[Autoplay]} // Use autoplay module
-        className="mySwiper"
-      >
-
-{[...(data?.data[0]?.strength_and_vision.clients || []), ...(data?.data[0]?.strength_and_vision.clients || [])].map((item, index) => (
-
+        <Swiper
+          slidesPerView="auto" // Adjusts number of logos based on screen size
+          spaceBetween={80} // Space between logos
+          loop={true} // Enables infinite scrolling
+          autoplay={{ delay: 0, disableOnInteraction: false }} // Continuous scroll
+          speed={5000} // Adjust for smoothness
+          modules={[Autoplay]} // Use autoplay module
+          className="mySwiper"
+        >
+          {[
+            ...(data?.data[0]?.strength_and_vision.clients || []),
+            ...(data?.data[0]?.strength_and_vision.clients || []),
+          ].map((item, index) => (
             <SwiperSlide key={index} className="!w-auto">
-            <Image
-              src={item.logo || "data:"}
-              alt="client logo"
-              width={150}
-              height={80}
-              className="logo-ticker-image"
-            />
-          </SwiperSlide>
-            ))}
-              {/* logos.copyWithin(logos.length, 0, logos.length-1).map((logo, index) => (
+              <Image
+                src={item.logo || "data:"}
+                alt="client logo"
+                width={150}
+                height={80}
+                className="logo-ticker-image grayscale"
+              />
+            </SwiperSlide>
+          ))}
+          {/* logos.copyWithin(logos.length, 0, logos.length-1).map((logo, index) => (
                 <SwiperSlide key={index} className="!w-auto">
                   <Image
                     src={logo || "data:"}
@@ -103,11 +102,7 @@ const LogoTicker = ({data}:{
                   />
                 </SwiperSlide>
               )) */}
-
-
-
-      </Swiper>
-
+        </Swiper>
       </div>
     </section>
   );

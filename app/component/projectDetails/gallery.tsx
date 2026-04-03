@@ -68,6 +68,14 @@ const Gallery = ({data,allProjects}:{
     router.push(`/project-details/${nextSlug}`);
   }
 
+  const handleNavigateToPreviousProject = () => {
+    const currentSlug = data.data.slug;
+    const currentIndex = allProjects.projects.findIndex((project) => project.slug === currentSlug);
+    const previousIndex = (currentIndex - 1 + allProjects.projects.length) % allProjects.projects.length;
+    const previousSlug = allProjects.projects[previousIndex].slug;
+    router.push(`/project-details/${previousSlug}`);
+  }
+
 
 
 
@@ -120,11 +128,28 @@ const Gallery = ({data,allProjects}:{
             </p> */}
       {/*       <div className="text-black/60  text-[18px] lg-mb-0 lg:mt-0 mt-6 mb-6 leading-[25.2px] font-[400]">
             {parse(data?.data?.description || "")}</div> mt-[60px] */}
-            <div className="flex items-center justify-between gap-5">
+            <div className="flex items-center justify-between gap-5 max-sm:flex-col">
 
             <h3 className="text-lg text-black font-bold mb-[40px]  uppercase">
               Gallery
             </h3>
+            <div className="flex items-center gap-5">
+          <button onClick={handleNavigateToPreviousProject}
+                            
+                            className="mb-[40px] self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtnright">
+                            
+                            PREVIOUS PROJECT
+                            <div>
+                              <Image
+                                src={"/assets/img/icons/arrow.svg"}
+                                alt=""
+                                width={30}
+                                height={30}
+                                
+                              />
+                            </div>
+                          </button>
+                          
             <button onClick={handleNavigateToNextProject}
                             
                             className="mb-[40px] self-start text-white bg-primary rounded-lg text-sm font-medium transition spckbtn">
@@ -138,6 +163,7 @@ const Gallery = ({data,allProjects}:{
                             </div>{" "}
                             NEXT PROJECT
                           </button>
+                          </div>
       </div>
             <GalleryCard data={data?.data?.images} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
             {/* <Image

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import SecHr from "../common/SecDivider/SecHr";
 import { AboutType } from "@/app/types/AboutType";
 import parse from 'html-react-parser'
@@ -12,12 +12,12 @@ const fadeIn = {
 
 const slideLeft = {
   hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
 const slideRight = {
   hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
 const CoreValue = ({data}:{

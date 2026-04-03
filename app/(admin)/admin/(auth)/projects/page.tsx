@@ -14,6 +14,7 @@ import {arrayMove, SortableContext, verticalListSortingStrategy} from '@dnd-kit/
 import ProjectCard from "./ProjectCard";
 import { BiHide } from "react-icons/bi";
 import { GoEye } from "react-icons/go";
+import { generateDimentions } from "@/lib/generateDimentions";
 
 
 type Project = {
@@ -26,6 +27,7 @@ type Project = {
     value: string;
   }[];
   hidden: boolean;
+  status: string;
 };
 
 export default function Projects() {
@@ -222,6 +224,7 @@ export default function Projects() {
                                       <Button onClick={handleBannerSave}>Save Banner</Button>
                                     </div>
                                     <ImageUploader value={bannerImage} onChange={(url) => setBannerImage(url)} />
+                                    <p className='text-xs text-gray-500'>{generateDimentions("projects", "banner")}</p>
                                     <Label>Banner Alt</Label>
                                     <Input value={bannerAlt} onChange={(e) => setBannerAlt(e.target.value)} />
                                   </div>
@@ -282,14 +285,32 @@ export default function Projects() {
             </Card>
           ))}
         </div>) : (
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-4">
+              <div className="font-bold text-green-600">Completed Projects</div>
             <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
             <SortableContext items={projects.map((project)=>project._id)} strategy={verticalListSortingStrategy}>
-                {projects?.map((project, index) => (
+                {projects?.filter((project)=>project.status === "Completed").map((project, index) => (
                     <ProjectCard key={index} project={project} id={project._id} />
                 ))}
             </SortableContext>
         </DndContext>
+        </div>
+
+
+        <div className="flex flex-col gap-4">
+          <div className="font-bold text-red-600">Ongoing Projects</div>
+            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+            <SortableContext items={projects.map((project)=>project._id)} strategy={verticalListSortingStrategy}>
+                {projects?.filter((project)=>project.status === "Ongoing").map((project, index) => (
+                    <ProjectCard key={index} project={project} id={project._id} />
+                ))}
+            </SortableContext>
+        </DndContext>
+        </div>
+
+
+
         </div>
       )}
     </div>

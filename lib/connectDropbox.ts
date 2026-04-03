@@ -97,7 +97,7 @@ export async function uploadToDropbox(file: File, filePath: string): Promise<str
     const sharedLinkResponse = await dropbox.sharingCreateSharedLinkWithSettings({
       path: response.result.path_display,
       settings: {
-        requested_visibility: { ".tag": "public" },
+        requested_visibility: { ".tag": "public" }
       },
     });
     console.log("Uploaded file path:", sharedLinkResponse);

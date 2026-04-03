@@ -9,11 +9,12 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import ClientSideLink from "../client-side-link";
-import { CodeIcon } from "lucide-react";
+import { CodeIcon, GroupIcon } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "/admin", icon: HomeIcon },
   { name: "About", href: "/admin/about", icon: UserGroupIcon },
+  { name: "Leadership", href: "/admin/leadership", icon: GroupIcon },
   { name: "News & Events", href: "/admin/news", icon: NewspaperIcon },
   { name: "Projects", href: "/admin/projects", icon: CubeIcon },
   { name: "Sectors", href: "/admin/sectors", icon: CubeIcon },

@@ -24,11 +24,11 @@ export async function PATCH(request: NextRequest) {
     try {
       await connectDB();
 
-      const {pageHeading} = await request.json()
+      const {bannerSection} = await request.json()
 
       const home = await Home.findOne()
       if(home){
-            home.pageHeading = pageHeading
+            home.bannerSection = bannerSection
             await home.save()
             return NextResponse.json({ message: "Content updated successfully", success: true }, { status: 201 }); 
       }

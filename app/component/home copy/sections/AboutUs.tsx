@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -10,12 +10,12 @@ const fadeIn = {
 
 const slideLeft = {
   hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
 const slideRight = {
   hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
 const AboutUs = () => {

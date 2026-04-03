@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialogue-box'
 import Link from "next/link";
+import { generateDimentions } from "@/lib/generateDimentions";
 
 type Career = {
   _id: string;
@@ -247,6 +248,7 @@ const handleDeleteDepartment = async (id:string) =>{
           <Button onClick={handleBannerSave}>Save Banner</Button>
         </div>
         <ImageUploader value={watch('bannerImage')} onChange={(url) => setValue("bannerImage", url)} />
+        <p className='text-xs text-gray-500'>{generateDimentions("careers", "banner")}</p>
         <Label>Banner Alt</Label>
         <Input value={watch('bannerAlt')} onChange={(e) => setValue("bannerAlt", e.target.value)} />
       </div>

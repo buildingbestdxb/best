@@ -2,9 +2,10 @@
 import React from "react";
 import HeroInner from "../common/Banner/HeroInner";
 import Message from "../Leadership/GmChairman";
+import { LeaderShipType } from "@/app/types/LeaderShipType";
 
 
-export default function Index() {
+export default function Index({data}:{data:LeaderShipType}) {
   const breadcrumb = [
     { label: "Home", href: "/" },
     { label: "Leadership Message", href: "" },
@@ -19,13 +20,12 @@ export default function Index() {
     <>
       
       <HeroInner
-        imageSrc="/assets/img/home/stastsc.jpg"
-        title="Leadership Message"
+        imageSrc={data.bannerImage}
+        title={data.pageTitle}
         breadcrumbs={breadcrumb}
-        altTag="banner"
+        altTag={data.bannerImageAlt}
       />
-      <Message />
-
+      <Message data={data.messageSection}/>
 
     </>
   );

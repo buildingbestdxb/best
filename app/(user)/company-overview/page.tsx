@@ -19,6 +19,8 @@ export default async function ProjectsDetails() {
   const response = await fetch(`${process.env.BASE_URL}/api/admin/about/intro`, { next: { revalidate: 60 } });
   const data = await response.json();
 
+  console.log(data)
+
   return (
     <>
       <Index data={data} />

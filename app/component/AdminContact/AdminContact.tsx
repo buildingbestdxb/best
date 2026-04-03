@@ -11,6 +11,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import Link from 'next/link'
 import { ImageUploader } from '@/components/ui/image-uploader'
+import { generateDimentions } from '@/lib/generateDimentions'
 
 
 interface Values {
@@ -249,6 +250,7 @@ const AdminContact = () => {
                         <Button onClick={handleBannerSave}>Save Banner</Button>
                     </div>
                     <ImageUploader value={watch('bannerImage')} onChange={(url)=>setValue("bannerImage",url)}/>
+                    <p className='text-xs text-gray-500'>{generateDimentions("contact", "banner")}</p>
                     <Label>Banner Alt</Label>
                     <Input {...register("bannerAlt")} />
                 </div>

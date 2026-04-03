@@ -8,6 +8,7 @@ import { ImageUploader } from "@/components/ui/image-uploader";
 import { FileUploader } from "@/components/ui/file-uploader";
 import { useEffect, useState } from "react";
 import { useRouter,useParams } from "next/navigation";
+import { generateDimentions } from "@/lib/generateDimentions";
 
 interface FileData {
   file: string;
@@ -163,6 +164,7 @@ export default function AccreditationForm() {
                       value={file.thumbnail}
                       onChange={(url) => updateFile(fileIndex, { thumbnail: url })}
                     />
+                    <p className='text-xs text-gray-500'>{generateDimentions("accreditation", "certificate_thumbnail")}</p>
                   </div>
                 </div>
               </div>

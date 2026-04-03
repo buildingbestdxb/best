@@ -17,6 +17,20 @@ export type HomeType = {
             logo: string;
         }[];
     };
+    bannerSection:{
+        items:[{
+            mainTitle:string,
+            subTitle:string,
+            video:string,
+            poster:string,
+            logo:string,
+            logoAlt:string,
+            image:string,
+            imageAlt:string,
+            style:string,
+            cardText:string
+        }]
+    },
     sectorHeading: string;
     sectorDescription: string;
     qualityHeading: string;

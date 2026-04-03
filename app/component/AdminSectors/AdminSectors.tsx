@@ -7,6 +7,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { generateDimentions } from '@/lib/generateDimentions'
 
 interface Values {
     bannerImage:string;
@@ -158,6 +159,7 @@ const handleDeleteSector = async(id:string) =>{
                                         <div className='flex flex-col gap-2'>
                                         <Label>Icon</Label>
                                         <ImageUploader value={watch("icon")} onChange={(url)=>setValue("icon",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "icon")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                         <Label>Icon Alt</Label>
@@ -166,6 +168,7 @@ const handleDeleteSector = async(id:string) =>{
                                         <div className='flex flex-col gap-2'>
                                         <Label>Banner Image</Label>
                                         <ImageUploader value={watch("bannerImage")} onChange={(url)=>setValue("bannerImage",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "banner")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                         <Label>Banner Alt</Label>
@@ -176,6 +179,7 @@ const handleDeleteSector = async(id:string) =>{
                                     <div className='flex flex-col gap-2'>
                                         <Label>Image</Label>
                                         <ImageUploader value={watch("image")} onChange={(url)=>setValue("image",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "image")}</p>
                                     </div> 
 
                                     <div className='flex flex-col gap-2'>
@@ -219,6 +223,7 @@ const handleDeleteSector = async(id:string) =>{
                                         <div className='flex flex-col gap-2'>
                                         <Label>Icon</Label>
                                         <ImageUploader value={watch("icon")} onChange={(url)=>setValue("icon",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "icon")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                         <Label>Icon Alt</Label>
@@ -227,6 +232,7 @@ const handleDeleteSector = async(id:string) =>{
                                         <div className='flex flex-col gap-2'>
                                         <Label>Banner Image</Label>
                                         <ImageUploader value={watch("bannerImage")} onChange={(url)=>setValue("bannerImage",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "banner")}</p>
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                         <Label>Banner Alt</Label>
@@ -236,6 +242,7 @@ const handleDeleteSector = async(id:string) =>{
                                     <div className='flex flex-col gap-2'>
                                         <Label>Image</Label>
                                         <ImageUploader value={watch("image")} onChange={(url)=>setValue("image",url)}/>
+                                        <p className='text-xs text-gray-500'>{generateDimentions("sectors", "image")}</p>
                                     </div> 
                                     <div className='flex flex-col gap-2'>
                                         <Label>Image Alt</Label>

@@ -26,6 +26,7 @@ const Form = () => {
       const [submitting,setIsSubmitting] = useState(false)
 
       const onSubmit = async(data:Values) =>{
+        console.log(data)
        try {
         setIsSubmitting(true)
         const response = await fetch('/api/admin/contact/enquiry',{
@@ -126,6 +127,7 @@ const Form = () => {
               </div>
               <button
                 type="submit"
+                onClick={()=>console.log("clicked")}
                 disabled={submitting}
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn orng">
                 <div>

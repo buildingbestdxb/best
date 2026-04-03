@@ -9,6 +9,7 @@ export type IndiNews = {
         _id:string;
         altTag:string;
         slug:string;
+        gallery:string[]
     }
     
 }
