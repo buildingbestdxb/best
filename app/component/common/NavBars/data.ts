@@ -14,8 +14,8 @@ export const menuItems = [
   },
   {
     title: "Projects",
-    // url: "/projects",
-    url: "#"
+    url: "/projects",
+    // url: "#"
   },
   {
     title: "News & Events",
