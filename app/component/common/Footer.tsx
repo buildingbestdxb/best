@@ -97,7 +97,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-orange-500">
+              <Link href="/projects" className="hover:text-orange-500">
                 Projects
               </Link>
             </li>
@@ -161,8 +161,8 @@ const Footer = () => {
                 <button
                   key={city}
                   className={`flex items-center gap-2 text-[16px] uppercase ${activeTab === city
-                      ? "text-white"
-                      : "bg-transparent text-white/50"
+                    ? "text-white"
+                    : "bg-transparent text-white/50"
                     }`}
                   onClick={() => setActiveTab(city)}>
                   <div
