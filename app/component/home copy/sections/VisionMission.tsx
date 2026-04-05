@@ -43,13 +43,13 @@ const VisionMission = () => {
         <motion.div className="grid lg:grid-cols-2 gap-6 xl:gap-[80px] items-start mt-6" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ staggerChildren: 0.2 }}>
           <SectionBox
             title="Mission"
-            text="Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the phenomenal construction industry revolution, with its goal of excellence, the Company earned reputation of delivering an exceptional construction services in the UAE. Throughout its commitment towards greater endeavor, BUILDING CO. (BEST) L.L.C created an outstanding distinction from its PRIDE Core Foundation — Planning, Reliability, Innovation, Determination and Excellence."
+            text="At Building Co. (BEST) L.L.C, our mission is to deliver world-class construction solutions that set the industry benchmark for quality, innovation, and efficiency. With an unwavering commitment to excellence, we ensure that every project meets the highest construction standards, integrating precision engineering, safety, reliability, and environmental responsibility. Our goal is to create lasting value for our clients and communities by delivering projects that exemplify superior craftsmanship and technical expertise."
             imgSrc={mission}
             altText="Mission Icon"
           />
           <SectionBox
             title="Vision"
-            text="Since 1975, BUILDING CO. (BEST) L.L.C metaphors to lead the phenomenal construction industry revolution, with its goal of excellence, the Company earned reputation of delivering an exceptional construction services in the UAE. Throughout its commitment towards greater endeavor, BUILDING CO. (BEST) L.L.C created an outstanding distinction from its PRIDE Core Foundation — Planning, Reliability, Innovation, Determination and Excellence."
+            text="To be the leading force in the construction industry, recognized for our ability to deliver complex projects with unmatched expertise and strict adherence to the highest construction standards. We strive to push the boundaries of innovation by leveraging cutting-edge technologies, enhancing efficiency, and maintaining superior quality. At Building Co. (BEST) L.L.C, we are committed to shaping the future of construction with projects that stand the test of time."
             imgSrc={vision}
             altText="Vision Icon"
           />
