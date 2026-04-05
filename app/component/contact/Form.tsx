@@ -69,7 +69,7 @@ const Form = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }} // Animation resets on scroll
             >
-              Let's build something exceptional together. Reach out to Building Co. (BEST)
+              Let&apos;s build something exceptional together. Reach out to Building Co. (BEST)
               L.L.C to discuss your project needs, explore our construction solutions, and
               experience excellence in every detail. Our team is ready to assist you with expert
               guidance and tailored services across the UAE.
