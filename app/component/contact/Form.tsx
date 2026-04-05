@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contactForm } from "@/app/schemas/contactForm";
 
 interface Values {
-  name:string;
+  name: string;
   email: string;
   subject: string;
   message: string;
@@ -16,36 +16,36 @@ interface Values {
 
 const Form = () => {
 
-      const {
-          register,
-          reset,
-          handleSubmit,
-          formState: {errors},
-      } = useForm<Values>({resolver:zodResolver(contactForm)});
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Values>({ resolver: zodResolver(contactForm) });
 
-      const [submitting,setIsSubmitting] = useState(false)
+  const [submitting, setIsSubmitting] = useState(false)
 
-      const onSubmit = async(data:Values) =>{
-        console.log(data)
-       try {
-        setIsSubmitting(true)
-        const response = await fetch('/api/admin/contact/enquiry',{
-          method:"POST",
-          body:JSON.stringify(data)
-        })
-        if(response.ok){
-          const data = await response.json()
-          alert(data.message)
-          reset()
-        }
-       } catch (error) {
-        console.log("Error submitting form",error)
-       }finally{
-        setIsSubmitting(false)
-       }
+  const onSubmit = async (data: Values) => {
+    console.log(data)
+    try {
+      setIsSubmitting(true)
+      const response = await fetch('/api/admin/contact/enquiry', {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      if (response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        reset()
       }
+    } catch (error) {
+      console.log("Error submitting form", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
-      
+
   return (
     <div className=" relative overflow-hidden h-full">
       <div className="container p-0 h-full">
@@ -69,8 +69,10 @@ const Form = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }} // Animation resets on scroll
             >
-              Reach out to us to discuss your project needs and discover how
-              Best can deliver the perfect solution
+              Let's build something exceptional together. Reach out to Building Co. (BEST)
+              L.L.C to discuss your project needs, explore our construction solutions, and
+              experience excellence in every detail. Our team is ready to assist you with expert
+              guidance and tailored services across the UAE.
             </motion.p>
             <form className="flex flex-col gap-[32px]" onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-1 gap-4">
@@ -127,7 +129,7 @@ const Form = () => {
               </div>
               <button
                 type="submit"
-                onClick={()=>console.log("clicked")}
+                onClick={() => console.log("clicked")}
                 disabled={submitting}
                 className="self-start text-white bg-primary rounded-lg text-sm font-medium transition uppercase spckbtn orng">
                 <div>

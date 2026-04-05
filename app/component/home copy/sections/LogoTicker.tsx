@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const logos = [
-  "/assets/img/clients/cl-01.png",
-  "/assets/img/clients/cl-02.png",
+  // "/assets/img/clients/cl-01.png",
+  // "/assets/img/clients/cl-02.png",
   "/assets/img/clients/cl-03.png",
   "/assets/img/clients/cl-04.png",
   "/assets/img/clients/cl-05.png",

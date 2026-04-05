@@ -19,14 +19,14 @@ export const menuItems = [
   },
   {
     title: "News & Events",
-    // url: "/news-and-events",
-    url: "#",
+    url: "/news-and-events",
+    // url: "#",
     children: [],
   },
 
   {
     title: "Careers",
-    // url: "/careers",,
-    url: "#"
+    url: "/careers",
+    // url: "#"
   },
 ];
