@@ -9,8 +9,8 @@ export const menuItems = [
   },
   {
     title: "Accreditation",
-    // url: "/accreditations",
-    url: "#"
+    url: "/accreditations",
+    // url: "#"
   },
   {
     title: "Projects",
