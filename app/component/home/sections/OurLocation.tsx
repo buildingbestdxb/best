@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import map from "@/public/assets/img/home/map.svg";
+import map from "@/public/assets/img/home/map-new.svg";
 import { motion } from "framer-motion"; // Import motion
 import parse from 'html-react-parser'
 import { HomeType } from "@/app/types/HomeType";
 
-const OurLocation = ({data}:{
-  data:HomeType
+const OurLocation = ({ data }: {
+  data: HomeType
 }) => {
   return (
     <section className="section-spacing relative overflow-hidden">
