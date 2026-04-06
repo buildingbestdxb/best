@@ -2,10 +2,10 @@ import React from "react";
 import HeroInner from "../common/Banner/HeroInner";
 import Certificates from "./Certificates";
 
-export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) {
+export default function Index({ data }: { data: { data: { image: string, alt: string }[] } }) {
   const breadcrumb = [
     { label: "Home", href: "/" },
-    { label: "News and Events", href: "" },
+    { label: "Accreditations", href: "" },
     // { label: `${data && data.data.sector}`, href: "#" },
   ];
 
@@ -17,7 +17,7 @@ export default function Index({data}:{data:{data:{image:string,alt:string}[]}}) 
         breadcrumbs={breadcrumb}
         altTag={data.data[0].alt}
       />
-<Certificates />
+      <Certificates />
 
     </>
   );
