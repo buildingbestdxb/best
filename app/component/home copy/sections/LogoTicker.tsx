@@ -11,7 +11,13 @@ const logos = [
   "/assets/img/clients/cl-05.png",
   "/assets/img/clients/cl-06.png",
   "/assets/img/clients/cl-07.png",
-  "/assets/img/clients/cl-08.png"
+  "/assets/img/clients/cl-08.png",
+  "/assets/img/clients/logo-1.jpg",
+  "/assets/img/clients/logo-2.jpg",
+  "/assets/img/clients/logo-3.jpg",
+  "/assets/img/clients/logo-4.png",
+  "/assets/img/clients/logo-5.jpg",
+  "/assets/img/clients/logo-6.jpg",
 ];
 
 const LogoTicker = () => {
