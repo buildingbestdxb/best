@@ -102,7 +102,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-orange-500">
+              <Link href="/accreditations" className="hover:text-orange-500">
                 Accreditations
               </Link>
             </li>
